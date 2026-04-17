@@ -1,7 +1,7 @@
-# Pokemon Card Portfolio Tracker
+# Pokedex 151 full-art
 
 ## Overview
-Next.js 15 (App Router, TypeScript) web app to track a 150-card Japanese Pokemon TCG wants list sourced from Cardmarket.
+Next.js 15 (App Router, TypeScript) web app to track a 151-card Japanese Pokemon TCG wants list (full-art / alt-art prints of each original Kanto Pokemon), sourced from Cardmarket.
 
 ## Tech Stack
 - Next.js 15 with App Router

@@ -2,6 +2,8 @@
 
 import { useState, useMemo, useCallback } from "react";
 import { cards as initialCards, typeColors, Card } from "@/lib/cards";
+import { getCardImageUrl } from "@/lib/cardImage";
+import { CardModal } from "./CardModal";
 
 type SortKey = keyof Card;
 type SortDir = "asc" | "desc";
@@ -14,6 +16,8 @@ export default function PortfolioTracker() {
   const [ownershipFilter, setOwnershipFilter] = useState<"all" | "owned" | "wanted">("all");
   const [sortKey, setSortKey] = useState<SortKey>("pokedexNumber");
   const [sortDir, setSortDir] = useState<SortDir>("asc");
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const [modalCard, setModalCard] = useState<Card | null>(null);
 
   const toggleOwned = useCallback((id: string) => {
     setCardList((prev) =>
@@ -109,7 +113,7 @@ export default function PortfolioTracker() {
   return (
     <div className="container">
       <header>
-        <h1>Pokemon Card Portfolio</h1>
+        <h1>Pokedex 151 full-art</h1>
         <p>
           {stats.owned} / {stats.total} cards collected
         </p>
@@ -230,7 +234,37 @@ export default function PortfolioTracker() {
               </td>
               <td className="pokedex-num">{card.pokedexNumber}</td>
               <td>
-                <strong>{card.name}</strong>
+                <span
+                  className="card-name-cell"
+                  onMouseEnter={() => setHoveredId(card.id)}
+                  onMouseLeave={() => setHoveredId(null)}
+                  onClick={() => setModalCard(card)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setModalCard(card);
+                    }
+                  }}
+                >
+                  <span className="preview-icon" aria-label="Preview card">
+                    &#128065;
+                  </span>
+                  <strong>{card.name}</strong>
+                  {hoveredId === card.id && getCardImageUrl(card) && (
+                    <span className="preview-tooltip">
+                      <img
+                        src={getCardImageUrl(card)!}
+                        alt=""
+                        loading="lazy"
+                        onError={(e) => {
+                          (e.currentTarget.parentElement as HTMLElement).style.display = "none";
+                        }}
+                      />
+                    </span>
+                  )}
+                </span>
               </td>
               <td className="hide-mobile">
                 <span
@@ -274,6 +308,10 @@ export default function PortfolioTracker() {
       <p style={{ textAlign: "center", marginTop: "1rem", color: "var(--text-muted)", fontSize: "0.8rem" }}>
         Showing {filtered.length} of {cardList.length} cards
       </p>
+
+      {modalCard && (
+        <CardModal card={modalCard} onClose={() => setModalCard(null)} />
+      )}
     </div>
   );
 }
