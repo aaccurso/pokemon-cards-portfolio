@@ -1,0 +1,243 @@
+:root {
+  --bg: #1a1a2e;
+  --surface: #16213e;
+  --surface-hover: #1a2745;
+  --border: #2a3a5c;
+  --text: #e0e0e0;
+  --text-muted: #8892a4;
+  --accent: #f8d030;
+  --owned-bg: #1a3a2e;
+  --owned-border: #2a5a3e;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+header h1 {
+  font-size: 2rem;
+  color: var(--accent);
+  margin-bottom: 0.25rem;
+}
+
+header p {
+  color: var(--text-muted);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.25rem;
+  text-align: center;
+}
+
+.stat-card .value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.stat-card .label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
+.progress-bar-container {
+  background: var(--border);
+  border-radius: 999px;
+  height: 12px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #f8d030, #78c850);
+  border-radius: 999px;
+  transition: width 0.5s ease;
+}
+
+.controls {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.controls input,
+.controls select {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.controls input {
+  flex: 1;
+  min-width: 200px;
+}
+
+.controls select {
+  min-width: 140px;
+}
+
+.controls input:focus,
+.controls select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.card-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.85rem;
+}
+
+.card-table thead th {
+  background: var(--surface);
+  padding: 0.75rem 0.5rem;
+  text-align: left;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  cursor: pointer;
+  user-select: none;
+}
+
+.card-table thead th:hover {
+  color: var(--accent);
+}
+
+.card-table tbody tr {
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+}
+
+.card-table tbody tr:hover {
+  background: var(--surface-hover);
+}
+
+.card-table tbody tr.owned {
+  background: var(--owned-bg);
+}
+
+.card-table tbody tr.owned:hover {
+  background: #1e4535;
+}
+
+.card-table td {
+  padding: 0.6rem 0.5rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.type-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+  margin-right: 4px;
+}
+
+.owned-checkbox {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--accent);
+}
+
+.price {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.pokedex-num {
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.variant-badge {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  background: rgba(248, 208, 48, 0.15);
+  color: var(--accent);
+  border: 1px solid rgba(248, 208, 48, 0.3);
+}
+
+.purchased-badge {
+  display: inline-block;
+  padding: 1px 6px;
+  margin-left: 6px;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  background: rgba(120, 200, 80, 0.18);
+  color: #78c850;
+  border: 1px solid rgba(120, 200, 80, 0.4);
+  vertical-align: middle;
+}
+
+.sort-indicator {
+  margin-left: 4px;
+  font-size: 0.7rem;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem 0.5rem;
+  }
+
+  .card-table {
+    font-size: 0.75rem;
+  }
+
+  .hide-mobile {
+    display: none;
+  }
+}
