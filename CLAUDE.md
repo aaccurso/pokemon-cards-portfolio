@@ -27,10 +27,12 @@ lib/
 - Cards sourced from a Cardmarket wants list (Japanese language, Near Mint condition)
 - Total budget for priced cards: ~1,119.75 EUR
 - Most expensive: Blastoise ex (135 EUR), Meowth promo (60 EUR), Vileplume GX (50 EUR)
-- A CSV version also exists at `/tmp/pokemon_cards_wishlist.csv`
+- A CSV version is versioned at `data/wishlist.csv`
 
 ## Source Sync Rule
-Whenever `lib/cards.ts` is modified (add/remove/edit a card), keep `/tmp/pokemon_cards_wishlist.csv` in sync with the same change. The CSV is the original source export and should reflect the current wants list at all times. Fields that don't have a CSV column (e.g. `pricePaid`, `owned`) are only tracked in `lib/cards.ts`.
+**Always keep `data/wishlist.csv` in sync with `lib/cards.ts`.** Whenever a card is added, removed, or edited in `lib/cards.ts`, apply the equivalent change to `data/wishlist.csv` in the same commit/turn. The CSV is the canonical wants-list export and must reflect the current state at all times.
+
+CSV columns: `Card Name, Card Code, Set, Qty, Language, Condition, Buy Price (EUR), Pokedex #, Type 1, Type 2, Generation, Card Variant`. Fields without a CSV column (e.g. `pricePaid`, `owned`) stay only in `lib/cards.ts`.
 
 ## Current Features
 - Progress bar showing collection completion percentage
