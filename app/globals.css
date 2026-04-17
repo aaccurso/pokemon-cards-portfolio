@@ -208,21 +208,6 @@ header p {
   border: 1px solid rgba(248, 208, 48, 0.3);
 }
 
-.purchased-badge {
-  display: inline-block;
-  padding: 1px 6px;
-  margin-left: 6px;
-  border-radius: 4px;
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  background: rgba(120, 200, 80, 0.18);
-  color: #78c850;
-  border: 1px solid rgba(120, 200, 80, 0.4);
-  vertical-align: middle;
-}
-
 .sort-indicator {
   margin-left: 4px;
   font-size: 0.7rem;

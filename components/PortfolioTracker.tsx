@@ -11,7 +11,7 @@ export default function PortfolioTracker() {
   const [search, setSearch] = useState("");
   const [typeFilter, setTypeFilter] = useState("all");
   const [setFilter, setSetFilter] = useState("all");
-  const [ownershipFilter, setOwnershipFilter] = useState<"all" | "owned" | "wanted" | "purchased">("all");
+  const [ownershipFilter, setOwnershipFilter] = useState<"all" | "owned" | "wanted">("all");
   const [sortKey, setSortKey] = useState<SortKey>("pokedexNumber");
   const [sortDir, setSortDir] = useState<SortDir>("asc");
 
@@ -61,8 +61,6 @@ export default function PortfolioTracker() {
       list = list.filter((c) => c.owned);
     } else if (ownershipFilter === "wanted") {
       list = list.filter((c) => !c.owned);
-    } else if (ownershipFilter === "purchased") {
-      list = list.filter((c) => c.pricePaid != null);
     }
 
     list = [...list].sort((a, b) => {
@@ -189,7 +187,6 @@ export default function PortfolioTracker() {
           <option value="all">All Cards</option>
           <option value="owned">Owned Only</option>
           <option value="wanted">Wanted Only</option>
-          <option value="purchased">Purchased Only</option>
         </select>
       </div>
 
@@ -234,11 +231,6 @@ export default function PortfolioTracker() {
               <td className="pokedex-num">{card.pokedexNumber}</td>
               <td>
                 <strong>{card.name}</strong>
-                {card.pricePaid != null && (
-                  <span className="purchased-badge" title="Purchased via tracked shipment">
-                    Bought
-                  </span>
-                )}
               </td>
               <td className="hide-mobile">
                 <span
