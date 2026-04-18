@@ -201,8 +201,7 @@
     "generation": 1,
     "variant": "VMAX",
     "binderId": "kanto-151",
-    "imageUrl": "https://images.pokemontcg.io/swsh3/190_hires.png",
-    "imageIsFallback": true
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/a791922750f0104f2338fca3e625e7c758968210cb6bff29fb2f26ae31e7a133/1600.jpg"
   },
   {
     "id": "caterpie",
@@ -850,8 +849,7 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "imageUrl": "https://images.scrydex.com/pokemon/me3-49/large",
-    "imageIsFallback": true
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/ijsi3amz52oo4th4/1600.jpg"
   },
   {
     "id": "hisuian-arcanine",
@@ -1412,8 +1410,7 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "imageUrl": "https://images.scrydex.com/pokemon/me3-121/large",
-    "imageIsFallback": true
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/w42nhm5b6uki54ut/1600.jpg"
   },
   {
     "id": "metapod",
@@ -2555,8 +2552,7 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "imageUrl": "https://images.pokemontcg.io/me2/105_hires.png",
-    "imageIsFallback": true
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/3xouhrr2bhnn7va7/1600.jpg"
   },
   {
     "id": "zubat",
