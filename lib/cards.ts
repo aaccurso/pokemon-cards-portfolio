@@ -11,6 +11,7 @@ export type Card = {
   buyPrice: number | null;
   imageUrl?: string | null;
   imageIsFallback?: boolean;
+  localImage?: boolean;
   pokedexNumber: number;
   type1: string;
   type2: string | null;

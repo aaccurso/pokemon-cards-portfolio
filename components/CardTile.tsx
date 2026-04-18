@@ -12,7 +12,11 @@ type Props = {
 export function CardTile({ card, owned, onClick }: Props) {
   const ref = useRef<HTMLButtonElement>(null);
   const [imgFailed, setImgFailed] = useState(false);
-  const imgUrl = card.imageUrl ?? null;
+  const [triedRemote, setTriedRemote] = useState(false);
+  const localSrc = card.localImage ? `/cards/${card.id}.webp` : null;
+  const imgUrl = triedRemote
+    ? card.imageUrl ?? null
+    : localSrc ?? card.imageUrl ?? null;
 
   function handleMove(e: React.MouseEvent) {
     const el = ref.current;
@@ -53,7 +57,14 @@ export function CardTile({ card, owned, onClick }: Props) {
               src={imgUrl}
               alt={card.name}
               loading="lazy"
-              onError={() => setImgFailed(true)}
+              onError={() => {
+                // If the local copy failed and a remote URL exists, retry remote once.
+                if (!triedRemote && localSrc && card.imageUrl) {
+                  setTriedRemote(true);
+                } else {
+                  setImgFailed(true);
+                }
+              }}
             />
           ) : (
             <div className="card-tile-placeholder">

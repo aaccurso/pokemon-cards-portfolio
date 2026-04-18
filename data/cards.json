@@ -14,7 +14,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "aerodactyl",
@@ -31,7 +32,8 @@
     "type2": "Flying",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "alakazam",
@@ -48,7 +50,8 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/z2i7jyiqvwqzn4xc/1600.jpg"
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/z2i7jyiqvwqzn4xc/1600.jpg",
+    "localImage": true
   },
   {
     "id": "alolan-dugtrio",
@@ -65,7 +68,8 @@
     "generation": 1,
     "variant": "Alolan Form",
     "binderId": "kanto-151",
-    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/w4mnjcknarfqw7f5/1600.jpg"
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/w4mnjcknarfqw7f5/1600.jpg",
+    "localImage": true
   },
   {
     "id": "alolan-golem-gx",
@@ -82,7 +86,8 @@
     "generation": 1,
     "variant": "Alolan Form / GX",
     "binderId": "kanto-151",
-    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/ref1bd5e88daff2b8aff02213df59f4c3db1c2ad5ea36cfc5280c9ec07e9e841688/1600.jpg"
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/ref1bd5e88daff2b8aff02213df59f4c3db1c2ad5ea36cfc5280c9ec07e9e841688/1600.jpg",
+    "localImage": true
   },
   {
     "id": "arbok",
@@ -99,7 +104,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "articuno",
@@ -116,7 +122,8 @@
     "type2": "Flying",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "beedrill-v",
@@ -133,7 +140,8 @@
     "generation": 1,
     "variant": "V",
     "binderId": "kanto-151",
-    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/5pb3we557erz5pyo/1600.jpg"
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/5pb3we557erz5pyo/1600.jpg",
+    "localImage": true
   },
   {
     "id": "bellsprout",
@@ -150,7 +158,8 @@
     "type2": "Poison",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "blastoise-ex",
@@ -167,7 +176,8 @@
     "type2": null,
     "generation": 1,
     "variant": "ex",
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "bulbasaur",
@@ -184,7 +194,8 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/xlljpxbi5voq4pee/1600.jpg"
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/xlljpxbi5voq4pee/1600.jpg",
+    "localImage": true
   },
   {
     "id": "butterfree-vmax",
@@ -201,7 +212,8 @@
     "generation": 1,
     "variant": "VMAX",
     "binderId": "kanto-151",
-    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/a791922750f0104f2338fca3e625e7c758968210cb6bff29fb2f26ae31e7a133/1600.jpg"
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/a791922750f0104f2338fca3e625e7c758968210cb6bff29fb2f26ae31e7a133/1600.jpg",
+    "localImage": true
   },
   {
     "id": "caterpie",
@@ -218,7 +230,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "chansey",
@@ -235,7 +248,8 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/83eb18706024d879bac1db12dbfed98d8606963d90aca5fc5349ddde62b23676/1600.jpg"
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/83eb18706024d879bac1db12dbfed98d8606963d90aca5fc5349ddde62b23676/1600.jpg",
+    "localImage": true
   },
   {
     "id": "charizard",
@@ -252,7 +266,8 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/vkeojmlithtqzy4l/1600.jpg"
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/vkeojmlithtqzy4l/1600.jpg",
+    "localImage": true
   },
   {
     "id": "charmander",
@@ -269,7 +284,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "charmeleon",
@@ -286,7 +302,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "clefairy",
@@ -303,7 +320,8 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/u6odyyb6x22l45y2/1600.jpg"
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/u6odyyb6x22l45y2/1600.jpg",
+    "localImage": true
   },
   {
     "id": "cloyster",
@@ -320,7 +338,8 @@
     "type2": "Ice",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "cubone",
@@ -337,7 +356,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "dewgong",
@@ -372,7 +392,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "ditto",
@@ -389,7 +410,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "dodrio",
@@ -406,7 +428,8 @@
     "type2": "Flying",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "doduo",
@@ -423,7 +446,8 @@
     "type2": "Flying",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "dragonair",
@@ -440,7 +464,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "dratini",
@@ -457,7 +482,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "drowzee",
@@ -474,7 +500,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "eevee",
@@ -491,7 +518,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "ekans",
@@ -526,7 +554,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "electrode",
@@ -543,7 +572,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "exeggcute",
@@ -560,7 +590,8 @@
     "type2": "Psychic",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "exeggutor",
@@ -577,7 +608,8 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/quyvghhmtysnhlss/1600.jpg"
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/quyvghhmtysnhlss/1600.jpg",
+    "localImage": true
   },
   {
     "id": "farfetchd",
@@ -594,7 +626,8 @@
     "type2": "Flying",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "fearow",
@@ -611,7 +644,8 @@
     "type2": "Flying",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "flareon",
@@ -628,7 +662,8 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/sdkujs6oatssofa5/1600.jpg"
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/sdkujs6oatssofa5/1600.jpg",
+    "localImage": true
   },
   {
     "id": "galarian-moltres",
@@ -645,7 +680,8 @@
     "type2": "Flying",
     "generation": 1,
     "variant": "Galarian Form",
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "galarian-zapdos",
@@ -662,7 +698,8 @@
     "type2": "Flying",
     "generation": 1,
     "variant": "Galarian Form",
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "gastly",
@@ -679,7 +716,8 @@
     "type2": "Poison",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "gengar",
@@ -696,7 +734,8 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/5l7l5z5jpwryybzm/1600.jpg"
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/5l7l5z5jpwryybzm/1600.jpg",
+    "localImage": true
   },
   {
     "id": "geodude",
@@ -713,7 +752,8 @@
     "type2": "Ground",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "gloom",
@@ -730,7 +770,8 @@
     "type2": "Poison",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "golbat",
@@ -747,7 +788,8 @@
     "type2": "Flying",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "goldeen",
@@ -764,7 +806,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "golduck",
@@ -781,7 +824,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "graveler",
@@ -798,7 +842,8 @@
     "type2": "Ground",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "grimer",
@@ -815,7 +860,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "gyarados-ex",
@@ -832,7 +878,8 @@
     "type2": "Flying",
     "generation": 1,
     "variant": "ex",
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "haunter",
@@ -849,7 +896,8 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/ijsi3amz52oo4th4/1600.jpg"
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/ijsi3amz52oo4th4/1600.jpg",
+    "localImage": true
   },
   {
     "id": "hisuian-arcanine",
@@ -866,7 +914,8 @@
     "generation": 1,
     "variant": "Hisuian Form",
     "binderId": "kanto-151",
-    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/cv2ftby3ebyazhiq/1600.jpg"
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/cv2ftby3ebyazhiq/1600.jpg",
+    "localImage": true
   },
   {
     "id": "hisuian-growlithe",
@@ -883,7 +932,8 @@
     "type2": "Rock",
     "generation": 1,
     "variant": "Hisuian Form",
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "hisuian-voltorb",
@@ -900,7 +950,8 @@
     "type2": "Grass",
     "generation": 1,
     "variant": "Hisuian Form",
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "hitmonchan",
@@ -917,7 +968,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "hitmonlee",
@@ -934,7 +986,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "horsea",
@@ -951,7 +1004,8 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/195ca2a40906c79591c133fefd9cfc87ebccfbeb55544d7139968e0a5ed686ef/1600.jpg"
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/195ca2a40906c79591c133fefd9cfc87ebccfbeb55544d7139968e0a5ed686ef/1600.jpg",
+    "localImage": true
   },
   {
     "id": "hypno",
@@ -968,7 +1022,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "ivysaur",
@@ -985,7 +1040,8 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/3pb7sfmy7rqdjt46/1600.jpg"
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/3pb7sfmy7rqdjt46/1600.jpg",
+    "localImage": true
   },
   {
     "id": "jigglypuff",
@@ -1002,7 +1058,8 @@
     "type2": "Fairy",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "jolteon",
@@ -1019,7 +1076,8 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/5xzfqjpc5yuxhhtm/1600.jpg"
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/5xzfqjpc5yuxhhtm/1600.jpg",
+    "localImage": true
   },
   {
     "id": "jynx",
@@ -1036,7 +1094,8 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/4a60e976ecd501d7a21b0119b0550b03d212be04c5f3982118bce852a5f093e4/1600.jpg"
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/4a60e976ecd501d7a21b0119b0550b03d212be04c5f3982118bce852a5f093e4/1600.jpg",
+    "localImage": true
   },
   {
     "id": "kabuto",
@@ -1053,7 +1112,8 @@
     "type2": "Water",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "kabutops",
@@ -1070,7 +1130,8 @@
     "type2": "Water",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "kadabra",
@@ -1087,7 +1148,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "kakuna",
@@ -1104,7 +1166,8 @@
     "type2": "Poison",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "kangaskhan",
@@ -1121,7 +1184,8 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/gyggtu3tt3cmhmuu/1600.jpg"
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/gyggtu3tt3cmhmuu/1600.jpg",
+    "localImage": true
   },
   {
     "id": "kingler",
@@ -1138,7 +1202,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "koffing",
@@ -1155,7 +1220,8 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/822fba55a24cbebb66d649f05f124efe101908a2d5a67933d34b46be517eecfc/1600.jpg"
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/822fba55a24cbebb66d649f05f124efe101908a2d5a67933d34b46be517eecfc/1600.jpg",
+    "localImage": true
   },
   {
     "id": "krabby",
@@ -1172,7 +1238,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "lapras",
@@ -1189,7 +1256,8 @@
     "type2": "Ice",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "lickitung",
@@ -1206,7 +1274,8 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/f995593c10a9b5d9acb8dc59763fc5172b460d163dc6206fde307f6033488b9b/1600.jpg"
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/f995593c10a9b5d9acb8dc59763fc5172b460d163dc6206fde307f6033488b9b/1600.jpg",
+    "localImage": true
   },
   {
     "id": "machamp",
@@ -1223,7 +1292,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "machoke",
@@ -1240,7 +1310,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "machop",
@@ -1257,7 +1328,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "magikarp",
@@ -1274,7 +1346,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "magmar",
@@ -1291,7 +1364,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "magnemite",
@@ -1308,7 +1382,8 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/fgdrr7eilt3rtqy3/1600.jpg"
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/fgdrr7eilt3rtqy3/1600.jpg",
+    "localImage": true
   },
   {
     "id": "magneton",
@@ -1325,7 +1400,8 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/b3pfwodnowqmwhrn/1600.jpg"
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/b3pfwodnowqmwhrn/1600.jpg",
+    "localImage": true
   },
   {
     "id": "mankey",
@@ -1342,7 +1418,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "marowak",
@@ -1359,7 +1436,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "mega-clefable-ex",
@@ -1376,7 +1454,8 @@
     "generation": 1,
     "variant": "Mega / ex",
     "binderId": "kanto-151",
-    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/a36s5nt73ud2yajc/1600.jpg"
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/a36s5nt73ud2yajc/1600.jpg",
+    "localImage": true
   },
   {
     "id": "mega-dragonite-ex",
@@ -1393,7 +1472,8 @@
     "generation": 1,
     "variant": "Mega / ex",
     "binderId": "kanto-151",
-    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/hquradlkeximiqgn/1600.jpg"
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/hquradlkeximiqgn/1600.jpg",
+    "localImage": true
   },
   {
     "id": "meowth",
@@ -1410,7 +1490,8 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/w42nhm5b6uki54ut/1600.jpg"
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/w42nhm5b6uki54ut/1600.jpg",
+    "localImage": true
   },
   {
     "id": "metapod",
@@ -1427,7 +1508,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "mew-v",
@@ -1444,7 +1526,8 @@
     "type2": null,
     "generation": 1,
     "variant": "V",
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "mewtwo",
@@ -1461,7 +1544,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "mistys-psyduck",
@@ -1478,7 +1562,8 @@
     "type2": null,
     "generation": 1,
     "variant": "Trainer's Pokemon",
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "mr-mime",
@@ -1495,7 +1580,8 @@
     "type2": "Fairy",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "muk",
@@ -1512,7 +1598,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "nidoking",
@@ -1529,7 +1616,8 @@
     "type2": "Ground",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "nidoqueen",
@@ -1546,7 +1634,8 @@
     "type2": "Ground",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "nidoran-f",
@@ -1563,7 +1652,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "nidoran-m",
@@ -1580,7 +1670,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "nidorina",
@@ -1597,7 +1688,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "nidorino",
@@ -1614,7 +1706,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "ninetales",
@@ -1631,7 +1724,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "oddish",
@@ -1648,7 +1742,8 @@
     "type2": "Poison",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "omanyte",
@@ -1665,7 +1760,8 @@
     "type2": "Water",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "omastar",
@@ -1682,7 +1778,8 @@
     "type2": "Water",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "onix",
@@ -1699,7 +1796,8 @@
     "type2": "Ground",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "paldean-tauros",
@@ -1716,7 +1814,8 @@
     "type2": null,
     "generation": 1,
     "variant": "Paldean Form",
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "paras",
@@ -1733,7 +1832,8 @@
     "type2": "Grass",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "parasect",
@@ -1750,7 +1850,8 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/aa7edda2de8e9156c2fa6617fab8dfa5111023644f27a0245388a8011be8e696/1600.jpg"
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/aa7edda2de8e9156c2fa6617fab8dfa5111023644f27a0245388a8011be8e696/1600.jpg",
+    "localImage": true
   },
   {
     "id": "persian",
@@ -1767,7 +1868,8 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/5246de56c6c06a6e52025928fb025b457d5cc3a7eda09c615c62149a55483792/1600.jpg"
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/5246de56c6c06a6e52025928fb025b457d5cc3a7eda09c615c62149a55483792/1600.jpg",
+    "localImage": true
   },
   {
     "id": "pidgeot-ex",
@@ -1784,7 +1886,8 @@
     "type2": "Flying",
     "generation": 1,
     "variant": "ex",
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "pidgeotto",
@@ -1801,7 +1904,8 @@
     "type2": "Flying",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "pidgey",
@@ -1818,7 +1922,8 @@
     "type2": "Flying",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "pikachu",
@@ -1835,7 +1940,8 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/586ac7c8de776198ed4ba4bc26413495e572adefc3e8a761ff84942be59a18e5/1600.jpg"
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/586ac7c8de776198ed4ba4bc26413495e572adefc3e8a761ff84942be59a18e5/1600.jpg",
+    "localImage": true
   },
   {
     "id": "pinsir",
@@ -1852,7 +1958,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "poliwag",
@@ -1869,7 +1976,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "poliwhirl",
@@ -1886,7 +1994,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "poliwrath",
@@ -1903,7 +2012,8 @@
     "type2": "Fighting",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "ponyta",
@@ -1920,7 +2030,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "porygon",
@@ -1937,7 +2048,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "primeape",
@@ -1954,7 +2066,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "raichu",
@@ -1971,7 +2084,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "rapidash",
@@ -1988,7 +2102,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "raticate",
@@ -2005,7 +2120,8 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/t3q26pvgebnj624q/1600.jpg"
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/t3q26pvgebnj624q/1600.jpg",
+    "localImage": true
   },
   {
     "id": "rattata",
@@ -2040,7 +2156,8 @@
     "type2": "Rock",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "rhyhorn",
@@ -2057,7 +2174,8 @@
     "type2": "Rock",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "sandshrew",
@@ -2110,7 +2228,8 @@
     "type2": "Flying",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "seadra",
@@ -2127,7 +2246,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "seaking",
@@ -2144,7 +2264,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "seel",
@@ -2161,7 +2282,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "shellder",
@@ -2178,7 +2300,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "slowbro",
@@ -2195,7 +2318,8 @@
     "type2": "Psychic",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "slowpoke",
@@ -2212,7 +2336,8 @@
     "type2": "Psychic",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "snorlax",
@@ -2229,7 +2354,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "spearow",
@@ -2246,7 +2372,8 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/2obttf3y6z4ssrbf/1600.jpg"
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/2obttf3y6z4ssrbf/1600.jpg",
+    "localImage": true
   },
   {
     "id": "squirtle",
@@ -2263,7 +2390,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "starmie",
@@ -2280,7 +2408,8 @@
     "type2": "Psychic",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "staryu",
@@ -2297,7 +2426,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "tangela",
@@ -2314,7 +2444,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "team-rockets-weezing",
@@ -2331,7 +2462,8 @@
     "generation": 1,
     "variant": "Trainer's Pokemon",
     "binderId": "kanto-151",
-    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/r7trixrvwo7mtovs/1600.jpg"
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/r7trixrvwo7mtovs/1600.jpg",
+    "localImage": true
   },
   {
     "id": "tentacool",
@@ -2348,7 +2480,8 @@
     "type2": "Poison",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "tentacruel",
@@ -2365,7 +2498,8 @@
     "type2": "Poison",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "vaporeon",
@@ -2382,7 +2516,8 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/7qxrwqfgffugzffo/1600.jpg"
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/7qxrwqfgffugzffo/1600.jpg",
+    "localImage": true
   },
   {
     "id": "venomoth",
@@ -2399,7 +2534,8 @@
     "type2": "Poison",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "venonat",
@@ -2416,7 +2552,8 @@
     "type2": "Poison",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "venusaur-ex",
@@ -2433,7 +2570,8 @@
     "type2": "Poison",
     "generation": 1,
     "variant": "ex",
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "victreebel",
@@ -2450,7 +2588,8 @@
     "type2": "Poison",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "vileplume-gx",
@@ -2467,7 +2606,8 @@
     "generation": 1,
     "variant": "GX",
     "binderId": "kanto-151",
-    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/40f5c340fdb0e285e56a5dbb89d8a3b357fbf819e94fa805ed155b852f74185f/1600.jpg"
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/40f5c340fdb0e285e56a5dbb89d8a3b357fbf819e94fa805ed155b852f74185f/1600.jpg",
+    "localImage": true
   },
   {
     "id": "vulpix",
@@ -2484,7 +2624,8 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/gteoszldkhekmim5/1600.jpg"
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/gteoszldkhekmim5/1600.jpg",
+    "localImage": true
   },
   {
     "id": "wartortle",
@@ -2501,7 +2642,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "weedle",
@@ -2518,7 +2660,8 @@
     "type2": "Poison",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "weepinbell",
@@ -2535,7 +2678,8 @@
     "type2": "Poison",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   },
   {
     "id": "wigglytuff",
@@ -2552,7 +2696,8 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/3xouhrr2bhnn7va7/1600.jpg"
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/3xouhrr2bhnn7va7/1600.jpg",
+    "localImage": true
   },
   {
     "id": "zubat",
@@ -2569,6 +2714,7 @@
     "type2": "Flying",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "localImage": true
   }
 ]

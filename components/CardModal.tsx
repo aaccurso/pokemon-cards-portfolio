@@ -12,7 +12,11 @@ type Props = {
 
 export function CardModal({ card, ownership, onClose }: Props) {
   const [imgFailed, setImgFailed] = useState(false);
-  const imgUrl = card.imageUrl ?? null;
+  const [triedRemote, setTriedRemote] = useState(false);
+  const localSrc = card.localImage ? `/cards/${card.id}.webp` : null;
+  const imgUrl = triedRemote
+    ? card.imageUrl ?? null
+    : localSrc ?? card.imageUrl ?? null;
   const owned = ownership != null;
 
   useEffect(() => {
@@ -41,7 +45,13 @@ export function CardModal({ card, ownership, onClose }: Props) {
                 src={imgUrl}
                 alt={card.name}
                 className="modal-image"
-                onError={() => setImgFailed(true)}
+                onError={() => {
+                  if (!triedRemote && localSrc && card.imageUrl) {
+                    setTriedRemote(true);
+                  } else {
+                    setImgFailed(true);
+                  }
+                }}
               />
             </div>
           ) : (

@@ -1,7 +1,9 @@
 import { Card, typeColors } from "@/lib/cards";
 
 export function PlaceholderCard({ card }: { card: Card }) {
-  const imgUrl = card.imageUrl ?? null;
+  const imgUrl = card.localImage
+    ? `/cards/${card.id}.webp`
+    : card.imageUrl ?? null;
   return (
     <div className="placeholder-card">
       <div className="ph-header">
