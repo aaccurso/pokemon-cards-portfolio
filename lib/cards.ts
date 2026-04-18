@@ -10,6 +10,7 @@ export type Card = {
   condition: string;
   buyPrice: number | null;
   imageUrl?: string | null;
+  imageIsFallback?: boolean;
   pokedexNumber: number;
   type1: string;
   type2: string | null;
@@ -19,6 +20,27 @@ export type Card = {
 };
 
 export const cards: Card[] = cardsJson as Card[];
+
+export const languageFlags: Record<string, string> = {
+  Japanese: "\u{1F1EF}\u{1F1F5}",
+  English: "\u{1F1EC}\u{1F1E7}",
+  German: "\u{1F1E9}\u{1F1EA}",
+  French: "\u{1F1EB}\u{1F1F7}",
+  Italian: "\u{1F1EE}\u{1F1F9}",
+  Spanish: "\u{1F1EA}\u{1F1F8}",
+  Portuguese: "\u{1F1F5}\u{1F1F9}",
+  Any: "\u{1F310}",
+};
+
+export const conditionNames: Record<string, string> = {
+  MT: "Mint",
+  NM: "Near Mint",
+  EX: "Excellent",
+  GD: "Good",
+  LP: "Lightly Played",
+  PL: "Played",
+  PO: "Poor",
+};
 
 export const typeColors: Record<string, string> = {
   Normal: "#A8A878",

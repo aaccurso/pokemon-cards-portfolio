@@ -424,6 +424,7 @@ header p {
   display: flex;
   gap: 4px;
   flex-wrap: wrap;
+  align-items: center;
   margin-top: 2px;
 }
 
@@ -444,6 +445,26 @@ header p {
 .card-tile.owned .card-tile-image {
   border-color: var(--owned-border);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35), 0 0 0 2px rgba(120, 200, 80, 0.35);
+}
+
+/* ALT chip for cards whose image is an alternative version */
+.card-tile-alt-chip {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  background: rgba(0, 0, 0, 0.62);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 2;
+  pointer-events: none;
+  user-select: none;
 }
 
 /* Poké Ball badge for owned cards (pure CSS) */
@@ -469,6 +490,89 @@ header p {
     inset 2px 2px 4px rgba(255, 255, 255, 0.25);
   z-index: 2;
   pointer-events: none;
+}
+
+/* Inline pokeball icon — used in grid tile footer + table "Own" column */
+.pokeball {
+  display: inline-block;
+  border-radius: 50%;
+  background:
+    linear-gradient(
+      to bottom,
+      #e94b3c 0 45%,
+      #1a1a1a 45% 55%,
+      #f5f5f5 55% 100%
+    );
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.5),
+    inset -1px -2px 3px rgba(0, 0, 0, 0.25),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.25);
+  flex-shrink: 0;
+  position: relative;
+  vertical-align: middle;
+}
+
+/* Center dot + black ring, rendered as an overlay so sizes stay crisp. */
+.pokeball::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border: 1px solid #1a1a1a;
+  border-radius: 50%;
+}
+
+.pokeball-sm {
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid #1a1a1a;
+}
+
+.pokeball-sm::after {
+  width: 6px;
+  height: 6px;
+}
+
+.pokeball-xs {
+  width: 14px;
+  height: 14px;
+  border: 1px solid #1a1a1a;
+}
+
+.pokeball-xs::after {
+  width: 5px;
+  height: 5px;
+}
+
+/* Push the pokeball to the far right of the tile footer's types row. */
+.card-tile-pokeball {
+  margin-left: auto;
+  pointer-events: none;
+}
+
+/* Flag emoji glyph (small leading decorator before the language name) */
+.language-flag {
+  display: inline-block;
+  margin-right: 6px;
+  font-size: 0.95em;
+  line-height: 1;
+  vertical-align: baseline;
+}
+
+/* Condition abbreviation chip — hover title reveals full name */
+.condition-chip {
+  display: inline-block;
+  padding: 1px 7px;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  background: rgba(120, 200, 80, 0.15);
+  color: #78c850;
+  border: 1px solid rgba(120, 200, 80, 0.4);
+  cursor: help;
 }
 
 /* Card name cell — clickable, with hover preview */
@@ -612,8 +716,27 @@ header p {
 
 .modal-image-wrapper {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 0.75rem;
+}
+
+.modal-alt-notice {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-align: center;
+  max-width: 340px;
+  line-height: 1.45;
+  padding: 0.5rem 0.75rem;
+  background: rgba(248, 208, 48, 0.08);
+  border: 1px solid rgba(248, 208, 48, 0.2);
+  border-radius: 6px;
+}
+
+.modal-alt-notice strong {
+  color: var(--text);
+  font-weight: 600;
 }
 
 .modal-image-clip {
@@ -1043,6 +1166,22 @@ header p {
 .ph-thumb-fallback {
   font-size: 10mm;
   color: #ccc;
+}
+
+.ph-alt-tag {
+  position: absolute;
+  top: 1mm;
+  right: 1mm;
+  font-size: 2mm;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(200, 0, 0, 0.7);
+  background: rgba(255, 255, 255, 0.9);
+  border: 0.2mm solid rgba(200, 0, 0, 0.5);
+  padding: 0.5mm 1.3mm;
+  border-radius: 0.8mm;
+  z-index: 2;
 }
 
 .ph-watermark {

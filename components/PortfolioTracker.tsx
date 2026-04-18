@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { cards as allCards, typeColors, Card } from "@/lib/cards";
+import { cards as allCards, typeColors, languageFlags, Card } from "@/lib/cards";
 import {
   purchases,
   buildOwnershipMap,
@@ -296,12 +296,10 @@ export default function PortfolioTracker() {
                   <td className="own-cell">
                     {own ? (
                       <span
-                        className="own-indicator"
+                        className="pokeball pokeball-xs"
                         aria-label="Owned"
                         title="Owned"
-                      >
-                        ●
-                      </span>
+                      />
                     ) : (
                       <span
                         className="own-indicator wanted"
@@ -364,7 +362,14 @@ export default function PortfolioTracker() {
                   </td>
                   <td>{card.code}</td>
                   <td className="hide-mobile">{card.set}</td>
-                  <td className="hide-mobile">{card.language}</td>
+                  <td className="hide-mobile">
+                    {languageFlags[card.language] && (
+                      <span className="language-flag" aria-hidden>
+                        {languageFlags[card.language]}
+                      </span>
+                    )}
+                    {card.language}
+                  </td>
                   <td className="hide-mobile">
                     {card.variant && (
                       <span className="variant-badge">{card.variant}</span>

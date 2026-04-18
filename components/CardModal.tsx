@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Card, typeColors } from "@/lib/cards";
+import { Card, typeColors, languageFlags, conditionNames } from "@/lib/cards";
 import type { CardOwnership } from "@/lib/purchases";
 
 type Props = {
@@ -54,6 +54,12 @@ export function CardModal({ card, ownership, onClose }: Props) {
               <div className="placeholder-hint">No image available</div>
             </div>
           )}
+          {card.imageIsFallback && imgUrl && !imgFailed && (
+            <p className="modal-alt-notice">
+              Image shown is an alternative version. Your actual card is{" "}
+              <strong>{card.set}</strong> ({card.code}).
+            </p>
+          )}
         </div>
         <div className="modal-info">
           <h2>{card.name}</h2>
@@ -91,11 +97,25 @@ export function CardModal({ card, ownership, onClose }: Props) {
             </div>
             <div>
               <dt>Language</dt>
-              <dd>{card.language}</dd>
+              <dd>
+                {languageFlags[card.language] && (
+                  <span className="language-flag" aria-hidden>
+                    {languageFlags[card.language]}
+                  </span>
+                )}
+                {card.language}
+              </dd>
             </div>
             <div>
               <dt>Condition</dt>
-              <dd>{card.condition}</dd>
+              <dd>
+                <span
+                  className="condition-chip"
+                  title={conditionNames[card.condition] ?? card.condition}
+                >
+                  {card.condition}
+                </span>
+              </dd>
             </div>
             {card.buyPrice != null && (
               <div>

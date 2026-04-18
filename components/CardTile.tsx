@@ -66,8 +66,13 @@ export function CardTile({ card, owned, onClick }: Props) {
           )}
           <div className="card-tile-shine" aria-hidden />
           <div className="card-tile-holo" aria-hidden />
-          {owned && (
-            <span className="pokeball-badge" title="Owned" aria-label="Owned" />
+          {card.imageIsFallback && (
+            <span
+              className="card-tile-alt-chip"
+              title="Alternative version — not your exact card"
+            >
+              ALT
+            </span>
           )}
         </div>
         <div className="card-tile-info">
@@ -87,6 +92,13 @@ export function CardTile({ card, owned, onClick }: Props) {
               >
                 {card.type2}
               </span>
+            )}
+            {owned && (
+              <span
+                className="pokeball pokeball-sm card-tile-pokeball"
+                title="Owned"
+                aria-label="Owned"
+              />
             )}
           </div>
         </div>
