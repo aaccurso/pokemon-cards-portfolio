@@ -8,11 +8,14 @@ type Props = {
   card: Card;
   ownership: CardOwnership | null;
   onClose: () => void;
+  onPrev?: () => void;
+  onNext?: () => void;
 };
 
-export function CardModal({ card, ownership, onClose }: Props) {
+export function CardModal({ card, ownership, onClose, onPrev, onNext }: Props) {
   const [imgFailed, setImgFailed] = useState(false);
   const [triedRemote, setTriedRemote] = useState(false);
+  const [zoomed, setZoomed] = useState(false);
   const localSrc = card.localImage ? `/cards/${card.id}.webp` : null;
   const imgUrl = triedRemote
     ? card.imageUrl ?? null
@@ -20,17 +23,33 @@ export function CardModal({ card, ownership, onClose }: Props) {
   const owned = ownership != null;
 
   useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+    setZoomed(false);
+    setImgFailed(false);
+    setTriedRemote(false);
+  }, [card.id]);
+
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        if (zoomed) {
+          setZoomed(false);
+        } else {
+          onClose();
+        }
+        return;
+      }
+      if (zoomed) return;
+      if (e.key === "ArrowLeft") onPrev?.();
+      else if (e.key === "ArrowRight") onNext?.();
     };
-    window.addEventListener("keydown", handleEsc);
+    window.addEventListener("keydown", handleKey);
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
-      window.removeEventListener("keydown", handleEsc);
+      window.removeEventListener("keydown", handleKey);
       document.body.style.overflow = prevOverflow;
     };
-  }, [onClose]);
+  }, [onClose, onPrev, onNext, zoomed]);
 
   return (
     <div className="modal-backdrop" onClick={onClose}>
@@ -38,9 +57,39 @@ export function CardModal({ card, ownership, onClose }: Props) {
         <button className="modal-close" onClick={onClose} aria-label="Close">
           &times;
         </button>
+        {onPrev && (
+          <button
+            className="modal-nav modal-nav-prev"
+            onClick={onPrev}
+            aria-label="Previous card"
+          >
+            &#8249;
+          </button>
+        )}
+        {onNext && (
+          <button
+            className="modal-nav modal-nav-next"
+            onClick={onNext}
+            aria-label="Next card"
+          >
+            &#8250;
+          </button>
+        )}
         <div className="modal-image-wrapper">
           {imgUrl && !imgFailed ? (
-            <div className="modal-image-clip">
+            <div
+              className="modal-image-clip modal-image-clip--zoomable"
+              onClick={() => setZoomed(true)}
+              role="button"
+              tabIndex={0}
+              aria-label="Zoom card image"
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  setZoomed(true);
+                }
+              }}
+            >
               <img
                 src={imgUrl}
                 alt={card.name}
@@ -159,6 +208,16 @@ export function CardModal({ card, ownership, onClose }: Props) {
           </dl>
         </div>
       </div>
+      {zoomed && imgUrl && !imgFailed && (
+        <div
+          className="zoom-overlay"
+          onClick={() => setZoomed(false)}
+          role="button"
+          aria-label="Close zoomed image"
+        >
+          <img src={imgUrl} alt={card.name} className="zoom-image" />
+        </div>
+      )}
     </div>
   );
 }

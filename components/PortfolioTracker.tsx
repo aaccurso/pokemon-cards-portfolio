@@ -394,13 +394,25 @@ export default function PortfolioTracker() {
         Showing {filtered.length} of {allCards.length} cards
       </p>
 
-      {modalCard && (
-        <CardModal
-          card={modalCard}
-          ownership={ownership.get(modalCard.id) ?? null}
-          onClose={() => setModalCard(null)}
-        />
-      )}
+      {modalCard && (() => {
+        const idx = filtered.findIndex((c) => c.id === modalCard.id);
+        const canNavigate = idx !== -1 && filtered.length > 1;
+        const onPrev = canNavigate
+          ? () => setModalCard(filtered[(idx - 1 + filtered.length) % filtered.length])
+          : undefined;
+        const onNext = canNavigate
+          ? () => setModalCard(filtered[(idx + 1) % filtered.length])
+          : undefined;
+        return (
+          <CardModal
+            card={modalCard}
+            ownership={ownership.get(modalCard.id) ?? null}
+            onClose={() => setModalCard(null)}
+            onPrev={onPrev}
+            onNext={onNext}
+          />
+        );
+      })()}
 
       {importOpen && (
         <ImportShipmentModal

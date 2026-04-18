@@ -714,6 +714,67 @@ header p {
   color: var(--accent);
 }
 
+.modal-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: background 0.15s, color 0.15s, transform 0.15s;
+  z-index: 2;
+}
+
+.modal-nav:hover {
+  background: var(--surface-hover);
+  color: var(--accent);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.modal-nav-prev {
+  left: 0.5rem;
+}
+
+.modal-nav-next {
+  right: 0.5rem;
+}
+
+.modal-image-clip--zoomable {
+  cursor: zoom-in;
+}
+
+.zoom-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  z-index: 101;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  cursor: zoom-out;
+  animation: modalFadeIn 0.2s ease-out;
+}
+
+.zoom-image {
+  max-width: 95vw;
+  max-height: 95vh;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+  cursor: zoom-out;
+}
+
 .modal-image-wrapper {
   display: flex;
   flex-direction: column;
