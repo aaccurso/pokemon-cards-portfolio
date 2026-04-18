@@ -64,7 +64,7 @@ The old `data/wishlist.csv` has been retired. Portfolio can be exported as CSV a
 ## Known Limitations / Planned Work
 - **Binder selector** — `binderId` is on every card but there's no UI yet to switch between binders.
 - **Market-price refresh** — `buyPrice` is a frozen snapshot; refresh is manual (ask Claude to update it).
-- **Not deployed** — runs locally only (`npm run dev`). The import-shipment server action writes to disk, which only works in environments with a writable filesystem.
+- **Deployed on Vercel.** The repo auto-deploys `main` to a Vercel URL. **Caveat:** the import-shipment server action writes to `data/purchases.json`, which requires a writable filesystem — this only works in local dev. On the deployed site the Import Shipment button will throw at runtime until ownership state is moved to a real backend (Vercel KV / Upstash / Supabase) or browser `localStorage`.
 - **No tests yet** — stats math and parser are the obvious first candidates.
 
 ## Commands
