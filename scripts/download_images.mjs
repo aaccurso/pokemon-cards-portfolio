@@ -9,12 +9,26 @@
  * - Resizes to max 800px wide and encodes WebP q85 — enough resolution
  *   for the modal view while keeping the committed size small.
  *
+ * Requires the `sharp` npm package. It is NOT in package.json — install
+ * it once locally before running:  `npm install --no-save sharp`.
+ * (Kept out of deps so that Vercel's install step doesn't hang on the
+ * native binary resolution.)
+ *
  *   node scripts/download_images.mjs           # normal
  *   node scripts/download_images.mjs --force   # re-download even if flagged
  */
 import fs from "node:fs";
 import path from "node:path";
-import sharp from "sharp";
+
+let sharp;
+try {
+  sharp = (await import("sharp")).default;
+} catch {
+  console.error(
+    "sharp is not installed. Run `npm install --no-save sharp` and try again."
+  );
+  process.exit(1);
+}
 
 const FILE = "data/cards.json";
 const OUT_DIR = "public/cards";
