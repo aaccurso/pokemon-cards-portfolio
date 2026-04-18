@@ -44,6 +44,20 @@ header p {
   color: var(--text-muted);
 }
 
+.header-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.85rem;
+  border-bottom: 1px dashed transparent;
+  transition: border-color 0.15s;
+}
+
+.header-link:hover {
+  border-bottom-color: var(--accent);
+}
+
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -684,6 +698,472 @@ header p {
 
 .status-wanted {
   color: var(--text-muted);
+}
+
+/* =====================================================
+   Print / Placeholder cards page
+   ===================================================== */
+
+.print-page {
+  background: #f4f4f4;
+  min-height: 100vh;
+  padding: 2rem 1rem 3rem;
+  color: #222;
+}
+
+.print-controls {
+  max-width: 780px;
+  margin: 0 auto 1.5rem;
+  background: #fff;
+  padding: 1.5rem 1.75rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.print-controls-header h1 {
+  color: #222;
+  font-size: 1.3rem;
+  margin-bottom: 0.35rem;
+}
+
+.print-hint {
+  color: #666;
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+
+.print-instructions {
+  background: #fff8e1;
+  border: 1px solid #f4d78a;
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+}
+
+.print-instructions h2 {
+  font-size: 0.95rem;
+  color: #7a5800;
+  margin-bottom: 0.6rem;
+}
+
+.print-instructions ol {
+  margin: 0 0 0.75rem 1.25rem;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: #3f3f3f;
+}
+
+.print-instructions li {
+  margin-bottom: 0.2rem;
+}
+
+.print-instructions strong {
+  color: #222;
+}
+
+.print-note {
+  font-size: 0.8rem;
+  color: #555;
+  font-style: italic;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding-top: 0.6rem;
+  line-height: 1.5;
+}
+
+.print-controls-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.print-opt {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  color: #444;
+  cursor: pointer;
+}
+
+.print-btn {
+  background: #2a6fdb;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.print-btn:hover {
+  background: #1f5bc0;
+}
+
+.print-sheet {
+  display: grid;
+  grid-template-columns: repeat(3, 63mm);
+  grid-auto-rows: 88mm;
+  gap: 2mm;
+  justify-content: center;
+  align-content: start;
+  margin: 0 auto 6mm;
+  width: 193mm;
+  box-sizing: content-box;
+  break-after: page;
+  page-break-after: always;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.print-sheet:last-child {
+  break-after: auto;
+  page-break-after: auto;
+}
+
+/* Calibration sheet (prints as first page) */
+.print-calibration-sheet {
+  width: 193mm;
+  margin: 0 auto 6mm;
+  padding: 4mm 0;
+  color: #111;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  break-after: page;
+  page-break-after: always;
+  break-inside: avoid;
+  page-break-inside: avoid;
+  background: #fff;
+  border-radius: 4mm;
+}
+
+.print-calibration-sheet h2 {
+  font-size: 6mm;
+  margin-bottom: 2mm;
+  color: #111;
+}
+
+.cal-intro {
+  font-size: 3mm;
+  color: #444;
+  line-height: 1.4;
+  max-width: 150mm;
+  margin-bottom: 8mm;
+}
+
+.cal-ruler-wrap {
+  display: flex;
+  align-items: center;
+  gap: 3mm;
+  margin-bottom: 1.5mm;
+}
+
+.cal-label-left,
+.cal-label-right {
+  font-size: 3mm;
+  font-weight: 700;
+  color: #222;
+  font-family: monospace;
+}
+
+.cal-ruler {
+  position: relative;
+  width: 50mm;
+  height: 10mm;
+  border: 0.4mm solid #111;
+  border-top: none;
+}
+
+.cal-tick {
+  position: absolute;
+  top: 0;
+  width: 0.4mm;
+  background: #111;
+  height: 5mm;
+}
+
+.cal-tick:first-child,
+.cal-tick:last-child {
+  height: 10mm;
+}
+
+.cal-ruler-caption {
+  font-size: 3mm;
+  color: #444;
+  margin-bottom: 8mm;
+}
+
+.cal-card-wrap {
+  display: flex;
+  gap: 6mm;
+  align-items: center;
+  margin-bottom: 8mm;
+}
+
+.cal-card-box {
+  width: 63mm;
+  height: 88mm;
+  border: 0.4mm solid #111;
+  border-radius: 3mm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-shrink: 0;
+  background: #fff;
+}
+
+.cal-card-label {
+  font-size: 3.2mm;
+  color: #444;
+  line-height: 1.4;
+}
+
+.cal-card-caption {
+  font-size: 3mm;
+  color: #444;
+  line-height: 1.5;
+  max-width: 90mm;
+}
+
+.cal-tips {
+  background: #f4f4f4;
+  border-left: 1mm solid #888;
+  padding: 3mm 4mm;
+  font-size: 2.8mm;
+  color: #333;
+  line-height: 1.5;
+  border-radius: 0 2mm 2mm 0;
+}
+
+.cal-tips ul {
+  margin: 1mm 0 0 4mm;
+  padding: 0;
+}
+
+.cal-tips li {
+  margin-bottom: 0.8mm;
+}
+
+.placeholder-card {
+  width: 63mm;
+  height: 88mm;
+  background: #fff;
+  color: #111;
+  border: 0.5mm solid #222;
+  border-radius: 3mm;
+  padding: 3mm 3mm 2.5mm;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5mm;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  box-sizing: border-box;
+  overflow: hidden;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.ph-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 2.4mm;
+  color: #666;
+}
+
+.ph-dex {
+  font-weight: 700;
+  color: #222;
+  font-family: monospace;
+}
+
+.ph-set {
+  font-style: italic;
+  text-align: right;
+  max-width: 40mm;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ph-name {
+  font-size: 4.2mm;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #111;
+  letter-spacing: -0.02em;
+}
+
+.ph-thumb {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  border: 0.3mm dashed #bbb;
+  border-radius: 2mm;
+  background: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.ph-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: grayscale(1) opacity(0.45);
+}
+
+.ph-thumb-fallback {
+  font-size: 10mm;
+  color: #ccc;
+}
+
+.ph-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-22deg);
+  font-size: 5mm;
+  font-weight: 900;
+  color: rgba(200, 0, 0, 0.35);
+  letter-spacing: 0.1em;
+  border: 0.5mm solid rgba(200, 0, 0, 0.35);
+  padding: 0.8mm 3mm;
+  border-radius: 1mm;
+  white-space: nowrap;
+}
+
+.ph-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 1mm;
+  font-size: 2.4mm;
+}
+
+.ph-types {
+  display: flex;
+  gap: 1mm;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.ph-type-badge {
+  padding: 0.3mm 1.5mm;
+  border-radius: 1mm;
+  font-size: 2.2mm;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 0.2mm 0.3mm rgba(0, 0, 0, 0.3);
+}
+
+.ph-variant {
+  padding: 0.3mm 1.2mm;
+  border: 0.2mm solid #999;
+  border-radius: 1mm;
+  font-size: 2mm;
+  font-weight: 600;
+  color: #555;
+}
+
+.ph-code-row {
+  display: flex;
+  justify-content: space-between;
+  color: #555;
+  font-family: monospace;
+  font-size: 2.2mm;
+}
+
+.ph-budget {
+  color: #2a6fdb;
+  font-weight: 700;
+  font-family: inherit;
+}
+
+.ph-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1mm 2mm;
+  font-size: 2.3mm;
+  padding-top: 1mm;
+  border-top: 0.2mm solid #ddd;
+}
+
+.ph-field {
+  display: flex;
+  align-items: baseline;
+  gap: 1mm;
+  min-width: 0;
+}
+
+.ph-field:nth-child(3),
+.ph-field:nth-child(4) {
+  grid-column: 1 / -1;
+}
+
+.ph-label {
+  color: #777;
+  font-size: 2mm;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.ph-line {
+  flex: 1;
+  border-bottom: 0.2mm solid #888;
+  min-height: 3mm;
+}
+
+.ph-unit {
+  color: #777;
+  font-size: 2mm;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  @page {
+    size: A4 portrait;
+    margin: 6mm;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+  }
+
+  .print-page {
+    background: #fff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .print-sheet,
+  .print-calibration-sheet {
+    margin: 0 auto !important;
+    page-break-after: always;
+    break-after: page;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .print-sheet:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
+
+  .placeholder-card {
+    box-shadow: none !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
 }
 
 @media (max-width: 768px) {

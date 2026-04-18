@@ -119,6 +119,9 @@ export default function PortfolioTracker() {
         <p>
           {stats.owned} / {stats.total} cards collected
         </p>
+        <a className="header-link" href="/print" target="_blank" rel="noopener">
+          Print binder placeholders &rarr;
+        </a>
       </header>
 
       <div className="progress-bar-container">
