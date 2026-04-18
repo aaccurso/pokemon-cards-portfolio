@@ -32,7 +32,7 @@ lib/
 ## Source Sync Rule
 **Always keep `data/wishlist.csv` in sync with `lib/cards.ts`.** Whenever a card is added, removed, or edited in `lib/cards.ts`, apply the equivalent change to `data/wishlist.csv` in the same commit/turn. The CSV is the canonical wants-list export and must reflect the current state at all times.
 
-CSV columns: `Card Name, Card Code, Set, Qty, Language, Condition, Buy Price (EUR), Pokedex #, Type 1, Type 2, Generation, Card Variant`. Fields without a CSV column (e.g. `pricePaid`, `owned`) stay only in `lib/cards.ts`.
+CSV columns: `Card Name, Card Code, Set, Qty, Language, Condition, Buy Price (EUR), Price Paid (EUR), Owned, Pokedex #, Type 1, Type 2, Generation, Card Variant`. `Owned` is `true`/`false`; `Price Paid (EUR)` is blank for unowned cards. `imageUrl` stays only in `lib/cards.ts` (not mirrored to CSV).
 
 ## Current Features
 - Progress bar showing collection completion percentage

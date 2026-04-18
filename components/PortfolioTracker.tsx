@@ -4,6 +4,7 @@ import { useState, useMemo, useCallback } from "react";
 import { cards as initialCards, typeColors, Card } from "@/lib/cards";
 import { getCardImageUrl } from "@/lib/cardImage";
 import { CardModal } from "./CardModal";
+import { CardTile } from "./CardTile";
 
 type SortKey = keyof Card;
 type SortDir = "asc" | "desc";
@@ -18,6 +19,7 @@ export default function PortfolioTracker() {
   const [sortDir, setSortDir] = useState<SortDir>("asc");
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [modalCard, setModalCard] = useState<Card | null>(null);
+  const [viewMode, setViewMode] = useState<"table" | "grid">("grid");
 
   const toggleOwned = useCallback((id: string) => {
     setCardList((prev) =>
@@ -192,8 +194,37 @@ export default function PortfolioTracker() {
           <option value="owned">Owned Only</option>
           <option value="wanted">Wanted Only</option>
         </select>
+        <div className="view-toggle" role="group" aria-label="View mode">
+          <button
+            className={viewMode === "table" ? "active" : ""}
+            onClick={() => setViewMode("table")}
+            aria-pressed={viewMode === "table"}
+            title="Table view"
+          >
+            &#9776; Table
+          </button>
+          <button
+            className={viewMode === "grid" ? "active" : ""}
+            onClick={() => setViewMode("grid")}
+            aria-pressed={viewMode === "grid"}
+            title="Grid view"
+          >
+            &#9638; Grid
+          </button>
+        </div>
       </div>
 
+      {viewMode === "grid" ? (
+        <div className="card-grid">
+          {filtered.map((card) => (
+            <CardTile
+              key={card.id}
+              card={card}
+              onClick={() => setModalCard(card)}
+            />
+          ))}
+        </div>
+      ) : (
       <table className="card-table">
         <thead>
           <tr>
@@ -304,6 +335,7 @@ export default function PortfolioTracker() {
           ))}
         </tbody>
       </table>
+      )}
 
       <p style={{ textAlign: "center", marginTop: "1rem", color: "var(--text-muted)", fontSize: "0.8rem" }}>
         Showing {filtered.length} of {cardList.length} cards
