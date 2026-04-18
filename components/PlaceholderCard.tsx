@@ -18,6 +18,7 @@ export function PlaceholderCard({ card }: { card: Card }) {
           </div>
         )}
         <div className="ph-watermark">PLACEHOLDER</div>
+        {card.imageIsFallback && <span className="ph-alt-tag">alt.</span>}
       </div>
       <div className="ph-meta">
         <div className="ph-types">

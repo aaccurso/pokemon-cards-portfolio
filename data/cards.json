@@ -47,7 +47,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/z2i7jyiqvwqzn4xc/1600.jpg"
   },
   {
     "id": "alolan-dugtrio",
@@ -63,7 +64,8 @@
     "type2": "Steel",
     "generation": 1,
     "variant": "Alolan Form",
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/w4mnjcknarfqw7f5/1600.jpg"
   },
   {
     "id": "alolan-golem-gx",
@@ -79,7 +81,8 @@
     "type2": "Electric",
     "generation": 1,
     "variant": "Alolan Form / GX",
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/ref1bd5e88daff2b8aff02213df59f4c3db1c2ad5ea36cfc5280c9ec07e9e841688/1600.jpg"
   },
   {
     "id": "arbok",
@@ -129,7 +132,8 @@
     "type2": "Poison",
     "generation": 1,
     "variant": "V",
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/5pb3we557erz5pyo/1600.jpg"
   },
   {
     "id": "bellsprout",
@@ -179,7 +183,8 @@
     "type2": "Poison",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/xlljpxbi5voq4pee/1600.jpg"
   },
   {
     "id": "butterfree-vmax",
@@ -195,7 +200,9 @@
     "type2": "Flying",
     "generation": 1,
     "variant": "VMAX",
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://images.pokemontcg.io/swsh3/190_hires.png",
+    "imageIsFallback": true
   },
   {
     "id": "caterpie",
@@ -228,7 +235,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/83eb18706024d879bac1db12dbfed98d8606963d90aca5fc5349ddde62b23676/1600.jpg"
   },
   {
     "id": "charizard",
@@ -244,7 +252,8 @@
     "type2": "Flying",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/vkeojmlithtqzy4l/1600.jpg"
   },
   {
     "id": "charmander",
@@ -294,7 +303,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/u6odyyb6x22l45y2/1600.jpg"
   },
   {
     "id": "cloyster",
@@ -344,7 +354,9 @@
     "type2": "Ice",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://images.scrydex.com/pokemon/me3-19/large",
+    "imageIsFallback": true
   },
   {
     "id": "diglett",
@@ -496,7 +508,9 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://images.pokemontcg.io/sv10/112_hires.png",
+    "imageIsFallback": true
   },
   {
     "id": "electabuzz",
@@ -563,7 +577,8 @@
     "type2": "Psychic",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/quyvghhmtysnhlss/1600.jpg"
   },
   {
     "id": "farfetchd",
@@ -613,7 +628,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/sdkujs6oatssofa5/1600.jpg"
   },
   {
     "id": "galarian-moltres",
@@ -680,7 +696,8 @@
     "type2": "Poison",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/5l7l5z5jpwryybzm/1600.jpg"
   },
   {
     "id": "geodude",
@@ -832,7 +849,9 @@
     "type2": "Poison",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://images.scrydex.com/pokemon/me3-49/large",
+    "imageIsFallback": true
   },
   {
     "id": "hisuian-arcanine",
@@ -848,7 +867,8 @@
     "type2": "Rock",
     "generation": 1,
     "variant": "Hisuian Form",
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/cv2ftby3ebyazhiq/1600.jpg"
   },
   {
     "id": "hisuian-growlithe",
@@ -932,7 +952,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/195ca2a40906c79591c133fefd9cfc87ebccfbeb55544d7139968e0a5ed686ef/1600.jpg"
   },
   {
     "id": "hypno",
@@ -965,7 +986,8 @@
     "type2": "Poison",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/3pb7sfmy7rqdjt46/1600.jpg"
   },
   {
     "id": "jigglypuff",
@@ -998,7 +1020,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/5xzfqjpc5yuxhhtm/1600.jpg"
   },
   {
     "id": "jynx",
@@ -1014,7 +1037,8 @@
     "type2": "Psychic",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/4a60e976ecd501d7a21b0119b0550b03d212be04c5f3982118bce852a5f093e4/1600.jpg"
   },
   {
     "id": "kabuto",
@@ -1098,7 +1122,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/gyggtu3tt3cmhmuu/1600.jpg"
   },
   {
     "id": "kingler",
@@ -1131,7 +1156,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/822fba55a24cbebb66d649f05f124efe101908a2d5a67933d34b46be517eecfc/1600.jpg"
   },
   {
     "id": "krabby",
@@ -1181,7 +1207,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/f995593c10a9b5d9acb8dc59763fc5172b460d163dc6206fde307f6033488b9b/1600.jpg"
   },
   {
     "id": "machamp",
@@ -1282,7 +1309,8 @@
     "type2": "Steel",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/fgdrr7eilt3rtqy3/1600.jpg"
   },
   {
     "id": "magneton",
@@ -1298,7 +1326,8 @@
     "type2": "Steel",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/b3pfwodnowqmwhrn/1600.jpg"
   },
   {
     "id": "mankey",
@@ -1348,7 +1377,8 @@
     "type2": null,
     "generation": 1,
     "variant": "Mega / ex",
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/a36s5nt73ud2yajc/1600.jpg"
   },
   {
     "id": "mega-dragonite-ex",
@@ -1364,7 +1394,8 @@
     "type2": "Flying",
     "generation": 1,
     "variant": "Mega / ex",
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/hquradlkeximiqgn/1600.jpg"
   },
   {
     "id": "meowth",
@@ -1380,7 +1411,9 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://images.scrydex.com/pokemon/me3-121/large",
+    "imageIsFallback": true
   },
   {
     "id": "metapod",
@@ -1719,7 +1752,8 @@
     "type2": "Grass",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/aa7edda2de8e9156c2fa6617fab8dfa5111023644f27a0245388a8011be8e696/1600.jpg"
   },
   {
     "id": "persian",
@@ -1735,7 +1769,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/5246de56c6c06a6e52025928fb025b457d5cc3a7eda09c615c62149a55483792/1600.jpg"
   },
   {
     "id": "pidgeot-ex",
@@ -1802,7 +1837,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/586ac7c8de776198ed4ba4bc26413495e572adefc3e8a761ff84942be59a18e5/1600.jpg"
   },
   {
     "id": "pinsir",
@@ -1971,7 +2007,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/t3q26pvgebnj624q/1600.jpg"
   },
   {
     "id": "rattata",
@@ -1987,7 +2024,9 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://images.scrydex.com/pokemon/me3-60/large",
+    "imageIsFallback": true
   },
   {
     "id": "rhydon",
@@ -2037,7 +2076,9 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://images.pokemontcg.io/me1/68_hires.png",
+    "imageIsFallback": true
   },
   {
     "id": "sandslash",
@@ -2053,7 +2094,9 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://images.pokemontcg.io/me1/69_hires.png",
+    "imageIsFallback": true
   },
   {
     "id": "scyther",
@@ -2205,7 +2248,8 @@
     "type2": "Flying",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/2obttf3y6z4ssrbf/1600.jpg"
   },
   {
     "id": "squirtle",
@@ -2289,7 +2333,8 @@
     "type2": null,
     "generation": 1,
     "variant": "Trainer's Pokemon",
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/r7trixrvwo7mtovs/1600.jpg"
   },
   {
     "id": "tentacool",
@@ -2339,7 +2384,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/7qxrwqfgffugzffo/1600.jpg"
   },
   {
     "id": "venomoth",
@@ -2423,7 +2469,8 @@
     "type2": "Poison",
     "generation": 1,
     "variant": "GX",
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/40f5c340fdb0e285e56a5dbb89d8a3b357fbf819e94fa805ed155b852f74185f/1600.jpg"
   },
   {
     "id": "vulpix",
@@ -2439,7 +2486,8 @@
     "type2": null,
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/gteoszldkhekmim5/1600.jpg"
   },
   {
     "id": "wartortle",
@@ -2506,7 +2554,9 @@
     "type2": "Fairy",
     "generation": 1,
     "variant": null,
-    "binderId": "kanto-151"
+    "binderId": "kanto-151",
+    "imageUrl": "https://images.pokemontcg.io/me2/105_hires.png",
+    "imageIsFallback": true
   },
   {
     "id": "zubat",
