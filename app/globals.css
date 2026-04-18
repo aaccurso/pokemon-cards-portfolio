@@ -278,9 +278,24 @@ header p {
   text-align: left;
   display: block;
   transform-style: preserve-3d;
-  transition: transform 0.2s ease-out;
   font: inherit;
   color: inherit;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease-out, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card-tile.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-tile {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 .card-tile-inner {
@@ -292,7 +307,7 @@ header p {
 .card-tile-image {
   position: relative;
   aspect-ratio: 63 / 88;
-  border-radius: 12px;
+  border-radius: 7px;
   overflow: hidden;
   background: var(--surface);
   border: 1px solid var(--border);
@@ -306,12 +321,8 @@ header p {
   isolation: isolate;
 }
 
-/* tcgdex card PNGs ship with a white rectangular bleed around the rounded
-   card artwork; scale slightly so overflow:hidden crops it off. */
 .card-tile-image img {
   background: var(--surface);
-  transform: scale(1.045);
-  transform-origin: center;
 }
 
 .card-tile:hover .card-tile-image {
@@ -616,7 +627,7 @@ header p {
   pointer-events: none;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 7px;
   overflow: hidden;
   line-height: 0;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
@@ -627,8 +638,6 @@ header p {
   display: block;
   width: 180px;
   height: auto;
-  transform: scale(1.045);
-  transform-origin: center;
 }
 
 @keyframes fadeInTooltip {
@@ -694,24 +703,37 @@ header p {
   position: absolute;
   top: 0.75rem;
   right: 0.75rem;
-  background: transparent;
-  border: none;
-  color: var(--text-muted);
-  font-size: 1.75rem;
+  background: var(--surface-hover);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 1.5rem;
   line-height: 1;
   cursor: pointer;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.15s, color 0.15s;
+  padding: 0;
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.15s;
 }
 
-.modal-close:hover {
-  background: var(--surface-hover);
+.modal-close:hover,
+.modal-close:focus-visible {
+  background: var(--surface);
   color: var(--accent);
+  border-color: var(--accent);
+  transform: scale(1.05);
+  outline: none;
+}
+
+.modal-close svg {
+  width: 18px;
+  height: 18px;
+  display: block;
 }
 
 .modal-nav {
@@ -813,8 +835,6 @@ header p {
   display: block;
   width: 100%;
   height: auto;
-  transform: scale(1.045);
-  transform-origin: center;
 }
 
 .modal-placeholder {
@@ -1678,6 +1698,18 @@ header p {
   .modal-content {
     grid-template-columns: 1fr;
     padding: 1.25rem;
+  }
+
+  .modal-close {
+    width: 44px;
+    height: 44px;
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+
+  .modal-close svg {
+    width: 20px;
+    height: 20px;
   }
 
   .preview-tooltip {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Card, typeColors } from "@/lib/cards";
 
 type Props = {
@@ -13,6 +13,33 @@ export function CardTile({ card, owned, onClick }: Props) {
   const ref = useRef<HTMLButtonElement>(null);
   const [imgFailed, setImgFailed] = useState(false);
   const [triedRemote, setTriedRemote] = useState(false);
+  const [revealed, setRevealed] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      setRevealed(true);
+      return;
+    }
+    const obs = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setRevealed(true);
+            obs.disconnect();
+            break;
+          }
+        }
+      },
+      { rootMargin: "80px 0px", threshold: 0.05 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
   const localSrc = card.localImage ? `/cards/${card.id}.webp` : null;
   const imgUrl = triedRemote
     ? card.imageUrl ?? null
@@ -44,7 +71,7 @@ export function CardTile({ card, owned, onClick }: Props) {
   return (
     <button
       ref={ref}
-      className={`card-tile ${owned ? "owned" : ""}`}
+      className={`card-tile ${owned ? "owned" : ""} ${revealed ? "is-revealed" : ""}`}
       onClick={onClick}
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
