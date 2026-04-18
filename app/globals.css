@@ -297,9 +297,21 @@ header p {
   background: var(--surface);
   border: 1px solid var(--border);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
-  transform: rotateX(var(--rx)) rotateY(var(--ry));
+  transform: rotateX(var(--rx)) rotateY(var(--ry)) translateZ(0);
   transition: transform 0.15s ease-out, box-shadow 0.2s ease-out, border-color 0.2s;
   transform-style: preserve-3d;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform;
+  isolation: isolate;
+}
+
+/* tcgdex card PNGs ship with a white rectangular bleed around the rounded
+   card artwork; scale slightly so overflow:hidden crops it off. */
+.card-tile-image img {
+  background: var(--surface);
+  transform: scale(1.045);
+  transform-origin: center;
 }
 
 .card-tile:hover .card-tile-image {
@@ -501,7 +513,8 @@ header p {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: 4px;
+  overflow: hidden;
+  line-height: 0;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
   animation: fadeInTooltip 0.15s ease-out;
 }
@@ -510,7 +523,8 @@ header p {
   display: block;
   width: 180px;
   height: auto;
-  border-radius: 4px;
+  transform: scale(1.045);
+  transform-origin: center;
 }
 
 @keyframes fadeInTooltip {
@@ -602,12 +616,21 @@ header p {
   justify-content: center;
 }
 
-.modal-image {
+.modal-image-clip {
   width: 100%;
   max-width: 340px;
-  height: auto;
+  overflow: hidden;
   border-radius: 12px;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  line-height: 0;
+}
+
+.modal-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  transform: scale(1.045);
+  transform-origin: center;
 }
 
 .modal-placeholder {
@@ -1166,6 +1189,279 @@ header p {
   }
 }
 
+/* Stat sub-value (the "/ 151" next to a headline number) */
+.stat-card .value-sub {
+  font-size: 1rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* Action buttons in the controls row (Import, CSV) */
+.action-button {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.5rem 0.9rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.action-button:hover {
+  background: var(--surface-hover);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.action-button.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #222;
+  font-weight: 600;
+}
+
+.action-button.primary:hover {
+  color: #222;
+  filter: brightness(1.05);
+}
+
+.action-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Read-only ownership indicator (replaces the old checkbox) */
+.own-cell {
+  text-align: center;
+}
+
+.own-indicator {
+  font-size: 1rem;
+  color: #78c850;
+}
+
+.own-indicator.wanted {
+  color: var(--text-muted);
+  opacity: 0.5;
+}
+
+/* "Showing X of Y" footer */
+.results-count {
+  text-align: center;
+  margin-top: 1rem;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+/* Duplicate purchase note inside modal */
+.dupe-note {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+/* --- Importer modal --- */
+.importer-modal {
+  grid-template-columns: 1fr;
+  max-width: 720px;
+}
+
+.importer-modal h2 {
+  color: var(--accent);
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.importer-hint {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+}
+
+.importer-textarea {
+  width: 100%;
+  min-height: 240px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 0.75rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  resize: vertical;
+}
+
+.importer-textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.importer-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.importer-actions button {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.importer-actions button:hover:not(:disabled) {
+  background: var(--surface-hover);
+  border-color: var(--accent);
+}
+
+.importer-actions button.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #222;
+  font-weight: 600;
+}
+
+.importer-actions button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.importer-shipment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-height: 50vh;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+.importer-shipment {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+}
+
+.importer-shipment.is-dupe {
+  opacity: 0.6;
+  border-style: dashed;
+}
+
+.importer-shipment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.importer-seller {
+  color: var(--text-muted);
+  margin-left: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.importer-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.importer-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  padding: 4px 0;
+}
+
+.importer-item-main {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.importer-item-set {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+.importer-item-price {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.importer-shipment-footer {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Small inline tag chips */
+.tag {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.tag-ok {
+  background: rgba(120, 200, 80, 0.18);
+  color: #78c850;
+  border: 1px solid rgba(120, 200, 80, 0.4);
+}
+
+.tag-warn {
+  background: rgba(248, 208, 48, 0.18);
+  color: var(--accent);
+  border: 1px solid rgba(248, 208, 48, 0.4);
+}
+
+.tag-error {
+  background: rgba(233, 75, 60, 0.18);
+  color: #e94b3c;
+  border: 1px solid rgba(233, 75, 60, 0.4);
+}
+
+.tag-dupe {
+  background: rgba(168, 144, 240, 0.18);
+  color: #a890f0;
+  border: 1px solid rgba(168, 144, 240, 0.4);
+}
+
+.importer-success,
+.importer-error {
+  padding: 1rem 0;
+}
+
+.importer-success p,
+.importer-error p {
+  margin-bottom: 0.5rem;
+}
+
+.importer-error {
+  color: #e94b3c;
+  font-size: 0.85rem;
+}
+
 @media (max-width: 768px) {
   .container {
     padding: 1rem 0.5rem;
@@ -1191,5 +1487,10 @@ header p {
   .card-grid {
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     gap: 0.75rem;
+  }
+
+  .importer-textarea {
+    min-height: 180px;
+    font-size: 0.75rem;
   }
 }

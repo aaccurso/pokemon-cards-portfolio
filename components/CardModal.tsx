@@ -2,11 +2,18 @@
 
 import { useEffect, useState } from "react";
 import { Card, typeColors } from "@/lib/cards";
-import { getCardImageUrl } from "@/lib/cardImage";
+import type { CardOwnership } from "@/lib/purchases";
 
-export function CardModal({ card, onClose }: { card: Card; onClose: () => void }) {
+type Props = {
+  card: Card;
+  ownership: CardOwnership | null;
+  onClose: () => void;
+};
+
+export function CardModal({ card, ownership, onClose }: Props) {
   const [imgFailed, setImgFailed] = useState(false);
-  const imgUrl = getCardImageUrl(card);
+  const imgUrl = card.imageUrl ?? null;
+  const owned = ownership != null;
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -29,12 +36,14 @@ export function CardModal({ card, onClose }: { card: Card; onClose: () => void }
         </button>
         <div className="modal-image-wrapper">
           {imgUrl && !imgFailed ? (
-            <img
-              src={imgUrl}
-              alt={card.name}
-              className="modal-image"
-              onError={() => setImgFailed(true)}
-            />
+            <div className="modal-image-clip">
+              <img
+                src={imgUrl}
+                alt={card.name}
+                className="modal-image"
+                onError={() => setImgFailed(true)}
+              />
+            </div>
           ) : (
             <div className="modal-placeholder">
               <div className="placeholder-pokeball" aria-hidden>
@@ -94,17 +103,26 @@ export function CardModal({ card, onClose }: { card: Card; onClose: () => void }
                 <dd>{card.buyPrice.toFixed(2).replace(".", ",")} &euro;</dd>
               </div>
             )}
-            {card.pricePaid != null && (
+            {ownership && (
               <div>
                 <dt>Paid</dt>
-                <dd>{card.pricePaid.toFixed(2).replace(".", ",")} &euro;</dd>
+                <dd>
+                  {ownership.pricePaid.toFixed(2).replace(".", ",")} &euro;
+                  {ownership.duplicateCount > 0 && (
+                    <span className="dupe-note">
+                      {" "}
+                      · {ownership.duplicateCount} duplicate
+                      {ownership.duplicateCount === 1 ? "" : "s"}
+                    </span>
+                  )}
+                </dd>
               </div>
             )}
             <div>
               <dt>Status</dt>
               <dd>
-                <span className={card.owned ? "status-owned" : "status-wanted"}>
-                  {card.owned ? "Owned" : "Wanted"}
+                <span className={owned ? "status-owned" : "status-wanted"}>
+                  {owned ? "Owned" : "Wanted"}
                 </span>
               </dd>
             </div>

@@ -1,0 +1,100 @@
+{
+  "shipments": [
+    {
+      "id": "legacy",
+      "seller": null,
+      "date": null,
+      "shipping": null,
+      "fees": null,
+      "total": null,
+      "items": [
+        { "cardId": "arbok", "pricePaid": 3.45, "condition": "NM" },
+        { "cardId": "bulbasaur", "pricePaid": 7.94, "condition": "NM" },
+        { "cardId": "charizard", "pricePaid": 14.95, "condition": "NM" },
+        { "cardId": "ivysaur", "pricePaid": 4.89, "condition": "NM" },
+        { "cardId": "ninetales", "pricePaid": 9.89, "condition": "NM" },
+        { "cardId": "persian", "pricePaid": 8.48, "condition": "NM" },
+        { "cardId": "raticate", "pricePaid": 2.25, "condition": "NM" },
+        { "cardId": "vulpix", "pricePaid": 3.49, "condition": "NM" }
+      ]
+    },
+    {
+      "id": "1269797683",
+      "seller": "JoekkiesCards",
+      "date": "2026-04-18",
+      "shipping": 6.20,
+      "fees": 0.26,
+      "total": 32.45,
+      "items": [
+        { "cardId": "tangela", "pricePaid": 3.00, "condition": "NM" },
+        { "cardId": "team-rockets-weezing", "pricePaid": 3.00, "condition": "NM" },
+        { "cardId": "kangaskhan", "pricePaid": 3.00, "condition": "NM" },
+        { "cardId": "chansey", "pricePaid": 15.00, "condition": "NM" },
+        { "cardId": "wigglytuff", "pricePaid": 1.99, "condition": "NM" }
+      ]
+    },
+    {
+      "id": "1269797904",
+      "seller": "4Corners",
+      "date": "2026-04-18",
+      "shipping": 1.55,
+      "fees": 0,
+      "total": 22.49,
+      "items": [
+        { "cardId": "galarian-zapdos", "pricePaid": 1.94, "condition": "NM" },
+        { "cardId": "venusaur-ex", "pricePaid": 9.00, "condition": "NM" },
+        { "cardId": "ninetales", "pricePaid": 10.00, "condition": "NM" }
+      ]
+    },
+    {
+      "id": "1269798146",
+      "seller": "PokeChibi",
+      "date": "2026-04-18",
+      "shipping": 1.70,
+      "fees": 0,
+      "total": 6.20,
+      "items": [
+        { "cardId": "hisuian-voltorb", "pricePaid": 1.25, "condition": "NM" },
+        { "cardId": "pidgey", "pricePaid": 3.25, "condition": "NM" }
+      ]
+    },
+    {
+      "id": "1269797958",
+      "seller": "nicofra",
+      "date": "2026-04-18",
+      "shipping": 8.15,
+      "fees": 0.46,
+      "total": 54.61,
+      "items": [
+        { "cardId": "magnemite", "pricePaid": 15.00, "condition": "NM" },
+        { "cardId": "haunter", "pricePaid": 21.00, "condition": "NM" },
+        { "cardId": "jolteon", "pricePaid": 10.00, "condition": "NM" }
+      ]
+    },
+    {
+      "id": "1269798353",
+      "seller": "TGCardshop",
+      "date": "2026-04-18",
+      "shipping": 1.70,
+      "fees": 0,
+      "total": 19.95,
+      "items": [
+        { "cardId": "magneton", "pricePaid": 9.25, "condition": "NM" },
+        { "cardId": "poliwhirl", "pricePaid": 9.00, "condition": "NM" }
+      ]
+    },
+    {
+      "id": "1269798369",
+      "seller": "Bratiska2",
+      "date": "2026-04-18",
+      "shipping": 6.70,
+      "fees": 0.25,
+      "total": 31.95,
+      "items": [
+        { "cardId": "dragonair", "pricePaid": 10.00, "condition": "NM" },
+        { "cardId": "mega-dragonite-ex", "pricePaid": 12.00, "condition": "NM" },
+        { "cardId": "rapidash", "pricePaid": 3.00, "condition": "NM" }
+      ]
+    }
+  ]
+}

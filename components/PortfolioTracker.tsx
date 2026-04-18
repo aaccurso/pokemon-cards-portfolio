@@ -1,16 +1,22 @@
 "use client";
 
-import { useState, useMemo, useCallback } from "react";
-import { cards as initialCards, typeColors, Card } from "@/lib/cards";
-import { getCardImageUrl } from "@/lib/cardImage";
+import { useMemo, useState } from "react";
+import { cards as allCards, typeColors, Card } from "@/lib/cards";
+import {
+  purchases,
+  buildOwnershipMap,
+  computeStats,
+  buildCsv,
+  OwnershipMap,
+} from "@/lib/purchases";
 import { CardModal } from "./CardModal";
 import { CardTile } from "./CardTile";
+import { ImportShipmentModal } from "./ImportShipmentModal";
 
-type SortKey = keyof Card;
+type SortKey = keyof Card | "pricePaid" | "owned";
 type SortDir = "asc" | "desc";
 
 export default function PortfolioTracker() {
-  const [cardList, setCardList] = useState<Card[]>(initialCards);
   const [search, setSearch] = useState("");
   const [typeFilter, setTypeFilter] = useState("all");
   const [setFilter, setSetFilter] = useState("all");
@@ -20,28 +26,31 @@ export default function PortfolioTracker() {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [modalCard, setModalCard] = useState<Card | null>(null);
   const [viewMode, setViewMode] = useState<"table" | "grid">("grid");
+  const [importOpen, setImportOpen] = useState(false);
 
-  const toggleOwned = useCallback((id: string) => {
-    setCardList((prev) =>
-      prev.map((c) => (c.id === id ? { ...c, owned: !c.owned } : c))
-    );
-  }, []);
+  const ownership: OwnershipMap = useMemo(() => buildOwnershipMap(purchases), []);
+
+  const stats = useMemo(
+    () => computeStats(allCards, ownership, purchases),
+    [ownership]
+  );
 
   const allTypes = useMemo(() => {
     const types = new Set<string>();
-    cardList.forEach((c) => {
+    allCards.forEach((c) => {
       types.add(c.type1);
       if (c.type2) types.add(c.type2);
     });
     return Array.from(types).sort();
-  }, [cardList]);
+  }, []);
 
-  const allSets = useMemo(() => {
-    return Array.from(new Set(cardList.map((c) => c.set))).sort();
-  }, [cardList]);
+  const allSets = useMemo(
+    () => Array.from(new Set(allCards.map((c) => c.set))).sort(),
+    []
+  );
 
   const filtered = useMemo(() => {
-    let list = cardList;
+    let list = allCards;
 
     if (search) {
       const q = search.toLowerCase();
@@ -64,14 +73,14 @@ export default function PortfolioTracker() {
     }
 
     if (ownershipFilter === "owned") {
-      list = list.filter((c) => c.owned);
+      list = list.filter((c) => ownership.has(c.id));
     } else if (ownershipFilter === "wanted") {
-      list = list.filter((c) => !c.owned);
+      list = list.filter((c) => !ownership.has(c.id));
     }
 
     list = [...list].sort((a, b) => {
-      const av = a[sortKey];
-      const bv = b[sortKey];
+      const av = getSortValue(a, sortKey, ownership);
+      const bv = getSortValue(b, sortKey, ownership);
       if (av == null && bv == null) return 0;
       if (av == null) return 1;
       if (bv == null) return -1;
@@ -80,21 +89,7 @@ export default function PortfolioTracker() {
     });
 
     return list;
-  }, [cardList, search, typeFilter, setFilter, ownershipFilter, sortKey, sortDir]);
-
-  const stats = useMemo(() => {
-    const owned = cardList.filter((c) => c.owned).length;
-    const total = cardList.length;
-    const totalBudget = cardList.reduce((s, c) => s + (c.buyPrice ?? 0), 0);
-    const spentEstimate = cardList
-      .filter((c) => c.owned)
-      .reduce((s, c) => s + (c.buyPrice ?? 0), 0);
-    const spentActual = cardList
-      .filter((c) => c.owned)
-      .reduce((s, c) => s + (c.pricePaid ?? 0), 0);
-    const remaining = totalBudget - spentEstimate;
-    return { owned, total, totalBudget, spentEstimate, spentActual, remaining };
-  }, [cardList]);
+  }, [search, typeFilter, setFilter, ownershipFilter, sortKey, sortDir, ownership]);
 
   function handleSort(key: SortKey) {
     if (sortKey === key) {
@@ -112,19 +107,36 @@ export default function PortfolioTracker() {
     );
   }
 
+  function handleDownloadCsv() {
+    const csv = buildCsv(allCards, ownership);
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `pokedex-portfolio-${new Date().toISOString().slice(0, 10)}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  const existingShipmentIds = useMemo(
+    () => new Set(purchases.shipments.map((s) => s.id)),
+    []
+  );
+
+  const collectedPct = Math.round((stats.owned / stats.total) * 100);
+
   return (
     <div className="container">
       <header>
         <h1>Pokedex 151 full-art</h1>
         <p>
-          {stats.owned} / {stats.total} cards collected
+          {stats.owned} / {stats.total} cards collected · {collectedPct}%
         </p>
-        <a className="header-link" href="/print" target="_blank" rel="noopener">
-          Print binder placeholders &rarr;
-        </a>
       </header>
 
-      <div className="progress-bar-container">
+      <div className="progress-bar-container" aria-label="Collection progress">
         <div
           className="progress-bar-fill"
           style={{ width: `${(stats.owned / stats.total) * 100}%` }}
@@ -133,36 +145,40 @@ export default function PortfolioTracker() {
 
       <div className="stats-grid">
         <div className="stat-card">
-          <div className="value">{stats.owned}</div>
-          <div className="label">Owned</div>
-        </div>
-        <div className="stat-card">
-          <div className="value">{stats.total - stats.owned}</div>
-          <div className="label">Still Wanted</div>
-        </div>
-        <div className="stat-card">
           <div className="value">
-            {stats.totalBudget.toFixed(2).replace(".", ",")} &euro;
+            {stats.owned}
+            <span className="value-sub"> / {stats.total}</span>
           </div>
-          <div className="label">Total Budget</div>
+          <div className="label">Collected</div>
         </div>
         <div className="stat-card">
-          <div className="value">
-            {stats.spentEstimate.toFixed(2).replace(".", ",")} &euro;
-          </div>
-          <div className="label">Spent (est.)</div>
+          <div className="value">{fmt(stats.spentOnCards)} &euro;</div>
+          <div className="label">Spent on cards</div>
         </div>
         <div className="stat-card">
-          <div className="value">
-            {stats.spentActual.toFixed(2).replace(".", ",")} &euro;
+          <div
+            className="value"
+            title="Sum of (buy price − price paid) for owned cards"
+          >
+            {stats.savings >= 0 ? "+" : ""}
+            {fmt(stats.savings)} &euro;
           </div>
-          <div className="label">Spent (actual)</div>
+          <div className="label">Saved vs target</div>
         </div>
         <div className="stat-card">
-          <div className="value">
-            {stats.remaining.toFixed(2).replace(".", ",")} &euro;
-          </div>
-          <div className="label">Remaining</div>
+          <div className="value">{fmt(stats.toComplete)} &euro;</div>
+          <div className="label">To complete (est.)</div>
+        </div>
+        <div className="stat-card">
+          <div className="value">{fmt(stats.budget)} &euro;</div>
+          <div className="label">Budget ({stats.pricedCount} priced)</div>
+        </div>
+        <div
+          className="stat-card"
+          title="Actual total paid including shipping, fees and duplicates"
+        >
+          <div className="value">{fmt(stats.totalOutlay)} &euro;</div>
+          <div className="label">Total outlay</div>
         </div>
       </div>
 
@@ -215,6 +231,20 @@ export default function PortfolioTracker() {
             &#9638; Grid
           </button>
         </div>
+        <button
+          className="action-button primary"
+          onClick={() => setImportOpen(true)}
+          title="Paste a Cardmarket shipment email"
+        >
+          + Import shipment
+        </button>
+        <button
+          className="action-button"
+          onClick={handleDownloadCsv}
+          title="Download the current portfolio as CSV"
+        >
+          ↓ CSV
+        </button>
       </div>
 
       {viewMode === "grid" ? (
@@ -223,130 +253,174 @@ export default function PortfolioTracker() {
             <CardTile
               key={card.id}
               card={card}
+              owned={ownership.has(card.id)}
               onClick={() => setModalCard(card)}
             />
           ))}
         </div>
       ) : (
-      <table className="card-table">
-        <thead>
-          <tr>
-            <th>Own</th>
-            <th onClick={() => handleSort("pokedexNumber")}>
-              # {sortIndicator("pokedexNumber")}
-            </th>
-            <th onClick={() => handleSort("name")}>
-              Name {sortIndicator("name")}
-            </th>
-            <th className="hide-mobile">Type</th>
-            <th onClick={() => handleSort("code")}>
-              Code {sortIndicator("code")}
-            </th>
-            <th className="hide-mobile" onClick={() => handleSort("set")}>
-              Set {sortIndicator("set")}
-            </th>
-            <th className="hide-mobile">Language</th>
-            <th className="hide-mobile">Variant</th>
-            <th onClick={() => handleSort("buyPrice")}>
-              Buy Price {sortIndicator("buyPrice")}
-            </th>
-            <th onClick={() => handleSort("pricePaid")}>
-              Paid {sortIndicator("pricePaid")}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {filtered.map((card) => (
-            <tr key={card.id} className={card.owned ? "owned" : ""}>
-              <td>
-                <input
-                  type="checkbox"
-                  className="owned-checkbox"
-                  checked={card.owned}
-                  onChange={() => toggleOwned(card.id)}
-                />
-              </td>
-              <td className="pokedex-num">{card.pokedexNumber}</td>
-              <td>
-                <span
-                  className="card-name-cell"
-                  onMouseEnter={() => setHoveredId(card.id)}
-                  onMouseLeave={() => setHoveredId(null)}
-                  onClick={() => setModalCard(card)}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      setModalCard(card);
-                    }
-                  }}
-                >
-                  <span className="preview-icon" aria-label="Preview card">
-                    &#128065;
-                  </span>
-                  <strong>{card.name}</strong>
-                  {hoveredId === card.id && getCardImageUrl(card) && (
-                    <span className="preview-tooltip">
-                      <img
-                        src={getCardImageUrl(card)!}
-                        alt=""
-                        loading="lazy"
-                        onError={(e) => {
-                          (e.currentTarget.parentElement as HTMLElement).style.display = "none";
-                        }}
-                      />
-                    </span>
-                  )}
-                </span>
-              </td>
-              <td className="hide-mobile">
-                <span
-                  className="type-badge"
-                  style={{ background: typeColors[card.type1] ?? "#888" }}
-                >
-                  {card.type1}
-                </span>
-                {card.type2 && (
-                  <span
-                    className="type-badge"
-                    style={{ background: typeColors[card.type2] ?? "#888" }}
-                  >
-                    {card.type2}
-                  </span>
-                )}
-              </td>
-              <td>{card.code}</td>
-              <td className="hide-mobile">{card.set}</td>
-              <td className="hide-mobile">{card.language}</td>
-              <td className="hide-mobile">
-                {card.variant && (
-                  <span className="variant-badge">{card.variant}</span>
-                )}
-              </td>
-              <td className="price">
-                {card.buyPrice != null
-                  ? `${card.buyPrice.toFixed(2).replace(".", ",")} \u20AC`
-                  : "\u2014"}
-              </td>
-              <td className="price">
-                {card.pricePaid != null
-                  ? `${card.pricePaid.toFixed(2).replace(".", ",")} \u20AC`
-                  : "\u2014"}
-              </td>
+        <table className="card-table">
+          <thead>
+            <tr>
+              <th onClick={() => handleSort("owned")}>
+                Own {sortIndicator("owned")}
+              </th>
+              <th onClick={() => handleSort("pokedexNumber")}>
+                # {sortIndicator("pokedexNumber")}
+              </th>
+              <th onClick={() => handleSort("name")}>
+                Name {sortIndicator("name")}
+              </th>
+              <th className="hide-mobile">Type</th>
+              <th onClick={() => handleSort("code")}>
+                Code {sortIndicator("code")}
+              </th>
+              <th className="hide-mobile" onClick={() => handleSort("set")}>
+                Set {sortIndicator("set")}
+              </th>
+              <th className="hide-mobile">Language</th>
+              <th className="hide-mobile">Variant</th>
+              <th onClick={() => handleSort("buyPrice")}>
+                Buy Price {sortIndicator("buyPrice")}
+              </th>
+              <th onClick={() => handleSort("pricePaid")}>
+                Paid {sortIndicator("pricePaid")}
+              </th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {filtered.map((card) => {
+              const own = ownership.get(card.id);
+              return (
+                <tr key={card.id} className={own ? "owned" : ""}>
+                  <td className="own-cell">
+                    {own ? (
+                      <span
+                        className="own-indicator"
+                        aria-label="Owned"
+                        title="Owned"
+                      >
+                        ●
+                      </span>
+                    ) : (
+                      <span
+                        className="own-indicator wanted"
+                        aria-label="Wanted"
+                        title="Wanted"
+                      >
+                        ○
+                      </span>
+                    )}
+                  </td>
+                  <td className="pokedex-num">{card.pokedexNumber}</td>
+                  <td>
+                    <span
+                      className="card-name-cell"
+                      onMouseEnter={() => setHoveredId(card.id)}
+                      onMouseLeave={() => setHoveredId(null)}
+                      onClick={() => setModalCard(card)}
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          setModalCard(card);
+                        }
+                      }}
+                    >
+                      <span className="preview-icon" aria-label="Preview card">
+                        &#128065;
+                      </span>
+                      <strong>{card.name}</strong>
+                      {hoveredId === card.id && card.imageUrl && (
+                        <span className="preview-tooltip">
+                          <img
+                            src={card.imageUrl}
+                            alt=""
+                            loading="lazy"
+                            onError={(e) => {
+                              (e.currentTarget.parentElement as HTMLElement).style.display = "none";
+                            }}
+                          />
+                        </span>
+                      )}
+                    </span>
+                  </td>
+                  <td className="hide-mobile">
+                    <span
+                      className="type-badge"
+                      style={{ background: typeColors[card.type1] ?? "#888" }}
+                    >
+                      {card.type1}
+                    </span>
+                    {card.type2 && (
+                      <span
+                        className="type-badge"
+                        style={{ background: typeColors[card.type2] ?? "#888" }}
+                      >
+                        {card.type2}
+                      </span>
+                    )}
+                  </td>
+                  <td>{card.code}</td>
+                  <td className="hide-mobile">{card.set}</td>
+                  <td className="hide-mobile">{card.language}</td>
+                  <td className="hide-mobile">
+                    {card.variant && (
+                      <span className="variant-badge">{card.variant}</span>
+                    )}
+                  </td>
+                  <td className="price">
+                    {card.buyPrice != null
+                      ? `${fmt(card.buyPrice)} \u20AC`
+                      : "\u2014"}
+                  </td>
+                  <td className="price">
+                    {own ? `${fmt(own.pricePaid)} \u20AC` : "\u2014"}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       )}
 
-      <p style={{ textAlign: "center", marginTop: "1rem", color: "var(--text-muted)", fontSize: "0.8rem" }}>
-        Showing {filtered.length} of {cardList.length} cards
+      <p className="results-count">
+        Showing {filtered.length} of {allCards.length} cards
       </p>
 
       {modalCard && (
-        <CardModal card={modalCard} onClose={() => setModalCard(null)} />
+        <CardModal
+          card={modalCard}
+          ownership={ownership.get(modalCard.id) ?? null}
+          onClose={() => setModalCard(null)}
+        />
+      )}
+
+      {importOpen && (
+        <ImportShipmentModal
+          cards={allCards}
+          ownership={ownership}
+          existingShipmentIds={existingShipmentIds}
+          onClose={() => setImportOpen(false)}
+        />
       )}
     </div>
   );
+}
+
+function fmt(n: number): string {
+  return n.toFixed(2).replace(".", ",");
+}
+
+function getSortValue(
+  c: Card,
+  key: SortKey,
+  ownership: OwnershipMap
+): string | number | boolean | null {
+  if (key === "pricePaid") return ownership.get(c.id)?.pricePaid ?? null;
+  if (key === "owned") return ownership.has(c.id);
+  const v = c[key as keyof Card];
+  if (v === undefined) return null;
+  return v as string | number | null;
 }

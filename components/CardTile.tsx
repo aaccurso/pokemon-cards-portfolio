@@ -2,17 +2,17 @@
 
 import { useRef, useState } from "react";
 import { Card, typeColors } from "@/lib/cards";
-import { getCardImageUrl } from "@/lib/cardImage";
 
 type Props = {
   card: Card;
+  owned: boolean;
   onClick: () => void;
 };
 
-export function CardTile({ card, onClick }: Props) {
+export function CardTile({ card, owned, onClick }: Props) {
   const ref = useRef<HTMLButtonElement>(null);
   const [imgFailed, setImgFailed] = useState(false);
-  const imgUrl = getCardImageUrl(card);
+  const imgUrl = card.imageUrl ?? null;
 
   function handleMove(e: React.MouseEvent) {
     const el = ref.current;
@@ -40,7 +40,7 @@ export function CardTile({ card, onClick }: Props) {
   return (
     <button
       ref={ref}
-      className={`card-tile ${card.owned ? "owned" : ""}`}
+      className={`card-tile ${owned ? "owned" : ""}`}
       onClick={onClick}
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
@@ -66,7 +66,7 @@ export function CardTile({ card, onClick }: Props) {
           )}
           <div className="card-tile-shine" aria-hidden />
           <div className="card-tile-holo" aria-hidden />
-          {card.owned && (
+          {owned && (
             <span className="pokeball-badge" title="Owned" aria-label="Owned" />
           )}
         </div>

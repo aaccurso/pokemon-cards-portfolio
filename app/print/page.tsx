@@ -2,13 +2,17 @@
 
 import { useState, useMemo } from "react";
 import { cards } from "@/lib/cards";
+import { buildOwnershipMap, purchases } from "@/lib/purchases";
 import { PlaceholderCard } from "@/components/PlaceholderCard";
 
 export default function PrintPage() {
   const [includeOwned, setIncludeOwned] = useState(false);
+  const ownership = useMemo(() => buildOwnershipMap(purchases), []);
 
   const sheets = useMemo(() => {
-    const filtered = includeOwned ? cards : cards.filter((c) => !c.owned);
+    const filtered = includeOwned
+      ? cards
+      : cards.filter((c) => !ownership.has(c.id));
     const sorted = [...filtered].sort(
       (a, b) => a.pokedexNumber - b.pokedexNumber
     );
@@ -17,7 +21,7 @@ export default function PrintPage() {
       pages.push(sorted.slice(i, i + 9));
     }
     return pages;
-  }, [includeOwned]);
+  }, [includeOwned, ownership]);
 
   const totalCards = sheets.reduce((s, p) => s + p.length, 0);
 

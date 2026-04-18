@@ -1,8 +1,7 @@
 import { Card, typeColors } from "@/lib/cards";
-import { getCardImageUrl } from "@/lib/cardImage";
 
 export function PlaceholderCard({ card }: { card: Card }) {
-  const imgUrl = getCardImageUrl(card);
+  const imgUrl = card.imageUrl ?? null;
   return (
     <div className="placeholder-card">
       <div className="ph-header">
