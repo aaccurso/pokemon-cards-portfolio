@@ -11,7 +11,6 @@ import {
 } from "@/lib/purchases";
 import { CardModal } from "./CardModal";
 import { CardTile } from "./CardTile";
-import { ImportShipmentModal } from "./ImportShipmentModal";
 
 type SortKey = keyof Card | "pricePaid" | "owned";
 type SortDir = "asc" | "desc";
@@ -26,7 +25,6 @@ export default function PortfolioTracker() {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [modalCard, setModalCard] = useState<Card | null>(null);
   const [viewMode, setViewMode] = useState<"table" | "grid">("grid");
-  const [importOpen, setImportOpen] = useState(false);
 
   const ownership: OwnershipMap = useMemo(() => buildOwnershipMap(purchases), []);
 
@@ -119,11 +117,6 @@ export default function PortfolioTracker() {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
   }
-
-  const existingShipmentIds = useMemo(
-    () => new Set(purchases.shipments.map((s) => s.id)),
-    []
-  );
 
   const collectedPct = Math.round((stats.owned / stats.total) * 100);
 
@@ -231,13 +224,6 @@ export default function PortfolioTracker() {
             &#9638; Grid
           </button>
         </div>
-        <button
-          className="action-button primary"
-          onClick={() => setImportOpen(true)}
-          title="Paste a Cardmarket shipment email"
-        >
-          + Import shipment
-        </button>
         <button
           className="action-button"
           onClick={handleDownloadCsv}
@@ -414,14 +400,6 @@ export default function PortfolioTracker() {
         );
       })()}
 
-      {importOpen && (
-        <ImportShipmentModal
-          cards={allCards}
-          ownership={ownership}
-          existingShipmentIds={existingShipmentIds}
-          onClose={() => setImportOpen(false)}
-        />
-      )}
     </div>
   );
 }

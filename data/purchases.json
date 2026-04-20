@@ -95,6 +95,48 @@
         { "cardId": "mega-dragonite-ex", "pricePaid": 12.00, "condition": "NM" },
         { "cardId": "rapidash", "pricePaid": 3.00, "condition": "NM" }
       ]
+    },
+    {
+      "id": "1270195835",
+      "seller": "CollectTCG",
+      "date": "2026-04-20",
+      "shipping": 6.20,
+      "fees": 0.52,
+      "total": 58.72,
+      "items": [
+        { "cardId": "mew-v", "pricePaid": 30.00, "condition": "NM" },
+        { "cardId": "drowzee", "pricePaid": 22.00, "condition": "NM" }
+      ]
+    },
+    {
+      "id": "1270193646",
+      "seller": "DaveKalter",
+      "date": "2026-04-20",
+      "shipping": 6.20,
+      "fees": 0.84,
+      "total": 90.54,
+      "items": [
+        { "cardId": "gastly", "pricePaid": 30.00, "condition": "NM" },
+        { "cardId": "blastoise-ex", "pricePaid": 1.00, "condition": "NM" },
+        { "cardId": "flareon", "pricePaid": 15.00, "condition": "NM" },
+        { "cardId": "gengar", "pricePaid": 32.50, "condition": "NM" },
+        { "cardId": "galarian-articuno", "pricePaid": 3.00, "condition": "NM" },
+        { "cardId": "mr-mime", "pricePaid": 2.00, "condition": "NM" }
+      ]
+    },
+    {
+      "id": "1270198120",
+      "seller": "Michaelpp1993",
+      "date": "2026-04-20",
+      "shipping": 6.20,
+      "fees": 0.47,
+      "total": 53.15,
+      "items": [
+        { "cardId": "spearow", "pricePaid": 1.49, "condition": "NM" },
+        { "cardId": "charmander", "pricePaid": 28.00, "condition": "NM" },
+        { "cardId": "nidoking", "pricePaid": 4.00, "condition": "NM" },
+        { "cardId": "psyduck", "pricePaid": 12.99, "condition": "NM" }
+      ]
     }
   ]
 }
