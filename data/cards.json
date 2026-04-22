@@ -108,24 +108,6 @@
     "localImage": true
   },
   {
-    "id": "articuno",
-    "name": "Articuno",
-    "code": "sv9 102",
-    "set": "Battle Partners",
-    "qty": 1,
-    "language": "Japanese",
-    "condition": "NM",
-    "buyPrice": 8,
-    "imageUrl": "https://assets.tcgdex.net/ja/SV/SV9/102/high.png",
-    "pokedexNumber": 144,
-    "type1": "Ice",
-    "type2": "Flying",
-    "generation": 1,
-    "variant": null,
-    "binderId": "kanto-151",
-    "localImage": true
-  },
-  {
     "id": "beedrill-v",
     "name": "Beedrill V",
     "code": "s10P 069",

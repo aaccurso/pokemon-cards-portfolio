@@ -137,6 +137,20 @@
         { "cardId": "nidoking", "pricePaid": 4.00, "condition": "NM" },
         { "cardId": "psyduck", "pricePaid": 12.99, "condition": "NM" }
       ]
+    },
+    {
+      "id": "pending-2026-04-22-gloom-pinsir",
+      "seller": null,
+      "date": "2026-04-22",
+      "shipping": 1.70,
+      "fees": 0,
+      "total": 12.97,
+      "items": [
+        { "cardId": "gloom", "pricePaid": 3.99, "condition": "NM" },
+        { "cardId": "pidgeotto", "pricePaid": 2.30, "condition": "NM" },
+        { "cardId": "jynx", "pricePaid": 1.99, "condition": "NM" },
+        { "cardId": "pinsir", "pricePaid": 2.99, "condition": "NM" }
+      ]
     }
   ]
 }
