@@ -1,5 +1,10 @@
+import { Suspense } from "react";
 import PortfolioTracker from "@/components/PortfolioTracker";
 
 export default function Home() {
-  return <PortfolioTracker />;
+  return (
+    <Suspense>
+      <PortfolioTracker />
+    </Suspense>
+  );
 }

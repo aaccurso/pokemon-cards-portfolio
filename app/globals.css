@@ -257,6 +257,30 @@ header p {
   font-weight: 600;
 }
 
+/* Standalone pill toggle (e.g. Illustration only) */
+.pill-toggle {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 0.5rem 0.9rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.pill-toggle:hover {
+  color: var(--text);
+  background: var(--surface-hover);
+}
+
+.pill-toggle.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #222;
+  font-weight: 600;
+}
+
 /* Grid view */
 .card-grid {
   display: grid;

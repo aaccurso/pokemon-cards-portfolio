@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { cards as allCards, typeColors, languageFlags, Card } from "@/lib/cards";
 import {
   purchases,
@@ -16,15 +17,64 @@ type SortKey = keyof Card | "pricePaid" | "owned";
 type SortDir = "asc" | "desc";
 
 export default function PortfolioTracker() {
-  const [search, setSearch] = useState("");
-  const [typeFilter, setTypeFilter] = useState("all");
-  const [setFilter, setSetFilter] = useState("all");
-  const [ownershipFilter, setOwnershipFilter] = useState<"all" | "owned" | "wanted">("all");
-  const [sortKey, setSortKey] = useState<SortKey>("pokedexNumber");
-  const [sortDir, setSortDir] = useState<SortDir>("asc");
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const [search, setSearch] = useState(() => searchParams.get("q") ?? "");
+  const [typeFilter, setTypeFilter] = useState(() => searchParams.get("type") ?? "all");
+  const [setFilter, setSetFilter] = useState(() => searchParams.get("set") ?? "all");
+  const [ownershipFilter, setOwnershipFilter] = useState<"all" | "owned" | "wanted">(() => {
+    const v = searchParams.get("own");
+    return v === "owned" || v === "wanted" ? v : "all";
+  });
+  const [illustrationOnly, setIllustrationOnly] = useState(
+    () => searchParams.get("illus") === "1"
+  );
+  const [sortKey, setSortKey] = useState<SortKey>(
+    () => (searchParams.get("sort") as SortKey) || "pokedexNumber"
+  );
+  const [sortDir, setSortDir] = useState<SortDir>(
+    () => (searchParams.get("dir") === "desc" ? "desc" : "asc")
+  );
   const [hoveredId, setHoveredId] = useState<string | null>(null);
-  const [modalCard, setModalCard] = useState<Card | null>(null);
-  const [viewMode, setViewMode] = useState<"table" | "grid">("grid");
+  const [modalCard, setModalCard] = useState<Card | null>(() => {
+    const id = searchParams.get("card");
+    if (!id) return null;
+    return allCards.find((c) => c.id === id) ?? null;
+  });
+  const [viewMode, setViewMode] = useState<"table" | "grid">(
+    () => (searchParams.get("view") === "table" ? "table" : "grid")
+  );
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    const p = new URLSearchParams();
+    if (search) p.set("q", search);
+    if (typeFilter !== "all") p.set("type", typeFilter);
+    if (setFilter !== "all") p.set("set", setFilter);
+    if (ownershipFilter !== "all") p.set("own", ownershipFilter);
+    if (illustrationOnly) p.set("illus", "1");
+    if (sortKey !== "pokedexNumber") p.set("sort", String(sortKey));
+    if (sortDir !== "asc") p.set("dir", sortDir);
+    if (viewMode !== "grid") p.set("view", viewMode);
+    if (modalCard) p.set("card", modalCard.id);
+
+    const qs = p.toString();
+    router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
+  }, [
+    search,
+    typeFilter,
+    setFilter,
+    ownershipFilter,
+    illustrationOnly,
+    sortKey,
+    sortDir,
+    viewMode,
+    modalCard,
+    pathname,
+    router,
+  ]);
 
   const ownership: OwnershipMap = useMemo(() => buildOwnershipMap(purchases), []);
 
@@ -76,6 +126,10 @@ export default function PortfolioTracker() {
       list = list.filter((c) => !ownership.has(c.id));
     }
 
+    if (illustrationOnly) {
+      list = list.filter((c) => c.buyPrice != null);
+    }
+
     list = [...list].sort((a, b) => {
       const av = getSortValue(a, sortKey, ownership);
       const bv = getSortValue(b, sortKey, ownership);
@@ -87,7 +141,7 @@ export default function PortfolioTracker() {
     });
 
     return list;
-  }, [search, typeFilter, setFilter, ownershipFilter, sortKey, sortDir, ownership]);
+  }, [search, typeFilter, setFilter, ownershipFilter, illustrationOnly, sortKey, sortDir, ownership]);
 
   function handleSort(key: SortKey) {
     if (sortKey === key) {
@@ -103,6 +157,16 @@ export default function PortfolioTracker() {
     return (
       <span className="sort-indicator">{sortDir === "asc" ? "▲" : "▼"}</span>
     );
+  }
+
+  async function handleShare() {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch {
+      // clipboard unavailable (e.g. non-HTTPS) — silently no-op
+    }
   }
 
   function handleDownloadCsv() {
@@ -206,6 +270,14 @@ export default function PortfolioTracker() {
           <option value="owned">Owned Only</option>
           <option value="wanted">Wanted Only</option>
         </select>
+        <button
+          className={`pill-toggle${illustrationOnly ? " active" : ""}`}
+          onClick={() => setIllustrationOnly((v) => !v)}
+          aria-pressed={illustrationOnly}
+          title="Show only cards without a suggested price (illustrations)"
+        >
+          Illustration only
+        </button>
         <div className="view-toggle" role="group" aria-label="View mode">
           <button
             className={viewMode === "table" ? "active" : ""}
@@ -224,6 +296,13 @@ export default function PortfolioTracker() {
             &#9638; Grid
           </button>
         </div>
+        <button
+          className="action-button"
+          onClick={handleShare}
+          title="Copy a shareable link to the current view"
+        >
+          {copied ? "✓ Copied" : "↗ Share"}
+        </button>
         <button
           className="action-button"
           onClick={handleDownloadCsv}
