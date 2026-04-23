@@ -187,7 +187,7 @@
     "qty": 1,
     "language": "Japanese",
     "condition": "NM",
-    "buyPrice": 0.5,
+    "buyPrice": null,
     "pokedexNumber": 12,
     "type1": "Grass",
     "type2": null,
