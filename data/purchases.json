@@ -151,6 +151,23 @@
         { "cardId": "jynx", "pricePaid": 1.99, "condition": "NM" },
         { "cardId": "pinsir", "pricePaid": 2.99, "condition": "NM" }
       ]
+    },
+    {
+      "id": "1271572518",
+      "seller": "markor",
+      "date": "2026-04-26",
+      "shipping": 12.35,
+      "fees": 0.38,
+      "total": 50.63,
+      "items": [
+        { "cardId": "alolan-dugtrio", "pricePaid": 2.00, "condition": "NM" },
+        { "cardId": "slowpoke", "pricePaid": 10.00, "condition": "NM" },
+        { "cardId": "raichu", "pricePaid": 10.50, "condition": "NM" },
+        { "cardId": "paldean-tauros", "pricePaid": 2.20, "condition": "NM" },
+        { "cardId": "lapras", "pricePaid": 5.00, "condition": "NM" },
+        { "cardId": "horsea", "pricePaid": 4.60, "condition": "NM" },
+        { "cardId": "lickitung", "pricePaid": 3.60, "condition": "NM" }
+      ]
     }
   ]
 }
