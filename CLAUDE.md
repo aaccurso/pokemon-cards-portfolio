@@ -17,6 +17,8 @@ Two git-tracked JSON files are the single source of truth:
 
 A card is "owned" if it appears in at least one purchase item. Its effective `pricePaid` is the min across purchases (best deal captured). Duplicates are recorded but don't double-count in collection stats.
 
+**Illustration cards** are entries with `buyPrice != null` — a priced alt-art / illustration target is locked in. Cards with `buyPrice == null` are placeholders waiting for a nicer illustrated print to be sourced; they are *not* illustrations. The "Illustration only" UI toggle filters to `buyPrice != null` (matches this definition; ignore the misleading tooltip text in `PortfolioTracker.tsx`).
+
 `binderId` defaults to `"kanto-151"`. A binder selector is planned but not yet implemented — the field is present so future binders don't force a migration.
 
 ## Project Structure
