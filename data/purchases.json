@@ -177,6 +177,43 @@
       ]
     },
     {
+      "id": "1270836498",
+      "seller": "Linarito9",
+      "date": "2026-04-23",
+      "shipping": 2.60,
+      "fees": 0,
+      "total": 12.57,
+      "items": [
+        { "cardId": "ditto", "pricePaid": 3.49, "condition": "NM" },
+        { "cardId": "caterpie", "pricePaid": 3.49, "condition": "NM" },
+        { "cardId": "omanyte", "pricePaid": 2.99, "condition": "NM" }
+      ]
+    },
+    {
+      "id": "1270836813",
+      "seller": "Lando-TCG",
+      "date": "2026-04-23",
+      "shipping": 1.70,
+      "fees": 0,
+      "total": 17.70,
+      "items": [
+        { "cardId": "charmeleon", "pricePaid": 16.00, "condition": "NM" }
+      ]
+    },
+    {
+      "id": "1270836453",
+      "seller": "JessyEnThorbenTCG",
+      "date": "2026-04-23",
+      "shipping": 1.70,
+      "fees": 0,
+      "total": 9.43,
+      "items": [
+        { "cardId": "dewgong", "pricePaid": 1.99, "condition": "NM" },
+        { "cardId": "exeggutor", "pricePaid": 1.99, "condition": "NM" },
+        { "cardId": "alakazam", "pricePaid": 3.75, "condition": "NM" }
+      ]
+    },
+    {
       "id": "1271572518",
       "seller": "markor",
       "date": "2026-04-26",
@@ -191,6 +228,55 @@
         { "cardId": "lapras", "pricePaid": 5.00, "condition": "NM" },
         { "cardId": "horsea", "pricePaid": 4.60, "condition": "NM" },
         { "cardId": "lickitung", "pricePaid": 3.60, "condition": "NM" }
+      ]
+    },
+    {
+      "id": "1271584330",
+      "seller": "flyas",
+      "date": "2026-04-26",
+      "shipping": 6.20,
+      "fees": 0.78,
+      "total": 84.83,
+      "items": [
+        { "cardId": "pikachu", "pricePaid": 27.95, "condition": "NM" },
+        { "cardId": "squirtle", "pricePaid": 24.95, "condition": "NM" },
+        { "cardId": "mewtwo", "pricePaid": 24.95, "condition": "NM" }
+      ]
+    },
+    {
+      "id": "1271588475",
+      "seller": "timoovd",
+      "date": "2026-04-26",
+      "shipping": 1.70,
+      "fees": 0,
+      "total": 17.65,
+      "items": [
+        { "cardId": "charmeleon", "pricePaid": 15.95, "condition": "NM" }
+      ]
+    },
+    {
+      "id": "1271588674",
+      "seller": "GengcardsNL",
+      "date": "2026-04-26",
+      "shipping": 1.70,
+      "fees": 0,
+      "total": 18.16,
+      "items": [
+        { "cardId": "machoke", "pricePaid": 3.99, "condition": "NM" },
+        { "cardId": "parasect", "pricePaid": 1.49, "condition": "NM" },
+        { "cardId": "hisuian-arcanine", "pricePaid": 1.99, "condition": "NM" },
+        { "cardId": "galarian-moltres", "pricePaid": 8.99, "condition": "NM" }
+      ]
+    },
+    {
+      "id": "1271588696",
+      "seller": "Pbronnenberg",
+      "date": "2026-04-26",
+      "shipping": 1.70,
+      "fees": 0,
+      "total": 13.70,
+      "items": [
+        { "cardId": "wartortle", "pricePaid": 12.00, "condition": "NM" }
       ]
     }
   ]

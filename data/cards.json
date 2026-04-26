@@ -1928,19 +1928,19 @@
   {
     "id": "pikachu",
     "name": "Pikachu",
-    "code": "s10a 073",
-    "set": "Dark Phantasma",
+    "code": "sv2a 173",
+    "set": "Pokemon Card 151",
     "qty": 1,
     "language": "Japanese",
     "condition": "NM",
-    "buyPrice": 40,
+    "buyPrice": 27.95,
     "pokedexNumber": 25,
     "type1": "Electric",
     "type2": null,
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/586ac7c8de776198ed4ba4bc26413495e572adefc3e8a761ff84942be59a18e5/1600.jpg",
+    "imageUrl": "https://assets.tcgdex.net/ja/SV/SV2a/173/high.png",
     "localImage": true
   },
   {
