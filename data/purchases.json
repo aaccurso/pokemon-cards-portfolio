@@ -139,8 +139,8 @@
       ]
     },
     {
-      "id": "pending-2026-04-22-gloom-pinsir",
-      "seller": null,
+      "id": "1270634365",
+      "seller": "JoekkiesCards",
       "date": "2026-04-22",
       "shipping": 1.70,
       "fees": 0,
@@ -150,6 +150,30 @@
         { "cardId": "pidgeotto", "pricePaid": 2.30, "condition": "NM" },
         { "cardId": "jynx", "pricePaid": 1.99, "condition": "NM" },
         { "cardId": "pinsir", "pricePaid": 2.99, "condition": "NM" }
+      ]
+    },
+    {
+      "id": "1270630420",
+      "seller": "romandiesse",
+      "date": "2026-04-22",
+      "shipping": 10.70,
+      "fees": 0.14,
+      "total": 37.34,
+      "items": [
+        { "cardId": "eevee", "pricePaid": 24.50, "condition": "NM" },
+        { "cardId": "exeggcute", "pricePaid": 2.00, "condition": "NM" }
+      ]
+    },
+    {
+      "id": "1270635449",
+      "seller": "SoyunJapanCards",
+      "date": "2026-04-22",
+      "shipping": 7.99,
+      "fees": 0.25,
+      "total": 57.04,
+      "items": [
+        { "cardId": "pidgeot-ex", "pricePaid": 22.00, "condition": "NM" },
+        { "cardId": "mega-clefable-ex", "pricePaid": 26.80, "condition": "NM" }
       ]
     },
     {
