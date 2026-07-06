@@ -356,8 +356,8 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "imageUrl": "https://images.scrydex.com/pokemon/me3-19/large",
-    "imageIsFallback": true
+    "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/yi3kt3odre7nn64b/1600.jpg",
+    "localImage": true
   },
   {
     "id": "diglett",
