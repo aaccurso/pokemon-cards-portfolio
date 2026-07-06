@@ -278,6 +278,75 @@
       "items": [
         { "cardId": "wartortle", "pricePaid": 12.00, "condition": "NM" }
       ]
+    },
+    {
+      "id": "1286533510",
+      "seller": "JK-Entertainment",
+      "date": "2026-07-06",
+      "shipping": 1.25,
+      "fees": 0,
+      "total": 21.64,
+      "items": [
+        { "cardId": "hisuian-growlithe", "pricePaid": 9.90, "condition": "NM" },
+        { "cardId": "clefairy", "pricePaid": 10.49, "condition": "NM" }
+      ]
+    },
+    {
+      "id": "1286533507",
+      "seller": "HakuLou",
+      "date": "2026-07-06",
+      "shipping": 1.25,
+      "fees": 0,
+      "total": 16.25,
+      "items": [
+        { "cardId": "snorlax", "pricePaid": 15.00, "condition": "NM" }
+      ]
+    },
+    {
+      "id": "1286533515",
+      "seller": "Pandago",
+      "date": "2026-07-06",
+      "shipping": 1.25,
+      "fees": 0,
+      "total": 19.55,
+      "items": [
+        { "cardId": "vaporeon", "pricePaid": 16.35, "condition": "NM" }
+      ]
+    },
+    {
+      "id": "1286533508",
+      "seller": "CardgazerTCG",
+      "date": "2026-07-06",
+      "shipping": 3.95,
+      "fees": 0.33,
+      "total": 36.71,
+      "items": [
+        { "cardId": "paras", "pricePaid": 19.99, "condition": "NM" },
+        { "cardId": "goldeen", "pricePaid": 7.45, "condition": "NM" }
+      ]
+    },
+    {
+      "id": "1286447709",
+      "seller": "Jeromeipen",
+      "date": "2026-07-06",
+      "shipping": 1.70,
+      "fees": 0,
+      "total": 20.70,
+      "items": [
+        { "cardId": "clefairy", "pricePaid": 10.00, "condition": "NM" },
+        { "cardId": "vileplume-gx", "pricePaid": 9.00, "condition": "NM" }
+      ]
+    },
+    {
+      "id": "1286448117",
+      "seller": "Snorlax2305",
+      "date": "2026-07-06",
+      "shipping": 1.70,
+      "fees": 0,
+      "total": 14.70,
+      "items": [
+        { "cardId": "snorlax", "pricePaid": 13.00, "condition": "NM" }
+      ]
     }
   ]
 }
