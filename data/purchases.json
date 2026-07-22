@@ -347,6 +347,59 @@
       "items": [
         { "cardId": "snorlax", "pricePaid": 13.00, "condition": "NM" }
       ]
+    },
+    {
+      "id": "pending-2026-07-22-starmie-machamp-venomoth",
+      "seller": null,
+      "date": "2026-07-22",
+      "shipping": 1.75,
+      "fees": 0,
+      "total": 9.10,
+      "items": [
+        { "cardId": "starmie-v", "pricePaid": 3.97, "condition": "NM" },
+        { "cardId": "machamp-vmax", "pricePaid": 1.39, "condition": "NM" },
+        { "cardId": "venomoth-gx", "pricePaid": 1.99, "condition": "NM" }
+      ]
+    },
+    {
+      "id": "pending-2026-07-22-beedrill-sandslash-gyarados-crobat",
+      "seller": null,
+      "date": "2026-07-22",
+      "shipping": 1.55,
+      "fees": 0,
+      "total": 20.00,
+      "items": [
+        { "cardId": "beedrill-v", "pricePaid": 0.50, "condition": "NM" },
+        { "cardId": "alolan-sandslash-gx", "pricePaid": 5.00, "condition": "NM" },
+        { "cardId": "gyarados-ex", "pricePaid": 9.70, "condition": "NM" },
+        { "cardId": "crobat", "pricePaid": 3.25, "condition": "NM" }
+      ]
+    },
+    {
+      "id": "pending-2026-07-22-espeon-glaceon",
+      "seller": null,
+      "date": "2026-07-22",
+      "shipping": 1.70,
+      "fees": 0,
+      "total": 3.94,
+      "items": [
+        { "cardId": "espeon-v", "pricePaid": 0.99, "condition": "NM" },
+        { "cardId": "glaceon-v", "pricePaid": 1.25, "condition": "NM" }
+      ]
+    },
+    {
+      "id": "pending-2026-07-22-aerodactyl-leafeon-slowbro-omastar",
+      "seller": null,
+      "date": "2026-07-22",
+      "shipping": 1.70,
+      "fees": 0,
+      "total": 18.66,
+      "items": [
+        { "cardId": "aerodactyl-gx", "pricePaid": 0.99, "condition": "NM" },
+        { "cardId": "leafeon-v", "pricePaid": 2.99, "condition": "NM" },
+        { "cardId": "slowbro", "pricePaid": 11.99, "condition": "NM" },
+        { "cardId": "omastar-v", "pricePaid": 0.99, "condition": "NM" }
+      ]
     }
   ]
 }
