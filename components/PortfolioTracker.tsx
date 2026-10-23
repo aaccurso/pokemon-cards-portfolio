@@ -2,9 +2,9 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { cards as allCards, typeColors, languageFlags, Card } from "@/lib/cards";
+import { cards as allCards, purchases } from "@/lib/data";
+import { typeColors, languageFlags, Card } from "@/lib/cards";
 import {
-  purchases,
   buildOwnershipMap,
   computeStats,
   buildCsv,

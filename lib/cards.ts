@@ -1,5 +1,3 @@
-import cardsJson from "@/data/cards.json";
-
 export type Card = {
   id: string;
   name: string;
@@ -20,7 +18,6 @@ export type Card = {
   binderId: string;
 };
 
-export const cards: Card[] = cardsJson as Card[];
 
 export const languageFlags: Record<string, string> = {
   Japanese: "\u{1F1EF}\u{1F1F5}",

@@ -1,5 +1,4 @@
-import purchasesJson from "@/data/purchases.json";
-import { Card } from "./cards";
+import type { Card } from "./cards";
 
 export type PurchaseItem = {
   cardId: string;
@@ -19,7 +18,6 @@ export type Shipment = {
 
 export type PurchaseData = { shipments: Shipment[] };
 
-export const purchases: PurchaseData = purchasesJson as PurchaseData;
 
 export type CardOwnership = {
   owned: true;
@@ -30,7 +28,7 @@ export type CardOwnership = {
 
 export type OwnershipMap = Map<string, CardOwnership>;
 
-export function buildOwnershipMap(data: PurchaseData = purchases): OwnershipMap {
+export function buildOwnershipMap(data: PurchaseData): OwnershipMap {
   const map: OwnershipMap = new Map();
   for (const ship of data.shipments) {
     for (const item of ship.items) {
@@ -67,7 +65,7 @@ export type CollectionStats = {
 export function computeStats(
   cards: Card[],
   ownership: OwnershipMap,
-  data: PurchaseData = purchases
+  data: PurchaseData
 ): CollectionStats {
   let owned = 0;
   let pricedCount = 0;

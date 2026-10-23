@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { cards } from "@/lib/cards";
-import { buildOwnershipMap, purchases } from "@/lib/purchases";
+import { cards, purchases } from "@/lib/data";
+import { buildOwnershipMap } from "@/lib/purchases";
 import { PlaceholderCard } from "@/components/PlaceholderCard";
 
 export default function PrintPage() {
