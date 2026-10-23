@@ -3,12 +3,7 @@ import assert from "node:assert/strict";
 import { buildOwnershipMap, computeStats } from "../lib/purchases.ts";
 import type { Card } from "../lib/cards.ts";
 import type { PurchaseData } from "../lib/purchases.ts";
-
-export const card = (over: Partial<Card>): Card => ({
-  id: "x", name: "X", code: "sv2a 001", set: "S", qty: 1, language: "Japanese",
-  condition: "NM", buyPrice: null, pokedexNumber: 1, type1: "Grass", type2: null,
-  generation: 1, variant: null, binderId: "kanto-151", setNumber: 1, ...over,
-});
+import { card } from "./helpers.ts";
 
 const binderMap = (cards: Card[]) => new Map(cards.map((c) => [c.id, c.binderId]));
 

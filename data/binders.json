@@ -1,0 +1,31 @@
+[
+  {
+    "id": "kanto-151",
+    "name": "Pokedex 151 full-art",
+    "description": "One full-art or alt-art print of each original Kanto Pokemon",
+    "kind": "wants",
+    "sort": "pokedexNumber"
+  },
+  {
+    "id": "kanto-evolutions",
+    "name": "Kanto evolutions",
+    "description": "Later-generation evolutions of Kanto Pokemon",
+    "kind": "wants",
+    "sort": "pokedexNumber"
+  },
+  {
+    "id": "eeveelutions",
+    "name": "Eeveelutions",
+    "description": "Eevee and its evolutions",
+    "kind": "wants",
+    "sort": "pokedexNumber"
+  },
+  {
+    "id": "m6a-30th",
+    "name": "30th CELEBRATION",
+    "description": "Full master set of the Japanese 30th anniversary expansion (M6a), cards 001 to 165",
+    "kind": "master-set",
+    "sort": "setNumber",
+    "officialCount": 103
+  }
+]
