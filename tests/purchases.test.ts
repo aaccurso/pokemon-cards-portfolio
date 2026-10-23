@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { buildOwnershipMap, computeStats } from "../lib/purchases.ts";
+import { buildOwnershipMap, computeStats, buildCsv } from "../lib/purchases.ts";
 import type { Card } from "../lib/cards.ts";
 import type { PurchaseData } from "../lib/purchases.ts";
 import { card } from "./helpers.ts";
@@ -63,4 +63,17 @@ test("stats are scoped to a binder and outlay is split by item share", () => {
   const kanto = computeStats(cards.filter((c) => c.binderId === "kanto-151"), o, data, "kanto-151", cardBinder);
   assert.equal(kanto.spentOnCards, 8); assert.equal(kanto.totalOutlay, 10); assert.equal(kanto.savings, 2);
   assert.equal(kanto.totalOutlay + m6a.totalOutlay, 140);
+});
+
+test("buildCsv includes the new columns and renders a pulled Trainer row", () => {
+  const cards = [card({
+    id: "t", name: "N", code: "M6a 153", set: "30th CELEBRATION", pokedexNumber: null, type1: null,
+    generation: null, category: "Trainer", setNumber: 153, nameJa: "N", rarity: "Classic Collection", binderId: "m6a-30th",
+  })];
+  const o = buildOwnershipMap({ shipments: [
+    { id: "box", seller: null, date: null, shipping: null, fees: null, total: 50, items: [{ cardId: "t", pricePaid: null, condition: "NM", qty: 2 }] },
+  ] });
+  const [header, row] = buildCsv(cards, o).trim().split("\n");
+  assert.equal(header, "Card Name,Card Code,Set,Qty,Language,Condition,Buy Price (EUR),Price Paid (EUR),Owned,Pokedex #,Type 1,Type 2,Generation,Card Variant,Binder,Category,Set Number,Japanese Name,Rarity,Qty Owned");
+  assert.equal(row, "N,M6a 153,30th CELEBRATION,1,Japanese,NM,,,true,,,,,,m6a-30th,Trainer,153,N,Classic Collection,2");
 });

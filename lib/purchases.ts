@@ -145,7 +145,7 @@ function binderShare(
 
 export function buildCsv(cards: Card[], ownership: OwnershipMap): string {
   const header =
-    "Card Name,Card Code,Set,Qty,Language,Condition,Buy Price (EUR),Price Paid (EUR),Owned,Pokedex #,Type 1,Type 2,Generation,Card Variant,Binder";
+    "Card Name,Card Code,Set,Qty,Language,Condition,Buy Price (EUR),Price Paid (EUR),Owned,Pokedex #,Type 1,Type 2,Generation,Card Variant,Binder,Category,Set Number,Japanese Name,Rarity,Qty Owned";
   const rows = cards.map((c) => {
     const o = ownership.get(c.id);
     return [
@@ -158,12 +158,18 @@ export function buildCsv(cards: Card[], ownership: OwnershipMap): string {
       c.buyPrice != null ? c.buyPrice.toFixed(2) : "",
       o && o.pricePaid != null ? o.pricePaid.toFixed(2) : "",
       o ? "true" : "false",
-      String(c.pokedexNumber),
-      c.type1,
+      c.pokedexNumber != null ? String(c.pokedexNumber) : "",
+      c.type1 ?? "",
       c.type2 ?? "",
-      String(c.generation),
+      c.generation != null ? String(c.generation) : "",
       csvEscape(c.variant ?? ""),
       c.binderId,
+      // Inlined rather than cardCategory(): lib modules may only type-import each other.
+      c.category ?? "Pokemon",
+      String(c.setNumber),
+      csvEscape(c.nameJa ?? ""),
+      csvEscape(c.rarity ?? ""),
+      o ? String(o.purchaseCount) : "0",
     ].join(",");
   });
   return [header, ...rows].join("\n") + "\n";
