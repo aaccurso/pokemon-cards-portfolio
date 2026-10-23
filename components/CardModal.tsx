@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Card, languageFlags, conditionNames, numberLabel, typeBadges } from "@/lib/cards";
+import { BinderDisplay, Card, languageFlags, conditionNames, numberLabel, typeBadges } from "@/lib/cards";
 import type { CardOwnership } from "@/lib/purchases";
 
 type Props = {
@@ -10,10 +10,10 @@ type Props = {
   onClose: () => void;
   onPrev?: () => void;
   onNext?: () => void;
-  officialCount?: number;
+  binder: BinderDisplay;
 };
 
-export function CardModal({ card, ownership, onClose, onPrev, onNext, officialCount }: Props) {
+export function CardModal({ card, ownership, onClose, onPrev, onNext, binder }: Props) {
   const [imgFailed, setImgFailed] = useState(false);
   const [triedRemote, setTriedRemote] = useState(false);
   const [zoomed, setZoomed] = useState(false);
@@ -153,9 +153,19 @@ export function CardModal({ card, ownership, onClose, onPrev, onNext, officialCo
           </div>
           <dl className="modal-details">
             <div>
-              <dt>{card.pokedexNumber != null ? "Pokedex #" : "Number"}</dt>
-              <dd>{numberLabel(card, officialCount)}</dd>
+              <dt>
+                {binder.kind === "wants" && card.pokedexNumber != null
+                  ? "Pokedex #"
+                  : "Number"}
+              </dt>
+              <dd>{numberLabel(card, binder)}</dd>
             </div>
+            {binder.kind === "master-set" && card.pokedexNumber != null && (
+              <div>
+                <dt>Pokedex #</dt>
+                <dd>#{String(card.pokedexNumber).padStart(3, "0")}</dd>
+              </div>
+            )}
             <div>
               <dt>Set</dt>
               <dd>{card.set}</dd>

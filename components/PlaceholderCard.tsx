@@ -1,11 +1,11 @@
-import { Card, numberLabel, typeBadges } from "@/lib/cards";
+import { BinderDisplay, Card, numberLabel, typeBadges } from "@/lib/cards";
 
 export function PlaceholderCard({
   card,
-  officialCount,
+  binder,
 }: {
   card: Card;
-  officialCount?: number;
+  binder: BinderDisplay;
 }) {
   const imgUrl = card.localImage
     ? `/cards/${card.id}.webp`
@@ -13,7 +13,7 @@ export function PlaceholderCard({
   return (
     <div className="placeholder-card">
       <div className="ph-header">
-        <span className="ph-dex">{numberLabel(card, officialCount)}</span>
+        <span className="ph-dex">{numberLabel(card, binder)}</span>
         <span className="ph-set">{card.set}</span>
       </div>
       <div className="ph-name">

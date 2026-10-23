@@ -391,7 +391,7 @@ export default function PortfolioTracker() {
               card={card}
               owned={ownership.has(card.id)}
               onClick={() => setModalCard(card)}
-              officialCount={binder.officialCount}
+              binder={binder}
             />
           ))}
         </div>
@@ -402,8 +402,8 @@ export default function PortfolioTracker() {
               <th onClick={() => handleSort("owned")}>
                 Own {sortIndicator("owned")}
               </th>
-              <th onClick={() => handleSort("pokedexNumber")}>
-                # {sortIndicator("pokedexNumber")}
+              <th onClick={() => handleSort(binder.sort)}>
+                # {sortIndicator(binder.sort)}
               </th>
               <th onClick={() => handleSort("name")}>
                 Name {sortIndicator("name")}
@@ -447,7 +447,7 @@ export default function PortfolioTracker() {
                       </span>
                     )}
                   </td>
-                  <td className="pokedex-num">{numberLabel(card, binder.officialCount)}</td>
+                  <td className="pokedex-num">{numberLabel(card, binder)}</td>
                   <td>
                     <span
                       className="card-name-cell"
@@ -545,7 +545,7 @@ export default function PortfolioTracker() {
             onClose={() => setModalCard(null)}
             onPrev={onPrev}
             onNext={onNext}
-            officialCount={binder.officialCount}
+            binder={binder}
           />
         );
       })()}

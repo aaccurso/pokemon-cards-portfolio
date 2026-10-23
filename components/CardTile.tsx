@@ -1,16 +1,16 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Card, numberLabel, typeBadges } from "@/lib/cards";
+import { BinderDisplay, Card, numberLabel, typeBadges } from "@/lib/cards";
 
 type Props = {
   card: Card;
   owned: boolean;
   onClick: () => void;
-  officialCount?: number;
+  binder: BinderDisplay;
 };
 
-export function CardTile({ card, owned, onClick, officialCount }: Props) {
+export function CardTile({ card, owned, onClick, binder }: Props) {
   const ref = useRef<HTMLButtonElement>(null);
   const [imgFailed, setImgFailed] = useState(false);
   const [triedRemote, setTriedRemote] = useState(false);
@@ -115,7 +115,7 @@ export function CardTile({ card, owned, onClick, officialCount }: Props) {
           )}
         </div>
         <div className="card-tile-info">
-          <span className="card-tile-num">{numberLabel(card, officialCount)}</span>
+          <span className="card-tile-num">{numberLabel(card, binder)}</span>
           <span className="card-tile-name">
             {card.name}
             {card.nameJa && <span className="name-ja">{card.nameJa}</span>}

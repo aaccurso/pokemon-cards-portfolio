@@ -20,7 +20,7 @@ Four git-tracked JSON files are the single source of truth:
 - **`data/binders.json`** — the binder registry. Fields: `id, name, description, kind, sort, officialCount?`.
   - `kind: "wants"` — a curated list. `buyPrice == null` means "no illustrated print chosen yet"; the "Illustration only" toggle is shown; the price refresh never prices a null card.
   - `kind: "master-set"` — every card is the target. `buyPrice` is the current Cardmarket single price (auto-filled by the refresh); the toggle is hidden; the "Saved vs target" tile becomes "Duplicates".
-  - `sort` is the default sort key (`pokedexNumber` or `setNumber`). `officialCount` is the number of non-secret cards, used for "No. 101 / 103" labels on Trainers.
+  - `sort` is the default sort key (`pokedexNumber` or `setNumber`). `officialCount` is the number of non-secret cards; master-set binders label every card with its slot index as printed on the card (`126/103`) in grid, table, modal, and placeholders, and the table "#" column sorts by `setNumber` there. Wants binders show the Pokedex number (`#025`).
 - **`data/cards.json`** — all cards across all binders. Fields: `id, name, code, set, qty, language, condition, buyPrice, imageUrl, localImage, pokedexNumber, type1, type2, generation, variant, binderId, setNumber, category?, nameJa?, tcgdexId?, rarity?`.
   - `category` defaults to `"Pokemon"`; Trainers and Energies have `pokedexNumber: null`, `type1: null`, `generation: null`.
   - `setNumber` is the numeric part of `code`. `tcgdexId` (e.g. `SV2a-063`) is the join key for the price refresh. `nameJa` is the printed Japanese name, shown under the English name.

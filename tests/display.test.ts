@@ -3,10 +3,19 @@ import assert from "node:assert/strict";
 import { numberLabel, typeBadges } from "../lib/cards.ts";
 import { card } from "./helpers.ts";
 
-test("numberLabel pads Pokedex numbers and uses set numbers for Trainers", () => {
-  assert.equal(numberLabel(card({ pokedexNumber: 25 })), "#025");
-  assert.equal(numberLabel(card({ pokedexNumber: null, type1: null, category: "Trainer", setNumber: 101 }), 103), "No. 101 / 103");
-  assert.equal(numberLabel(card({ pokedexNumber: null, type1: null, category: "Trainer", setNumber: 101 })), "No. 101");
+const wants = { kind: "wants" as const };
+const master = { kind: "master-set" as const, officialCount: 103 };
+
+test("numberLabel shows padded Pokedex numbers in wants binders", () => {
+  assert.equal(numberLabel(card({ pokedexNumber: 25 }), wants), "#025");
+  assert.equal(numberLabel(card({ pokedexNumber: null, type1: null, category: "Trainer", setNumber: 101 }), wants), "No. 101");
+});
+
+test("numberLabel shows the set index as printed on the card in master-set binders", () => {
+  assert.equal(numberLabel(card({ pokedexNumber: 25, setNumber: 126 }), master), "126/103");
+  assert.equal(numberLabel(card({ pokedexNumber: 102, setNumber: 1 }), master), "001/103");
+  assert.equal(numberLabel(card({ pokedexNumber: null, type1: null, category: "Trainer", setNumber: 101 }), master), "101/103");
+  assert.equal(numberLabel(card({ pokedexNumber: 25, setNumber: 126 }), { kind: "master-set" }), "126");
 });
 
 test("typeBadges lists Pokemon types and a single neutral badge for Trainers", () => {

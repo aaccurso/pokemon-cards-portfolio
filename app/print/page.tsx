@@ -206,7 +206,7 @@ function PrintSheets() {
             <PlaceholderCard
               key={card.id}
               card={card}
-              officialCount={binder.officialCount}
+              binder={binder}
             />
           ))}
         </div>

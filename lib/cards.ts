@@ -1,4 +1,9 @@
+import type { Binder } from "./binders";
+
 export type CardCategory = "Pokemon" | "Trainer" | "Energy";
+
+/** The slice of a binder that display helpers need. */
+export type BinderDisplay = Pick<Binder, "kind"> & Partial<Pick<Binder, "officialCount">>;
 
 export type Card = {
   id: string;
@@ -78,15 +83,19 @@ export const typeColors: Record<string, string> = {
 };
 
 /**
- * "#025" for Pokemon; "No. 101 / 103" (or "No. 101" without an official
- * count) for Trainers and Energies, which have no Pokedex number.
+ * Master-set binders show the slot index as printed on the card ("126/103",
+ * or "126" without an official count). Wants binders show the Pokedex number
+ * ("#025"), falling back to "No. 101" for cards without one.
  */
-export function numberLabel(c: Card, officialCount?: number): string {
+export function numberLabel(c: Card, binder: BinderDisplay): string {
+  if (binder.kind === "master-set") {
+    const n = String(c.setNumber).padStart(3, "0");
+    return binder.officialCount != null ? `${n}/${binder.officialCount}` : n;
+  }
   if (c.pokedexNumber != null) {
     return `#${String(c.pokedexNumber).padStart(3, "0")}`;
   }
-  const base = `No. ${c.setNumber}`;
-  return officialCount != null ? `${base} / ${officialCount}` : base;
+  return `No. ${c.setNumber}`;
 }
 
 export type TypeBadge = { label: string; color: string };
