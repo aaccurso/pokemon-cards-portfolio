@@ -80,9 +80,12 @@ Array of binder entries:
   },
   { "id": "kanto-evolutions", "name": "Kanto evolutions", "description": "Later-generation evolutions of Kanto Pokemon", "kind": "wants", "sort": "pokedexNumber" },
   { "id": "eeveelutions", "name": "Eeveelutions", "description": "Eevee and its evolutions", "kind": "wants", "sort": "pokedexNumber" },
-  { "id": "m6a-30th", "name": "30th CELEBRATION", "description": "Full master set of the Japanese 30th anniversary expansion (M6a), cards 001 to 165", "kind": "master-set", "sort": "setNumber" }
+  { "id": "m6a-30th", "name": "30th CELEBRATION", "description": "Full master set of the Japanese 30th anniversary expansion (M6a), cards 001 to 165", "kind": "master-set", "sort": "setNumber", "officialCount": 103 }
 ]
 ```
+
+`officialCount` is optional and only used for the `No. 101 / 103` display on
+cards without a Pokedex number.
 
 `kind` controls exactly two behaviours:
 
@@ -156,9 +159,10 @@ UI reads this file yet.
 - Loads `data/binders.json`, exports `binders`, `DEFAULT_BINDER_ID`,
   `getBinder(id)`, `cardsForBinder(id)`, `resolveBinderId(param)`.
 - `resolveBinderId` returns the default for an unknown or missing param.
-- A validation function checks every card's `binderId` is in the registry
-  and every purchase item's `cardId` exists. It throws in development and
-  logs in production, called once at module load.
+- A pure `validateData(cards, purchases, binders)` returns a list of problems:
+  cards whose `binderId` is not in the registry and purchase items whose
+  `cardId` matches no card. `lib/data.ts` calls it once at module load,
+  throws in development, and logs in production.
 
 #### Active binder in the dashboard
 
@@ -281,12 +285,22 @@ log a booster-pull shipment, when and how to run `refresh_prices.mjs`, and
 
 #### Testing
 
-Node's built-in test runner (`node --test`), wired to `npm test`, no new
-runtime dependency. TypeScript sources are exercised through a small
-`tsx`-free approach: pure logic under test is written as `.ts` compiled by
-`tsc` into a `test-dist/` folder in the `npm test` script, or the tests
-import the already plain-JS `scripts/lib/` helpers directly. The planner
-picks whichever keeps `npm test` to one command.
+Node 24 is installed and strips TypeScript types natively, so tests are
+`.ts` files under `tests/` run by `node --test tests/`, wired to `npm test`.
+No new dependency. Two constraints follow and are part of the design:
+
+- Logic modules must not import JSON or use the `@/` alias, because Node
+  cannot resolve either. JSON loading moves into a single new `lib/data.ts`
+  that imports `data/cards.json`, `data/purchases.json`, `data/binders.json`
+  and exports `cards`, `purchases`, `binders`. `lib/cards.ts`,
+  `lib/purchases.ts`, and `lib/binders.ts` keep only types and pure functions
+  that take data as parameters. Components and pages import data from
+  `lib/data.ts` and functions from the logic modules.
+- Cross-module imports inside `lib/` are `import type` only, so they are
+  erased at runtime and no `.ts` extension question arises.
+- `scripts/lib/` helpers are plain `.mjs` and are imported directly.
+
+Coverage:
 
 - `lib/purchases.ts`: ownership map with null prices and qty; outlay
   attribution for a pure and a mixed shipment; stat formulas for both kinds;
