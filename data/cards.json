@@ -15,7 +15,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 63,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-063"
   },
   {
     "id": "aerodactyl-gx",
@@ -33,7 +36,9 @@
     "generation": 1,
     "variant": "GX",
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 45,
+    "category": "Pokemon"
   },
   {
     "id": "alakazam",
@@ -51,7 +56,10 @@
     "variant": null,
     "binderId": "kanto-151",
     "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/z2i7jyiqvwqzn4xc/1600.jpg",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 71,
+    "category": "Pokemon",
+    "tcgdexId": "M1S-071"
   },
   {
     "id": "alolan-dugtrio",
@@ -69,7 +77,10 @@
     "variant": "Alolan Form",
     "binderId": "kanto-151",
     "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/w4mnjcknarfqw7f5/1600.jpg",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 116,
+    "category": "Pokemon",
+    "tcgdexId": "SV8-116"
   },
   {
     "id": "alolan-golem-gx",
@@ -87,7 +98,10 @@
     "variant": "Alolan Form / GX",
     "binderId": "kanto-151",
     "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/ref1bd5e88daff2b8aff02213df59f4c3db1c2ad5ea36cfc5280c9ec07e9e841688/1600.jpg",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 51,
+    "category": "Pokemon",
+    "tcgdexId": "SM4S-051"
   },
   {
     "id": "alolan-sandslash-gx",
@@ -105,7 +119,9 @@
     "generation": 7,
     "variant": "Alolan Form / GX",
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 187,
+    "category": "Pokemon"
   },
   {
     "id": "arbok",
@@ -123,7 +139,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 79,
+    "category": "Pokemon",
+    "tcgdexId": "SV5K-079"
   },
   {
     "id": "beedrill-v",
@@ -141,7 +160,10 @@
     "variant": "V",
     "binderId": "kanto-151",
     "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/5pb3we557erz5pyo/1600.jpg",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 69,
+    "category": "Pokemon",
+    "tcgdexId": "S10P-069"
   },
   {
     "id": "bellsprout",
@@ -159,7 +181,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 69,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-069"
   },
   {
     "id": "blastoise-ex",
@@ -177,7 +202,9 @@
     "generation": 1,
     "variant": "ex",
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 16,
+    "category": "Pokemon"
   },
   {
     "id": "bulbasaur",
@@ -195,7 +222,10 @@
     "variant": null,
     "binderId": "kanto-151",
     "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/xlljpxbi5voq4pee/1600.jpg",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 64,
+    "category": "Pokemon",
+    "tcgdexId": "M1L-064"
   },
   {
     "id": "butterfree",
@@ -213,7 +243,10 @@
     "variant": null,
     "binderId": "kanto-151",
     "imageUrl": "https://assets.tcgdex.net/ja/SV/SV2a/012/high.png",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 12,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-012"
   },
   {
     "id": "caterpie",
@@ -231,7 +264,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 172,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-172"
   },
   {
     "id": "chansey",
@@ -249,7 +285,10 @@
     "variant": null,
     "binderId": "kanto-151",
     "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/83eb18706024d879bac1db12dbfed98d8606963d90aca5fc5349ddde62b23676/1600.jpg",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 113,
+    "category": "Pokemon",
+    "tcgdexId": "SV6-113"
   },
   {
     "id": "charizard",
@@ -267,7 +306,10 @@
     "variant": null,
     "binderId": "kanto-151",
     "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/vkeojmlithtqzy4l/1600.jpg",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 187,
+    "category": "Pokemon",
+    "tcgdexId": "S8b-187"
   },
   {
     "id": "charmander",
@@ -285,7 +327,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 168,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-168"
   },
   {
     "id": "charmeleon",
@@ -303,7 +348,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 169,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-169"
   },
   {
     "id": "clefairy",
@@ -321,7 +369,10 @@
     "variant": null,
     "binderId": "kanto-151",
     "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/u6odyyb6x22l45y2/1600.jpg",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 86,
+    "category": "Pokemon",
+    "tcgdexId": "M3-086"
   },
   {
     "id": "cloyster",
@@ -339,7 +390,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 91,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-091"
   },
   {
     "id": "crobat",
@@ -357,7 +411,10 @@
     "generation": 2,
     "variant": null,
     "binderId": "kanto-evolutions",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 91,
+    "category": "Pokemon",
+    "tcgdexId": "M4-091"
   },
   {
     "id": "cubone",
@@ -375,7 +432,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 104,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-104"
   },
   {
     "id": "dewgong",
@@ -393,7 +453,10 @@
     "variant": null,
     "binderId": "kanto-151",
     "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/yi3kt3odre7nn64b/1600.jpg",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 84,
+    "category": "Pokemon",
+    "tcgdexId": "M2-084"
   },
   {
     "id": "diglett",
@@ -411,7 +474,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 50,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-050"
   },
   {
     "id": "ditto",
@@ -429,7 +495,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 197,
+    "category": "Pokemon",
+    "tcgdexId": "S12a-197"
   },
   {
     "id": "dodrio",
@@ -447,7 +516,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 85,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-085"
   },
   {
     "id": "doduo",
@@ -465,7 +537,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 84,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-084"
   },
   {
     "id": "dragonair",
@@ -483,7 +558,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 182,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-182"
   },
   {
     "id": "dratini",
@@ -501,7 +579,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 147,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-147"
   },
   {
     "id": "drowzee",
@@ -519,7 +600,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 86,
+    "category": "Pokemon",
+    "tcgdexId": "SV1V-086"
   },
   {
     "id": "eevee",
@@ -537,7 +621,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 78,
+    "category": "Pokemon",
+    "tcgdexId": "SV5a-078"
   },
   {
     "id": "ekans",
@@ -555,7 +642,9 @@
     "variant": null,
     "binderId": "kanto-151",
     "imageUrl": "https://images.pokemontcg.io/sv10/112_hires.png",
-    "imageIsFallback": true
+    "imageIsFallback": true,
+    "category": "Pokemon",
+    "setNumber": 0
   },
   {
     "id": "electabuzz",
@@ -573,7 +662,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 125,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-125"
   },
   {
     "id": "electrode",
@@ -591,7 +683,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 101,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-101"
   },
   {
     "id": "espeon-v",
@@ -609,7 +704,10 @@
     "generation": 2,
     "variant": "V",
     "binderId": "eeveelutions",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 35,
+    "category": "Pokemon",
+    "tcgdexId": "S6a-035"
   },
   {
     "id": "exeggcute",
@@ -627,7 +725,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 65,
+    "category": "Pokemon",
+    "tcgdexId": "SV7a-065"
   },
   {
     "id": "exeggutor",
@@ -645,7 +746,10 @@
     "variant": null,
     "binderId": "kanto-151",
     "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/quyvghhmtysnhlss/1600.jpg",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 66,
+    "category": "Pokemon",
+    "tcgdexId": "M1L-066"
   },
   {
     "id": "farfetchd",
@@ -663,7 +767,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 83,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-083"
   },
   {
     "id": "fearow",
@@ -681,7 +788,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 22,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-022"
   },
   {
     "id": "flareon",
@@ -699,7 +809,10 @@
     "variant": null,
     "binderId": "kanto-151",
     "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/sdkujs6oatssofa5/1600.jpg",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 188,
+    "category": "Pokemon",
+    "tcgdexId": "S8b-188"
   },
   {
     "id": "galarian-articuno",
@@ -717,7 +830,10 @@
     "generation": 1,
     "variant": "Galarian Form",
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 182,
+    "category": "Pokemon",
+    "tcgdexId": "S12a-182"
   },
   {
     "id": "galarian-moltres",
@@ -735,7 +851,10 @@
     "generation": 1,
     "variant": "Galarian Form",
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 190,
+    "category": "Pokemon",
+    "tcgdexId": "S12a-190"
   },
   {
     "id": "galarian-zapdos",
@@ -753,7 +872,10 @@
     "generation": 1,
     "variant": "Galarian Form",
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 188,
+    "category": "Pokemon",
+    "tcgdexId": "S12a-188"
   },
   {
     "id": "gastly",
@@ -771,7 +893,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 80,
+    "category": "Pokemon",
+    "tcgdexId": "SV5K-080"
   },
   {
     "id": "gengar",
@@ -789,7 +914,10 @@
     "variant": null,
     "binderId": "kanto-151",
     "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/5l7l5z5jpwryybzm/1600.jpg",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 74,
+    "category": "Pokemon",
+    "tcgdexId": "S10a-074"
   },
   {
     "id": "geodude",
@@ -807,7 +935,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 74,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-074"
   },
   {
     "id": "glaceon-v",
@@ -825,7 +956,10 @@
     "generation": 4,
     "variant": "V",
     "binderId": "eeveelutions",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 24,
+    "category": "Pokemon",
+    "tcgdexId": "S6a-024"
   },
   {
     "id": "gloom",
@@ -843,7 +977,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 109,
+    "category": "Pokemon",
+    "tcgdexId": "SV3-109"
   },
   {
     "id": "golbat",
@@ -861,7 +998,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 42,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-042"
   },
   {
     "id": "goldeen",
@@ -879,7 +1019,9 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 84,
+    "category": "Pokemon"
   },
   {
     "id": "golduck",
@@ -897,7 +1039,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 55,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-055"
   },
   {
     "id": "graveler",
@@ -915,7 +1060,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 75,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-075"
   },
   {
     "id": "grimer",
@@ -933,7 +1081,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 88,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-088"
   },
   {
     "id": "gyarados-ex",
@@ -951,7 +1102,10 @@
     "generation": 1,
     "variant": "ex",
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 91,
+    "category": "Pokemon",
+    "tcgdexId": "SV1S-091"
   },
   {
     "id": "haunter",
@@ -969,7 +1123,9 @@
     "variant": null,
     "binderId": "kanto-151",
     "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/oqo2uzpzvbhm6qqg/1600.jpg",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 22,
+    "category": "Pokemon"
   },
   {
     "id": "hisuian-arcanine",
@@ -987,7 +1143,10 @@
     "variant": "Hisuian Form",
     "binderId": "kanto-151",
     "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/cv2ftby3ebyazhiq/1600.jpg",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 75,
+    "category": "Pokemon",
+    "tcgdexId": "S10a-075"
   },
   {
     "id": "hisuian-growlithe",
@@ -1005,7 +1164,10 @@
     "generation": 1,
     "variant": "Hisuian Form",
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 75,
+    "category": "Pokemon",
+    "tcgdexId": "SV5a-075"
   },
   {
     "id": "hisuian-voltorb",
@@ -1023,7 +1185,10 @@
     "generation": 1,
     "variant": "Hisuian Form",
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 173,
+    "category": "Pokemon",
+    "tcgdexId": "S12a-173"
   },
   {
     "id": "hitmonchan",
@@ -1041,7 +1206,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 107,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-107"
   },
   {
     "id": "hitmonlee",
@@ -1059,7 +1227,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 106,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-106"
   },
   {
     "id": "horsea",
@@ -1077,7 +1248,10 @@
     "variant": null,
     "binderId": "kanto-151",
     "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/195ca2a40906c79591c133fefd9cfc87ebccfbeb55544d7139968e0a5ed686ef/1600.jpg",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 67,
+    "category": "Pokemon",
+    "tcgdexId": "SV6a-067"
   },
   {
     "id": "hypno",
@@ -1095,7 +1269,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 97,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-097"
   },
   {
     "id": "ivysaur",
@@ -1113,7 +1290,10 @@
     "variant": null,
     "binderId": "kanto-151",
     "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/3pb7sfmy7rqdjt46/1600.jpg",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 65,
+    "category": "Pokemon",
+    "tcgdexId": "M1L-065"
   },
   {
     "id": "jigglypuff",
@@ -1131,7 +1311,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 39,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-039"
   },
   {
     "id": "jolteon",
@@ -1149,7 +1332,10 @@
     "variant": null,
     "binderId": "kanto-151",
     "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/5xzfqjpc5yuxhhtm/1600.jpg",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 193,
+    "category": "Pokemon",
+    "tcgdexId": "S8b-193"
   },
   {
     "id": "jynx",
@@ -1167,7 +1353,10 @@
     "variant": null,
     "binderId": "kanto-151",
     "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/4a60e976ecd501d7a21b0119b0550b03d212be04c5f3982118bce852a5f093e4/1600.jpg",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 71,
+    "category": "Pokemon",
+    "tcgdexId": "S11a-071"
   },
   {
     "id": "kabuto",
@@ -1185,7 +1374,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 140,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-140"
   },
   {
     "id": "kabutops",
@@ -1203,7 +1395,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 141,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-141"
   },
   {
     "id": "kadabra",
@@ -1221,7 +1416,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 64,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-064"
   },
   {
     "id": "kakuna",
@@ -1239,7 +1437,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 14,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-014"
   },
   {
     "id": "kangaskhan",
@@ -1257,7 +1458,10 @@
     "variant": null,
     "binderId": "kanto-151",
     "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/gyggtu3tt3cmhmuu/1600.jpg",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 110,
+    "category": "Pokemon",
+    "tcgdexId": "SV10-110"
   },
   {
     "id": "kingler",
@@ -1275,7 +1479,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 99,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-099"
   },
   {
     "id": "koffing",
@@ -1293,7 +1500,10 @@
     "variant": null,
     "binderId": "kanto-151",
     "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/822fba55a24cbebb66d649f05f124efe101908a2d5a67933d34b46be517eecfc/1600.jpg",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 56,
+    "category": "Pokemon",
+    "tcgdexId": "SM11b-056"
   },
   {
     "id": "krabby",
@@ -1311,7 +1521,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 98,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-098"
   },
   {
     "id": "lapras",
@@ -1329,7 +1542,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 177,
+    "category": "Pokemon",
+    "tcgdexId": "S12a-177"
   },
   {
     "id": "leafeon-v",
@@ -1347,7 +1563,9 @@
     "generation": 4,
     "variant": "V",
     "binderId": "eeveelutions",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 194,
+    "category": "Pokemon"
   },
   {
     "id": "lickitung",
@@ -1365,7 +1583,10 @@
     "variant": null,
     "binderId": "kanto-151",
     "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/f995593c10a9b5d9acb8dc59763fc5172b460d163dc6206fde307f6033488b9b/1600.jpg",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 82,
+    "category": "Pokemon",
+    "tcgdexId": "SV5M-082"
   },
   {
     "id": "machamp-vmax",
@@ -1383,7 +1604,10 @@
     "generation": 1,
     "variant": "VMAX",
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 33,
+    "category": "Pokemon",
+    "tcgdexId": "S10D-033"
   },
   {
     "id": "machoke",
@@ -1401,7 +1625,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 177,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-177"
   },
   {
     "id": "machop",
@@ -1419,7 +1646,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 66,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-066"
   },
   {
     "id": "magikarp",
@@ -1437,7 +1667,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 129,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-129"
   },
   {
     "id": "magmar",
@@ -1455,7 +1688,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 126,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-126"
   },
   {
     "id": "magnemite",
@@ -1473,7 +1709,10 @@
     "variant": null,
     "binderId": "kanto-151",
     "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/fgdrr7eilt3rtqy3/1600.jpg",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 55,
+    "category": "Pokemon",
+    "tcgdexId": "SM11b-055"
   },
   {
     "id": "magneton",
@@ -1491,7 +1730,10 @@
     "variant": null,
     "binderId": "kanto-151",
     "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/b3pfwodnowqmwhrn/1600.jpg",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 112,
+    "category": "Pokemon",
+    "tcgdexId": "SV8-112"
   },
   {
     "id": "mankey",
@@ -1509,7 +1751,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 56,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-056"
   },
   {
     "id": "marowak",
@@ -1527,7 +1772,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 105,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-105"
   },
   {
     "id": "mega-clefable-ex",
@@ -1545,7 +1793,10 @@
     "variant": "Mega / ex",
     "binderId": "kanto-151",
     "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/a36s5nt73ud2yajc/1600.jpg",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 112,
+    "category": "Pokemon",
+    "tcgdexId": "M3-112"
   },
   {
     "id": "mega-dragonite-ex",
@@ -1563,7 +1814,10 @@
     "variant": "Mega / ex",
     "binderId": "kanto-151",
     "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/hquradlkeximiqgn/1600.jpg",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 232,
+    "category": "Pokemon",
+    "tcgdexId": "M2a-232"
   },
   {
     "id": "meowth",
@@ -1581,7 +1835,10 @@
     "variant": null,
     "binderId": "kanto-151",
     "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/w42nhm5b6uki54ut/1600.jpg",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 192,
+    "category": "Pokemon",
+    "tcgdexId": "SV-P-192"
   },
   {
     "id": "metapod",
@@ -1599,7 +1856,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 2,
+    "category": "Pokemon",
+    "tcgdexId": "SV9-002"
   },
   {
     "id": "mew-v",
@@ -1617,7 +1877,10 @@
     "generation": 1,
     "variant": "V",
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 183,
+    "category": "Pokemon",
+    "tcgdexId": "S12a-183"
   },
   {
     "id": "mewtwo",
@@ -1635,7 +1898,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 183,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-183"
   },
   {
     "id": "psyduck",
@@ -1653,7 +1919,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 199,
+    "category": "Pokemon",
+    "tcgdexId": "M2a-199"
   },
   {
     "id": "mr-mime",
@@ -1671,7 +1940,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 179,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-179"
   },
   {
     "id": "muk",
@@ -1689,7 +1961,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 89,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-089"
   },
   {
     "id": "nidoking",
@@ -1707,7 +1982,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 174,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-174"
   },
   {
     "id": "nidoqueen",
@@ -1725,7 +2003,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 31,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-031"
   },
   {
     "id": "nidoran-f",
@@ -1743,7 +2024,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 29,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-029"
   },
   {
     "id": "nidoran-m",
@@ -1761,7 +2045,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 32,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-032"
   },
   {
     "id": "nidorina",
@@ -1779,7 +2066,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 30,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-030"
   },
   {
     "id": "nidorino",
@@ -1797,7 +2087,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 33,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-033"
   },
   {
     "id": "ninetales",
@@ -1815,7 +2108,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 110,
+    "category": "Pokemon",
+    "tcgdexId": "SV3-110"
   },
   {
     "id": "oddish",
@@ -1833,7 +2129,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 43,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-043"
   },
   {
     "id": "omanyte",
@@ -1851,7 +2150,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 180,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-180"
   },
   {
     "id": "omastar-v",
@@ -1869,7 +2171,10 @@
     "generation": 1,
     "variant": "V",
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 18,
+    "category": "Pokemon",
+    "tcgdexId": "S12-018"
   },
   {
     "id": "onix",
@@ -1887,7 +2192,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 95,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-095"
   },
   {
     "id": "paldean-tauros",
@@ -1905,7 +2213,10 @@
     "generation": 1,
     "variant": "Paldean Form",
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 84,
+    "category": "Pokemon",
+    "tcgdexId": "SV1a-084"
   },
   {
     "id": "paras",
@@ -1923,7 +2234,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 207,
+    "category": "Pokemon",
+    "tcgdexId": "S12a-207"
   },
   {
     "id": "parasect",
@@ -1941,7 +2255,10 @@
     "variant": null,
     "binderId": "kanto-151",
     "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/aa7edda2de8e9156c2fa6617fab8dfa5111023644f27a0245388a8011be8e696/1600.jpg",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 72,
+    "category": "Pokemon",
+    "tcgdexId": "S10a-072"
   },
   {
     "id": "persian",
@@ -1959,7 +2276,10 @@
     "variant": null,
     "binderId": "kanto-151",
     "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/5246de56c6c06a6e52025928fb025b457d5cc3a7eda09c615c62149a55483792/1600.jpg",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 75,
+    "category": "Pokemon",
+    "tcgdexId": "SV6a-075"
   },
   {
     "id": "pidgeot-ex",
@@ -1977,7 +2297,10 @@
     "generation": 1,
     "variant": "ex",
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 136,
+    "category": "Pokemon",
+    "tcgdexId": "SV3-136"
   },
   {
     "id": "pidgeotto",
@@ -1995,7 +2318,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 119,
+    "category": "Pokemon",
+    "tcgdexId": "SV3-119"
   },
   {
     "id": "pidgey",
@@ -2013,7 +2339,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 118,
+    "category": "Pokemon",
+    "tcgdexId": "SV3-118"
   },
   {
     "id": "pikachu",
@@ -2031,7 +2360,10 @@
     "variant": null,
     "binderId": "kanto-151",
     "imageUrl": "https://assets.tcgdex.net/ja/SV/SV2a/173/high.png",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 173,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-173"
   },
   {
     "id": "pinsir",
@@ -2049,7 +2381,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 67,
+    "category": "Pokemon",
+    "tcgdexId": "SV5a-067"
   },
   {
     "id": "poliwag",
@@ -2067,7 +2402,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 60,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-060"
   },
   {
     "id": "poliwhirl",
@@ -2085,7 +2423,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 176,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-176"
   },
   {
     "id": "poliwrath",
@@ -2103,7 +2444,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 62,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-062"
   },
   {
     "id": "ponyta",
@@ -2121,7 +2465,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 77,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-077"
   },
   {
     "id": "porygon",
@@ -2139,7 +2486,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 137,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-137"
   },
   {
     "id": "primeape",
@@ -2157,7 +2507,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 57,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-057"
   },
   {
     "id": "raichu",
@@ -2175,7 +2528,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 74,
+    "category": "Pokemon",
+    "tcgdexId": "SV2D-074"
   },
   {
     "id": "rapidash",
@@ -2193,7 +2549,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 69,
+    "category": "Pokemon",
+    "tcgdexId": "SV9a-069"
   },
   {
     "id": "raticate",
@@ -2211,7 +2570,10 @@
     "variant": null,
     "binderId": "kanto-151",
     "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/t3q26pvgebnj624q/1600.jpg",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 92,
+    "category": "Pokemon",
+    "tcgdexId": "M3-092"
   },
   {
     "id": "rattata",
@@ -2229,7 +2591,10 @@
     "variant": null,
     "binderId": "kanto-151",
     "imageUrl": "https://images.scrydex.com/pokemon/me3-60/large",
-    "imageIsFallback": true
+    "imageIsFallback": true,
+    "setNumber": 59,
+    "category": "Pokemon",
+    "tcgdexId": "M3-059"
   },
   {
     "id": "rhydon",
@@ -2247,7 +2612,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 112,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-112"
   },
   {
     "id": "rhyhorn",
@@ -2265,7 +2633,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 111,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-111"
   },
   {
     "id": "sandshrew",
@@ -2283,7 +2654,10 @@
     "variant": null,
     "binderId": "kanto-151",
     "imageUrl": "https://images.pokemontcg.io/me1/68_hires.png",
-    "imageIsFallback": true
+    "imageIsFallback": true,
+    "setNumber": 20,
+    "category": "Pokemon",
+    "tcgdexId": "M1L-020"
   },
   {
     "id": "sandslash",
@@ -2301,7 +2675,10 @@
     "variant": null,
     "binderId": "kanto-151",
     "imageUrl": "https://images.pokemontcg.io/me1/69_hires.png",
-    "imageIsFallback": true
+    "imageIsFallback": true,
+    "setNumber": 21,
+    "category": "Pokemon",
+    "tcgdexId": "M1L-021"
   },
   {
     "id": "scyther",
@@ -2319,7 +2696,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 123,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-123"
   },
   {
     "id": "seadra",
@@ -2337,7 +2717,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 117,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-117"
   },
   {
     "id": "seaking",
@@ -2355,7 +2738,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 119,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-119"
   },
   {
     "id": "seel",
@@ -2373,7 +2759,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 86,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-086"
   },
   {
     "id": "shellder",
@@ -2391,7 +2780,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 90,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-090"
   },
   {
     "id": "slowbro",
@@ -2409,7 +2801,9 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 87,
+    "category": "Pokemon"
   },
   {
     "id": "slowpoke",
@@ -2427,7 +2821,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 82,
+    "category": "Pokemon",
+    "tcgdexId": "SV1V-082"
   },
   {
     "id": "snorlax",
@@ -2445,7 +2842,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 181,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-181"
   },
   {
     "id": "spearow",
@@ -2463,7 +2863,10 @@
     "variant": null,
     "binderId": "kanto-151",
     "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/2obttf3y6z4ssrbf/1600.jpg",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 74,
+    "category": "Pokemon",
+    "tcgdexId": "M1L-074"
   },
   {
     "id": "squirtle",
@@ -2481,7 +2884,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 170,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-170"
   },
   {
     "id": "starmie-v",
@@ -2499,7 +2905,10 @@
     "generation": 1,
     "variant": "V",
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 83,
+    "category": "Pokemon",
+    "tcgdexId": "S9a-083"
   },
   {
     "id": "staryu",
@@ -2517,7 +2926,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 120,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-120"
   },
   {
     "id": "tangela",
@@ -2535,7 +2947,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 178,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-178"
   },
   {
     "id": "team-rockets-weezing",
@@ -2553,7 +2968,10 @@
     "variant": "Trainer's Pokemon",
     "binderId": "kanto-151",
     "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/r7trixrvwo7mtovs/1600.jpg",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 105,
+    "category": "Pokemon",
+    "tcgdexId": "SV10-105"
   },
   {
     "id": "tentacool",
@@ -2571,7 +2989,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 72,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-072"
   },
   {
     "id": "tentacruel",
@@ -2589,7 +3010,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 73,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-073"
   },
   {
     "id": "vaporeon",
@@ -2607,7 +3031,10 @@
     "variant": null,
     "binderId": "kanto-151",
     "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/7qxrwqfgffugzffo/1600.jpg",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 189,
+    "category": "Pokemon",
+    "tcgdexId": "S8b-189"
   },
   {
     "id": "venomoth-gx",
@@ -2625,7 +3052,10 @@
     "generation": 1,
     "variant": "GX",
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 2,
+    "category": "Pokemon",
+    "tcgdexId": "SM9a-002"
   },
   {
     "id": "venonat",
@@ -2643,7 +3073,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 48,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-048"
   },
   {
     "id": "venusaur-ex",
@@ -2661,7 +3094,10 @@
     "generation": 1,
     "variant": "ex",
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 184,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-184"
   },
   {
     "id": "victreebel",
@@ -2679,7 +3115,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 71,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-071"
   },
   {
     "id": "vileplume-gx",
@@ -2697,7 +3136,10 @@
     "variant": "GX",
     "binderId": "kanto-151",
     "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/40f5c340fdb0e285e56a5dbb89d8a3b357fbf819e94fa805ed155b852f74185f/1600.jpg",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 62,
+    "category": "Pokemon",
+    "tcgdexId": "SM11b-062"
   },
   {
     "id": "vulpix",
@@ -2715,7 +3157,10 @@
     "variant": null,
     "binderId": "kanto-151",
     "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/gteoszldkhekmim5/1600.jpg",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 67,
+    "category": "Pokemon",
+    "tcgdexId": "M1L-067"
   },
   {
     "id": "wartortle",
@@ -2733,7 +3178,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 171,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-171"
   },
   {
     "id": "weedle",
@@ -2751,7 +3199,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 13,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-013"
   },
   {
     "id": "weepinbell",
@@ -2769,7 +3220,10 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 70,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-070"
   },
   {
     "id": "wigglytuff",
@@ -2787,7 +3241,10 @@
     "variant": null,
     "binderId": "kanto-151",
     "imageUrl": "https://storage.googleapis.com/images.pricecharting.com/3xouhrr2bhnn7va7/1600.jpg",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 91,
+    "category": "Pokemon",
+    "tcgdexId": "M2-091"
   },
   {
     "id": "zubat",
@@ -2805,6 +3262,9 @@
     "generation": 1,
     "variant": null,
     "binderId": "kanto-151",
-    "localImage": true
+    "localImage": true,
+    "setNumber": 41,
+    "category": "Pokemon",
+    "tcgdexId": "SV2a-041"
   }
 ]
