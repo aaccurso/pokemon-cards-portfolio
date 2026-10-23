@@ -698,7 +698,7 @@ Use the script's top-movers output in the second commit body.
 
 - [ ] **Step 1: Update CLAUDE.md**
 
-Sections to change: Overview (several binders, M6a), Data model (add `data/binders.json` with `kind` semantics, new card fields, `pricePaid: null` and `qty` for pulls, `product`, `data/prices.json`), Project Structure (`lib/data.ts`, `lib/binders.ts`, `lib/display.ts`, `components/BinderTabs.tsx`, `scripts/lib/`, `tests/`), Source of truth rule (how to log a booster-pull shipment, with the example from the spec), a new "Refreshing prices" section (`node scripts/refresh_prices.mjs [--dry-run]`, what it changes, commit both files), Current Features (binder tabs, `?binder=` param), Known Limitations (remove "Binder selector", "Market-price refresh", and "No tests yet"; add "price history not visualized"), Commands (`npm test`).
+Sections to change: Overview (several binders, M6a), Data model (add `data/binders.json` with `kind` semantics, new card fields, `pricePaid: null` and `qty` for pulls, `product`, `data/prices.json`), Project Structure (`lib/data.ts`, `lib/binders.ts`, `components/BinderTabs.tsx`, `scripts/lib/`, `tests/`), Source of truth rule (how to log a booster-pull shipment, with the example from the spec), a new "Refreshing prices" section (`node scripts/refresh_prices.mjs [--dry-run]`, what it changes, commit both files), Current Features (binder tabs, `?binder=` param), Known Limitations (remove "Binder selector", "Market-price refresh", and "No tests yet"; add "price history not visualized"), Commands (`npm test`).
 
 - [ ] **Step 2: Update layout metadata and build**
 
