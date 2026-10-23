@@ -26,7 +26,7 @@ export function PlaceholderCard({ card }: { card: Card }) {
         <div className="ph-types">
           <span
             className="ph-type-badge"
-            style={{ background: typeColors[card.type1] ?? "#888" }}
+            style={{ background: typeColors[card.type1 ?? ""] ?? "#888" }}
           >
             {card.type1}
           </span>

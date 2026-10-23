@@ -79,14 +79,21 @@ export default function PortfolioTracker() {
   const ownership: OwnershipMap = useMemo(() => buildOwnershipMap(purchases), []);
 
   const stats = useMemo(
-    () => computeStats(allCards, ownership, purchases),
+    () =>
+      computeStats(
+        allCards,
+        ownership,
+        purchases,
+        "kanto-151",
+        new Map(allCards.map((c) => [c.id, c.binderId]))
+      ),
     [ownership]
   );
 
   const allTypes = useMemo(() => {
     const types = new Set<string>();
     allCards.forEach((c) => {
-      types.add(c.type1);
+      if (c.type1) types.add(c.type1);
       if (c.type2) types.add(c.type2);
     });
     return Array.from(types).sort();
@@ -412,7 +419,7 @@ export default function PortfolioTracker() {
                   <td className="hide-mobile">
                     <span
                       className="type-badge"
-                      style={{ background: typeColors[card.type1] ?? "#888" }}
+                      style={{ background: typeColors[card.type1 ?? ""] ?? "#888" }}
                     >
                       {card.type1}
                     </span>
@@ -446,7 +453,7 @@ export default function PortfolioTracker() {
                       : "\u2014"}
                   </td>
                   <td className="price">
-                    {own ? `${fmt(own.pricePaid)} \u20AC` : "\u2014"}
+                    {own && own.pricePaid != null ? `${fmt(own.pricePaid)} \u20AC` : "\u2014"}
                   </td>
                 </tr>
               );

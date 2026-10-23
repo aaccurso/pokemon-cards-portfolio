@@ -14,7 +14,7 @@ export default function PrintPage() {
       ? cards
       : cards.filter((c) => !ownership.has(c.id));
     const sorted = [...filtered].sort(
-      (a, b) => a.pokedexNumber - b.pokedexNumber
+      (a, b) => (a.pokedexNumber ?? Infinity) - (b.pokedexNumber ?? Infinity)
     );
     const pages: typeof sorted[] = [];
     for (let i = 0; i < sorted.length; i += 9) {

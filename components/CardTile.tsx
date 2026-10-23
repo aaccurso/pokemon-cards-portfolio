@@ -119,7 +119,7 @@ export function CardTile({ card, owned, onClick }: Props) {
           <div className="card-tile-types">
             <span
               className="type-badge"
-              style={{ background: typeColors[card.type1] ?? "#888" }}
+              style={{ background: typeColors[card.type1 ?? ""] ?? "#888" }}
             >
               {card.type1}
             </span>

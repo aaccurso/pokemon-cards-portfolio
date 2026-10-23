@@ -136,7 +136,7 @@ export function CardModal({ card, ownership, onClose, onPrev, onNext }: Props) {
           <div className="modal-badges">
             <span
               className="type-badge"
-              style={{ background: typeColors[card.type1] ?? "#888" }}
+              style={{ background: typeColors[card.type1 ?? ""] ?? "#888" }}
             >
               {card.type1}
             </span>
@@ -197,7 +197,9 @@ export function CardModal({ card, ownership, onClose, onPrev, onNext }: Props) {
               <div>
                 <dt>Paid</dt>
                 <dd>
-                  {ownership.pricePaid.toFixed(2).replace(".", ",")} &euro;
+                  {ownership.pricePaid != null
+                    ? `${ownership.pricePaid.toFixed(2).replace(".", ",")} €`
+                    : "Pulled from pack"}
                   {ownership.duplicateCount > 0 && (
                     <span className="dupe-note">
                       {" "}

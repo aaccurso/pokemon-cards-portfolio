@@ -1,3 +1,5 @@
+export type CardCategory = "Pokemon" | "Trainer" | "Energy";
+
 export type Card = {
   id: string;
   name: string;
@@ -10,13 +12,27 @@ export type Card = {
   imageUrl?: string | null;
   imageIsFallback?: boolean;
   localImage?: boolean;
-  pokedexNumber: number;
-  type1: string;
+  pokedexNumber: number | null;
+  type1: string | null;
   type2: string | null;
-  generation: number;
+  generation: number | null;
   variant: string | null;
   binderId: string;
+  /** Absent means "Pokemon" — see cardCategory(). */
+  category?: CardCategory;
+  /** Numeric part of `code`; the sort key for master-set binders. */
+  setNumber: number;
+  /** Printed Japanese name, when it differs from `name`. */
+  nameJa?: string;
+  /** tcgdex card id such as "SV2a-063"; join key for price refresh. */
+  tcgdexId?: string;
+  /** tcgdex rarity label, e.g. "Classic Collection". */
+  rarity?: string;
 };
+
+export function cardCategory(c: Card): CardCategory {
+  return c.category ?? "Pokemon";
+}
 
 
 export const languageFlags: Record<string, string> = {
