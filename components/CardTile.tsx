@@ -1,15 +1,16 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Card, typeColors } from "@/lib/cards";
+import { Card, numberLabel, typeBadges } from "@/lib/cards";
 
 type Props = {
   card: Card;
   owned: boolean;
   onClick: () => void;
+  officialCount?: number;
 };
 
-export function CardTile({ card, owned, onClick }: Props) {
+export function CardTile({ card, owned, onClick, officialCount }: Props) {
   const ref = useRef<HTMLButtonElement>(null);
   const [imgFailed, setImgFailed] = useState(false);
   const [triedRemote, setTriedRemote] = useState(false);
@@ -114,23 +115,21 @@ export function CardTile({ card, owned, onClick }: Props) {
           )}
         </div>
         <div className="card-tile-info">
-          <span className="card-tile-num">#{card.pokedexNumber}</span>
-          <span className="card-tile-name">{card.name}</span>
+          <span className="card-tile-num">{numberLabel(card, officialCount)}</span>
+          <span className="card-tile-name">
+            {card.name}
+            {card.nameJa && <span className="name-ja">{card.nameJa}</span>}
+          </span>
           <div className="card-tile-types">
-            <span
-              className="type-badge"
-              style={{ background: typeColors[card.type1 ?? ""] ?? "#888" }}
-            >
-              {card.type1}
-            </span>
-            {card.type2 && (
+            {typeBadges(card).map((b) => (
               <span
-                className="type-badge"
-                style={{ background: typeColors[card.type2] ?? "#888" }}
+                key={b.label}
+                className={`type-badge${b.label === "Trainer" || b.label === "Energy" ? " trainer" : ""}`}
+                style={{ background: b.color }}
               >
-                {card.type2}
+                {b.label}
               </span>
-            )}
+            ))}
             {owned && (
               <span
                 className="pokeball pokeball-sm card-tile-pokeball"

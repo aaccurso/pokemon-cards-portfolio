@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Card, typeColors, languageFlags, conditionNames } from "@/lib/cards";
+import { Card, languageFlags, conditionNames, numberLabel, typeBadges } from "@/lib/cards";
 import type { CardOwnership } from "@/lib/purchases";
 
 type Props = {
@@ -10,9 +10,10 @@ type Props = {
   onClose: () => void;
   onPrev?: () => void;
   onNext?: () => void;
+  officialCount?: number;
 };
 
-export function CardModal({ card, ownership, onClose, onPrev, onNext }: Props) {
+export function CardModal({ card, ownership, onClose, onPrev, onNext, officialCount }: Props) {
   const [imgFailed, setImgFailed] = useState(false);
   const [triedRemote, setTriedRemote] = useState(false);
   const [zoomed, setZoomed] = useState(false);
@@ -132,30 +133,28 @@ export function CardModal({ card, ownership, onClose, onPrev, onNext }: Props) {
           )}
         </div>
         <div className="modal-info">
-          <h2>{card.name}</h2>
+          <h2>
+            {card.name}
+            {card.nameJa && <span className="name-ja">{card.nameJa}</span>}
+          </h2>
           <div className="modal-badges">
-            <span
-              className="type-badge"
-              style={{ background: typeColors[card.type1 ?? ""] ?? "#888" }}
-            >
-              {card.type1}
-            </span>
-            {card.type2 && (
+            {typeBadges(card).map((b) => (
               <span
-                className="type-badge"
-                style={{ background: typeColors[card.type2] ?? "#888" }}
+                key={b.label}
+                className={`type-badge${b.label === "Trainer" || b.label === "Energy" ? " trainer" : ""}`}
+                style={{ background: b.color }}
               >
-                {card.type2}
+                {b.label}
               </span>
-            )}
+            ))}
             {card.variant && (
               <span className="variant-badge">{card.variant}</span>
             )}
           </div>
           <dl className="modal-details">
             <div>
-              <dt>Pokedex #</dt>
-              <dd>{card.pokedexNumber}</dd>
+              <dt>{card.pokedexNumber != null ? "Pokedex #" : "Number"}</dt>
+              <dd>{numberLabel(card, officialCount)}</dd>
             </div>
             <div>
               <dt>Set</dt>

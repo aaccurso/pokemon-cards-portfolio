@@ -76,3 +76,30 @@ export const typeColors: Record<string, string> = {
   Steel: "#B8B8D0",
   Fairy: "#EE99AC",
 };
+
+/**
+ * "#025" for Pokemon; "No. 101 / 103" (or "No. 101" without an official
+ * count) for Trainers and Energies, which have no Pokedex number.
+ */
+export function numberLabel(c: Card, officialCount?: number): string {
+  if (c.pokedexNumber != null) {
+    return `#${String(c.pokedexNumber).padStart(3, "0")}`;
+  }
+  const base = `No. ${c.setNumber}`;
+  return officialCount != null ? `${base} / ${officialCount}` : base;
+}
+
+export type TypeBadge = { label: string; color: string };
+
+/** Type badges for Pokemon; one neutral category badge otherwise. */
+export function typeBadges(c: Card): TypeBadge[] {
+  const category = cardCategory(c);
+  if (category !== "Pokemon" || c.type1 == null) {
+    return [{ label: category === "Pokemon" ? "Unknown" : category, color: "#777" }];
+  }
+  const badges: TypeBadge[] = [
+    { label: c.type1, color: typeColors[c.type1] ?? "#888" },
+  ];
+  if (c.type2) badges.push({ label: c.type2, color: typeColors[c.type2] ?? "#888" });
+  return badges;
+}

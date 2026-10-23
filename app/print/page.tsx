@@ -1,27 +1,74 @@
 "use client";
 
-import { useState, useMemo } from "react";
-import { cards, purchases } from "@/lib/data";
+import { Suspense, useState, useMemo } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { cards, purchases, binders } from "@/lib/data";
 import { buildOwnershipMap } from "@/lib/purchases";
+import {
+  DEFAULT_BINDER_ID,
+  cardsForBinder,
+  getBinder,
+  resolveBinderId,
+} from "@/lib/binders";
+import type { Card } from "@/lib/cards";
 import { PlaceholderCard } from "@/components/PlaceholderCard";
+import { BinderTabs, BinderCounts } from "@/components/BinderTabs";
 
 export default function PrintPage() {
+  return (
+    <Suspense>
+      <PrintSheets />
+    </Suspense>
+  );
+}
+
+function sortValue(c: Card, key: "pokedexNumber" | "setNumber"): number {
+  const v = c[key];
+  return v == null ? Number.POSITIVE_INFINITY : v;
+}
+
+function PrintSheets() {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const binderId = resolveBinderId(searchParams.get("binder"), binders);
+  const binder = getBinder(binderId, binders);
+
   const [includeOwned, setIncludeOwned] = useState(false);
   const ownership = useMemo(() => buildOwnershipMap(purchases), []);
+  const binderCards = useMemo(() => cardsForBinder(binderId, cards), [binderId]);
+
+  const binderCounts = useMemo<BinderCounts>(() => {
+    const counts: BinderCounts = {};
+    for (const b of binders) {
+      const list = cardsForBinder(b.id, cards);
+      counts[b.id] = {
+        owned: list.filter((c) => ownership.has(c.id)).length,
+        total: list.length,
+      };
+    }
+    return counts;
+  }, [ownership]);
+
+  function selectBinder(id: string) {
+    router.replace(id === DEFAULT_BINDER_ID ? pathname : `${pathname}?binder=${id}`, {
+      scroll: false,
+    });
+  }
 
   const sheets = useMemo(() => {
     const filtered = includeOwned
-      ? cards
-      : cards.filter((c) => !ownership.has(c.id));
+      ? binderCards
+      : binderCards.filter((c) => !ownership.has(c.id));
     const sorted = [...filtered].sort(
-      (a, b) => (a.pokedexNumber ?? Infinity) - (b.pokedexNumber ?? Infinity)
+      (a, b) => sortValue(a, binder.sort) - sortValue(b, binder.sort)
     );
     const pages: typeof sorted[] = [];
     for (let i = 0; i < sorted.length; i += 9) {
       pages.push(sorted.slice(i, i + 9));
     }
     return pages;
-  }, [includeOwned, ownership]);
+  }, [includeOwned, ownership, binderCards, binder.sort]);
 
   const totalCards = sheets.reduce((s, p) => s + p.length, 0);
 
@@ -29,7 +76,7 @@ export default function PrintPage() {
     <div className="print-page">
       <div className="print-controls no-print">
         <div className="print-controls-header">
-          <h1>Binder Placeholder Cards</h1>
+          <h1>{binder.name} placeholder cards</h1>
           <p className="print-hint">
             {totalCards} cards &middot; {sheets.length + 1} sheet
             {sheets.length + 1 === 1 ? "" : "s"} total (first page is a
@@ -79,6 +126,12 @@ export default function PrintPage() {
         </div>
 
         <div className="print-controls-actions">
+          <BinderTabs
+            binders={binders}
+            activeId={binderId}
+            counts={binderCounts}
+            onSelect={selectBinder}
+          />
           <label className="print-opt">
             <input
               type="checkbox"
@@ -150,7 +203,11 @@ export default function PrintPage() {
       {sheets.map((page, i) => (
         <div key={i} className="print-sheet">
           {page.map((card) => (
-            <PlaceholderCard key={card.id} card={card} />
+            <PlaceholderCard
+              key={card.id}
+              card={card}
+              officialCount={binder.officialCount}
+            />
           ))}
         </div>
       ))}

@@ -1,16 +1,25 @@
-import { Card, typeColors } from "@/lib/cards";
+import { Card, numberLabel, typeBadges } from "@/lib/cards";
 
-export function PlaceholderCard({ card }: { card: Card }) {
+export function PlaceholderCard({
+  card,
+  officialCount,
+}: {
+  card: Card;
+  officialCount?: number;
+}) {
   const imgUrl = card.localImage
     ? `/cards/${card.id}.webp`
     : card.imageUrl ?? null;
   return (
     <div className="placeholder-card">
       <div className="ph-header">
-        <span className="ph-dex">#{String(card.pokedexNumber).padStart(3, "0")}</span>
+        <span className="ph-dex">{numberLabel(card, officialCount)}</span>
         <span className="ph-set">{card.set}</span>
       </div>
-      <div className="ph-name">{card.name}</div>
+      <div className="ph-name">
+        {card.name}
+        {card.nameJa && <span className="name-ja">{card.nameJa}</span>}
+      </div>
       <div className="ph-thumb">
         {imgUrl ? (
           <img src={imgUrl} alt="" />
@@ -24,20 +33,15 @@ export function PlaceholderCard({ card }: { card: Card }) {
       </div>
       <div className="ph-meta">
         <div className="ph-types">
-          <span
-            className="ph-type-badge"
-            style={{ background: typeColors[card.type1 ?? ""] ?? "#888" }}
-          >
-            {card.type1}
-          </span>
-          {card.type2 && (
+          {typeBadges(card).map((b) => (
             <span
+              key={b.label}
               className="ph-type-badge"
-              style={{ background: typeColors[card.type2] ?? "#888" }}
+              style={{ background: b.color }}
             >
-              {card.type2}
+              {b.label}
             </span>
-          )}
+          ))}
           {card.variant && <span className="ph-variant">{card.variant}</span>}
         </div>
         <div className="ph-code-row">

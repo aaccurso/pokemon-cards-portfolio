@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { cards as allCards, purchases, binders } from "@/lib/data";
-import { typeColors, languageFlags, cardCategory, Card } from "@/lib/cards";
+import { languageFlags, cardCategory, numberLabel, typeBadges, Card } from "@/lib/cards";
 import {
   DEFAULT_BINDER_ID,
   buildCardBinderMap,
@@ -391,6 +391,7 @@ export default function PortfolioTracker() {
               card={card}
               owned={ownership.has(card.id)}
               onClick={() => setModalCard(card)}
+              officialCount={binder.officialCount}
             />
           ))}
         </div>
@@ -446,7 +447,7 @@ export default function PortfolioTracker() {
                       </span>
                     )}
                   </td>
-                  <td className="pokedex-num">{card.pokedexNumber}</td>
+                  <td className="pokedex-num">{numberLabel(card, binder.officialCount)}</td>
                   <td>
                     <span
                       className="card-name-cell"
@@ -465,7 +466,10 @@ export default function PortfolioTracker() {
                       <span className="preview-icon" aria-label="Preview card">
                         &#128065;
                       </span>
-                      <strong>{card.name}</strong>
+                      <strong>
+                        {card.name}
+                        {card.nameJa && <span className="name-ja">{card.nameJa}</span>}
+                      </strong>
                       {hoveredId === card.id && card.imageUrl && (
                         <span className="preview-tooltip">
                           <img
@@ -481,20 +485,15 @@ export default function PortfolioTracker() {
                     </span>
                   </td>
                   <td className="hide-mobile">
-                    <span
-                      className="type-badge"
-                      style={{ background: typeColors[card.type1 ?? ""] ?? "#888" }}
-                    >
-                      {card.type1}
-                    </span>
-                    {card.type2 && (
+                    {typeBadges(card).map((b) => (
                       <span
-                        className="type-badge"
-                        style={{ background: typeColors[card.type2] ?? "#888" }}
+                        key={b.label}
+                        className={`type-badge${b.label === "Trainer" || b.label === "Energy" ? " trainer" : ""}`}
+                        style={{ background: b.color }}
                       >
-                        {card.type2}
+                        {b.label}
                       </span>
-                    )}
+                    ))}
                   </td>
                   <td>{card.code}</td>
                   <td className="hide-mobile">{card.set}</td>
@@ -546,6 +545,7 @@ export default function PortfolioTracker() {
             onClose={() => setModalCard(null)}
             onPrev={onPrev}
             onNext={onNext}
+            officialCount={binder.officialCount}
           />
         );
       })()}
