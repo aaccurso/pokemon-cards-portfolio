@@ -76,3 +76,33 @@ test("buildM6aCard maps a Pokemon and a Trainer", () => {
 
   assert.throws(() => buildM6aCard({ id: "M6a-999", localId: "999", name: "?", category: "Trainer" }, undefined, {}));
 });
+
+test("buildM6aCard maps Metal to Steel", () => {
+  const c = buildM6aCard(
+    { id: "M6a-082", localId: "082", name: "ディアルガ", category: "Pokemon", dexId: [483], types: ["Metal"], rarity: "None" },
+    { productName: "Dialga #82", imageUri: "https://storage.googleapis.com/images.pricecharting.com/h/60.jpg" }, {});
+  assert.equal(c.type1, "Steel");
+});
+
+test("buildM6aCard takes ex/EX casing from the Japanese name and keeps variant detection working", () => {
+  const mewtwo = buildM6aCard(
+    { id: "M6a-128", localId: "128", name: "ミュウツーex", category: "Pokemon", dexId: [150], types: ["Psychic"], rarity: "Futuristic Rare" },
+    { productName: "Mewtwo Ex #128", imageUri: "https://storage.googleapis.com/images.pricecharting.com/h/60.jpg" }, {});
+  assert.equal(mewtwo.name, "Mewtwo ex");
+  assert.equal(mewtwo.variant, "ex");
+  assert.equal(mewtwo.id, "m6a-128-mewtwo-ex");
+  const garde = buildM6aCard(
+    { id: "M6a-156", localId: "156", name: "MサーナイトEX", category: "Pokemon", dexId: [282], types: ["Fairy"], rarity: "Classic Collection" },
+    { productName: "M Gardevoir Ex #156", imageUri: "https://storage.googleapis.com/images.pricecharting.com/h/60.jpg" }, {});
+  assert.equal(garde.name, "M Gardevoir EX");
+  assert.equal(garde.variant, "Mega / EX");
+});
+
+test("buildM6aCard applies hand name fixes for malformed PriceCharting names", () => {
+  const c = buildM6aCard(
+    { id: "M6a-160", localId: "160", name: "ピカチュウ&ゼクロムGX", category: "Pokemon", dexId: [25, 644], types: ["Lightning"], rarity: "Classic Collection" },
+    { productName: "Pikachu & ZekromTag Team GX #160", imageUri: "https://storage.googleapis.com/images.pricecharting.com/h/60.jpg" }, {});
+  assert.equal(c.name, "Pikachu & Zekrom GX");
+  assert.equal(c.id, "m6a-160-pikachu-zekrom-gx");
+  assert.equal(c.variant, "GX");
+});

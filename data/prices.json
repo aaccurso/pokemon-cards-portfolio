@@ -3424,16 +3424,6 @@
       "low": 3.95
     }
   ],
-  "m6a-160-pikachu-zekromtag-team-gx": [
-    {
-      "date": "2026-10-23",
-      "source": "cardmarket",
-      "trend": 14.74,
-      "avg7": 14.68,
-      "avg30": 14.95,
-      "low": 11.7
-    }
-  ],
   "m6a-161-zacian-v": [
     {
       "date": "2026-10-23",
@@ -3482,6 +3472,16 @@
       "avg7": 39.83,
       "avg30": 44.94,
       "low": 34.99
+    }
+  ],
+  "m6a-160-pikachu-zekrom-gx": [
+    {
+      "date": "2026-10-23",
+      "source": "cardmarket",
+      "trend": 14.74,
+      "avg7": 14.68,
+      "avg30": 14.95,
+      "low": 11.7
     }
   ]
 }
