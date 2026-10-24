@@ -43,8 +43,11 @@ app/
   print/page.tsx     — printable placeholder-card binder sheet (per binder)
   globals.css
 components/
-  PortfolioTracker.tsx — main dashboard (binder tabs, stats, filters, grid/table, modals)
+  PortfolioTracker.tsx — main dashboard: URL-backed state, derived data, composition of the parts below
   BinderTabs.tsx       — binder selector pills with owned / total counts
+  StatsGrid.tsx        — the six stat cards (props: stats, kind)
+  FilterBar.tsx        — search, type/set/ownership selects, illustration toggle, view toggle, Share/CSV; exports the Filters type
+  CardTable.tsx        — table view with sortable headers and hover preview
   CardTile.tsx         — grid-view 3D-tilt holo card
   CardModal.tsx        — per-card details modal
   PlaceholderCard.tsx  — per-card print sheet placeholder
@@ -53,6 +56,8 @@ lib/
   cards.ts       — Card type, typeColors, numberLabel/typeBadges display helpers
   purchases.ts   — ownership/stats derivation + CSV export (pure)
   binders.ts     — Binder type, resolveBinderId/getBinder/cardsForBinder, validateData (pure)
+  sort.ts        — SortKey/SortDir, getSortValue, compareBySort nulls-last comparator (pure)
+  format.ts      — fmtEur, the one place prices are formatted for display (pure)
 data/
   binders.json    — binder registry
   cards.json      — all cards
@@ -64,7 +69,7 @@ scripts/
 tests/            — node --test suites (*.test.ts), run with npm test
 ```
 
-`lib/cards.ts`, `lib/purchases.ts`, `lib/binders.ts` must not import JSON or use the `@/` alias and may only `import type` from each other, so Node can run the tests directly.
+`lib/cards.ts`, `lib/purchases.ts`, `lib/binders.ts`, `lib/sort.ts`, `lib/format.ts` must not import JSON or use the `@/` alias and may only `import type` from each other, so Node can run the tests directly.
 
 ## Source of truth rule
 **The four `data/*.json` files are the only places collection data lives.** `lib/data.ts` is a thin loader — do not hand-edit card objects anywhere else. Never set `owned` or `pricePaid` on a card — those are derived.
