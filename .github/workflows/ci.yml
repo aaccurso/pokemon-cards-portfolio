@@ -23,3 +23,6 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Smoke (headless Chrome DOM checks)
+        run: npm run smoke -- --require-chrome
