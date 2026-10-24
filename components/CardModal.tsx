@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { BinderDisplay, Card, languageFlags, conditionNames, numberLabel, typeBadges } from "@/lib/cards";
 import type { CardOwnership } from "@/lib/purchases";
+import { fmtEur } from "@/lib/format";
 
 type Props = {
   card: Card;
@@ -199,7 +200,7 @@ export function CardModal({ card, ownership, onClose, onPrev, onNext, binder }: 
             {card.buyPrice != null && (
               <div>
                 <dt>Buy Price</dt>
-                <dd>{card.buyPrice.toFixed(2).replace(".", ",")} &euro;</dd>
+                <dd>{fmtEur(card.buyPrice)}</dd>
               </div>
             )}
             {ownership && (
@@ -207,7 +208,7 @@ export function CardModal({ card, ownership, onClose, onPrev, onNext, binder }: 
                 <dt>Paid</dt>
                 <dd>
                   {ownership.pricePaid != null
-                    ? `${ownership.pricePaid.toFixed(2).replace(".", ",")} €`
+                    ? fmtEur(ownership.pricePaid)
                     : "Pulled from pack"}
                   {ownership.duplicateCount > 0 && (
                     <span className="dupe-note">
