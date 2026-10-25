@@ -55,7 +55,17 @@ test("buildPlan derives every URL and expectation from the data", () => {
   // Print excludes owned cards: 2 unowned Kanto cards -> 1 grid sheet + 1 calibration sheet.
   assert.deepEqual(byPath["/print"], { h1: "Pokedex 151 full-art placeholder cards", printCards: 2, printSheets: 2 });
   assert.deepEqual(byPath["/print?binder=m6a-30th"], { h1: "30th CELEBRATION placeholder cards", printCards: 3, printSheets: 2 });
-  assert.equal(plan.length, 7);
+  // Finish-as-singles shortlist: the wanted cards of the master set as a table, priciest first.
+  assert.deepEqual(byPath["/?binder=m6a-30th&own=wanted&view=table&sort=buyPrice&dir=desc"], {
+    h1: "30th CELEBRATION",
+    tbodyRows: 3,
+  });
+  assert.equal(plan.length, 8);
+});
+
+test("buildPlan skips the shortlist page when there is no master-set binder", () => {
+  const plan = buildPlan({ cards, purchases, binders: binders.filter((b) => b.kind !== "master-set") });
+  assert.equal(plan.some((p) => p.path.includes("own=wanted")), false);
 });
 
 test("buildPlan skips the modal page when nothing in the default binder is owned", () => {

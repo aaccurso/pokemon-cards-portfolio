@@ -54,6 +54,15 @@ export function buildPlan({ cards, purchases, binders }) {
   const largest = perBinder.reduce((a, b) => (b.list.length > a.list.length ? b : a));
   plan.push({ path: `/?binder=${largest.binder.id}&view=table`, expect: { h1: largest.binder.name, tbodyRows: largest.list.length } });
 
+  // Finish-as-singles shortlist: the URL the "Buy as singles" tile link applies.
+  const master = perBinder.find((p) => p.binder.kind === "master-set");
+  if (master) {
+    plan.push({
+      path: `/?binder=${master.binder.id}&own=wanted&view=table&sort=buyPrice&dir=desc`,
+      expect: { h1: master.binder.name, tbodyRows: master.list.length - master.owned },
+    });
+  }
+
   plan.push({ path: "/?binder=typo", expect: { h1: getBinder(defaultId, binders).name, showing: def.list.length } });
 
   const firstOwned = [...def.list]
