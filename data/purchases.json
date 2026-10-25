@@ -865,11 +865,6 @@
           "condition": "NM"
         },
         {
-          "cardId": "m6a-019-pikachu",
-          "pricePaid": null,
-          "condition": "NM"
-        },
-        {
           "cardId": "m6a-020-pikachu",
           "pricePaid": null,
           "condition": "NM"
@@ -1041,11 +1036,6 @@
         },
         {
           "cardId": "m6a-054-mewtwo",
-          "pricePaid": null,
-          "condition": "NM"
-        },
-        {
-          "cardId": "m6a-055-mewtwo-ex",
           "pricePaid": null,
           "condition": "NM"
         },
