@@ -218,6 +218,60 @@ export function buildCsv(cards: Card[], ownership: OwnershipMap): string {
   return [header, ...rows].join("\n") + "\n";
 }
 
+/** One duplicated card as handed to a trade partner or buylist. */
+export type TradeRow = {
+  code: string;
+  name: string;
+  nameJa: string | null;
+  /** Copies beyond the first, i.e. what is available to trade. */
+  extra: number;
+  /** Frozen Cardmarket trend (`buyPrice`); null when unpriced. */
+  trend: number | null;
+};
+
+/** Cards with at least one extra copy, sorted by setNumber then code. */
+export function buildTradeList(cards: Card[], ownership: OwnershipMap): TradeRow[] {
+  const rows: Array<TradeRow & { setNumber: number }> = [];
+  for (const c of cards) {
+    const o = ownership.get(c.id);
+    if (!o || o.duplicateCount <= 0) continue;
+    rows.push({
+      code: c.code,
+      name: c.name,
+      nameJa: c.nameJa ?? null,
+      extra: o.duplicateCount,
+      trend: c.buyPrice,
+      setNumber: c.setNumber,
+    });
+  }
+  rows.sort((a, b) => a.setNumber - b.setNumber || a.code.localeCompare(b.code));
+  return rows.map(({ setNumber: _n, ...row }) => row);
+}
+
+/** Chat-friendly lines such as `M6a 045 Pikachu ex x2 (1,20 EUR)`. */
+export function tradeListText(rows: TradeRow[]): string {
+  return rows
+    .map((r) => {
+      const price = r.trend != null ? ` (${r.trend.toFixed(2).replace(".", ",")} EUR)` : "";
+      return `${r.code} ${r.name} x${r.extra}${price}`;
+    })
+    .join("\n");
+}
+
+export function tradeListCsv(rows: TradeRow[]): string {
+  const header = "Code,Name,Japanese Name,Extra Copies,Trend (EUR)";
+  const lines = rows.map((r) =>
+    [
+      csvEscape(r.code),
+      csvEscape(r.name),
+      csvEscape(r.nameJa ?? ""),
+      String(r.extra),
+      r.trend != null ? r.trend.toFixed(2) : "",
+    ].join(",")
+  );
+  return [header, ...lines].join("\n") + "\n";
+}
+
 function csvEscape(s: string): string {
   if (/[",\n]/.test(s)) return `"${s.replace(/"/g, '""')}"`;
   return s;
