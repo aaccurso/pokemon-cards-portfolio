@@ -8,29 +8,81 @@
       "fees": null,
       "total": 55.34,
       "items": [
-        { "cardId": "arbok", "pricePaid": 3.45, "condition": "NM" },
-        { "cardId": "bulbasaur", "pricePaid": 7.94, "condition": "NM" },
-        { "cardId": "charizard", "pricePaid": 14.95, "condition": "NM" },
-        { "cardId": "ivysaur", "pricePaid": 4.89, "condition": "NM" },
-        { "cardId": "ninetales", "pricePaid": 9.89, "condition": "NM" },
-        { "cardId": "persian", "pricePaid": 8.48, "condition": "NM" },
-        { "cardId": "raticate", "pricePaid": 2.25, "condition": "NM" },
-        { "cardId": "vulpix", "pricePaid": 3.49, "condition": "NM" }
+        {
+          "cardId": "arbok",
+          "pricePaid": 3.45,
+          "condition": "NM"
+        },
+        {
+          "cardId": "bulbasaur",
+          "pricePaid": 7.94,
+          "condition": "NM"
+        },
+        {
+          "cardId": "charizard",
+          "pricePaid": 14.95,
+          "condition": "NM"
+        },
+        {
+          "cardId": "ivysaur",
+          "pricePaid": 4.89,
+          "condition": "NM"
+        },
+        {
+          "cardId": "ninetales",
+          "pricePaid": 9.89,
+          "condition": "NM"
+        },
+        {
+          "cardId": "persian",
+          "pricePaid": 8.48,
+          "condition": "NM"
+        },
+        {
+          "cardId": "raticate",
+          "pricePaid": 2.25,
+          "condition": "NM"
+        },
+        {
+          "cardId": "vulpix",
+          "pricePaid": 3.49,
+          "condition": "NM"
+        }
       ]
     },
     {
       "id": "1269797683",
       "seller": "JoekkiesCards",
       "date": "2026-04-18",
-      "shipping": 6.20,
+      "shipping": 6.2,
       "fees": 0.26,
       "total": 32.45,
       "items": [
-        { "cardId": "tangela", "pricePaid": 3.00, "condition": "NM" },
-        { "cardId": "team-rockets-weezing", "pricePaid": 3.00, "condition": "NM" },
-        { "cardId": "kangaskhan", "pricePaid": 3.00, "condition": "NM" },
-        { "cardId": "chansey", "pricePaid": 15.00, "condition": "NM" },
-        { "cardId": "wigglytuff", "pricePaid": 1.99, "condition": "NM" }
+        {
+          "cardId": "tangela",
+          "pricePaid": 3,
+          "condition": "NM"
+        },
+        {
+          "cardId": "team-rockets-weezing",
+          "pricePaid": 3,
+          "condition": "NM"
+        },
+        {
+          "cardId": "kangaskhan",
+          "pricePaid": 3,
+          "condition": "NM"
+        },
+        {
+          "cardId": "chansey",
+          "pricePaid": 15,
+          "condition": "NM"
+        },
+        {
+          "cardId": "wigglytuff",
+          "pricePaid": 1.99,
+          "condition": "NM"
+        }
       ]
     },
     {
@@ -41,21 +93,41 @@
       "fees": 0,
       "total": 22.49,
       "items": [
-        { "cardId": "galarian-zapdos", "pricePaid": 1.94, "condition": "NM" },
-        { "cardId": "venusaur-ex", "pricePaid": 9.00, "condition": "NM" },
-        { "cardId": "ninetales", "pricePaid": 10.00, "condition": "NM" }
+        {
+          "cardId": "galarian-zapdos",
+          "pricePaid": 1.94,
+          "condition": "NM"
+        },
+        {
+          "cardId": "venusaur-ex",
+          "pricePaid": 9,
+          "condition": "NM"
+        },
+        {
+          "cardId": "ninetales",
+          "pricePaid": 10,
+          "condition": "NM"
+        }
       ]
     },
     {
       "id": "1269798146",
       "seller": "PokeChibi",
       "date": "2026-04-18",
-      "shipping": 1.70,
+      "shipping": 1.7,
       "fees": 0,
-      "total": 6.20,
+      "total": 6.2,
       "items": [
-        { "cardId": "hisuian-voltorb", "pricePaid": 1.25, "condition": "NM" },
-        { "cardId": "pidgey", "pricePaid": 3.25, "condition": "NM" }
+        {
+          "cardId": "hisuian-voltorb",
+          "pricePaid": 1.25,
+          "condition": "NM"
+        },
+        {
+          "cardId": "pidgey",
+          "pricePaid": 3.25,
+          "condition": "NM"
+        }
       ]
     },
     {
@@ -66,102 +138,206 @@
       "fees": 0.46,
       "total": 54.61,
       "items": [
-        { "cardId": "magnemite", "pricePaid": 15.00, "condition": "NM" },
-        { "cardId": "haunter", "pricePaid": 21.00, "condition": "NM" },
-        { "cardId": "jolteon", "pricePaid": 10.00, "condition": "NM" }
+        {
+          "cardId": "magnemite",
+          "pricePaid": 15,
+          "condition": "NM"
+        },
+        {
+          "cardId": "haunter",
+          "pricePaid": 21,
+          "condition": "NM"
+        },
+        {
+          "cardId": "jolteon",
+          "pricePaid": 10,
+          "condition": "NM"
+        }
       ]
     },
     {
       "id": "1269798353",
       "seller": "TGCardshop",
       "date": "2026-04-18",
-      "shipping": 1.70,
+      "shipping": 1.7,
       "fees": 0,
       "total": 19.95,
       "items": [
-        { "cardId": "magneton", "pricePaid": 9.25, "condition": "NM" },
-        { "cardId": "poliwhirl", "pricePaid": 9.00, "condition": "NM" }
+        {
+          "cardId": "magneton",
+          "pricePaid": 9.25,
+          "condition": "NM"
+        },
+        {
+          "cardId": "poliwhirl",
+          "pricePaid": 9,
+          "condition": "NM"
+        }
       ]
     },
     {
       "id": "1269798369",
       "seller": "Bratiska2",
       "date": "2026-04-18",
-      "shipping": 6.70,
+      "shipping": 6.7,
       "fees": 0.25,
       "total": 31.95,
       "items": [
-        { "cardId": "dragonair", "pricePaid": 10.00, "condition": "NM" },
-        { "cardId": "mega-dragonite-ex", "pricePaid": 12.00, "condition": "NM" },
-        { "cardId": "rapidash", "pricePaid": 3.00, "condition": "NM" }
+        {
+          "cardId": "dragonair",
+          "pricePaid": 10,
+          "condition": "NM"
+        },
+        {
+          "cardId": "mega-dragonite-ex",
+          "pricePaid": 12,
+          "condition": "NM"
+        },
+        {
+          "cardId": "rapidash",
+          "pricePaid": 3,
+          "condition": "NM"
+        }
       ]
     },
     {
       "id": "1270195835",
       "seller": "CollectTCG",
       "date": "2026-04-20",
-      "shipping": 6.20,
+      "shipping": 6.2,
       "fees": 0.52,
       "total": 58.72,
       "items": [
-        { "cardId": "mew-v", "pricePaid": 30.00, "condition": "NM" },
-        { "cardId": "drowzee", "pricePaid": 22.00, "condition": "NM" }
+        {
+          "cardId": "mew-v",
+          "pricePaid": 30,
+          "condition": "NM"
+        },
+        {
+          "cardId": "drowzee",
+          "pricePaid": 22,
+          "condition": "NM"
+        }
       ]
     },
     {
       "id": "1270193646",
       "seller": "DaveKalter",
       "date": "2026-04-20",
-      "shipping": 6.20,
+      "shipping": 6.2,
       "fees": 0.84,
       "total": 90.54,
       "items": [
-        { "cardId": "gastly", "pricePaid": 30.00, "condition": "NM" },
-        { "cardId": "blastoise-ex", "pricePaid": 1.00, "condition": "NM" },
-        { "cardId": "flareon", "pricePaid": 15.00, "condition": "NM" },
-        { "cardId": "gengar", "pricePaid": 32.50, "condition": "NM" },
-        { "cardId": "galarian-articuno", "pricePaid": 3.00, "condition": "NM" },
-        { "cardId": "mr-mime", "pricePaid": 2.00, "condition": "NM" }
+        {
+          "cardId": "gastly",
+          "pricePaid": 30,
+          "condition": "NM"
+        },
+        {
+          "cardId": "blastoise-ex",
+          "pricePaid": 1,
+          "condition": "NM"
+        },
+        {
+          "cardId": "flareon",
+          "pricePaid": 15,
+          "condition": "NM"
+        },
+        {
+          "cardId": "gengar",
+          "pricePaid": 32.5,
+          "condition": "NM"
+        },
+        {
+          "cardId": "galarian-articuno",
+          "pricePaid": 3,
+          "condition": "NM"
+        },
+        {
+          "cardId": "mr-mime",
+          "pricePaid": 2,
+          "condition": "NM"
+        }
       ]
     },
     {
       "id": "1270198120",
       "seller": "Michaelpp1993",
       "date": "2026-04-20",
-      "shipping": 6.20,
+      "shipping": 6.2,
       "fees": 0.47,
       "total": 53.15,
       "items": [
-        { "cardId": "spearow", "pricePaid": 1.49, "condition": "NM" },
-        { "cardId": "charmander", "pricePaid": 28.00, "condition": "NM" },
-        { "cardId": "nidoking", "pricePaid": 4.00, "condition": "NM" },
-        { "cardId": "psyduck", "pricePaid": 12.99, "condition": "NM" }
+        {
+          "cardId": "spearow",
+          "pricePaid": 1.49,
+          "condition": "NM"
+        },
+        {
+          "cardId": "charmander",
+          "pricePaid": 28,
+          "condition": "NM"
+        },
+        {
+          "cardId": "nidoking",
+          "pricePaid": 4,
+          "condition": "NM"
+        },
+        {
+          "cardId": "psyduck",
+          "pricePaid": 12.99,
+          "condition": "NM"
+        }
       ]
     },
     {
       "id": "1270634365",
       "seller": "JoekkiesCards",
       "date": "2026-04-22",
-      "shipping": 1.70,
+      "shipping": 1.7,
       "fees": 0,
       "total": 12.97,
       "items": [
-        { "cardId": "gloom", "pricePaid": 3.99, "condition": "NM" },
-        { "cardId": "pidgeotto", "pricePaid": 2.30, "condition": "NM" },
-        { "cardId": "jynx", "pricePaid": 1.99, "condition": "NM" },
-        { "cardId": "pinsir", "pricePaid": 2.99, "condition": "NM" }
+        {
+          "cardId": "gloom",
+          "pricePaid": 3.99,
+          "condition": "NM"
+        },
+        {
+          "cardId": "pidgeotto",
+          "pricePaid": 2.3,
+          "condition": "NM"
+        },
+        {
+          "cardId": "jynx",
+          "pricePaid": 1.99,
+          "condition": "NM"
+        },
+        {
+          "cardId": "pinsir",
+          "pricePaid": 2.99,
+          "condition": "NM"
+        }
       ]
     },
     {
       "id": "1270630420",
       "seller": "romandiesse",
       "date": "2026-04-22",
-      "shipping": 10.70,
+      "shipping": 10.7,
       "fees": 0.14,
       "total": 37.34,
       "items": [
-        { "cardId": "eevee", "pricePaid": 24.50, "condition": "NM" },
-        { "cardId": "exeggcute", "pricePaid": 2.00, "condition": "NM" }
+        {
+          "cardId": "eevee",
+          "pricePaid": 24.5,
+          "condition": "NM"
+        },
+        {
+          "cardId": "exeggcute",
+          "pricePaid": 2,
+          "condition": "NM"
+        }
       ]
     },
     {
@@ -172,45 +348,81 @@
       "fees": 0.25,
       "total": 57.04,
       "items": [
-        { "cardId": "pidgeot-ex", "pricePaid": 22.00, "condition": "NM" },
-        { "cardId": "mega-clefable-ex", "pricePaid": 26.80, "condition": "NM" }
+        {
+          "cardId": "pidgeot-ex",
+          "pricePaid": 22,
+          "condition": "NM"
+        },
+        {
+          "cardId": "mega-clefable-ex",
+          "pricePaid": 26.8,
+          "condition": "NM"
+        }
       ]
     },
     {
       "id": "1270836498",
       "seller": "Linarito9",
       "date": "2026-04-23",
-      "shipping": 2.60,
+      "shipping": 2.6,
       "fees": 0,
       "total": 12.57,
       "items": [
-        { "cardId": "ditto", "pricePaid": 3.49, "condition": "NM" },
-        { "cardId": "caterpie", "pricePaid": 3.49, "condition": "NM" },
-        { "cardId": "omanyte", "pricePaid": 2.99, "condition": "NM" }
+        {
+          "cardId": "ditto",
+          "pricePaid": 3.49,
+          "condition": "NM"
+        },
+        {
+          "cardId": "caterpie",
+          "pricePaid": 3.49,
+          "condition": "NM"
+        },
+        {
+          "cardId": "omanyte",
+          "pricePaid": 2.99,
+          "condition": "NM"
+        }
       ]
     },
     {
       "id": "1270836813",
       "seller": "Lando-TCG",
       "date": "2026-04-23",
-      "shipping": 1.70,
+      "shipping": 1.7,
       "fees": 0,
-      "total": 17.70,
+      "total": 17.7,
       "items": [
-        { "cardId": "charmeleon", "pricePaid": 16.00, "condition": "NM" }
+        {
+          "cardId": "charmeleon",
+          "pricePaid": 16,
+          "condition": "NM"
+        }
       ]
     },
     {
       "id": "1270836453",
       "seller": "JessyEnThorbenTCG",
       "date": "2026-04-23",
-      "shipping": 1.70,
+      "shipping": 1.7,
       "fees": 0,
       "total": 9.43,
       "items": [
-        { "cardId": "dewgong", "pricePaid": 1.99, "condition": "NM" },
-        { "cardId": "exeggutor", "pricePaid": 1.99, "condition": "NM" },
-        { "cardId": "alakazam", "pricePaid": 3.75, "condition": "NM" }
+        {
+          "cardId": "dewgong",
+          "pricePaid": 1.99,
+          "condition": "NM"
+        },
+        {
+          "cardId": "exeggutor",
+          "pricePaid": 1.99,
+          "condition": "NM"
+        },
+        {
+          "cardId": "alakazam",
+          "pricePaid": 3.75,
+          "condition": "NM"
+        }
       ]
     },
     {
@@ -221,62 +433,126 @@
       "fees": 0.38,
       "total": 50.63,
       "items": [
-        { "cardId": "alolan-dugtrio", "pricePaid": 2.00, "condition": "NM" },
-        { "cardId": "slowpoke", "pricePaid": 10.00, "condition": "NM" },
-        { "cardId": "raichu", "pricePaid": 10.50, "condition": "NM" },
-        { "cardId": "paldean-tauros", "pricePaid": 2.20, "condition": "NM" },
-        { "cardId": "lapras", "pricePaid": 5.00, "condition": "NM" },
-        { "cardId": "horsea", "pricePaid": 4.60, "condition": "NM" },
-        { "cardId": "lickitung", "pricePaid": 3.60, "condition": "NM" }
+        {
+          "cardId": "alolan-dugtrio",
+          "pricePaid": 2,
+          "condition": "NM"
+        },
+        {
+          "cardId": "slowpoke",
+          "pricePaid": 10,
+          "condition": "NM"
+        },
+        {
+          "cardId": "raichu",
+          "pricePaid": 10.5,
+          "condition": "NM"
+        },
+        {
+          "cardId": "paldean-tauros",
+          "pricePaid": 2.2,
+          "condition": "NM"
+        },
+        {
+          "cardId": "lapras",
+          "pricePaid": 5,
+          "condition": "NM"
+        },
+        {
+          "cardId": "horsea",
+          "pricePaid": 4.6,
+          "condition": "NM"
+        },
+        {
+          "cardId": "lickitung",
+          "pricePaid": 3.6,
+          "condition": "NM"
+        }
       ]
     },
     {
       "id": "1271584330",
       "seller": "flyas",
       "date": "2026-04-26",
-      "shipping": 6.20,
+      "shipping": 6.2,
       "fees": 0.78,
       "total": 84.83,
       "items": [
-        { "cardId": "pikachu", "pricePaid": 27.95, "condition": "NM" },
-        { "cardId": "squirtle", "pricePaid": 24.95, "condition": "NM" },
-        { "cardId": "mewtwo", "pricePaid": 24.95, "condition": "NM" }
+        {
+          "cardId": "pikachu",
+          "pricePaid": 27.95,
+          "condition": "NM"
+        },
+        {
+          "cardId": "squirtle",
+          "pricePaid": 24.95,
+          "condition": "NM"
+        },
+        {
+          "cardId": "mewtwo",
+          "pricePaid": 24.95,
+          "condition": "NM"
+        }
       ]
     },
     {
       "id": "1271588475",
       "seller": "timoovd",
       "date": "2026-04-26",
-      "shipping": 1.70,
+      "shipping": 1.7,
       "fees": 0,
       "total": 17.65,
       "items": [
-        { "cardId": "charmeleon", "pricePaid": 15.95, "condition": "NM" }
+        {
+          "cardId": "charmeleon",
+          "pricePaid": 15.95,
+          "condition": "NM"
+        }
       ]
     },
     {
       "id": "1271588674",
       "seller": "GengcardsNL",
       "date": "2026-04-26",
-      "shipping": 1.70,
+      "shipping": 1.7,
       "fees": 0,
       "total": 18.16,
       "items": [
-        { "cardId": "machoke", "pricePaid": 3.99, "condition": "NM" },
-        { "cardId": "parasect", "pricePaid": 1.49, "condition": "NM" },
-        { "cardId": "hisuian-arcanine", "pricePaid": 1.99, "condition": "NM" },
-        { "cardId": "galarian-moltres", "pricePaid": 8.99, "condition": "NM" }
+        {
+          "cardId": "machoke",
+          "pricePaid": 3.99,
+          "condition": "NM"
+        },
+        {
+          "cardId": "parasect",
+          "pricePaid": 1.49,
+          "condition": "NM"
+        },
+        {
+          "cardId": "hisuian-arcanine",
+          "pricePaid": 1.99,
+          "condition": "NM"
+        },
+        {
+          "cardId": "galarian-moltres",
+          "pricePaid": 8.99,
+          "condition": "NM"
+        }
       ]
     },
     {
       "id": "1271588696",
       "seller": "Pbronnenberg",
       "date": "2026-04-26",
-      "shipping": 1.70,
+      "shipping": 1.7,
       "fees": 0,
-      "total": 13.70,
+      "total": 13.7,
       "items": [
-        { "cardId": "wartortle", "pricePaid": 12.00, "condition": "NM" }
+        {
+          "cardId": "wartortle",
+          "pricePaid": 12,
+          "condition": "NM"
+        }
       ]
     },
     {
@@ -287,8 +563,16 @@
       "fees": 0,
       "total": 21.64,
       "items": [
-        { "cardId": "hisuian-growlithe", "pricePaid": 9.90, "condition": "NM" },
-        { "cardId": "clefairy", "pricePaid": 10.49, "condition": "NM" }
+        {
+          "cardId": "hisuian-growlithe",
+          "pricePaid": 9.9,
+          "condition": "NM"
+        },
+        {
+          "cardId": "clefairy",
+          "pricePaid": 10.49,
+          "condition": "NM"
+        }
       ]
     },
     {
@@ -299,7 +583,11 @@
       "fees": 0,
       "total": 16.25,
       "items": [
-        { "cardId": "snorlax", "pricePaid": 15.00, "condition": "NM" }
+        {
+          "cardId": "snorlax",
+          "pricePaid": 15,
+          "condition": "NM"
+        }
       ]
     },
     {
@@ -310,7 +598,11 @@
       "fees": 0,
       "total": 19.55,
       "items": [
-        { "cardId": "vaporeon", "pricePaid": 16.35, "condition": "NM" }
+        {
+          "cardId": "vaporeon",
+          "pricePaid": 16.35,
+          "condition": "NM"
+        }
       ]
     },
     {
@@ -321,31 +613,51 @@
       "fees": 0.33,
       "total": 36.71,
       "items": [
-        { "cardId": "paras", "pricePaid": 19.99, "condition": "NM" },
-        { "cardId": "goldeen", "pricePaid": 7.45, "condition": "NM" }
+        {
+          "cardId": "paras",
+          "pricePaid": 19.99,
+          "condition": "NM"
+        },
+        {
+          "cardId": "goldeen",
+          "pricePaid": 7.45,
+          "condition": "NM"
+        }
       ]
     },
     {
       "id": "1286447709",
       "seller": "Jeromeipen",
       "date": "2026-07-06",
-      "shipping": 1.70,
+      "shipping": 1.7,
       "fees": 0,
-      "total": 20.70,
+      "total": 20.7,
       "items": [
-        { "cardId": "clefairy", "pricePaid": 10.00, "condition": "NM" },
-        { "cardId": "vileplume-gx", "pricePaid": 9.00, "condition": "NM" }
+        {
+          "cardId": "clefairy",
+          "pricePaid": 10,
+          "condition": "NM"
+        },
+        {
+          "cardId": "vileplume-gx",
+          "pricePaid": 9,
+          "condition": "NM"
+        }
       ]
     },
     {
       "id": "1286448117",
       "seller": "Snorlax2305",
       "date": "2026-07-06",
-      "shipping": 1.70,
+      "shipping": 1.7,
       "fees": 0,
-      "total": 14.70,
+      "total": 14.7,
       "items": [
-        { "cardId": "snorlax", "pricePaid": 13.00, "condition": "NM" }
+        {
+          "cardId": "snorlax",
+          "pricePaid": 13,
+          "condition": "NM"
+        }
       ]
     },
     {
@@ -354,11 +666,23 @@
       "date": "2026-07-22",
       "shipping": 1.75,
       "fees": 0,
-      "total": 9.10,
+      "total": 9.1,
       "items": [
-        { "cardId": "starmie-v", "pricePaid": 3.97, "condition": "NM" },
-        { "cardId": "machamp-vmax", "pricePaid": 1.39, "condition": "NM" },
-        { "cardId": "venomoth-gx", "pricePaid": 1.99, "condition": "NM" }
+        {
+          "cardId": "starmie-v",
+          "pricePaid": 3.97,
+          "condition": "NM"
+        },
+        {
+          "cardId": "machamp-vmax",
+          "pricePaid": 1.39,
+          "condition": "NM"
+        },
+        {
+          "cardId": "venomoth-gx",
+          "pricePaid": 1.99,
+          "condition": "NM"
+        }
       ]
     },
     {
@@ -367,38 +691,689 @@
       "date": "2026-07-22",
       "shipping": 1.55,
       "fees": 0,
-      "total": 20.00,
+      "total": 20,
       "items": [
-        { "cardId": "beedrill-v", "pricePaid": 0.50, "condition": "NM" },
-        { "cardId": "alolan-sandslash-gx", "pricePaid": 5.00, "condition": "NM" },
-        { "cardId": "gyarados-ex", "pricePaid": 9.70, "condition": "NM" },
-        { "cardId": "crobat", "pricePaid": 3.25, "condition": "NM" }
+        {
+          "cardId": "beedrill-v",
+          "pricePaid": 0.5,
+          "condition": "NM"
+        },
+        {
+          "cardId": "alolan-sandslash-gx",
+          "pricePaid": 5,
+          "condition": "NM"
+        },
+        {
+          "cardId": "gyarados-ex",
+          "pricePaid": 9.7,
+          "condition": "NM"
+        },
+        {
+          "cardId": "crobat",
+          "pricePaid": 3.25,
+          "condition": "NM"
+        }
       ]
     },
     {
       "id": "pending-2026-07-22-espeon-glaceon",
       "seller": null,
       "date": "2026-07-22",
-      "shipping": 1.70,
+      "shipping": 1.7,
       "fees": 0,
       "total": 3.94,
       "items": [
-        { "cardId": "espeon-v", "pricePaid": 0.99, "condition": "NM" },
-        { "cardId": "glaceon-v", "pricePaid": 1.25, "condition": "NM" }
+        {
+          "cardId": "espeon-v",
+          "pricePaid": 0.99,
+          "condition": "NM"
+        },
+        {
+          "cardId": "glaceon-v",
+          "pricePaid": 1.25,
+          "condition": "NM"
+        }
       ]
     },
     {
       "id": "pending-2026-07-22-aerodactyl-leafeon-slowbro-omastar",
       "seller": null,
       "date": "2026-07-22",
-      "shipping": 1.70,
+      "shipping": 1.7,
       "fees": 0,
       "total": 18.66,
       "items": [
-        { "cardId": "aerodactyl-gx", "pricePaid": 0.99, "condition": "NM" },
-        { "cardId": "leafeon-v", "pricePaid": 2.99, "condition": "NM" },
-        { "cardId": "slowbro", "pricePaid": 11.99, "condition": "NM" },
-        { "cardId": "omastar-v", "pricePaid": 0.99, "condition": "NM" }
+        {
+          "cardId": "aerodactyl-gx",
+          "pricePaid": 0.99,
+          "condition": "NM"
+        },
+        {
+          "cardId": "leafeon-v",
+          "pricePaid": 2.99,
+          "condition": "NM"
+        },
+        {
+          "cardId": "slowbro",
+          "pricePaid": 11.99,
+          "condition": "NM"
+        },
+        {
+          "cardId": "omastar-v",
+          "pricePaid": 0.99,
+          "condition": "NM"
+        }
+      ]
+    },
+    {
+      "id": "2026-10-25-m6a-booster-boxes",
+      "seller": "Local shop",
+      "product": "30th CELEBRATION booster box x3 + 10 packs (70 packs)",
+      "date": "2026-10-25",
+      "shipping": 0,
+      "fees": 0,
+      "total": 600,
+      "items": [
+        {
+          "cardId": "m6a-001-exeggcute",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-002-alolan-exeggutor",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-003-volbeat",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-004-illumise",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-005-vivillon",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-006-moltres",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-007-ho-oh",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-008-reshiram",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-009-fuecoco-ex",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-010-slowpoke",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-011-lapras",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-012-articuno",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-013-kyogre",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-014-palkia",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-015-greninja-ex",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-016-wishiwashi",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-017-pikachu",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-018-pikachu",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-020-pikachu",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-021-pikachu",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-022-pikachu",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-023-pikachu",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-024-pikachu",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-025-pikachu",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-026-pikachu",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-027-pikachu",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-028-pikachu",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-029-pikachu",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-030-pikachu",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-031-pikachu",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-032-pikachu",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-033-pikachu",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-034-pikachu",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-035-pikachu",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-036-pikachu",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-037-pikachu",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-038-pikachu",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-039-pikachu",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-040-pikachu",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-041-pikachu",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-042-pikachu",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-043-pikachu",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-044-pikachu",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-045-pikachu",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-046-pikachu",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-047-pikachu-ex",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-048-pikachu-ex",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-049-zapdos",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-050-zekrom",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-051-toxtricity",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-052-morpeko",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-053-miraidon",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-054-mewtwo",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-056-mew",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-057-mew-ex",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-058-espeon",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-059-sylveon-ex",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-060-unown",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-061-drifloon",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-062-chandelure",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-063-xerneas",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-064-cosmog",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-065-cosmoem",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-066-lunala",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-067-gimmighoul",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-068-groudon",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-069-lucario",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-070-seismitoad",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-071-lycanroc",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-072-koraidon",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-073-nidoran",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-074-nidorina",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-075-alolan-meowth",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-076-gengar-ex",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-077-umbreon",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-078-scraggy",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-079-yveltal",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-080-galarian-meowth",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-081-jirachi-ex",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-082-dialga",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-083-ferrothorn",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-084-solgaleo",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-085-zacian",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-086-zamazenta",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-087-gholdengo",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-088-salamence-ex",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-089-jangmo-o",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-090-hakamo-o",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-091-kommo-o",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-092-meowth",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-093-ditto",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-094-eevee",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-095-snorlax",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-096-igglybuff",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-097-lugia",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-098-hisuian-zorua",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-099-hisuian-zoroark",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-100-maushold",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-101-ultra-ball",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-102-poke-pad",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-103-switch",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-104-alolan-exeggutor",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-105-moltres",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-106-lapras",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-108-zapdos",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-109-toxtricity",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-113-lycanroc",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-114-nidorina",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-115-alolan-meowth",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-116-scraggy",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-118-gholdengo",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-127-pikachu-ex",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-129-mew-ex",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-133-salamence-ex",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-138-misty",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-140-sneasel",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-143-delcatty",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-149-crobat-g",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-150-gengar",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-155-genesect-ex",
+          "pricePaid": null,
+          "condition": "NM"
+        }
       ]
     }
   ]
