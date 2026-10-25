@@ -27,7 +27,7 @@ Four git-tracked JSON files are the single source of truth:
   - No `owned` or `pricePaid` — those are derived from purchases.
 - **`data/purchases.json`** — the shipment log. `{ shipments: Shipment[] }`, each `{ id, seller, date, shipping, fees, total, product?, items[] }`, each item `{ cardId, pricePaid, condition, qty? }`.
   - `pricePaid: null` means pulled from sealed product. `qty` defaults to 1. `product` is a free label such as `"30th CELEBRATION booster box x2"`.
-- **`data/prices.json`** — append-only price history keyed by card id. Each entry is a list of snapshots: `{ date, source: "manual", price }` for the pre-refresh target, and `{ date, source: "cardmarket", trend, avg7, avg30, low }` per refresh. Nothing in the UI reads it yet.
+- **`data/prices.json`** — append-only price history keyed by card id. Each entry is a list of snapshots: `{ date, source: "manual", price }` for the pre-refresh target, and `{ date, source: "cardmarket", trend, avg7, avg30, low }` per refresh. Nothing in the UI reads it yet. On disk it is stored one snapshot per line (`formatPrices` in `scripts/lib/prices.mjs`) so a refresh diff is an append per card; `tests/data.test.ts` fails if the file drifts from that format, so after a hand edit rerun the formatter rather than `JSON.stringify`.
 
 A card is "owned" if it appears in at least one purchase item. Its effective `pricePaid` is the min across priced purchases, or null when every copy was pulled. Duplicates are recorded but don't double-count in collection stats.
 
