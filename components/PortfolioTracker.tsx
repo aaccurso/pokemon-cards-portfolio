@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { cards as allCards, purchases, binders } from "@/lib/data";
 import { languageFlags, cardCategory, numberLabel, typeBadges, Card } from "@/lib/cards";
@@ -381,6 +382,13 @@ export default function PortfolioTracker() {
         >
           ↓ CSV
         </button>
+        <Link
+          href={binderId === DEFAULT_BINDER_ID ? "/needed" : `/needed?binder=${binderId}`}
+          className="action-button"
+          title="One-sheet list of the numbers still missing, for shops and seller chats"
+        >
+          ☐ Needed
+        </Link>
       </div>
 
       {viewMode === "grid" ? (
