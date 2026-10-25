@@ -23,6 +23,7 @@ export function BinderTabs({ binders, activeId, counts, onSelect }: Props) {
             type="button"
             className={`binder-tab${active ? " active" : ""}`}
             aria-pressed={active}
+            aria-label={`${b.name}, ${c.owned} of ${c.total} owned`}
             onClick={() => onSelect(b.id)}
             title={b.description}
           >
