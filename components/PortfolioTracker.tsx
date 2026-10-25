@@ -18,6 +18,9 @@ import {
   progressLabel,
   buildCsv,
   rarityBreakdown,
+  buildTradeList,
+  tradeListCsv,
+  tradeListText,
   OwnershipMap,
 } from "@/lib/purchases";
 import { fmtEur } from "@/lib/format";
@@ -36,7 +39,7 @@ function readFilters(params: URLSearchParams): Filters {
     q: params.get("q") ?? "",
     type: params.get("type") ?? "all",
     set: params.get("set") ?? "all",
-    own: own === "owned" || own === "wanted" ? own : "all",
+    own: own === "owned" || own === "wanted" || own === "dupes" ? own : "all",
     illus: params.get("illus") === "1",
     rarity: params.get("rarity") ?? "all",
   };
@@ -67,6 +70,7 @@ export default function PortfolioTracker() {
     () => (searchParams.get("view") === "table" ? "table" : "grid")
   );
   const [copied, setCopied] = useState(false);
+  const [tradeCopied, setTradeCopied] = useState(false);
 
   const binder = getBinder(binderId, binders);
   const binderCards = useMemo(() => cardsForBinder(binderId, allCards), [binderId]);
@@ -184,6 +188,8 @@ export default function PortfolioTracker() {
       list = list.filter((c) => ownership.has(c.id));
     } else if (filters.own === "wanted") {
       list = list.filter((c) => !ownership.has(c.id));
+    } else if (filters.own === "dupes") {
+      list = list.filter((c) => (ownership.get(c.id)?.duplicateCount ?? 0) > 0);
     }
 
     if (filters.illus) {
@@ -216,17 +222,41 @@ export default function PortfolioTracker() {
     }
   }
 
-  function handleDownloadCsv() {
-    const csv = buildCsv(binderCards, ownership);
-    const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+  function downloadFile(suffix: string, content: string, mime: string) {
+    const blob = new Blob([content], { type: `${mime};charset=utf-8` });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `${binderId}-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.download = `${binderId}-${new Date().toISOString().slice(0, 10)}${suffix}`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+  }
+
+  function handleDownloadCsv() {
+    downloadFile(".csv", buildCsv(binderCards, ownership), "text/csv");
+  }
+
+  const tradeRows = useMemo(
+    () => buildTradeList(binderCards, ownership),
+    [binderCards, ownership]
+  );
+
+  async function handleCopyTradeText() {
+    const text = tradeListText(tradeRows);
+    try {
+      await navigator.clipboard.writeText(text);
+      setTradeCopied(true);
+      setTimeout(() => setTradeCopied(false), 1500);
+    } catch {
+      // clipboard unavailable (e.g. non-HTTPS): hand over the same text as a file
+      downloadFile("-trade.txt", text, "text/plain");
+    }
+  }
+
+  function handleDownloadTradeCsv() {
+    downloadFile("-trade.csv", tradeListCsv(tradeRows), "text/csv");
   }
 
   const pct = collectedPct(stats);
@@ -318,6 +348,10 @@ export default function PortfolioTracker() {
         onCsv={handleDownloadCsv}
         neededHref={binderId === DEFAULT_BINDER_ID ? "/needed" : `/needed?binder=${binderId}`}
         copied={copied}
+        tradeCount={tradeRows.length}
+        tradeCopied={tradeCopied}
+        onTradeText={handleCopyTradeText}
+        onTradeCsv={handleDownloadTradeCsv}
         showIllustration={binder.kind === "wants"}
       />
 
@@ -344,6 +378,7 @@ export default function PortfolioTracker() {
               key={card.id}
               card={card}
               owned={ownership.has(card.id)}
+              copies={ownership.get(card.id)?.purchaseCount}
               onClick={() => setModalCard(card)}
               binder={binder}
             />

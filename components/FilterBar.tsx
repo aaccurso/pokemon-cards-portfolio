@@ -4,7 +4,8 @@ import Link from "next/link";
 
 import type { RarityRow } from "@/lib/purchases";
 
-export type OwnFilter = "all" | "owned" | "wanted";
+/** `dupes` is owned with at least one extra copy; in the URL as `own=dupes`. */
+export type OwnFilter = "all" | "owned" | "wanted" | "dupes";
 export type ViewMode = "table" | "grid";
 
 export type Filters = {
@@ -37,6 +38,11 @@ type Props = {
   /** Href of the /needed one-sheet for the active binder. */
   neededHref: string;
   copied: boolean;
+  /** Cards with extra copies; 0 hides the trade-list disclosure. */
+  tradeCount: number;
+  tradeCopied: boolean;
+  onTradeText: () => void;
+  onTradeCsv: () => void;
   /** Wants binders only; master-set binders hide the toggle. */
   showIllustration: boolean;
 };
@@ -53,6 +59,10 @@ export function FilterBar({
   onCsv,
   neededHref,
   copied,
+  tradeCount,
+  tradeCopied,
+  onTradeText,
+  onTradeCsv,
   showIllustration,
 }: Props) {
   return (
@@ -87,6 +97,7 @@ export function FilterBar({
           <option value="all">All Cards</option>
           <option value="owned">Owned Only</option>
           <option value="wanted">Wanted Only</option>
+          <option value="dupes">Duplicates Only</option>
         </select>
         {rarities.length > 0 && (
           <select
@@ -153,6 +164,24 @@ export function FilterBar({
         >
           ☐ Needed
         </Link>
+        {tradeCount > 0 && (
+          <details className="trade-menu">
+            <summary
+              className="action-button"
+              title="Export the extra copies for a trade partner or buylist"
+            >
+              ⇄ Trade list ({tradeCount})
+            </summary>
+            <div className="trade-menu-items">
+              <button className="action-button" onClick={onTradeText}>
+                {tradeCopied ? "✓ Copied" : "Copy text"}
+              </button>
+              <button className="action-button" onClick={onTradeCsv}>
+                ↓ Trade CSV
+              </button>
+            </div>
+          </details>
+        )}
       </div>
     </div>
   );

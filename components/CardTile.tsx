@@ -8,9 +8,11 @@ type Props = {
   owned: boolean;
   onClick: () => void;
   binder: BinderDisplay;
+  /** Copies owned; a badge appears beside the Pokeball when above 1. */
+  copies?: number;
 };
 
-export function CardTile({ card, owned, onClick, binder }: Props) {
+export function CardTile({ card, owned, onClick, binder, copies = 1 }: Props) {
   const ref = useRef<HTMLButtonElement>(null);
   const [imgFailed, setImgFailed] = useState(false);
   const [triedRemote, setTriedRemote] = useState(false);
@@ -136,6 +138,15 @@ export function CardTile({ card, owned, onClick, binder }: Props) {
                 title="Owned"
                 aria-label="Owned"
               />
+            )}
+            {owned && copies > 1 && (
+              <span
+                className="copies-badge"
+                title={`${copies} copies owned (${copies - 1} extra)`}
+                aria-label={`${copies} copies owned`}
+              >
+                x{copies}
+              </span>
             )}
           </div>
         </div>

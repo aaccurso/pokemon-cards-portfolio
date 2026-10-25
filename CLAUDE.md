@@ -126,8 +126,9 @@ Whenever a card is added or updated without a bundled image (e.g. a new set not 
 - One "All binders" line under the tabs: market value of everything owned vs the sum of all shipment totals
 - Grid view with 3D tilt + holographic hover; Japanese names under English ones
 - Table view with sortable columns (incl. derived `owned` and `pricePaid`)
-- Search by name, code, or set name; filter by type (incl. Trainer), set, ownership
+- Search by name, code, or set name; filter by type (incl. Trainer), set, ownership (All, Owned, Wanted, Duplicates; `own=dupes` in the URL)
 - Rarity filter (`?rarity=<tcgdex label>`), shown whenever a card in the binder has `rarity`; master-set binders also get a clickable per-rarity completion breakdown under the progress bar and a value-weighted progress figure in the header (`rarityBreakdown` in `lib/purchases.ts`, display order and labels in `rarityOrder` in `lib/cards.ts`)
+- Duplicates: `xN` copies badge beside the Pokeball (grid and table), and a "Trade list" export beside CSV (copy text or download CSV via `buildTradeList` in `lib/purchases.ts`), shown only when the binder has extra copies
 - Pokemon type badges with canonical game colors; neutral badge for Trainers
 - Variant badges (ex, GX, V, VMAX, VSTAR, BREAK, LEGEND, Alolan/Galarian/Hisuian/Mega forms)
 - CSV download of the active binder

@@ -1,6 +1,15 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { buildOwnershipMap, computeStats, buildCsv, progressLabel, valueVsOutlayPct } from "../lib/purchases.ts";
+import {
+  buildCsv,
+  buildOwnershipMap,
+  buildTradeList,
+  computeStats,
+  progressLabel,
+  tradeListCsv,
+  tradeListText,
+  valueVsOutlayPct,
+} from "../lib/purchases.ts";
 import type { Card } from "../lib/cards.ts";
 import type { PurchaseData } from "../lib/purchases.ts";
 import { card } from "./helpers.ts";
@@ -142,4 +151,47 @@ test("market value: master-set pulls carry no price but still have market value"
 test("market value is zero on an empty binder", () => {
   const s = computeStats([], new Map(), { shipments: [] }, "kanto-151", new Map());
   assert.equal(s.marketValue, 0); assert.equal(s.marketValueAllCopies, 0); assert.equal(s.unpricedOwned, 0);
+});
+
+test("buildTradeList lists only cards with extra copies, sorted by setNumber", () => {
+  const cards = [
+    card({ id: "p", name: "Pikachu ex", code: "M6a 045", setNumber: 45, nameJa: "ピカチュウex", buyPrice: 1.2 }),
+    card({ id: "e", name: "Eevee", code: "M6a 012", setNumber: 12, buyPrice: null }),
+    card({ id: "s", name: "Snorlax", code: "M6a 101", setNumber: 101, buyPrice: 3 }),
+    card({ id: "n", name: "Never owned", code: "M6a 002", setNumber: 2, buyPrice: 9 }),
+  ];
+  const o = buildOwnershipMap({ shipments: [
+    { id: "box", seller: null, date: null, shipping: null, fees: null, total: 50, items: [
+      { cardId: "p", pricePaid: null, condition: "NM", qty: 3 },
+      { cardId: "e", pricePaid: null, condition: "NM", qty: 2 },
+      { cardId: "s", pricePaid: null, condition: "NM" },
+    ] },
+  ] });
+  assert.deepEqual(buildTradeList(cards, o), [
+    { code: "M6a 012", name: "Eevee", nameJa: null, extra: 1, trend: null },
+    { code: "M6a 045", name: "Pikachu ex", nameJa: "ピカチュウex", extra: 2, trend: 1.2 },
+  ]);
+  assert.deepEqual(buildTradeList(cards, new Map()), []);
+});
+
+test("tradeListText renders one line per row with a comma-decimal EUR trend", () => {
+  const rows = [
+    { code: "M6a 012", name: "Eevee", nameJa: null, extra: 1, trend: null },
+    { code: "M6a 045", name: "Pikachu ex", nameJa: "ピカチュウex", extra: 2, trend: 1.2 },
+  ];
+  assert.equal(tradeListText(rows), "M6a 012 Eevee x1\nM6a 045 Pikachu ex x2 (1,20 EUR)");
+  assert.equal(tradeListText([]), "");
+});
+
+test("tradeListCsv has a header, escapes names, and ends with a newline", () => {
+  const rows = [
+    { code: "M6a 045", name: "Pikachu, ex", nameJa: "ピカチュウex", extra: 2, trend: 1.2 },
+    { code: "M6a 012", name: "Eevee", nameJa: null, extra: 1, trend: null },
+  ];
+  assert.equal(
+    tradeListCsv(rows),
+    "Code,Name,Japanese Name,Extra Copies,Trend (EUR)\n" +
+      'M6a 045,"Pikachu, ex",ピカチュウex,2,1.20\n' +
+      "M6a 012,Eevee,,1,\n"
+  );
 });
