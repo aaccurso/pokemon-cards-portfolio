@@ -6,7 +6,7 @@
       "date": null,
       "shipping": null,
       "fees": null,
-      "total": null,
+      "total": 55.34,
       "items": [
         { "cardId": "arbok", "pricePaid": 3.45, "condition": "NM" },
         { "cardId": "bulbasaur", "pricePaid": 7.94, "condition": "NM" },

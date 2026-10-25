@@ -1,11 +1,12 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { validateData, cardsForBinder } from "../lib/binders.ts";
+import { validateData, cardsForBinder, siteDescription, ogAlt } from "../lib/binders.ts";
 import { typeColors } from "../lib/cards.ts";
 import type { Card } from "../lib/cards.ts";
 import type { PurchaseData } from "../lib/purchases.ts";
 import type { Binder } from "../lib/binders.ts";
+import { formatPrices } from "../scripts/lib/prices.mjs";
 
 const read = (p: string) => JSON.parse(fs.readFileSync(new URL(`../${p}`, import.meta.url), "utf8"));
 const cards: Card[] = read("data/cards.json");
@@ -23,6 +24,11 @@ test("every price-history key is a current card id", () => {
   assert.deepEqual(Object.keys(prices).filter((k) => !ids.has(k)), []);
 });
 
+test("data/prices.json is stored one snapshot per line (formatPrices output)", () => {
+  const raw = fs.readFileSync(new URL("../data/prices.json", import.meta.url), "utf8");
+  assert.equal(raw, formatPrices(JSON.parse(raw)));
+});
+
 test("the M6a binder holds exactly cards 001 to 165", () => {
   const m6a = cardsForBinder("m6a-30th", cards);
   assert.equal(m6a.length, 165);
@@ -37,6 +43,13 @@ test("every Pokemon type uses the app's type vocabulary", () => {
 test("card names use canonical suffix casing and have no glued words", () => {
   const bad = cards.filter((c) => /\sEx$/.test(c.name) || /[a-z][A-Z][a-z]+ Team/.test(c.name)).map((c) => c.name);
   assert.deepEqual(bad, []);
+});
+
+test("site description and OG alt mention every binder in data/binders.json", () => {
+  for (const b of binders) {
+    assert.ok(siteDescription(binders).includes(b.name), `description lacks ${b.name}`);
+    assert.ok(ogAlt(binders).includes(b.name), `og alt lacks ${b.name}`);
+  }
 });
 
 test("every ex/EX/GX card has a variant", () => {

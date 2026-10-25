@@ -1,6 +1,8 @@
 import { ImageResponse } from "next/og";
+import { binders } from "@/lib/data";
+import { SITE_TITLE, ogAlt } from "@/lib/binders";
 
-export const alt = "Pokédex 151 full-art — Japanese Pokémon TCG wishlist tracker";
+export const alt = ogAlt(binders);
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -90,18 +92,36 @@ export default async function Image() {
             display: "flex",
           }}
         >
-          Pokédex 151 full-art
+          {SITE_TITLE}
         </div>
+        {/* One pill per binder, derived from data/binders.json. Satori needs
+            display: flex on every box and no calc(), so sizes are plain px. */}
         <div
           style={{
-            fontSize: 34,
-            color: "#8892a4",
-            marginTop: 20,
             display: "flex",
-            textAlign: "center",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            gap: 14,
+            marginTop: 28,
+            maxWidth: 1100,
           }}
         >
-          Japanese Pokémon TCG wishlist tracker
+          {binders.map((b) => (
+            <div
+              key={b.id}
+              style={{
+                display: "flex",
+                fontSize: 25,
+                color: "#8892a4",
+                padding: "8px 20px",
+                borderRadius: 999,
+                border: "2px solid #2a3450",
+                background: "rgba(255,255,255,0.04)",
+              }}
+            >
+              {b.name}
+            </div>
+          ))}
         </div>
       </div>
     ),

@@ -45,6 +45,8 @@ Full schema and workflows documented in [`CLAUDE.md`](CLAUDE.md).
 
 ## Local development
 
+Requires Node 24 (see `.nvmrc`; `nvm use` picks it up). The tests rely on Node's built-in TypeScript type stripping, so anything older than 22.18 gets an `EBADENGINE` warning on `npm install` and cannot run `npm test`.
+
 ```bash
 npm install
 npm run dev            # http://localhost:3000
