@@ -115,7 +115,8 @@ header p {
 .controls {
   display: flex;
   gap: 0.75rem;
-  flex: 1 1 auto;
+  flex: 1 1 0;
+  min-width: 0;
   flex-wrap: wrap;
 }
 
@@ -1779,27 +1780,6 @@ header p {
     margin-top: 0.75rem;
   }
 
-  .binder-tabs {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    scroll-snap-type: x proximity;
-    scrollbar-width: none;
-    margin-inline: -0.5rem;
-    padding-inline: 0.5rem;
-    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
-    mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
-  }
-
-  .binder-tabs::-webkit-scrollbar {
-    display: none;
-  }
-
-  .binder-tab {
-    flex: 0 0 auto;
-    scroll-snap-align: start;
-    white-space: nowrap;
-  }
-
   .table-wrap {
     overflow-x: auto;
   }
@@ -1882,6 +1862,31 @@ header p {
   font-variant-numeric: tabular-nums;
   font-size: 0.75rem;
   opacity: 0.8;
+}
+
+/* Phones: one scrollable strip instead of two or three wrapped rows. This block
+   must stay below the base tab rules above, which would otherwise win on order. */
+@media (max-width: 768px) {
+  .binder-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+    margin-inline: -0.5rem;
+    padding-inline: 0.5rem;
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
+    mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
+  }
+
+  .binder-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .binder-tab {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    white-space: nowrap;
+  }
 }
 
 /* ---- Japanese secondary name + neutral category badge ---- */

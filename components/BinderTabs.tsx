@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import type { Binder } from "@/lib/binders";
 
 export type BinderCounts = Record<string, { owned: number; total: number }>;
@@ -12,6 +13,14 @@ type Props = {
 };
 
 export function BinderTabs({ binders, activeId, counts, onSelect }: Props) {
+  const activeRef = useRef<HTMLButtonElement>(null);
+
+  // On phones the strip scrolls horizontally; keep the active tab visible.
+  // Desktop wraps instead, so "nearest" makes this a no-op there.
+  useEffect(() => {
+    activeRef.current?.scrollIntoView?.({ inline: "nearest", block: "nearest" });
+  }, [activeId]);
+
   return (
     <nav className="binder-tabs" aria-label="Binders">
       {binders.map((b) => {
@@ -20,6 +29,7 @@ export function BinderTabs({ binders, activeId, counts, onSelect }: Props) {
         return (
           <button
             key={b.id}
+            ref={active ? activeRef : null}
             type="button"
             className={`binder-tab${active ? " active" : ""}`}
             aria-pressed={active}
