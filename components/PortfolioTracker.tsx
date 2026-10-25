@@ -21,7 +21,7 @@ import {
 } from "@/lib/purchases";
 import { fmtEur } from "@/lib/format";
 import { compareBySort, SortDir, SortKey } from "@/lib/sort";
-import { neededText } from "@/lib/shortlist";
+import { neededText } from "@/lib/needed";
 import { CardModal } from "./CardModal";
 import { CardTile } from "./CardTile";
 import { CardTable } from "./CardTable";

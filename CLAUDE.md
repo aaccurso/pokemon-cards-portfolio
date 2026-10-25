@@ -59,7 +59,7 @@ lib/
   cards.ts       — Card type, typeColors, numberLabel/typeBadges display helpers
   purchases.ts   — ownership/stats derivation + CSV export (pure)
   needed.ts      — needed-list blocks, labels and text export (pure)
-  shortlist.ts   - Cardmarket search URL + "Need (N): ..." text formatter (pure)
+  shortlist.ts   - Cardmarket search URL for the card modal (pure)
   binders.ts     — Binder type, resolveBinderId/getBinder/cardsForBinder, validateData (pure)
   sort.ts        — SortKey/SortDir, getSortValue, compareBySort nulls-last comparator (pure)
   format.ts      — fmtEur, the one place prices are formatted for display (pure)

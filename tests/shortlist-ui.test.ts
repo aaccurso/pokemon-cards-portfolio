@@ -38,8 +38,16 @@ test("FilterBar takes onCopyNeeded and copiedNeeded and shows Copy as text only 
   assert.match(filterBar, /Copy as text/);
 });
 
+test("Copy as text reuses item 2's neededText; lib/shortlist.ts keeps only the Cardmarket URL", () => {
+  // The lane says item 5 reuses item 2's text formatter rather than carrying a second one.
+  assert.match(tracker, /import \{ neededText \} from "@\/lib\/needed"/);
+  assert.doesNotMatch(tracker, /from "@\/lib\/shortlist"/, "PortfolioTracker has no reason to import lib/shortlist");
+  const shortlist = read("lib/shortlist.ts");
+  assert.doesNotMatch(shortlist, /neededText/, "lib/shortlist.ts must not duplicate lib/needed.ts");
+  assert.match(shortlist, /export function cardmarketSearchUrl/);
+});
+
 test("PortfolioTracker builds the shortlist from the shared filter state and sort module, not legacy setters", () => {
-  assert.match(tracker, /import \{ neededText \} from "@\/lib\/shortlist"/);
   assert.match(tracker, /function showSinglesShortlist\(\)/);
   assert.match(tracker, /setFilters\(\{ \.\.\.EMPTY_FILTERS, own: "wanted" \}\)/);
   assert.match(tracker, /setViewMode\("table"\)/);

@@ -1,17 +1,9 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { cardmarketSearchUrl, neededText } from "../lib/shortlist.ts";
-import { buildOwnershipMap } from "../lib/purchases.ts";
-import { card } from "./helpers.ts";
+import { cardmarketSearchUrl } from "../lib/shortlist.ts";
 
-const master = { kind: "master-set" as const, officialCount: 103 };
-const wants = { kind: "wants" as const };
-
-const owning = (...ids: string[]) =>
-  buildOwnershipMap({ shipments: [
-    { id: "s", seller: null, date: null, shipping: null, fees: null, total: 1,
-      items: ids.map((cardId) => ({ cardId, pricePaid: null, condition: "NM" })) },
-  ] });
+// The "Need (N): ..." text export lives in lib/needed.ts (collecting-workflow
+// item 2) and is covered by tests/needed.test.ts; item 5 only adds the link.
 
 test("cardmarketSearchUrl searches Cardmarket by the printed set code", () => {
   assert.equal(
@@ -24,28 +16,9 @@ test("cardmarketSearchUrl searches Cardmarket by the printed set code", () => {
   );
 });
 
-test("neededText lists missing set numbers for a master-set binder, padded and ascending", () => {
-  const cards = [
-    card({ id: "c", setNumber: 101, binderId: "m6a-30th" }),
-    card({ id: "a", setNumber: 3, binderId: "m6a-30th" }),
-    card({ id: "b", setNumber: 12, binderId: "m6a-30th" }),
-    card({ id: "owned", setNumber: 7, binderId: "m6a-30th" }),
-  ];
-  assert.equal(neededText(cards, owning("owned"), master), "Need (3): 003 012 101");
-});
-
-test("neededText lists Pokedex number and name for a wants binder, by Pokedex order", () => {
-  const cards = [
-    card({ id: "charizard", name: "Charizard ex", pokedexNumber: 6 }),
-    card({ id: "pikachu", name: "Pikachu", pokedexNumber: 25 }),
-    card({ id: "bulbasaur", name: "Bulbasaur", pokedexNumber: 1 }),
-  ];
+test("cardmarketSearchUrl escapes characters that would break the query string", () => {
   assert.equal(
-    neededText(cards, owning("bulbasaur"), wants),
-    "Need (2): #006 Charizard ex, #025 Pikachu"
+    cardmarketSearchUrl("s12a 100&x=1"),
+    "https://www.cardmarket.com/en/Pokemon/Products/Search?searchString=s12a%20100%26x%3D1"
   );
-});
-
-test("neededText with nothing missing", () => {
-  assert.equal(neededText([card({ id: "x" })], owning("x"), wants), "Need (0)");
 });
