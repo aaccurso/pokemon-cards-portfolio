@@ -1,6 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
+import { activeTabScrollLeft } from "../lib/tabStrip.ts";
 
 // Contract tests for the mobile pass (roadmap design lane, item 1).
 // Plain CSS has no unit-test surface of its own, so these read the stylesheet
@@ -79,4 +80,48 @@ test("binder tabs become a horizontal scroll strip on phones", () => {
 test("Share and CSV live in a secondary group that moves below the results on phones", () => {
   assert.match(tracker, /<div className="controls-secondary">[\s\S]*Share[\s\S]*CSV[\s\S]*<\/div>/);
   assert.match(declarations(phone, ".controls-secondary"), /order:\s*\d+/);
+});
+
+// Keeping the active tab visible must only move the strip's own horizontal
+// axis. scrollIntoView also scrolls every ancestor, window included, so on a
+// reload while scrolled down, a bfcache restore or a ?card= deep link the page
+// jumped back to the top on hydration (desktop and /print too).
+test("BinderTabs never calls scrollIntoView", () => {
+  assert.doesNotMatch(read("components/BinderTabs.tsx"), /scrollIntoView/);
+  assert.match(read("components/BinderTabs.tsx"), /activeTabScrollLeft/);
+});
+
+test("activeTabScrollLeft is null when the strip does not overflow (desktop wraps)", () => {
+  assert.equal(
+    activeTabScrollLeft({ navLeft: 0, navWidth: 900, navScrollLeft: 0, navScrollWidth: 900, elLeft: 600, elWidth: 120 }),
+    null,
+  );
+  assert.equal(
+    activeTabScrollLeft({ navLeft: 0, navWidth: 900, navScrollLeft: 0, navScrollWidth: 700, elLeft: 600, elWidth: 120 }),
+    null,
+  );
+});
+
+test("activeTabScrollLeft centres the active tab inside an overflowing strip", () => {
+  // Strip 360 wide showing 0..360 of 900; tab sits at 600..720 in content space.
+  const left = activeTabScrollLeft({
+    navLeft: 16, navWidth: 360, navScrollLeft: 0, navScrollWidth: 900, elLeft: 616, elWidth: 120,
+  });
+  assert.equal(left, 600 - (360 - 120) / 2); // 480: tab centre 660 == 480 + 180
+  // Already scrolled: the element's viewport position shifts but the answer is the same.
+  assert.equal(
+    activeTabScrollLeft({ navLeft: 16, navWidth: 360, navScrollLeft: 200, navScrollWidth: 900, elLeft: 416, elWidth: 120 }),
+    480,
+  );
+});
+
+test("activeTabScrollLeft clamps to the strip's scroll range", () => {
+  assert.equal(
+    activeTabScrollLeft({ navLeft: 0, navWidth: 360, navScrollLeft: 0, navScrollWidth: 900, elLeft: 10, elWidth: 120 }),
+    0,
+  );
+  assert.equal(
+    activeTabScrollLeft({ navLeft: 0, navWidth: 360, navScrollLeft: 0, navScrollWidth: 900, elLeft: 780, elWidth: 120 }),
+    540,
+  );
 });

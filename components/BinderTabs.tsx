@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import type { Binder } from "@/lib/binders";
+import { activeTabScrollLeft } from "@/lib/tabStrip";
 
 export type BinderCounts = Record<string, { owned: number; total: number }>;
 
@@ -16,9 +17,22 @@ export function BinderTabs({ binders, activeId, counts, onSelect }: Props) {
   const activeRef = useRef<HTMLButtonElement>(null);
 
   // On phones the strip scrolls horizontally; keep the active tab visible.
-  // Desktop wraps instead, so "nearest" makes this a no-op there.
+  // Only the nav's own x axis moves. Scrolling the tab "into view" via the
+  // DOM API would also scroll every ancestor (window included) and reset a
+  // restored or deep-linked page position on hydration. Desktop wraps instead.
   useEffect(() => {
-    activeRef.current?.scrollIntoView?.({ inline: "nearest", block: "nearest" });
+    const el = activeRef.current;
+    const nav = el?.parentElement;
+    if (!el || !nav) return;
+    const left = activeTabScrollLeft({
+      navLeft: nav.getBoundingClientRect().left,
+      navWidth: nav.clientWidth,
+      navScrollLeft: nav.scrollLeft,
+      navScrollWidth: nav.scrollWidth,
+      elLeft: el.getBoundingClientRect().left,
+      elWidth: el.offsetWidth,
+    });
+    if (left !== null) nav.scrollTo({ left });
   }, [activeId]);
 
   return (
