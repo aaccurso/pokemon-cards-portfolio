@@ -82,6 +82,22 @@ export const typeColors: Record<string, string> = {
   Fairy: "#EE99AC",
 };
 
+export type RarityLabel = { rarity: string; label: string };
+
+/**
+ * tcgdex rarity labels in display order, with the short label the UI shows.
+ * "None" is what tcgdex reports for Common, Uncommon and plain Rare prints.
+ * Rarities not listed here sort after these and display their raw label.
+ */
+export const rarityOrder: RarityLabel[] = [
+  { rarity: "None", label: "Common / Uncommon" },
+  { rarity: "Double rare", label: "RR" },
+  { rarity: "Illustration rare", label: "AR" },
+  { rarity: "Special illustration rare", label: "SAR" },
+  { rarity: "Futuristic Rare", label: "Futuristic" },
+  { rarity: "Classic Collection", label: "Classic" },
+];
+
 /**
  * Master-set binders show the slot index as printed on the card ("126/103",
  * or "126" without an official count). Wants binders show the Pokedex number

@@ -14,10 +14,10 @@ const cards = [
   card({ id: "bulbasaur", pokedexNumber: 1 }),
   card({ id: "ivysaur", pokedexNumber: 2 }),
   card({ id: "venusaur", pokedexNumber: 3 }),
-  card({ id: "m6a-001", binderId: "m6a-30th", setNumber: 1 }),
-  card({ id: "m6a-002", binderId: "m6a-30th", setNumber: 2 }),
-  card({ id: "m6a-003", binderId: "m6a-30th", setNumber: 3 }),
-  card({ id: "m6a-004", binderId: "m6a-30th", setNumber: 4 }),
+  card({ id: "m6a-001", binderId: "m6a-30th", setNumber: 1, rarity: "None" }),
+  card({ id: "m6a-002", binderId: "m6a-30th", setNumber: 2, rarity: "Classic Collection" }),
+  card({ id: "m6a-003", binderId: "m6a-30th", setNumber: 3, rarity: "Classic Collection" }),
+  card({ id: "m6a-004", binderId: "m6a-30th", setNumber: 4, rarity: "None" }),
 ];
 
 const purchases: PurchaseData = {
@@ -43,11 +43,13 @@ test("buildPlan derives every URL and expectation from the data", () => {
     h1: "Pokedex 151 full-art",
     showing: 3,
     tabs: ["1 / 3", "1 / 4"],
+    raritySelect: false,
   });
   assert.deepEqual(byPath["/?binder=m6a-30th"], {
     h1: "30th CELEBRATION",
     showing: 4,
     tabs: ["1 / 3", "1 / 4"],
+    raritySelect: true,
   });
   assert.equal(byPath["/?binder=typo"].h1, "Pokedex 151 full-art");
   assert.equal(byPath["/?binder=m6a-30th&view=table"].tbodyRows, 4);
@@ -55,7 +57,22 @@ test("buildPlan derives every URL and expectation from the data", () => {
   // Print excludes owned cards: 2 unowned Kanto cards -> 1 grid sheet + 1 calibration sheet.
   assert.deepEqual(byPath["/print"], { h1: "Pokedex 151 full-art placeholder cards", printCards: 2, printSheets: 2 });
   assert.deepEqual(byPath["/print?binder=m6a-30th"], { h1: "30th CELEBRATION placeholder cards", printCards: 3, printSheets: 2 });
-  assert.equal(plan.length, 7);
+  // Rarity filter: the first rarity in rarityOrder present in the binder, counts from the data.
+  assert.deepEqual(byPath["/?binder=m6a-30th&rarity=None"], {
+    h1: "30th CELEBRATION",
+    showing: 2,
+    of: 4,
+    rarityRows: 2,
+    activeRarity: "Common / Uncommon",
+  });
+  assert.equal(plan.length, 8);
+});
+
+test("buildPlan adds no rarity page for a binder where no card has a rarity", () => {
+  const plan = buildPlan({ cards, purchases, binders });
+  assert.equal(plan.filter((p) => p.path.includes("rarity=")).length, 1);
+  const noRarity = cards.map((c) => ({ ...c, rarity: undefined }));
+  assert.equal(buildPlan({ cards: noRarity, purchases, binders }).some((p) => p.path.includes("rarity=")), false);
 });
 
 test("buildPlan skips the modal page when nothing in the default binder is owned", () => {
@@ -100,6 +117,31 @@ test("checkPage counts table rows, finds the modal status, and reads the print h
   const print = `<html><body><h1>X placeholder cards</h1><p class="print-hint">69<!-- --> cards · <!-- -->9<!-- --> sheet<!-- -->s<!-- --> total (first page is a calibration guide)</p></body></html>`;
   assert.deepEqual(checkPage({ path: "/print", expect: { h1: "X placeholder cards", printCards: 69, printSheets: 9 } }, print), []);
   assert.equal(checkPage({ path: "/print", expect: { h1: "X placeholder cards", printCards: 70, printSheets: 9 } }, print).length, 1);
+});
+
+test("checkPage reads a filtered Showing count and the rarity breakdown rows", () => {
+  const rows = (active: string) => `<div class="rarity-breakdown">
+    <button type="button" class="rarity-row${active === "Common / Uncommon" ? " active" : ""}" aria-pressed="${active === "Common / Uncommon"}"><span class="rarity-label">Common / Uncommon</span></button>
+    <button type="button" class="rarity-row${active === "Classic" ? " active" : ""}" aria-pressed="${active === "Classic"}"><span class="rarity-label">Classic</span></button>
+  </div>`;
+  const html = dashboard("30th CELEBRATION", 0, ["1 / 3", "1 / 4"], rows("Common / Uncommon"))
+    .replace("Showing <!-- -->0<!-- --> of <!-- -->0", "Showing <!-- -->2<!-- --> of <!-- -->4");
+  const expect = { h1: "30th CELEBRATION", showing: 2, of: 4, rarityRows: 2, activeRarity: "Common / Uncommon" };
+  assert.deepEqual(checkPage({ path: "/r", expect }, html), []);
+  assert.equal(checkPage({ path: "/r", expect: { ...expect, showing: 3 } }, html).length, 1);
+  assert.equal(checkPage({ path: "/r", expect: { ...expect, rarityRows: 3 } }, html).length, 1);
+  assert.equal(checkPage({ path: "/r", expect: { ...expect, activeRarity: "Classic" } }, html).length, 1);
+  const none = dashboard("30th CELEBRATION", 4, ["1 / 3", "1 / 4"], rows(""));
+  assert.equal(checkPage({ path: "/r", expect: { h1: "30th CELEBRATION", activeRarity: "Classic" } }, none).length, 1);
+});
+
+test("checkPage asserts the rarity select is present on binders with rarities and absent elsewhere", () => {
+  const withSelect = dashboard("30th CELEBRATION", 4, ["1 / 3", "1 / 4"], `<select aria-label="Rarity"><option value="all">All Rarities</option></select>`);
+  const without = dashboard("Pokedex 151 full-art", 3, ["1 / 3", "1 / 4"]);
+  assert.deepEqual(checkPage({ path: "/m", expect: { h1: "30th CELEBRATION", raritySelect: true } }, withSelect), []);
+  assert.deepEqual(checkPage({ path: "/", expect: { h1: "Pokedex 151 full-art", raritySelect: false } }, without), []);
+  assert.equal(checkPage({ path: "/m", expect: { h1: "30th CELEBRATION", raritySelect: false } }, withSelect).length, 1);
+  assert.equal(checkPage({ path: "/", expect: { h1: "Pokedex 151 full-art", raritySelect: true } }, without).length, 1);
 });
 
 test("checkPage flags Next's client error page", () => {

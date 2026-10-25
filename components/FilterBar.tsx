@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 
+import type { RarityRow } from "@/lib/purchases";
+
 export type OwnFilter = "all" | "owned" | "wanted";
 export type ViewMode = "table" | "grid";
 
@@ -15,15 +17,19 @@ export type Filters = {
   own: OwnFilter;
   /** "Illustration only": cards with a priced target (buyPrice != null). */
   illus: boolean;
+  /** A tcgdex rarity label (e.g. "Classic Collection") or "all". */
+  rarity: string;
 };
 
-export const EMPTY_FILTERS: Filters = { q: "", type: "all", set: "all", own: "all", illus: false };
+export const EMPTY_FILTERS: Filters = { q: "", type: "all", set: "all", own: "all", illus: false, rarity: "all" };
 
 type Props = {
   filters: Filters;
   onChange: (patch: Partial<Filters>) => void;
   types: string[];
   sets: string[];
+  /** Per-rarity rows of the active binder; empty when no card has a rarity, which hides the select. */
+  rarities: RarityRow[];
   viewMode: ViewMode;
   onViewMode: (mode: ViewMode) => void;
   onShare: () => void;
@@ -40,6 +46,7 @@ export function FilterBar({
   onChange,
   types,
   sets,
+  rarities,
   viewMode,
   onViewMode,
   onShare,
@@ -81,6 +88,20 @@ export function FilterBar({
           <option value="owned">Owned Only</option>
           <option value="wanted">Wanted Only</option>
         </select>
+        {rarities.length > 0 && (
+          <select
+            value={filters.rarity}
+            onChange={(e) => onChange({ rarity: e.target.value })}
+            aria-label="Rarity"
+          >
+            <option value="all">All Rarities</option>
+            {rarities.map((r) => (
+              <option key={r.rarity} value={r.rarity}>
+                {r.label}
+              </option>
+            ))}
+          </select>
+        )}
         {showIllustration && (
           <button
             className={`pill-toggle${filters.illus ? " active" : ""}`}
