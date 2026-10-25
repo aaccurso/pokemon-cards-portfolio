@@ -24,6 +24,7 @@ Personal tracker for Japanese Pokémon TCG binders. Each binder is its own colle
 - **Price refresh** — one script pulls Cardmarket trend prices from tcgdex into `buyPrice` and appends every snapshot to `data/prices.json`, so history is kept for later charts.
 - **CDN-independent images** — every card image is bundled as WebP in `public/cards/`.
 - **CSV export** of the active binder.
+- **Finish-as-singles shortlist**: a "Buy as singles" link on the master-set tile jumps to the wanted cards as a table, priciest first (`?own=wanted&view=table&sort=buyPrice&dir=desc`); "Copy as text" turns the wanted set into one line (`Need (62): 003 007 012 ...`) for a seller chat; the card modal links the set code to a Cardmarket search.
 
 ## Tech stack
 
