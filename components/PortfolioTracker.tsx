@@ -308,79 +308,83 @@ export default function PortfolioTracker() {
         </div>
       </div>
 
-      <div className="controls">
-        <input
-          type="text"
-          placeholder="Search by name, code, or set..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)}>
-          <option value="all">All Types</option>
-          {allTypes.map((t) => (
-            <option key={t} value={t}>
-              {t}
-            </option>
-          ))}
-        </select>
-        <select value={setFilter} onChange={(e) => setSetFilter(e.target.value)}>
-          <option value="all">All Sets</option>
-          {allSets.map((s) => (
-            <option key={s} value={s}>
-              {s}
-            </option>
-          ))}
-        </select>
-        <select
-          value={ownershipFilter}
-          onChange={(e) => setOwnershipFilter(e.target.value as typeof ownershipFilter)}
-        >
-          <option value="all">All Cards</option>
-          <option value="owned">Owned Only</option>
-          <option value="wanted">Wanted Only</option>
-        </select>
-        {binder.kind === "wants" && (
-          <button
-            className={`pill-toggle${illustrationOnly ? " active" : ""}`}
-            onClick={() => setIllustrationOnly((v) => !v)}
-            aria-pressed={illustrationOnly}
-            title="Show only cards with a priced illustration target"
+      <div className="controls-row">
+        <div className="controls">
+          <input
+            type="text"
+            placeholder="Search by name, code, or set..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)}>
+            <option value="all">All Types</option>
+            {allTypes.map((t) => (
+              <option key={t} value={t}>
+                {t}
+              </option>
+            ))}
+          </select>
+          <select value={setFilter} onChange={(e) => setSetFilter(e.target.value)}>
+            <option value="all">All Sets</option>
+            {allSets.map((s) => (
+              <option key={s} value={s}>
+                {s}
+              </option>
+            ))}
+          </select>
+          <select
+            value={ownershipFilter}
+            onChange={(e) => setOwnershipFilter(e.target.value as typeof ownershipFilter)}
           >
-            Illustration only
+            <option value="all">All Cards</option>
+            <option value="owned">Owned Only</option>
+            <option value="wanted">Wanted Only</option>
+          </select>
+          {binder.kind === "wants" && (
+            <button
+              className={`pill-toggle${illustrationOnly ? " active" : ""}`}
+              onClick={() => setIllustrationOnly((v) => !v)}
+              aria-pressed={illustrationOnly}
+              title="Show only cards with a priced illustration target"
+            >
+              Illustration only
+            </button>
+          )}
+          <div className="view-toggle" role="group" aria-label="View mode">
+            <button
+              className={viewMode === "table" ? "active" : ""}
+              onClick={() => setViewMode("table")}
+              aria-pressed={viewMode === "table"}
+              title="Table view"
+            >
+              &#9776; Table
+            </button>
+            <button
+              className={viewMode === "grid" ? "active" : ""}
+              onClick={() => setViewMode("grid")}
+              aria-pressed={viewMode === "grid"}
+              title="Grid view"
+            >
+              &#9638; Grid
+            </button>
+          </div>
+        </div>
+        <div className="controls-secondary">
+          <button
+            className="action-button"
+            onClick={handleShare}
+            title="Copy a shareable link to the current view"
+          >
+            {copied ? "✓ Copied" : "↗ Share"}
           </button>
-        )}
-        <div className="view-toggle" role="group" aria-label="View mode">
           <button
-            className={viewMode === "table" ? "active" : ""}
-            onClick={() => setViewMode("table")}
-            aria-pressed={viewMode === "table"}
-            title="Table view"
+            className="action-button"
+            onClick={handleDownloadCsv}
+            title="Download the current portfolio as CSV"
           >
-            &#9776; Table
-          </button>
-          <button
-            className={viewMode === "grid" ? "active" : ""}
-            onClick={() => setViewMode("grid")}
-            aria-pressed={viewMode === "grid"}
-            title="Grid view"
-          >
-            &#9638; Grid
+            ↓ CSV
           </button>
         </div>
-        <button
-          className="action-button"
-          onClick={handleShare}
-          title="Copy a shareable link to the current view"
-        >
-          {copied ? "✓ Copied" : "↗ Share"}
-        </button>
-        <button
-          className="action-button"
-          onClick={handleDownloadCsv}
-          title="Download the current portfolio as CSV"
-        >
-          ↓ CSV
-        </button>
       </div>
 
       {viewMode === "grid" ? (
@@ -396,133 +400,135 @@ export default function PortfolioTracker() {
           ))}
         </div>
       ) : (
-        <table className="card-table">
-          <thead>
-            <tr>
-              <th onClick={() => handleSort("owned")}>
-                Own {sortIndicator("owned")}
-              </th>
-              <th onClick={() => handleSort(binder.sort)}>
-                # {sortIndicator(binder.sort)}
-              </th>
-              <th onClick={() => handleSort("name")}>
-                Name {sortIndicator("name")}
-              </th>
-              <th className="hide-mobile">Type</th>
-              <th onClick={() => handleSort("code")}>
-                Code {sortIndicator("code")}
-              </th>
-              <th className="hide-mobile" onClick={() => handleSort("set")}>
-                Set {sortIndicator("set")}
-              </th>
-              <th className="hide-mobile">Language</th>
-              <th className="hide-mobile">Variant</th>
-              <th onClick={() => handleSort("buyPrice")}>
-                Buy Price {sortIndicator("buyPrice")}
-              </th>
-              <th onClick={() => handleSort("pricePaid")}>
-                Paid {sortIndicator("pricePaid")}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {filtered.map((card) => {
-              const own = ownership.get(card.id);
-              return (
-                <tr key={card.id} className={own ? "owned" : ""}>
-                  <td className="own-cell">
-                    {own ? (
-                      <span
-                        className="pokeball pokeball-xs"
-                        aria-label="Owned"
-                        title="Owned"
-                      />
-                    ) : (
-                      <span
-                        className="own-indicator wanted"
-                        aria-label="Wanted"
-                        title="Wanted"
-                      >
-                        ○
-                      </span>
-                    )}
-                  </td>
-                  <td className="pokedex-num">{numberLabel(card, binder)}</td>
-                  <td>
-                    <span
-                      className="card-name-cell"
-                      onMouseEnter={() => setHoveredId(card.id)}
-                      onMouseLeave={() => setHoveredId(null)}
-                      onClick={() => setModalCard(card)}
-                      role="button"
-                      tabIndex={0}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter" || e.key === " ") {
-                          e.preventDefault();
-                          setModalCard(card);
-                        }
-                      }}
-                    >
-                      <span className="preview-icon" aria-label="Preview card">
-                        &#128065;
-                      </span>
-                      <strong>
-                        {card.name}
-                        {card.nameJa && <span className="name-ja">{card.nameJa}</span>}
-                      </strong>
-                      {hoveredId === card.id && card.imageUrl && (
-                        <span className="preview-tooltip">
-                          <img
-                            src={card.imageUrl}
-                            alt=""
-                            loading="lazy"
-                            onError={(e) => {
-                              (e.currentTarget.parentElement as HTMLElement).style.display = "none";
-                            }}
-                          />
+        <div className="table-wrap">
+          <table className="card-table">
+            <thead>
+              <tr>
+                <th onClick={() => handleSort("owned")}>
+                  Own {sortIndicator("owned")}
+                </th>
+                <th onClick={() => handleSort(binder.sort)}>
+                  # {sortIndicator(binder.sort)}
+                </th>
+                <th onClick={() => handleSort("name")}>
+                  Name {sortIndicator("name")}
+                </th>
+                <th className="hide-mobile">Type</th>
+                <th onClick={() => handleSort("code")}>
+                  Code {sortIndicator("code")}
+                </th>
+                <th className="hide-mobile" onClick={() => handleSort("set")}>
+                  Set {sortIndicator("set")}
+                </th>
+                <th className="hide-mobile">Language</th>
+                <th className="hide-mobile">Variant</th>
+                <th onClick={() => handleSort("buyPrice")}>
+                  Buy Price {sortIndicator("buyPrice")}
+                </th>
+                <th onClick={() => handleSort("pricePaid")}>
+                  Paid {sortIndicator("pricePaid")}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {filtered.map((card) => {
+                const own = ownership.get(card.id);
+                return (
+                  <tr key={card.id} className={own ? "owned" : ""}>
+                    <td className="own-cell">
+                      {own ? (
+                        <span
+                          className="pokeball pokeball-xs"
+                          aria-label="Owned"
+                          title="Owned"
+                        />
+                      ) : (
+                        <span
+                          className="own-indicator wanted"
+                          aria-label="Wanted"
+                          title="Wanted"
+                        >
+                          ○
                         </span>
                       )}
-                    </span>
-                  </td>
-                  <td className="hide-mobile">
-                    {typeBadges(card).map((b) => (
+                    </td>
+                    <td className="pokedex-num">{numberLabel(card, binder)}</td>
+                    <td>
                       <span
-                        key={b.label}
-                        className={`type-badge${b.label === "Trainer" || b.label === "Energy" ? " trainer" : ""}`}
-                        style={{ background: b.color }}
+                        className="card-name-cell"
+                        onMouseEnter={() => setHoveredId(card.id)}
+                        onMouseLeave={() => setHoveredId(null)}
+                        onClick={() => setModalCard(card)}
+                        role="button"
+                        tabIndex={0}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            setModalCard(card);
+                          }
+                        }}
                       >
-                        {b.label}
+                        <span className="preview-icon" aria-label="Preview card">
+                          &#128065;
+                        </span>
+                        <strong>
+                          {card.name}
+                          {card.nameJa && <span className="name-ja">{card.nameJa}</span>}
+                        </strong>
+                        {hoveredId === card.id && card.imageUrl && (
+                          <span className="preview-tooltip">
+                            <img
+                              src={card.imageUrl}
+                              alt=""
+                              loading="lazy"
+                              onError={(e) => {
+                                (e.currentTarget.parentElement as HTMLElement).style.display = "none";
+                              }}
+                            />
+                          </span>
+                        )}
                       </span>
-                    ))}
-                  </td>
-                  <td>{card.code}</td>
-                  <td className="hide-mobile">{card.set}</td>
-                  <td className="hide-mobile">
-                    {languageFlags[card.language] && (
-                      <span className="language-flag" aria-hidden>
-                        {languageFlags[card.language]}
-                      </span>
-                    )}
-                    {card.language}
-                  </td>
-                  <td className="hide-mobile">
-                    {card.variant && (
-                      <span className="variant-badge">{card.variant}</span>
-                    )}
-                  </td>
-                  <td className="price">
-                    {card.buyPrice != null
-                      ? `${fmt(card.buyPrice)} \u20AC`
-                      : "\u2014"}
-                  </td>
-                  <td className="price">
-                    {own && own.pricePaid != null ? `${fmt(own.pricePaid)} \u20AC` : "\u2014"}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+                    </td>
+                    <td className="hide-mobile">
+                      {typeBadges(card).map((b) => (
+                        <span
+                          key={b.label}
+                          className={`type-badge${b.label === "Trainer" || b.label === "Energy" ? " trainer" : ""}`}
+                          style={{ background: b.color }}
+                        >
+                          {b.label}
+                        </span>
+                      ))}
+                    </td>
+                    <td>{card.code}</td>
+                    <td className="hide-mobile">{card.set}</td>
+                    <td className="hide-mobile">
+                      {languageFlags[card.language] && (
+                        <span className="language-flag" aria-hidden>
+                          {languageFlags[card.language]}
+                        </span>
+                      )}
+                      {card.language}
+                    </td>
+                    <td className="hide-mobile">
+                      {card.variant && (
+                        <span className="variant-badge">{card.variant}</span>
+                      )}
+                    </td>
+                    <td className="price">
+                      {card.buyPrice != null
+                        ? `${fmt(card.buyPrice)} \u20AC`
+                        : "\u2014"}
+                    </td>
+                    <td className="price">
+                      {own && own.pricePaid != null ? `${fmt(own.pricePaid)} \u20AC` : "\u2014"}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       )}
 
       <p className="results-count">

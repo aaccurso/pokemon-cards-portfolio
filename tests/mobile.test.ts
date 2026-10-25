@@ -9,7 +9,7 @@ import fs from "node:fs";
 // layout changed and the change should be looked at on a real phone.
 
 const read = (p: string) => fs.readFileSync(new URL(`../${p}`, import.meta.url), "utf8");
-const css = read("app/globals.css");
+const css = read("app/globals.css").replace(/\/\*[\s\S]*?\*\//g, "");
 const tracker = read("components/PortfolioTracker.tsx");
 
 /** Concatenate the bodies of every `@media <query> { ... }` block in the sheet. */
@@ -33,15 +33,13 @@ function mediaBlocks(sheet: string, query: string): string {
   return out.join("\n");
 }
 
-/** Declarations of the first rule whose selector list contains `selector` exactly. */
+/** Declarations of every rule whose selector list contains `selector` exactly, merged like the cascade. */
 function declarations(block: string, selector: string): string {
   const rules = block.match(/[^{}]+\{[^{}]*\}/g) ?? [];
-  for (const rule of rules) {
-    const [sel, body] = rule.split("{");
-    const parts = sel.split(",").map((s) => s.trim());
-    if (parts.includes(selector)) return body.replace("}", "");
-  }
-  return "";
+  return rules
+    .filter((rule) => rule.split("{")[0].split(",").map((s) => s.trim()).includes(selector))
+    .map((rule) => rule.split("{")[1].replace("}", ""))
+    .join("\n");
 }
 
 const base = css.replace(/@media[^{]+\{(?:[^{}]|\{[^{}]*\})*\}/g, "");
@@ -58,8 +56,8 @@ test("stat cards fall to 3 columns on tablets and 2 on phones", () => {
 });
 
 test("form fields are at least 16px on phones so iOS Safari does not zoom on focus", () => {
-  const decl = declarations(phone, ".controls input") || declarations(phone, ".controls select");
-  assert.match(decl, /font-size:\s*16px/);
+  assert.match(declarations(phone, ".controls input"), /font-size:\s*16px/);
+  assert.match(declarations(phone, ".controls select"), /font-size:\s*16px/);
   assert.match(declarations(phone, ".controls input"), /flex-basis:\s*100%/);
   assert.match(declarations(phone, ".controls select"), /min-width:\s*0/);
 });

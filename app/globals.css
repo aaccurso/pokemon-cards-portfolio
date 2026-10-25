@@ -8,6 +8,8 @@
   --accent: #f8d030;
   --owned-bg: #1a3a2e;
   --owned-border: #2a5a3e;
+  --stat-pad: 1.25rem;
+  --stat-value: 1.75rem;
 }
 
 * {
@@ -69,12 +71,12 @@ header p {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 1.25rem;
+  padding: var(--stat-pad);
   text-align: center;
 }
 
 .stat-card .value {
-  font-size: 1.75rem;
+  font-size: var(--stat-value);
   font-weight: 700;
   color: var(--accent);
 }
@@ -100,11 +102,26 @@ header p {
   transition: width 0.5s ease;
 }
 
-.controls {
+/* Filters on the left, Share/CSV on the right. On phones the row dissolves
+   (display: contents) and .controls-secondary is reordered below the results. */
+.controls-row {
   display: flex;
   gap: 0.75rem;
   margin-bottom: 1.5rem;
   flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.controls {
+  display: flex;
+  gap: 0.75rem;
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+}
+
+.controls-secondary {
+  display: flex;
+  gap: 0.75rem;
 }
 
 .controls input,
@@ -1706,13 +1723,93 @@ header p {
   font-size: 0.85rem;
 }
 
+/* Tablet and half-screen desktop: six stat cards in two rows, no orphan. */
+@media (max-width: 1190px) {
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
+  /* Flex column so .controls-secondary can be reordered below the results. */
   .container {
+    display: flex;
+    flex-direction: column;
     padding: 1rem 0.5rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .stat-card {
+    --stat-pad: 0.85rem;
+    --stat-value: 1.35rem;
+  }
+
+  .controls-row {
+    display: contents;
+  }
+
+  .controls {
+    margin-bottom: 1.25rem;
+  }
+
+  /* 16px keeps iOS Safari from zooming the page when a field is focused. */
+  .controls input,
+  .controls select {
+    font-size: 16px;
+  }
+
+  .controls input {
+    flex-basis: 100%;
+    min-width: 0;
+  }
+
+  .controls select {
+    flex: 1 1 40%;
+    min-width: 0;
+  }
+
+  .controls-secondary {
+    order: 1;
+    justify-content: center;
+    margin-top: 0.75rem;
+  }
+
+  .binder-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+    margin-inline: -0.5rem;
+    padding-inline: 0.5rem;
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
+    mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
+  }
+
+  .binder-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .binder-tab {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    white-space: nowrap;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
   }
 
   .card-table {
     font-size: 0.75rem;
+  }
+
+  .preview-icon {
+    display: none;
   }
 
   .hide-mobile {
