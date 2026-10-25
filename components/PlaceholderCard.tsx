@@ -1,4 +1,5 @@
 import { BinderDisplay, Card, numberLabel, typeBadges } from "@/lib/cards";
+import { fmtEur } from "@/lib/format";
 
 export function PlaceholderCard({
   card,
@@ -48,7 +49,7 @@ export function PlaceholderCard({
           <span className="ph-code">{card.code}</span>
           {card.buyPrice != null && (
             <span className="ph-budget">
-              &le; {card.buyPrice.toFixed(2).replace(".", ",")} &euro;
+              &le; {fmtEur(card.buyPrice)}
             </span>
           )}
         </div>
