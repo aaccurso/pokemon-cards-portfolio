@@ -100,6 +100,90 @@ header p {
   transition: width 0.5s ease;
 }
 
+/* Value-weighted completion next to the card count in the header */
+header p .value-progress {
+  color: var(--text-muted);
+}
+
+/* Completion by rarity (master-set binders): one clickable row per rarity */
+.rarity-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin: -1rem 0 2rem;
+}
+
+.rarity-row {
+  display: grid;
+  grid-template-columns: 9rem minmax(6rem, 1fr) 5rem 7rem;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.3rem 0.6rem;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: var(--text-muted);
+  font: inherit;
+  font-size: 0.8rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.rarity-row:hover {
+  color: var(--text);
+  background: var(--surface-hover);
+}
+
+.rarity-row.active {
+  color: var(--text);
+  border-color: var(--accent);
+  background: var(--surface);
+}
+
+.rarity-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rarity-bar {
+  display: block;
+  height: 6px;
+  background: var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.rarity-bar-fill {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #f8d030, #78c850);
+  border-radius: 999px;
+  transition: width 0.5s ease;
+}
+
+.rarity-count {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.rarity-togo {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  text-align: right;
+}
+
+@media (max-width: 640px) {
+  .rarity-row {
+    grid-template-columns: 7rem 1fr 4rem;
+  }
+  .rarity-togo {
+    display: none;
+  }
+}
+
 .controls {
   display: flex;
   gap: 0.75rem;

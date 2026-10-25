@@ -15,6 +15,7 @@ import {
   buildOwnershipMap,
   computeStats,
   buildCsv,
+  rarityBreakdown,
   OwnershipMap,
 } from "@/lib/purchases";
 import { CardModal } from "./CardModal";
@@ -43,6 +44,7 @@ export default function PortfolioTracker() {
   const [illustrationOnly, setIllustrationOnly] = useState(
     () => searchParams.get("illus") === "1"
   );
+  const [rarityFilter, setRarityFilter] = useState(() => searchParams.get("rarity") ?? "all");
   const [sortKey, setSortKey] = useState<SortKey>(
     () => (searchParams.get("sort") as SortKey) || initialBinder.sort
   );
@@ -72,6 +74,7 @@ export default function PortfolioTracker() {
     if (setFilter !== "all") p.set("set", setFilter);
     if (ownershipFilter !== "all") p.set("own", ownershipFilter);
     if (illustrationOnly) p.set("illus", "1");
+    if (rarityFilter !== "all") p.set("rarity", rarityFilter);
     if (sortKey !== binder.sort) p.set("sort", String(sortKey));
     if (sortDir !== "asc") p.set("dir", sortDir);
     if (viewMode !== "grid") p.set("view", viewMode);
@@ -87,6 +90,7 @@ export default function PortfolioTracker() {
     setFilter,
     ownershipFilter,
     illustrationOnly,
+    rarityFilter,
     sortKey,
     sortDir,
     viewMode,
@@ -131,6 +135,12 @@ export default function PortfolioTracker() {
     [binderCards]
   );
 
+  // Empty when no card in the binder carries a rarity (all wants binders today).
+  const rarityRows = useMemo(
+    () => rarityBreakdown(binderCards, ownership),
+    [binderCards, ownership]
+  );
+
   function selectBinder(id: string) {
     if (id === binderId) return;
     setBinderId(id);
@@ -139,6 +149,7 @@ export default function PortfolioTracker() {
     setSetFilter("all");
     setOwnershipFilter("all");
     setIllustrationOnly(false);
+    setRarityFilter("all");
     setSortKey(getBinder(id, binders).sort);
     setSortDir("asc");
     setModalCard(null);
@@ -179,6 +190,10 @@ export default function PortfolioTracker() {
       list = list.filter((c) => c.buyPrice != null);
     }
 
+    if (rarityFilter !== "all") {
+      list = list.filter((c) => c.rarity === rarityFilter);
+    }
+
     list = [...list].sort((a, b) => {
       const av = getSortValue(a, sortKey, ownership);
       const bv = getSortValue(b, sortKey, ownership);
@@ -190,7 +205,7 @@ export default function PortfolioTracker() {
     });
 
     return list;
-  }, [binderCards, search, typeFilter, setFilter, ownershipFilter, illustrationOnly, sortKey, sortDir, ownership]);
+  }, [binderCards, search, typeFilter, setFilter, ownershipFilter, illustrationOnly, rarityFilter, sortKey, sortDir, ownership]);
 
   function handleSort(key: SortKey) {
     if (sortKey === key) {
@@ -234,6 +249,10 @@ export default function PortfolioTracker() {
   const collectedPct =
     stats.total === 0 ? 0 : Math.round((stats.owned / stats.total) * 100);
   const isMasterSet = binder.kind === "master-set";
+  // Value of the owned priced cards; budget - toComplete by construction.
+  const ownedValue = stats.budget - stats.toComplete;
+  const valuePct = stats.budget === 0 ? 0 : Math.round((ownedValue / stats.budget) * 100);
+  const showRarity = isMasterSet && rarityRows.length > 0;
 
   return (
     <div className="container">
@@ -248,6 +267,14 @@ export default function PortfolioTracker() {
         <h1>{binder.name}</h1>
         <p>
           {stats.owned} / {stats.total} cards collected · {collectedPct}%
+          {isMasterSet && (
+            <span
+              className="value-progress"
+              title="Share of the set's single-card value you already own; the honest master-set progress"
+            >
+              {" "}· value {fmt0(ownedValue)} / {fmt0(stats.budget)} &euro; ({valuePct}%)
+            </span>
+          )}
         </p>
       </header>
 
@@ -257,6 +284,36 @@ export default function PortfolioTracker() {
           style={{ width: `${collectedPct}%` }}
         />
       </div>
+
+      {showRarity && (
+        <div className="rarity-breakdown" aria-label="Completion by rarity">
+          {rarityRows.map((r) => {
+            const pct = r.total === 0 ? 0 : Math.round((r.owned / r.total) * 100);
+            const active = rarityFilter === r.rarity;
+            return (
+              <button
+                key={r.rarity}
+                type="button"
+                className={`rarity-row${active ? " active" : ""}`}
+                aria-pressed={active}
+                onClick={() => setRarityFilter(active ? "all" : r.rarity)}
+                title={active ? "Clear the rarity filter" : `Show only ${r.label}`}
+              >
+                <span className="rarity-label">{r.label}</span>
+                <span className="rarity-bar">
+                  <span className="rarity-bar-fill" style={{ width: `${pct}%` }} />
+                </span>
+                <span className="rarity-count">
+                  {r.owned} / {r.total}
+                </span>
+                <span className="rarity-togo">
+                  {r.toComplete > 0 ? `to go ${fmt0(r.toComplete)} €` : ""}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      )}
 
       <div className="stats-grid">
         <div className="stat-card">
@@ -339,6 +396,20 @@ export default function PortfolioTracker() {
           <option value="owned">Owned Only</option>
           <option value="wanted">Wanted Only</option>
         </select>
+        {rarityRows.length > 0 && (
+          <select
+            value={rarityFilter}
+            onChange={(e) => setRarityFilter(e.target.value)}
+            aria-label="Rarity"
+          >
+            <option value="all">All Rarities</option>
+            {rarityRows.map((r) => (
+              <option key={r.rarity} value={r.rarity}>
+                {r.label}
+              </option>
+            ))}
+          </select>
+        )}
         {binder.kind === "wants" && (
           <button
             className={`pill-toggle${illustrationOnly ? " active" : ""}`}
@@ -556,6 +627,11 @@ export default function PortfolioTracker() {
 
 function fmt(n: number): string {
   return n.toFixed(2).replace(".", ",");
+}
+
+/** Whole euros, for compact summary lines. */
+function fmt0(n: number): string {
+  return String(Math.round(n));
 }
 
 function getSortValue(
