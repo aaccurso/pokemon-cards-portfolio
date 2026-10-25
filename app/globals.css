@@ -960,6 +960,11 @@ header p {
   min-height: 100vh;
   padding: 2rem 1rem 3rem;
   color: #222;
+  /* Inherited by every descendant: badge colours, the watermark and the
+     calibration ruler ticks print without the manual "Background graphics"
+     step in the print dialog. */
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
 }
 
 .print-controls {
@@ -1245,10 +1250,6 @@ header p {
   overflow: hidden;
   break-inside: avoid;
   page-break-inside: avoid;
-  /* Badge colours and the watermark print without the manual
-     "Background graphics" step in the print dialog. */
-  print-color-adjust: exact;
-  -webkit-print-color-adjust: exact;
 }
 
 /* Ink saver (?ink=1): same geometry, less toner. The grey photo goes, the
