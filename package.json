@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "node --test \"tests/**/*.test.ts\""
+    "test": "node --test \"tests/**/*.test.ts\"",
+    "prepare": "git config core.hooksPath .githooks || true"
   },
   "dependencies": {
     "next": "^15.3.2",

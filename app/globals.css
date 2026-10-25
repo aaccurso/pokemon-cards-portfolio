@@ -1475,6 +1475,24 @@ header p {
   cursor: not-allowed;
 }
 
+/* Runtime error boundary (app/error.tsx) */
+.error-page {
+  text-align: center;
+  padding-top: 4rem;
+}
+
+.error-page h1 {
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+
+.error-detail {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  word-break: break-word;
+}
+
 /* Read-only ownership indicator (replaces the old checkbox) */
 .own-cell {
   text-align: center;

@@ -10,10 +10,10 @@ export const cards: Card[] = cardsJson as Card[];
 export const purchases: PurchaseData = purchasesJson as PurchaseData;
 export const binders: Binder[] = bindersJson as Binder[];
 
+// One throw policy, every environment: this module is evaluated when
+// `next build` prerenders `/` and `/print`, so inconsistent data fails the
+// build (and therefore the Vercel deploy) instead of shipping with a log line.
 const problems = validateData(cards, purchases, binders);
 if (problems.length > 0) {
-  if (process.env.NODE_ENV !== "production") {
-    throw new Error(problems.join("\n"));
-  }
-  for (const p of problems) console.error(p);
+  throw new Error(`Invalid data:\n${problems.join("\n")}`);
 }
