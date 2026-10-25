@@ -34,22 +34,22 @@ a recommended order within the lane, and a "not recommended" list.
 
 ## Suggested starting order across lanes
 
-1. **Engineering 1**: CI on Node 24 with `npm test`. Half a morning; makes
+1. **Engineering 1** (shipped 2026-10-23): CI on Node 24 with `npm test`. Half a morning; makes
    every later item safer.
-2. **Design 2 and 1**: focus states and the iOS zoom fix, then the mobile
+2. **Design 2 and 1** (shipped 2026-10-23): focus states and the iOS zoom fix, then the mobile
    pass. Small CSS, visible every day on a phone.
 3. **Workflow 1, first half**: number-entry pull logging with a copy-to-
    clipboard shipment block. Needed before the first M6a booster box is
    opened; the tile-tapping half can wait until typing numbers proves
    insufficient.
-4. **Insight 1 and 2**: collection value tiles and completion by rarity.
+4. **Insight 1 and 2** (shipped 2026-10-23): collection value tiles and completion by rarity.
    Both are pure functions over existing fields plus a few tiles.
-5. **Engineering 2**: clear the deferred review minors in two small PRs.
-6. **Engineering 6**: split `PortfolioTracker.tsx` before adding the third
+5. **Engineering 2** (shipped 2026-10-23): clear the deferred review minors in two small PRs.
+6. **Engineering 6** (shipped 2026-10-23): split `PortfolioTracker.tsx` before adding the third
    view mode (workflow 4) or the pulls mode UI.
 7. Then by appetite: pack economics after the first box is logged, price
    movement after a second refresh, scheduled refresh once the manual run
-   feels routine, rarity-aware tiles, print refinements.
+   feels routine, rarity-aware tiles, print refinements (shipped 2026-10-23).
 
 ## Conventions for working these items
 

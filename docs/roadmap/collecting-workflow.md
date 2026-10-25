@@ -61,6 +61,7 @@ Product [booster box x1] Total [60]
 3. Default `condition` for pulls: always `NM`, or a per-session picker?
 
 ## 2. ~~Pocket "needed" list~~ (shipped in e0740ef)
+Status: shipped 2026-10-23 in b7df070.
 
 Shipped: `lib/needed.ts`, `app/needed/page.tsx`, a "Needed" link beside CSV. Rulings on the open questions: whole grid with owned dimmed (the lane default; missing-only would lose the context of where the gaps sit); text export in English only (smallest option; `nameJa` can be added to `neededLabel` later without touching the page). Page hints from item 4 were not added since item 4 has not landed.
 
@@ -81,6 +82,7 @@ Shipped: `lib/needed.ts`, `app/needed/page.tsx`, a "Needed" link beside CSV. Rul
 2. Should the text export include Japanese names for sellers in Japan?
 
 ## 3. Duplicates view and trade list
+Status: shipped 2026-10-23 in 736ee04.
 
 **Problem.** `buildOwnershipMap` already computes `duplicateCount` per card and the master-set stats tile shows the total, but there is no way to see which cards are duplicated or to hand that list to a trade partner or a buylist.
 
@@ -129,6 +131,7 @@ Page 1                      Page 2
 3. Any binder with a non-default sort order, for example Kanto by set rather than Pokedex? Then `paginate` needs a per-binder order field.
 
 ## 5. Finish-as-singles shortlist
+Status: shipped 2026-10-23 in 4d05b28.
 
 **Problem.** After the packs are done, the remaining M6a cards will be bought as singles, and the "To complete as singles" tile already prices that. But getting from the tile to a shopping list means setting four filters by hand, and nothing links a card to a Cardmarket search.
 

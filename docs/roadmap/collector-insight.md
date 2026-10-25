@@ -9,6 +9,7 @@ Numbers quoted are from the repo as of 2026-10-23: Kanto 83 / 152 owned, M6a 0 /
 ---
 
 ## 1. Collection value: market value of what you own vs what you paid
+Status: shipped 2026-10-23 in bd12551.
 
 **Problem.** The app is called a portfolio, but no tile says what the owned cards are worth. On wants binders the information is hidden inside "Saved vs target" (`savings` in `computeStats`, `lib/purchases.ts`), which since the price refresh is literally `sum(buyPrice) - sum(pricePaid)` over owned cards, i.e. unrealised gain, under a label that still implies a shopping target. On master-set binders every pull has `pricePaid: null`, so "Spent on cards" is permanently 0,00 EUR and `savings` is 0: the tile that should carry the insight carries nothing. The `legacy` shipment has `total: null`, so "Total outlay" is at least 55,34 EUR (the sum of its eight `pricePaid`) too low on Kanto.
 
@@ -52,6 +53,7 @@ Data fix shipped with it: set `legacy.total` to 55,34 in `data/purchases.json` s
 ---
 
 ## 2. Completion by rarity (master-set)
+Status: shipped 2026-10-23 in 83f09e8.
 
 **Problem.** `rarity` exists on all 165 M6a cards (93 None, 10 Double rare, 20 Illustration rare, 10 Special illustration rare, 2 Futuristic Rare, 30 Classic Collection) and on no other binder, and nothing reads it except the CSV. Progress is one bar over card count. Because 111 cards are worth under 1 EUR in total 11,90 EUR, the bar will read 67% while 98% of the set's value (609 EUR) is still missing. There is no way to filter the grid to "Classic Collection I still need".
 
