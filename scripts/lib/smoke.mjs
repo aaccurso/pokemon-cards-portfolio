@@ -3,7 +3,8 @@
  * check a dumped DOM against it. No I/O here so tests can drive it directly.
  */
 import { cardsForBinder, resolveBinderId, getBinder } from "../../lib/binders.ts";
-import { buildOwnershipMap } from "../../lib/purchases.ts";
+import { buildOwnershipMap, rarityBreakdown } from "../../lib/purchases.ts";
+import { rarityOrder } from "../../lib/cards.ts";
 
 /** Strings that must never appear in rendered text on any page. */
 export const BAD_TOKENS = ["#null", "undefined", "NaN", "[object Object]", "Application error"];
@@ -33,6 +34,7 @@ const sortValue = (c, key) => (c[key] == null ? Number.POSITIVE_INFINITY : c[key
 /**
  * Pages to render and what each must show. Every number comes from
  * data/*.json so the plan tracks the collection instead of literals.
+ * `showing` is "Showing N of M cards"; M defaults to N unless `of` is set.
  */
 export function buildPlan({ cards, purchases, binders }) {
   const ownership = buildOwnershipMap(purchases);
@@ -48,11 +50,34 @@ export function buildPlan({ cards, purchases, binders }) {
   const plan = [];
   for (const { binder, list } of perBinder) {
     const path = binder.id === defaultId ? "/" : `/?binder=${binder.id}`;
-    plan.push({ path, expect: { h1: binder.name, showing: list.length, tabs } });
+    // The rarity select shows up only when a card in the binder has a rarity.
+    const raritySelect = list.some((c) => c.rarity);
+    plan.push({ path, expect: { h1: binder.name, showing: list.length, tabs, raritySelect } });
   }
 
   const largest = perBinder.reduce((a, b) => (b.list.length > a.list.length ? b : a));
   plan.push({ path: `/?binder=${largest.binder.id}&view=table`, expect: { h1: largest.binder.name, tbodyRows: largest.list.length } });
+
+  // Rarity filter + breakdown (collector-insight item 2): for every master-set
+  // binder with rarities, filter on the first known rarity present and expect
+  // its row to read active, the filtered count, and one row per rarity.
+  for (const { binder, list } of perBinder) {
+    if (binder.kind !== "master-set") continue;
+    const rows = rarityBreakdown(list, ownership);
+    if (rows.length === 0) continue;
+    const present = new Set(rows.map((r) => r.rarity));
+    const first = rarityOrder.find((r) => present.has(r.rarity)) ?? rows[0];
+    plan.push({
+      path: `/?binder=${binder.id}&rarity=${encodeURIComponent(first.rarity)}`,
+      expect: {
+        h1: binder.name,
+        showing: list.filter((c) => c.rarity === first.rarity).length,
+        of: list.length,
+        rarityRows: rows.length,
+        activeRarity: first.label,
+      },
+    });
+  }
 
   plan.push({ path: "/?binder=typo", expect: { h1: getBinder(defaultId, binders).name, showing: def.list.length } });
 
@@ -92,7 +117,7 @@ export function checkPage(page, html) {
   }
 
   if (expect.showing != null) {
-    const want = `Showing ${expect.showing} of ${expect.showing} cards`;
+    const want = `Showing ${expect.showing} of ${expect.of ?? expect.showing} cards`;
     if (!text.includes(want)) {
       const got = first(text, /(Showing \d+ of \d+ cards)/);
       failures.push(`Showing: expected "${want}", got ${got ? `"${got}"` : "none"}`);
@@ -118,6 +143,24 @@ export function checkPage(page, html) {
     const got = status == null ? null : textOf(status);
     if (!hasModal || got !== expect.modalStatus) {
       failures.push(`modal: expected status "${expect.modalStatus}", got ${hasModal ? (got ? `"${got}"` : "no status") : "no modal"}`);
+    }
+  }
+
+  if (expect.raritySelect != null) {
+    const got = /<select\b[^>]*aria-label="Rarity"/.test(html);
+    if (got !== expect.raritySelect) failures.push(`rarity select: expected ${expect.raritySelect ? "present" : "absent"}, got ${got ? "present" : "absent"}`);
+  }
+
+  if (expect.rarityRows != null) {
+    const got = (html.match(/class="rarity-row(?: active)?"/g) ?? []).length;
+    if (got !== expect.rarityRows) failures.push(`rarity rows: expected ${expect.rarityRows}, got ${got}`);
+  }
+
+  if (expect.activeRarity != null) {
+    const active = first(html, /<button\b[^>]*class="rarity-row active"[^>]*>([\s\S]*?)<\/button>/);
+    const label = active == null ? null : textOf(first(active, /<span class="rarity-label">([\s\S]*?)<\/span>/) ?? active);
+    if (label !== expect.activeRarity) {
+      failures.push(`active rarity: expected "${expect.activeRarity}", got ${label == null ? "no active row" : `"${label}"`}`);
     }
   }
 
