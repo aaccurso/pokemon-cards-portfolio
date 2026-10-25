@@ -1,7 +1,8 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { validateData, cardsForBinder } from "../lib/binders.ts";
+import { validateData, cardsForBinder, buildCardBinderMap } from "../lib/binders.ts";
+import { buildOwnershipMap, computeStats } from "../lib/purchases.ts";
 import { typeColors } from "../lib/cards.ts";
 import type { Card } from "../lib/cards.ts";
 import type { PurchaseData } from "../lib/purchases.ts";
@@ -37,6 +38,22 @@ test("every Pokemon type uses the app's type vocabulary", () => {
 test("card names use canonical suffix casing and have no glued words", () => {
   const bad = cards.filter((c) => /\sEx$/.test(c.name) || /[a-z][A-Z][a-z]+ Team/.test(c.name)).map((c) => c.name);
   assert.deepEqual(bad, []);
+});
+
+test("per binder, market value of owned cards never exceeds the priced budget", () => {
+  const ownership = buildOwnershipMap(purchases);
+  const cardBinder = buildCardBinderMap(cards);
+  for (const b of binders) {
+    const s = computeStats(cardsForBinder(b.id, cards), ownership, purchases, b.id, cardBinder);
+    assert.ok(s.marketValue <= s.budget + 1e-9, `${b.id}: marketValue ${s.marketValue} > budget ${s.budget}`);
+    assert.ok(s.marketValueAllCopies >= s.marketValue, `${b.id}: all-copies value below distinct value`);
+    assert.ok(s.unpricedOwned <= s.owned, `${b.id}: more unpriced owned than owned`);
+  }
+});
+
+test("every shipment has a total, so outlay is not understated", () => {
+  const missing = purchases.shipments.filter((sh) => sh.total == null).map((sh) => sh.id);
+  assert.deepEqual(missing, []);
 });
 
 test("every ex/EX/GX card has a variant", () => {
