@@ -7,7 +7,8 @@ import fs from "node:fs";
 // pins the CSS and markup shape that the mobile layout relies on.
 
 const readText = (p: string) => fs.readFileSync(new URL(`../${p}`, import.meta.url), "utf8");
-const css = readText("app/globals.css");
+const stripComments = (s: string) => s.replace(/\/\*[\s\S]*?\*\//g, "");
+const css = stripComments(readText("app/globals.css"));
 const modalSrc = readText("components/CardModal.tsx");
 
 const MOBILE = "@media (max-width: 768px)";

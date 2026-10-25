@@ -69,24 +69,6 @@ export function CardModal({ card, ownership, onClose, onPrev, onNext, binder }: 
             <line x1="18" y1="6" x2="6" y2="18" />
           </svg>
         </button>
-        {onPrev && (
-          <button
-            className="modal-nav modal-nav-prev"
-            onClick={onPrev}
-            aria-label="Previous card"
-          >
-            &#8249;
-          </button>
-        )}
-        {onNext && (
-          <button
-            className="modal-nav modal-nav-next"
-            onClick={onNext}
-            aria-label="Next card"
-          >
-            &#8250;
-          </button>
-        )}
         <div className="modal-image-wrapper">
           {imgUrl && !imgFailed ? (
             <div
@@ -229,6 +211,30 @@ export function CardModal({ card, ownership, onClose, onPrev, onNext, binder }: 
             </div>
           </dl>
         </div>
+        {(onPrev || onNext) && (
+          // Desktop: display: contents, so the buttons stay absolutely
+          // positioned against .modal-content. Mobile: a sticky bottom row.
+          <div className="modal-nav-row">
+            {onPrev && (
+              <button
+                className="modal-nav modal-nav-prev"
+                onClick={onPrev}
+                aria-label="Previous card"
+              >
+                &#8249;
+              </button>
+            )}
+            {onNext && (
+              <button
+                className="modal-nav modal-nav-next"
+                onClick={onNext}
+                aria-label="Next card"
+              >
+                &#8250;
+              </button>
+            )}
+          </div>
+        )}
       </div>
       {zoomed && imgUrl && !imgFailed && (
         <div
