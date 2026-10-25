@@ -14,10 +14,13 @@ import {
 import {
   buildOwnershipMap,
   computeStats,
+  collectedPct,
+  progressLabel,
   buildCsv,
   rarityBreakdown,
   OwnershipMap,
 } from "@/lib/purchases";
+import { fmtEur } from "@/lib/format";
 import { compareBySort, SortDir, SortKey } from "@/lib/sort";
 import { fmt0 } from "@/lib/format";
 import { CardModal } from "./CardModal";
@@ -94,17 +97,23 @@ export default function PortfolioTracker() {
     [binderCards, ownership, binderId, cardBinder]
   );
 
-  const binderCounts = useMemo<BinderCounts>(() => {
+  // Per-tab counts plus the one "all binders" summary line: market value of
+  // every owned copy vs the global sum of shipment totals (same basis as the
+  // per-binder value / outlay figure).
+  const { binderCounts, allValue, allOutlay } = useMemo(() => {
     const counts: BinderCounts = {};
+    let value = 0;
     for (const b of binders) {
       const list = cardsForBinder(b.id, allCards);
       counts[b.id] = {
         owned: list.filter((c) => ownership.has(c.id)).length,
         total: list.length,
       };
+      value += computeStats(list, ownership, purchases, b.id, cardBinder).marketValueAllCopies;
     }
-    return counts;
-  }, [ownership]);
+    const outlay = purchases.shipments.reduce((sum, sh) => sum + (sh.total ?? 0), 0);
+    return { binderCounts: counts, allValue: value, allOutlay: outlay };
+  }, [ownership, cardBinder]);
 
   const allTypes = useMemo(() => {
     const types = new Set<string>();
@@ -220,12 +229,11 @@ export default function PortfolioTracker() {
     URL.revokeObjectURL(url);
   }
 
-  const collectedPct =
-    stats.total === 0 ? 0 : Math.round((stats.owned / stats.total) * 100);
+  const pct = collectedPct(stats);
   const isMasterSet = binder.kind === "master-set";
-  // Value of the owned priced cards; budget - toComplete by construction.
-  const ownedValue = stats.budget - stats.toComplete;
-  const valuePct = stats.budget === 0 ? 0 : Math.round((ownedValue / stats.budget) * 100);
+  // Value-weighted completion: Cardmarket trend of the owned priced cards over
+  // the whole set's value (item 1's marketValue); the honest master-set progress.
+  const valuePct = stats.budget === 0 ? 0 : Math.round((stats.marketValue / stats.budget) * 100);
   const showRarity = isMasterSet && rarityRows.length > 0;
 
   return (
@@ -236,27 +244,34 @@ export default function PortfolioTracker() {
         counts={binderCounts}
         onSelect={selectBinder}
       />
+      <p
+        className="binder-summary"
+        title="Cardmarket trend price of every owned copy (duplicates included) across all binders, against the sum of all shipment totals"
+      >
+        All binders: {fmtEur(allValue)} value vs {fmtEur(allOutlay)} outlay
+      </p>
 
       <header>
         <h1>{binder.name}</h1>
-        <p>
-          {stats.owned} / {stats.total} cards collected · {collectedPct}%
-          {isMasterSet && (
-            <span
-              className="value-progress"
-              title="Share of the set's single-card value you already own; the honest master-set progress"
-            >
-              {" "}· value {fmt0(ownedValue)} / {fmt0(stats.budget)} &euro; ({valuePct}%)
-            </span>
-          )}
-        </p>
+        <p className="binder-description">{binder.description}</p>
       </header>
 
-      <div className="progress-bar-container" aria-label="Collection progress">
-        <div
-          className="progress-bar-fill"
-          style={{ width: `${collectedPct}%` }}
-        />
+      <div className="progress">
+        <div className="progress-bar-container" aria-label="Collection progress">
+          <div
+            className="progress-bar-fill"
+            style={{ width: `${pct}%` }}
+          />
+        </div>
+        <span className="progress-label">{progressLabel(stats)}</span>
+        {isMasterSet && (
+          <span
+            className="progress-label value-progress"
+            title="Share of the set's single-card value you already own; the honest master-set progress"
+          >
+            value {fmt0(stats.marketValue)} / {fmt0(stats.budget)} &euro; ({valuePct}%)
+          </span>
+        )}
       </div>
 
       {showRarity && (

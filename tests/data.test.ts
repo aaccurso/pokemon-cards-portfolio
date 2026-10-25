@@ -1,7 +1,8 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { validateData, cardsForBinder, siteDescription, ogAlt } from "../lib/binders.ts";
+import { validateData, cardsForBinder, buildCardBinderMap, siteDescription, ogAlt } from "../lib/binders.ts";
+import { buildOwnershipMap, computeStats } from "../lib/purchases.ts";
 import { typeColors } from "../lib/cards.ts";
 import type { Card } from "../lib/cards.ts";
 import type { PurchaseData } from "../lib/purchases.ts";
@@ -50,6 +51,22 @@ test("site description and OG alt mention every binder in data/binders.json", ()
     assert.ok(siteDescription(binders).includes(b.name), `description lacks ${b.name}`);
     assert.ok(ogAlt(binders).includes(b.name), `og alt lacks ${b.name}`);
   }
+});
+
+test("per binder, market value of owned cards never exceeds the priced budget", () => {
+  const ownership = buildOwnershipMap(purchases);
+  const cardBinder = buildCardBinderMap(cards);
+  for (const b of binders) {
+    const s = computeStats(cardsForBinder(b.id, cards), ownership, purchases, b.id, cardBinder);
+    assert.ok(s.marketValue <= s.budget + 1e-9, `${b.id}: marketValue ${s.marketValue} > budget ${s.budget}`);
+    assert.ok(s.marketValueAllCopies >= s.marketValue, `${b.id}: all-copies value below distinct value`);
+    assert.ok(s.unpricedOwned <= s.owned, `${b.id}: more unpriced owned than owned`);
+  }
+});
+
+test("every shipment has a total, so outlay is not understated", () => {
+  const missing = purchases.shipments.filter((sh) => sh.total == null).map((sh) => sh.id);
+  assert.deepEqual(missing, []);
 });
 
 test("every ex/EX/GX card has a variant", () => {

@@ -48,6 +48,13 @@ header p {
   color: var(--text-muted);
 }
 
+header .binder-description {
+  max-width: 36rem;
+  margin: 0 auto;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
 .header-link {
   display: inline-block;
   margin-top: 0.5rem;
@@ -89,12 +96,27 @@ header p {
   margin-top: 0.25rem;
 }
 
+.progress {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
 .progress-bar-container {
+  flex: 1 1 auto;
   background: var(--border);
   border-radius: 999px;
   height: 12px;
   overflow: hidden;
-  margin-bottom: 2rem;
+}
+
+.progress-label {
+  flex: 0 0 auto;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 
 .progress-bar-fill {
@@ -104,8 +126,8 @@ header p {
   transition: width 0.5s ease;
 }
 
-/* Value-weighted completion next to the card count in the header */
-header p .value-progress {
+/* Value-weighted completion next to the count label in the progress row */
+.progress .value-progress {
   color: var(--text-muted);
 }
 
@@ -1594,6 +1616,25 @@ header p .value-progress {
   font-weight: 500;
 }
 
+/* Stat sub-line under the label ("+330,61 EUR vs paid", "value = 123%") */
+.stat-card .stat-sub {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 0.35rem;
+  font-variant-numeric: tabular-nums;
+}
+.stat-card .stat-sub.negative {
+  color: #e07070;
+}
+
+/* One-line "all binders" value summary under the tab strip */
+.binder-summary {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin: -0.5rem 0 1.25rem;
+  font-variant-numeric: tabular-nums;
+}
+
 /* Action buttons in the controls row (Import, CSV) */
 .action-button {
   background: var(--surface);
@@ -2017,6 +2058,20 @@ header p .value-progress {
   font-weight: 400;
   opacity: 0.7;
   line-height: 1.2;
+  /* lang="ja" picks Japanese glyph forms; this list prefers the system CJK face on each OS. */
+  font-family: -apple-system, "Hiragino Sans", "Yu Gothic UI", "Noto Sans JP", sans-serif;
+}
+/* Modal: subtitle, not a second yellow title. */
+.modal-info h2 .name-ja {
+  color: var(--text-muted);
+  font-size: 1rem;
+  font-weight: 400;
+  margin-top: 2px;
+  opacity: 1;
+}
+/* Table: floor the smallest text on the page at ~11.5px. */
+.card-table .name-ja {
+  font-size: 0.72rem;
 }
 .type-badge.trainer {
   background: #777;

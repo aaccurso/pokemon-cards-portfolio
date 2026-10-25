@@ -118,7 +118,7 @@ export function CardModal({ card, ownership, onClose, onPrev, onNext, binder }: 
         <div className="modal-info">
           <h2>
             {card.name}
-            {card.nameJa && <span className="name-ja">{card.nameJa}</span>}
+            {card.nameJa && <span className="name-ja" lang="ja">{card.nameJa}</span>}
           </h2>
           <div className="modal-badges">
             {typeBadges(card).map((b) => (

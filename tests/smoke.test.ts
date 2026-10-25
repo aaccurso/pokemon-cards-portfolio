@@ -149,3 +149,12 @@ test("checkPage flags Next's client error page", () => {
   assert.equal(failures.length, 1);
   assert.match(failures[0], /Application error/);
 });
+
+test("checkPage flags a Japanese name rendered without lang=\"ja\"", () => {
+  const ok = `<html><body><h1>X</h1><strong>Pikachu<span class="name-ja" lang="ja">ピカチュウ</span></strong></body></html>`;
+  assert.deepEqual(checkPage({ path: "/t", expect: { h1: "X" } }, ok), []);
+  const bare = `<html><body><h1>X</h1><strong>Pikachu<span class="name-ja">ピカチュウ</span></strong></body></html>`;
+  const failures = checkPage({ path: "/t", expect: { h1: "X" } }, bare);
+  assert.equal(failures.length, 1);
+  assert.match(failures[0], /lang="ja"/);
+});
