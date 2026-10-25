@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { BinderDisplay, Card, numberLabel, typeBadges } from "@/lib/cards";
 
 export function PlaceholderCard({
@@ -37,7 +38,9 @@ export function PlaceholderCard({
             <span
               key={b.label}
               className="ph-type-badge"
-              style={{ background: b.color }}
+              style={
+                { "--badge": b.color, background: "var(--badge)" } as CSSProperties
+              }
             >
               {b.label}
             </span>
