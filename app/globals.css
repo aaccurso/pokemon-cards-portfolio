@@ -795,6 +795,13 @@ header p {
   right: 0.5rem;
 }
 
+/* Wrapper for the two nav buttons. On desktop it generates no box, so the
+   buttons keep their absolute positioning against .modal-content. On phones
+   it becomes a sticky footer row (see the 768px block). */
+.modal-nav-row {
+  display: contents;
+}
+
 .modal-image-clip--zoomable {
   cursor: zoom-in;
 }
@@ -1794,9 +1801,42 @@ header p {
     display: none;
   }
 
+  .modal-backdrop {
+    padding: 0.75rem;
+  }
+
   .modal-content {
     grid-template-columns: 1fr;
     padding: 1.25rem;
+    padding-bottom: 0;
+    /* dvh tracks the iOS URL bar; vh first so older browsers keep a value */
+    max-height: 90vh;
+    max-height: 90dvh;
+  }
+
+  /* Nav buttons leave the absolute left/right slots (which land over the
+     details text once the layout stacks) and become a sticky footer row. */
+  .modal-nav-row {
+    display: flex;
+    justify-content: space-between;
+    position: sticky;
+    bottom: 0;
+    margin: 0 -1.25rem;
+    padding: 0.6rem 1.25rem;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+  }
+
+  .modal-nav-row .modal-nav,
+  .modal-nav-row .modal-nav:hover {
+    position: static;
+    transform: none;
+  }
+
+  /* On the last card only "next" is missing; keep "previous" on the left and
+     a lone "next" on the right instead of letting it slide left. */
+  .modal-nav-row .modal-nav-next {
+    margin-left: auto;
   }
 
   .modal-close {
