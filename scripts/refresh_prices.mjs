@@ -8,7 +8,15 @@
  *   buyPrice so the pre-refresh target is never lost.
  * - Sets buyPrice = round(trend, 2), except a null buyPrice in a "wants"
  *   binder stays null (it means "no illustration chosen yet").
- * - Builds both files in memory and writes once at the end.
+ * - Builds both files in memory and writes once at the end. prices.json is
+ *   written one snapshot per line (formatPrices) so a refresh diff is an
+ *   append per card rather than a rewrite of every history array.
+ *
+ * Data growth (roadmap engineering item 7): ~98 bytes per snapshot, 313 per
+ * refresh, so weekly runs add roughly 1.6 MB a year. Nothing imports this
+ * file into the client bundle, and it must stay that way; a future history
+ * view derives what it needs at build time. Shard to data/prices/<year>.json
+ * only if the file passes a few MB.
  *
  *   node scripts/refresh_prices.mjs            # refresh and write
  *   node scripts/refresh_prices.mjs --dry-run  # print changes only
@@ -20,6 +28,7 @@ import {
   upsertCardmarket,
   nextBuyPrice,
   topMovers,
+  formatPrices,
 } from "./lib/prices.mjs";
 
 const CARDS_FILE = "data/cards.json";
@@ -84,7 +93,7 @@ if (DRY_RUN) {
   process.exit(0);
 }
 
-fs.writeFileSync(PRICES_FILE, JSON.stringify(prices, null, 2) + "\n");
+fs.writeFileSync(PRICES_FILE, formatPrices(prices));
 fs.writeFileSync(CARDS_FILE, JSON.stringify(cards, null, 2) + "\n");
 console.log("top movers:");
 for (const c of topMovers(changes.filter((c) => c.from != null), 10)) {
