@@ -19,7 +19,7 @@ Four git-tracked JSON files are the single source of truth:
 
 - **`data/binders.json`** — the binder registry. Fields: `id, name, description, kind, sort, officialCount?`.
   - `kind: "wants"` — a curated list. `buyPrice == null` means "no illustrated print chosen yet"; the "Illustration only" toggle is shown; the price refresh never prices a null card.
-  - `kind: "master-set"` — every card is the target. `buyPrice` is the current Cardmarket single price (auto-filled by the refresh); the toggle is hidden; the "Saved vs target" tile becomes "Duplicates".
+  - `kind: "master-set"` — every card is the target. `buyPrice` is the current Cardmarket single price (auto-filled by the refresh); the toggle is hidden; the "Spent on cards" and "Value" tiles become "Pulled value" and "Duplicates".
   - `sort` is the default sort key (`pokedexNumber` or `setNumber`). `officialCount` is the number of non-secret cards; master-set binders label every card with its slot index as printed on the card (`126/103`) in grid, table, modal, and placeholders, and the table "#" column sorts by `setNumber` there. Wants binders show the Pokedex number (`#025`).
 - **`data/cards.json`** — all cards across all binders. Fields: `id, name, code, set, qty, language, condition, buyPrice, imageUrl, localImage, pokedexNumber, type1, type2, generation, variant, binderId, setNumber, category?, nameJa?, tcgdexId?, rarity?`.
   - `category` defaults to `"Pokemon"`; Trainers and Energies have `pokedexNumber: null`, `type1: null`, `generation: null`.
@@ -33,7 +33,9 @@ A card is "owned" if it appears in at least one purchase item. Its effective `pr
 
 **Illustration cards** (wants binders only) are entries with `buyPrice != null`. The "Illustration only" toggle filters to those.
 
-**Total outlay** per binder attributes each shipment's `total` in proportion to how many of its items (by qty) belong to that binder, so the binders' outlays sum to the global total.
+**Total outlay** per binder attributes each shipment's `total` in proportion to how many of its items (by qty) belong to that binder, so the binders' outlays sum to the global total. Every shipment must have a `total` (a test enforces it); the `legacy` shipment's is the sum of its item prices.
+
+**Collection value** (`marketValue`, `marketValueAllCopies`, `unpricedOwned` in `computeStats`) is the Cardmarket trend (`buyPrice`) summed over owned priced cards, once per card or once per copy. Gain vs paid (`marketValue - spentOnCards`) is derived in the component, not stored. Value / outlay (`valueVsOutlayPct`) always uses `marketValueAllCopies`, on every binder kind and on the "All binders" line, because outlay already paid for the duplicate copies. `savings` is the pre-value figure and is kept for one release.
 
 ## Project Structure
 ```
@@ -41,6 +43,7 @@ app/
   layout.tsx
   page.tsx           — renders PortfolioTracker
   print/page.tsx     — printable placeholder-card binder sheet (per binder)
+  needed/page.tsx    — pocket needed list (number grid, copy as text, one-sheet print)
   globals.css
 components/
   PortfolioTracker.tsx — main dashboard: URL-backed state, derived data, composition of the parts below
@@ -55,6 +58,7 @@ lib/
   data.ts        — the ONLY module that imports the JSON files; validates them at load
   cards.ts       — Card type, typeColors, numberLabel/typeBadges display helpers
   purchases.ts   — ownership/stats derivation + CSV export (pure)
+  needed.ts      — needed-list blocks, labels and text export (pure)
   binders.ts     — Binder type, resolveBinderId/getBinder/cardsForBinder, validateData (pure)
   sort.ts        — SortKey/SortDir, SORT_KEYS + isSortKey (validates ?sort=), getSortValue, compareBySort nulls-last comparator (pure)
   format.ts      — fmtEur, the one place prices are formatted for display (pure)
@@ -69,7 +73,7 @@ scripts/
 tests/            — node --test suites (*.test.ts), run with npm test
 ```
 
-`lib/cards.ts`, `lib/purchases.ts`, `lib/binders.ts`, `lib/sort.ts`, `lib/format.ts` must not import JSON or use the `@/` alias and may only `import type` from each other, so Node can run the tests directly.
+`lib/cards.ts`, `lib/purchases.ts`, `lib/binders.ts`, `lib/sort.ts`, `lib/format.ts`, `lib/needed.ts` must not import JSON or use the `@/` alias and may only `import type` from each other, so Node can run the tests directly.
 
 ## Source of truth rule
 **The four `data/*.json` files are the only places collection data lives.** `lib/data.ts` is a thin loader — do not hand-edit card objects anywhere else. Never set `owned` or `pricePaid` on a card — those are derived.
@@ -118,7 +122,8 @@ Whenever a card is added or updated without a bundled image (e.g. a new set not 
 
 ## Current Features
 - Binder tabs (`?binder=<id>` in the URL, default `kanto-151`); switching resets filters and sort
-- Progress bar and stats grid per binder: Collected, Spent on cards, Saved vs target / Duplicates, To complete, Budget / Set value (N priced), Total outlay
+- Progress bar and stats grid per binder: Collected, Spent on cards / Pulled value, Value (N owned) with gain vs paid / Duplicates, To complete, Budget / Set value (N priced), Total outlay with value / outlay percentage
+- One "All binders" line under the tabs: market value of everything owned vs the sum of all shipment totals
 - Grid view with 3D tilt + holographic hover; Japanese names under English ones
 - Table view with sortable columns (incl. derived `owned` and `pricePaid`)
 - Search by name, code, or set name; filter by type (incl. Trainer), set, ownership
@@ -126,6 +131,7 @@ Whenever a card is added or updated without a bundled image (e.g. a new set not 
 - Variant badges (ex, GX, V, VMAX, VSTAR, BREAK, LEGEND, Alolan/Galarian/Hisuian/Mega forms)
 - CSV download of the active binder
 - Print page (`/print?binder=<id>`) for blank placeholder cards, sorted by the binder's sort key; `&ink=1` is the ink saver (no card photo, outlined badges and watermark, same geometry)
+- Needed list (`/needed?binder=<id>`): one-screen or one-A4 view of the missing numbers (master sets as a 001 to 165 grid with secrets in their own block, wants binders as `#025 Pikachu` rows), owned cells dimmed, plus a "Copy as text" button that emits `Need (62): 003 007 ...` for seller chats
 
 ## Known Limitations / Planned Work
 - **Price history is captured but not visualized** — `data/prices.json` is write-only for now.

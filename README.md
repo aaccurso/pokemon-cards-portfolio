@@ -18,7 +18,7 @@ Personal tracker for Japanese Pokémon TCG binders. Each binder is its own colle
 - **Table view** with sortable columns (Pokédex #, name, code, set, buy price, price paid).
 - **Search and filter** by name/code/set, Pokémon type (incl. Trainer), card set, or ownership status.
 - **Per-card modal** with the full-resolution image, set/code, price paid, and purchase history.
-- **Derived stats per binder**: Collected, Spent on cards, Saved vs target (or Duplicates for a master set), To complete, Budget / Set value, Total outlay. Shipments that span binders split their total by item share.
+- **Derived stats per binder**: Collected, Spent on cards, Value of owned cards with gain vs paid (or Pulled value and Duplicates for a master set), To complete, Budget / Set value, Total outlay with a value / outlay percentage. Shipments that span binders split their total by item share. One line under the tabs sums value across all binders.
 - **Booster pulls** — log a box opening as one shipment; pulled cards count as owned without inventing a per-card price.
 - **Print route** (`/print?binder=…`) generates an A4 PDF of placeholder cards (9 per page) with a calibration sheet so you can confirm the print scale first.
 - **Price refresh** — one script pulls Cardmarket trend prices from tcgdex into `buyPrice` and appends every snapshot to `data/prices.json`, so history is kept for later charts.

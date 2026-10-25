@@ -20,6 +20,7 @@ import {
   buildCsv,
   OwnershipMap,
 } from "@/lib/purchases";
+import { fmtEur } from "@/lib/format";
 import { compareBySort, isSortKey, SortDir, SortKey } from "@/lib/sort";
 import { CardModal } from "./CardModal";
 import { CardTile } from "./CardTile";
@@ -101,17 +102,23 @@ export default function PortfolioTracker() {
     [binderCards, ownership, binderId, cardBinder]
   );
 
-  const binderCounts = useMemo<BinderCounts>(() => {
+  // Per-tab counts plus the one "all binders" summary line: market value of
+  // every owned copy vs the global sum of shipment totals (same basis as the
+  // per-binder value / outlay figure).
+  const { binderCounts, allValue, allOutlay } = useMemo(() => {
     const counts: BinderCounts = {};
+    let value = 0;
     for (const b of binders) {
       const list = cardsForBinder(b.id, allCards);
       counts[b.id] = {
         owned: list.filter((c) => ownership.has(c.id)).length,
         total: list.length,
       };
+      value += computeStats(list, ownership, purchases, b.id, cardBinder).marketValueAllCopies;
     }
-    return counts;
-  }, [ownership]);
+    const outlay = purchases.shipments.reduce((sum, sh) => sum + (sh.total ?? 0), 0);
+    return { binderCounts: counts, allValue: value, allOutlay: outlay };
+  }, [ownership, cardBinder]);
 
   const allTypes = useMemo(() => {
     const types = new Set<string>();
@@ -227,6 +234,12 @@ export default function PortfolioTracker() {
         counts={binderCounts}
         onSelect={selectBinder}
       />
+      <p
+        className="binder-summary"
+        title="Cardmarket trend price of every owned copy (duplicates included) across all binders, against the sum of all shipment totals"
+      >
+        All binders: {fmtEur(allValue)} value vs {fmtEur(allOutlay)} outlay
+      </p>
 
       <header>
         <h1>{binder.name}</h1>
@@ -254,6 +267,7 @@ export default function PortfolioTracker() {
         onViewMode={setViewMode}
         onShare={handleShare}
         onCsv={handleDownloadCsv}
+        neededHref={binderId === DEFAULT_BINDER_ID ? "/needed" : `/needed?binder=${binderId}`}
         copied={copied}
         showIllustration={binder.kind === "wants"}
       />
