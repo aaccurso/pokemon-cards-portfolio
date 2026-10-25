@@ -2,6 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { resolveBinderId, validateData, cardsForBinder, buildCardBinderMap } from "../lib/binders.ts";
 import type { Binder } from "../lib/binders.ts";
+import type { PurchaseData, PurchaseItem, Shipment } from "../lib/purchases.ts";
 import { card } from "./helpers.ts";
 
 const binders: Binder[] = [
@@ -24,6 +25,31 @@ test("validateData reports unknown binder ids and unknown purchase card ids", ()
     binders);
   assert.equal(problems.length, 2);
   assert.match(problems[0], /a.*nope/); assert.match(problems[1], /ghost/);
+});
+
+test("validateData reports empty shipments, qty < 1, negative pricePaid, and duplicate shipment ids", () => {
+  const ship = (id: string, items: PurchaseItem[]): Shipment =>
+    ({ id, seller: null, date: null, shipping: null, fees: null, total: 10, items });
+  const cards = [card({ id: "a" })];
+  const problems = validateData(cards, { shipments: [
+    ship("empty", []),
+    ship("qty", [{ cardId: "a", pricePaid: 1, condition: "NM", qty: 0 }]),
+    ship("neg", [{ cardId: "a", pricePaid: -0.5, condition: "NM" }]),
+    ship("dup", [{ cardId: "a", pricePaid: 1, condition: "NM" }]),
+    ship("dup", [{ cardId: "a", pricePaid: 1, condition: "NM", qty: 2 }]),
+  ] }, binders);
+  assert.deepEqual(problems, [
+    "shipment empty has no items",
+    "shipment qty item a has qty 0 (must be >= 1)",
+    "shipment neg item a has negative pricePaid -0.5",
+    "duplicate shipment id dup",
+  ]);
+});
+
+test("validateData accepts pulled copies (null pricePaid) and a missing qty", () => {
+  const ok: PurchaseData = { shipments: [{ id: "s", seller: null, date: null, shipping: null, fees: null, total: null,
+    items: [{ cardId: "a", pricePaid: null, condition: "NM" }, { cardId: "a", pricePaid: 0, condition: "NM", qty: 3 }] }] };
+  assert.deepEqual(validateData([card({ id: "a" })], ok, binders), []);
 });
 
 test("cardsForBinder filters by binderId and buildCardBinderMap indexes every card", () => {
