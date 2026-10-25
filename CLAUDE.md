@@ -111,7 +111,10 @@ Whenever a card is added or updated without a bundled image (e.g. a new set not 
 ## Adding a new binder
 1. Add an entry to `data/binders.json`.
 2. Add cards with that `binderId` to `data/cards.json` (for a full set, write a builder like `scripts/build_m6a.mjs`).
-3. Download images, run `node scripts/refresh_prices.mjs`, run `npm test && npm run build`. `lib/data.ts` throws in development if any card references an unknown binder.
+3. Download images, run `node scripts/refresh_prices.mjs`, run `npm test && npm run build`. `lib/data.ts` throws in every environment (so `next build` fails) if `validateData` finds a problem: unknown or duplicate binder, card or shipment ids, a master-set binder without `officialCount`, an empty shipment, a null `total`, `qty < 1`, or a negative `pricePaid`.
+
+## Data validation gate
+`validateData` in `lib/binders.ts` is the single checker. It runs in three places: `lib/data.ts` throws at module load (fails the build), `tests/data.test.ts` runs it on the real JSON, and the tracked `.githooks/pre-commit` runs that test before every commit (`git commit --no-verify` skips it once). `npm install` / `npm ci` enables the hook through the `prepare` script; after a fresh clone with no install, run `git config core.hooksPath .githooks`. Every shipment needs a numeric `total`; when shipping is unknown, use the sum of item prices.
 
 ## Current Features
 - Binder tabs (`?binder=<id>` in the URL, default `kanto-151`); switching resets filters and sort
@@ -137,6 +140,7 @@ npm test       # Run unit tests (node --test)
 npm run build  # Production build
 npm start      # Serve production build
 npm run smoke  # Headless Chrome DOM checks on the real pages (see below)
+git config core.hooksPath .githooks  # Enable the pre-commit data gate (npm install does this too)
 ```
 
 `npm run smoke` renders every binder, the table view, the card modal, and the print pages in headless Chrome and asserts on the DOM (h1, counts, tabs, no `undefined`/`NaN`). Expectations come from `data/*.json`. It starts `next start` on `SMOKE_PORT` (default 3000; needs a prior `npm run build`, otherwise falls back to `next dev`), or reuses a running server when `SMOKE_URL` is set. Without Chrome it prints SKIP and exits 0; CI passes `--require-chrome`. Helpers live in `scripts/lib/smoke.mjs` and are unit-tested.
