@@ -69,3 +69,19 @@ test("real M6a data: six known rarities, totals sum to 165, values sum to the se
   assert.ok(Math.abs(rows.reduce((s, r) => s + r.value, 0) - setValue) < 1e-9);
   for (const r of rows) assert.ok(r.owned <= r.total && r.toComplete <= r.value + 1e-9);
 });
+
+test("rarityBreakdown takes its order and labels from rarityOrder itself, not a private copy", () => {
+  // Temporarily extend the shared constant: a breakdown that iterates
+  // rarityOrder places the new rarity before unknown ones and uses its label.
+  const added = { rarity: "Zebra rare", label: "Zebra" };
+  rarityOrder.push(added);
+  try {
+    const rows = rarityBreakdown(
+      [card({ id: "u", rarity: "Unlisted rare" }), card({ id: "z", rarity: "Zebra rare" })],
+      own()
+    );
+    assert.deepEqual(rows.map((r) => [r.rarity, r.label]), [["Zebra rare", "Zebra"], ["Unlisted rare", "Unlisted rare"]]);
+  } finally {
+    rarityOrder.pop();
+  }
+});

@@ -1,4 +1,7 @@
 import type { Card } from "./cards";
+// Explicit .ts extension so Node's test runner (no extension resolution) and
+// the Next bundler (allowImportingTsExtensions) both find the module.
+import { rarityOrder } from "./cards.ts";
 
 export type PurchaseItem = {
   cardId: string;
@@ -138,17 +141,6 @@ export type RarityRow = {
   toComplete: number;
 };
 
-// Mirrors rarityOrder in lib/cards.ts; inlined because lib modules may only
-// type-import each other.
-const rarityDisplayOrder: [string, string][] = [
-  ["None", "Common / Uncommon"],
-  ["Double rare", "RR"],
-  ["Illustration rare", "AR"],
-  ["Special illustration rare", "SAR"],
-  ["Futuristic Rare", "Futuristic"],
-  ["Classic Collection", "Classic"],
-];
-
 /**
  * Per-rarity completion for the cards given, in display order. Cards without
  * a rarity are skipped; rarities outside the known list come last, in first
@@ -156,7 +148,7 @@ const rarityDisplayOrder: [string, string][] = [
  */
 export function rarityBreakdown(cards: Card[], ownership: OwnershipMap): RarityRow[] {
   const rows = new Map<string, RarityRow>();
-  for (const [rarity, label] of rarityDisplayOrder) {
+  for (const { rarity, label } of rarityOrder) {
     rows.set(rarity, { rarity, label, total: 0, owned: 0, value: 0, toComplete: 0 });
   }
   for (const c of cards) {

@@ -69,7 +69,7 @@ scripts/
 tests/            — node --test suites (*.test.ts), run with npm test
 ```
 
-`lib/cards.ts`, `lib/purchases.ts`, `lib/binders.ts`, `lib/sort.ts`, `lib/format.ts` must not import JSON or use the `@/` alias and may only `import type` from each other, so Node can run the tests directly.
+`lib/cards.ts`, `lib/purchases.ts`, `lib/binders.ts`, `lib/sort.ts`, `lib/format.ts`, `lib/print.ts` must not import JSON or use the `@/` alias, so Node can run the tests directly. Imports between them use a relative path with an explicit `.ts` extension (`import { rarityOrder } from "./cards.ts"`), which both Node and the Next bundler resolve; keep the graph acyclic (`cards.ts` imports nothing from the others).
 
 ## Source of truth rule
 **The four `data/*.json` files are the only places collection data lives.** `lib/data.ts` is a thin loader — do not hand-edit card objects anywhere else. Never set `owned` or `pricePaid` on a card — those are derived.
