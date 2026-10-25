@@ -21,6 +21,7 @@ import {
 } from "@/lib/purchases";
 import { fmtEur } from "@/lib/format";
 import { compareBySort, SortDir, SortKey } from "@/lib/sort";
+import { neededText } from "@/lib/shortlist";
 import { CardModal } from "./CardModal";
 import { CardTile } from "./CardTile";
 import { CardTable } from "./CardTable";
@@ -64,6 +65,7 @@ export default function PortfolioTracker() {
     () => (searchParams.get("view") === "table" ? "table" : "grid")
   );
   const [copied, setCopied] = useState(false);
+  const [copiedNeeded, setCopiedNeeded] = useState(false);
 
   const binder = getBinder(binderId, binders);
   const binderCards = useMemo(() => cardsForBinder(binderId, allCards), [binderId]);
@@ -202,6 +204,24 @@ export default function PortfolioTracker() {
     }
   }
 
+  /** Wanted cards, table view, priciest first: the finish-as-singles shopping list. */
+  function showSinglesShortlist() {
+    setFilters({ ...EMPTY_FILTERS, own: "wanted" });
+    setViewMode("table");
+    setSortKey("buyPrice");
+    setSortDir("desc");
+  }
+
+  async function handleCopyNeeded() {
+    try {
+      await navigator.clipboard.writeText(neededText(filtered, ownership, binder));
+      setCopiedNeeded(true);
+      setTimeout(() => setCopiedNeeded(false), 1500);
+    } catch {
+      // clipboard unavailable (e.g. non-HTTPS): silently no-op
+    }
+  }
+
   function handleDownloadCsv() {
     const csv = buildCsv(binderCards, ownership);
     const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
@@ -247,7 +267,7 @@ export default function PortfolioTracker() {
         <span className="progress-label">{progressLabel(stats)}</span>
       </div>
 
-      <StatsGrid stats={stats} kind={binder.kind} />
+      <StatsGrid stats={stats} kind={binder.kind} onBuySingles={showSinglesShortlist} />
 
       <FilterBar
         filters={filters}
@@ -260,6 +280,8 @@ export default function PortfolioTracker() {
         onCsv={handleDownloadCsv}
         neededHref={binderId === DEFAULT_BINDER_ID ? "/needed" : `/needed?binder=${binderId}`}
         copied={copied}
+        onCopyNeeded={handleCopyNeeded}
+        copiedNeeded={copiedNeeded}
         showIllustration={binder.kind === "wants"}
       />
 

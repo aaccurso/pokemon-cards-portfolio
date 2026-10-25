@@ -31,6 +31,9 @@ type Props = {
   /** Href of the /needed one-sheet for the active binder. */
   neededHref: string;
   copied: boolean;
+  /** Copies the wanted cards shown as one line of text; only offered on the Wanted filter. */
+  onCopyNeeded: () => void;
+  copiedNeeded: boolean;
   /** Wants binders only; master-set binders hide the toggle. */
   showIllustration: boolean;
 };
@@ -46,6 +49,8 @@ export function FilterBar({
   onCsv,
   neededHref,
   copied,
+  onCopyNeeded,
+  copiedNeeded,
   showIllustration,
 }: Props) {
   return (
@@ -118,6 +123,15 @@ export function FilterBar({
         >
           {copied ? "✓ Copied" : "↗ Share"}
         </button>
+        {filters.own === "wanted" && (
+          <button
+            className="action-button"
+            onClick={onCopyNeeded}
+            title="Copy the wanted cards shown as one line of text"
+          >
+            {copiedNeeded ? "✓ Copied" : "⎘ Copy as text"}
+          </button>
+        )}
         <button
           className="action-button"
           onClick={onCsv}

@@ -1670,6 +1670,44 @@ header .binder-description {
   font-weight: 400;
 }
 
+/* Cardmarket search link beside the set code in the modal */
+.cardmarket-link {
+  margin-left: 0.6rem;
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.cardmarket-link:hover {
+  text-decoration: underline;
+}
+
+/* Text-style link inside a stat tile ("Buy as singles") */
+.stat-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0;
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.stat-link:hover {
+  text-decoration: underline;
+}
+
+.stat-link:focus-visible,
+.cardmarket-link:focus-visible {
+  outline: none;
+  border-radius: 4px;
+  box-shadow: var(--ring);
+}
+
 /* --- Importer modal --- */
 .importer-modal {
   grid-template-columns: 1fr;
