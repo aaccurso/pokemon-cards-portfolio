@@ -23,6 +23,28 @@ export type Binder = {
 
 export const DEFAULT_BINDER_ID = "kanto-151";
 
+export const SITE_TITLE = "Pokémon card binders";
+
+/** Comma-separated binder names in data order; empty string for no binders. */
+export function binderNames(binders: Binder[]): string {
+  return binders.map((b) => b.name).join(", ");
+}
+
+/** Site-wide meta description, enumerating every binder so shared links stay honest. */
+export function siteDescription(binders: Binder[]): string {
+  const names = binderNames(binders);
+  const lead = names
+    ? `Personal tracker for Japanese Pokémon TCG binders: ${names}.`
+    : "Personal tracker for Japanese Pokémon TCG binders.";
+  return `${lead} Log Cardmarket shipments and booster pulls, watch each binder fill in, and print placeholder sheets.`;
+}
+
+/** Alt text for the Open Graph image. */
+export function ogAlt(binders: Binder[]): string {
+  const names = binderNames(binders);
+  return names ? `${SITE_TITLE}: ${names}` : SITE_TITLE;
+}
+
 export function resolveBinderId(
   param: string | null | undefined,
   binders: Binder[]
