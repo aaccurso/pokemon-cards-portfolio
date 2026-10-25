@@ -258,6 +258,7 @@ export default function PortfolioTracker() {
         onViewMode={setViewMode}
         onShare={handleShare}
         onCsv={handleDownloadCsv}
+        neededHref={binderId === DEFAULT_BINDER_ID ? "/needed" : `/needed?binder=${binderId}`}
         copied={copied}
         showIllustration={binder.kind === "wants"}
       />

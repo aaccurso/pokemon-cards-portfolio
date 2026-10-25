@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 export type OwnFilter = "all" | "owned" | "wanted";
 export type ViewMode = "table" | "grid";
 
@@ -26,6 +28,8 @@ type Props = {
   onViewMode: (mode: ViewMode) => void;
   onShare: () => void;
   onCsv: () => void;
+  /** Href of the /needed one-sheet for the active binder. */
+  neededHref: string;
   copied: boolean;
   /** Wants binders only; master-set binders hide the toggle. */
   showIllustration: boolean;
@@ -40,6 +44,7 @@ export function FilterBar({
   onViewMode,
   onShare,
   onCsv,
+  neededHref,
   copied,
   showIllustration,
 }: Props) {
@@ -117,6 +122,13 @@ export function FilterBar({
       >
         ↓ CSV
       </button>
+      <Link
+        href={neededHref}
+        className="action-button"
+        title="One-sheet list of the numbers still missing, for shops and seller chats"
+      >
+        ☐ Needed
+      </Link>
     </div>
   );
 }

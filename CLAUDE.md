@@ -43,6 +43,7 @@ app/
   layout.tsx
   page.tsx           — renders PortfolioTracker
   print/page.tsx     — printable placeholder-card binder sheet (per binder)
+  needed/page.tsx    — pocket needed list (number grid, copy as text, one-sheet print)
   globals.css
 components/
   PortfolioTracker.tsx — main dashboard: URL-backed state, derived data, composition of the parts below
@@ -57,6 +58,7 @@ lib/
   data.ts        — the ONLY module that imports the JSON files; validates them at load
   cards.ts       — Card type, typeColors, numberLabel/typeBadges display helpers
   purchases.ts   — ownership/stats derivation + CSV export (pure)
+  needed.ts      — needed-list blocks, labels and text export (pure)
   binders.ts     — Binder type, resolveBinderId/getBinder/cardsForBinder, validateData (pure)
   sort.ts        — SortKey/SortDir, getSortValue, compareBySort nulls-last comparator (pure)
   format.ts      — fmtEur, the one place prices are formatted for display (pure)
@@ -71,7 +73,7 @@ scripts/
 tests/            — node --test suites (*.test.ts), run with npm test
 ```
 
-`lib/cards.ts`, `lib/purchases.ts`, `lib/binders.ts`, `lib/sort.ts`, `lib/format.ts` must not import JSON or use the `@/` alias and may only `import type` from each other, so Node can run the tests directly.
+`lib/cards.ts`, `lib/purchases.ts`, `lib/binders.ts`, `lib/sort.ts`, `lib/format.ts`, `lib/needed.ts` must not import JSON or use the `@/` alias and may only `import type` from each other, so Node can run the tests directly.
 
 ## Source of truth rule
 **The four `data/*.json` files are the only places collection data lives.** `lib/data.ts` is a thin loader — do not hand-edit card objects anywhere else. Never set `owned` or `pricePaid` on a card — those are derived.
@@ -129,6 +131,7 @@ Whenever a card is added or updated without a bundled image (e.g. a new set not 
 - Variant badges (ex, GX, V, VMAX, VSTAR, BREAK, LEGEND, Alolan/Galarian/Hisuian/Mega forms)
 - CSV download of the active binder
 - Print page (`/print?binder=<id>`) for blank placeholder cards, sorted by the binder's sort key; `&ink=1` is the ink saver (no card photo, outlined badges and watermark, same geometry)
+- Needed list (`/needed?binder=<id>`): one-screen or one-A4 view of the missing numbers (master sets as a 001 to 165 grid with secrets in their own block, wants binders as `#025 Pikachu` rows), owned cells dimmed, plus a "Copy as text" button that emits `Need (62): 003 007 ...` for seller chats
 
 ## Known Limitations / Planned Work
 - **Price history is captured but not visualized** — `data/prices.json` is write-only for now.

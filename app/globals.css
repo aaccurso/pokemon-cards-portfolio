@@ -2021,3 +2021,190 @@ header .binder-description {
     0 0 24px rgba(248, 208, 48, 0.25);
   border-color: rgba(248, 208, 48, 0.5);
 }
+
+/* =====================================================
+   Needed list page (/needed): one-sheet view of missing numbers
+   ===================================================== */
+.needed-page {
+  background: #f4f4f4;
+  min-height: 100vh;
+  padding: 1.25rem 1rem 3rem;
+  color: #222;
+}
+
+.needed-controls,
+.needed-header,
+.needed-block {
+  max-width: 780px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.needed-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.needed-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+a.action-button {
+  display: inline-block;
+  text-decoration: none;
+}
+
+.needed-page .action-button {
+  background: #fff;
+  border-color: #ccc;
+  color: #222;
+}
+
+.needed-page .action-button:hover {
+  background: #fff;
+  border-color: #2a6fdb;
+  color: #2a6fdb;
+}
+
+.needed-header {
+  margin-bottom: 1rem;
+}
+
+.needed-header h1 {
+  color: #222;
+  font-size: 1.3rem;
+  margin-bottom: 0.2rem;
+}
+
+.needed-summary {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.needed-block {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.needed-block h2 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #666;
+  margin-bottom: 0.6rem;
+}
+
+.needed-grid {
+  list-style: none;
+  display: grid;
+  gap: 2px;
+}
+
+.needed-grid.numbers {
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+}
+
+.needed-grid.rows {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2px 1rem;
+}
+
+.needed-cell {
+  min-width: 0;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  color: #111;
+  background: #fff6cc;
+  padding: 0.35rem 0.2rem;
+  text-align: center;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.needed-grid.rows .needed-cell {
+  text-align: left;
+  padding: 0.25rem 0.4rem;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.needed-cell.owned {
+  font-weight: 400;
+  color: #b4b4b4;
+  background: transparent;
+}
+
+@media (max-width: 600px) {
+  .needed-page {
+    padding: 1rem 0.6rem 2rem;
+  }
+  .needed-block {
+    padding: 0.75rem 0.5rem;
+  }
+  .needed-grid.rows {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px 0.5rem;
+  }
+  .needed-grid.numbers .needed-cell {
+    padding: 0.45rem 0;
+    font-size: 0.85rem;
+  }
+}
+
+@media print {
+  .needed-page {
+    background: #fff !important;
+    padding: 0 !important;
+    min-height: 0;
+  }
+  .needed-header {
+    margin-bottom: 3mm;
+  }
+  .needed-header h1 {
+    font-size: 14pt;
+  }
+  .needed-summary {
+    font-size: 9pt;
+  }
+  .needed-block {
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+    margin-bottom: 4mm;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .needed-block h2 {
+    font-size: 9pt;
+    margin-bottom: 1.5mm;
+  }
+  .needed-grid {
+    gap: 0;
+  }
+  .needed-grid.numbers .needed-cell {
+    font-size: 16pt;
+    padding: 0.8mm 0;
+    background: none;
+    border-radius: 0;
+  }
+  .needed-grid.rows {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0 3mm;
+  }
+  .needed-grid.rows .needed-cell {
+    font-size: 10pt;
+    padding: 0.4mm 0;
+  }
+  .needed-cell.owned {
+    color: #9a9a9a !important;
+  }
+}
