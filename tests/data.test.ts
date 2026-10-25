@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { validateData, cardsForBinder } from "../lib/binders.ts";
+import { validateData, cardsForBinder, siteDescription, ogAlt } from "../lib/binders.ts";
 import { typeColors } from "../lib/cards.ts";
 import type { Card } from "../lib/cards.ts";
 import type { PurchaseData } from "../lib/purchases.ts";
@@ -37,6 +37,13 @@ test("every Pokemon type uses the app's type vocabulary", () => {
 test("card names use canonical suffix casing and have no glued words", () => {
   const bad = cards.filter((c) => /\sEx$/.test(c.name) || /[a-z][A-Z][a-z]+ Team/.test(c.name)).map((c) => c.name);
   assert.deepEqual(bad, []);
+});
+
+test("site description and OG alt mention every binder in data/binders.json", () => {
+  for (const b of binders) {
+    assert.ok(siteDescription(binders).includes(b.name), `description lacks ${b.name}`);
+    assert.ok(ogAlt(binders).includes(b.name), `og alt lacks ${b.name}`);
+  }
 });
 
 test("every ex/EX/GX card has a variant", () => {
