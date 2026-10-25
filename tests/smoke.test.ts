@@ -65,7 +65,12 @@ test("buildPlan derives every URL and expectation from the data", () => {
     rarityRows: 2,
     activeRarity: "Common / Uncommon",
   });
-  assert.equal(plan.length, 8);
+  // Finish-as-singles shortlist: the wanted cards of the master set as a table, priciest first.
+  assert.deepEqual(byPath["/?binder=m6a-30th&own=wanted&view=table&sort=buyPrice&dir=desc"], {
+    h1: "30th CELEBRATION",
+    tbodyRows: 3,
+  });
+  assert.equal(plan.length, 9);
 });
 
 test("buildPlan adds no rarity page for a binder where no card has a rarity", () => {
@@ -73,6 +78,11 @@ test("buildPlan adds no rarity page for a binder where no card has a rarity", ()
   assert.equal(plan.filter((p) => p.path.includes("rarity=")).length, 1);
   const noRarity = cards.map((c) => ({ ...c, rarity: undefined }));
   assert.equal(buildPlan({ cards: noRarity, purchases, binders }).some((p) => p.path.includes("rarity=")), false);
+});
+
+test("buildPlan skips the shortlist page when there is no master-set binder", () => {
+  const plan = buildPlan({ cards, purchases, binders: binders.filter((b) => b.kind !== "master-set") });
+  assert.equal(plan.some((p) => p.path.includes("own=wanted")), false);
 });
 
 test("buildPlan skips the modal page when nothing in the default binder is owned", () => {

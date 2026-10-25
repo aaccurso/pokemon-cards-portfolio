@@ -26,6 +26,7 @@ import {
 import { fmtEur } from "@/lib/format";
 import { compareBySort, SortDir, SortKey } from "@/lib/sort";
 import { fmt0 } from "@/lib/format";
+import { neededText } from "@/lib/needed";
 import { CardModal } from "./CardModal";
 import { CardTile } from "./CardTile";
 import { CardTable } from "./CardTable";
@@ -71,6 +72,7 @@ export default function PortfolioTracker() {
   );
   const [copied, setCopied] = useState(false);
   const [tradeCopied, setTradeCopied] = useState(false);
+  const [copiedNeeded, setCopiedNeeded] = useState(false);
 
   const binder = getBinder(binderId, binders);
   const binderCards = useMemo(() => cardsForBinder(binderId, allCards), [binderId]);
@@ -222,6 +224,24 @@ export default function PortfolioTracker() {
     }
   }
 
+  /** Wanted cards, table view, priciest first: the finish-as-singles shopping list. */
+  function showSinglesShortlist() {
+    setFilters({ ...EMPTY_FILTERS, own: "wanted" });
+    setViewMode("table");
+    setSortKey("buyPrice");
+    setSortDir("desc");
+  }
+
+  async function handleCopyNeeded() {
+    try {
+      await navigator.clipboard.writeText(neededText(filtered, ownership, binder));
+      setCopiedNeeded(true);
+      setTimeout(() => setCopiedNeeded(false), 1500);
+    } catch {
+      // clipboard unavailable (e.g. non-HTTPS): silently no-op
+    }
+  }
+
   function downloadFile(suffix: string, content: string, mime: string) {
     const blob = new Blob([content], { type: `${mime};charset=utf-8` });
     const url = URL.createObjectURL(blob);
@@ -334,7 +354,7 @@ export default function PortfolioTracker() {
         </div>
       )}
 
-      <StatsGrid stats={stats} kind={binder.kind} />
+      <StatsGrid stats={stats} kind={binder.kind} onBuySingles={showSinglesShortlist} />
 
       <FilterBar
         filters={filters}
@@ -352,6 +372,8 @@ export default function PortfolioTracker() {
         tradeCopied={tradeCopied}
         onTradeText={handleCopyTradeText}
         onTradeCsv={handleDownloadTradeCsv}
+        onCopyNeeded={handleCopyNeeded}
+        copiedNeeded={copiedNeeded}
         showIllustration={binder.kind === "wants"}
       />
 

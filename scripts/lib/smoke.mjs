@@ -79,6 +79,15 @@ export function buildPlan({ cards, purchases, binders }) {
     });
   }
 
+  // Finish-as-singles shortlist: the URL the "Buy as singles" tile link applies.
+  const master = perBinder.find((p) => p.binder.kind === "master-set");
+  if (master) {
+    plan.push({
+      path: `/?binder=${master.binder.id}&own=wanted&view=table&sort=buyPrice&dir=desc`,
+      expect: { h1: master.binder.name, tbodyRows: master.list.length - master.owned },
+    });
+  }
+
   plan.push({ path: "/?binder=typo", expect: { h1: getBinder(defaultId, binders).name, showing: def.list.length } });
 
   const firstOwned = [...def.list]

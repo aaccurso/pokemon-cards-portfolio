@@ -7,9 +7,11 @@ import { fmtEur } from "@/lib/format";
 type Props = {
   stats: CollectionStats;
   kind: BinderKind;
+  /** Master-set binders only: jump to the wanted cards as a table, priciest first. */
+  onBuySingles?: () => void;
 };
 
-export function StatsGrid({ stats, kind }: Props) {
+export function StatsGrid({ stats, kind, onBuySingles }: Props) {
   const isMasterSet = kind === "master-set";
   // Derived here, not stored: unrealised gain and the only honest ROI (outlay
   // includes shipping, fees and duplicates, so compare it to every copy's value).
@@ -68,6 +70,16 @@ export function StatsGrid({ stats, kind }: Props) {
         <div className="label">
           {isMasterSet ? "To complete as singles" : "To complete (est.)"}
         </div>
+        {isMasterSet && stats.wanted > 0 && onBuySingles && (
+          <button
+            type="button"
+            className="stat-link"
+            onClick={onBuySingles}
+            title="Show the wanted cards as a table, priciest first"
+          >
+            Buy as singles &rarr;
+          </button>
+        )}
       </div>
       <div className="stat-card">
         <div className="value">{fmtEur(stats.budget)}</div>

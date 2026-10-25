@@ -25,6 +25,7 @@ Personal tracker for Japanese Pokémon TCG binders. Each binder is its own colle
 - **CDN-independent images** — every card image is bundled as WebP in `public/cards/`.
 - **CSV export** of the active binder.
 - **Duplicates and trade list**: filter to cards with extra copies (`?own=dupes`), see an `x2` badge beside the Pokéball, and copy or download the extras as a trade list (`M6a 045 Pikachu ex x2 (1,20 EUR)`) for a trade partner or buylist.
+- **Finish-as-singles shortlist**: a "Buy as singles" link on the master-set tile jumps to the wanted cards as a table, priciest first (`?own=wanted&view=table&sort=buyPrice&dir=desc`); "Copy as text" turns the wanted set into one line (`Need (62): 003 007 012 ...`) for a seller chat; the card modal links the set code to a Cardmarket search.
 
 ## Tech stack
 

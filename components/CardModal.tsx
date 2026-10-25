@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { BinderDisplay, Card, languageFlags, conditionNames, numberLabel, typeBadges } from "@/lib/cards";
 import type { CardOwnership } from "@/lib/purchases";
 import { fmtEur } from "@/lib/format";
+import { cardmarketSearchUrl } from "@/lib/shortlist";
 
 type Props = {
   card: Card;
@@ -155,7 +156,18 @@ export function CardModal({ card, ownership, onClose, onPrev, onNext, binder }: 
             </div>
             <div>
               <dt>Code</dt>
-              <dd>{card.code}</dd>
+              <dd>
+                {card.code}
+                <a
+                  className="cardmarket-link"
+                  href={cardmarketSearchUrl(card.code)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Search this code on Cardmarket"
+                >
+                  Cardmarket &#8599;
+                </a>
+              </dd>
             </div>
             <div>
               <dt>Language</dt>
