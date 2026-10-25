@@ -117,7 +117,7 @@ Whenever a card is added or updated without a bundled image (e.g. a new set not 
 - Pokemon type badges with canonical game colors; neutral badge for Trainers
 - Variant badges (ex, GX, V, VMAX, VSTAR, BREAK, LEGEND, Alolan/Galarian/Hisuian/Mega forms)
 - CSV download of the active binder
-- Print page (`/print?binder=<id>`) for blank placeholder cards, sorted by the binder's sort key
+- Print page (`/print?binder=<id>`) for blank placeholder cards, sorted by the binder's sort key; `&ink=1` is the ink saver (no card photo, outlined badges and watermark, same geometry)
 
 ## Known Limitations / Planned Work
 - **Price history is captured but not visualized** — `data/prices.json` is write-only for now.
