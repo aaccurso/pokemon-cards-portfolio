@@ -76,6 +76,16 @@ export type CollectionStats = {
   duplicates: number;
 };
 
+/** Rounded completion percent; 0 for an empty binder. */
+export function collectedPct(s: Pick<CollectionStats, "owned" | "total">): number {
+  return s.total === 0 ? 0 : Math.round((s.owned / s.total) * 100);
+}
+
+/** "97 / 165 · 59%": the one place the headline count is shown above the fold. */
+export function progressLabel(s: Pick<CollectionStats, "owned" | "total">): string {
+  return `${s.owned} / ${s.total} · ${collectedPct(s)}%`;
+}
+
 export function computeStats(
   cards: Card[],
   ownership: OwnershipMap,
