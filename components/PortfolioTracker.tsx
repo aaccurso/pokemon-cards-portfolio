@@ -17,11 +17,11 @@ import {
   buildCsv,
   OwnershipMap,
 } from "@/lib/purchases";
+import { SortKey, isSortKey, getSortValue } from "@/lib/sort";
 import { CardModal } from "./CardModal";
 import { CardTile } from "./CardTile";
 import { BinderTabs, BinderCounts } from "./BinderTabs";
 
-type SortKey = keyof Card | "pricePaid" | "owned";
 type SortDir = "asc" | "desc";
 
 export default function PortfolioTracker() {
@@ -40,12 +40,15 @@ export default function PortfolioTracker() {
     const v = searchParams.get("own");
     return v === "owned" || v === "wanted" ? v : "all";
   });
+  // Only a "wants" binder has the Illustration toggle; ignore ?illus=1 elsewhere
+  // so a master-set binder never filters invisibly.
   const [illustrationOnly, setIllustrationOnly] = useState(
-    () => searchParams.get("illus") === "1"
+    () => searchParams.get("illus") === "1" && initialBinder.kind === "wants"
   );
-  const [sortKey, setSortKey] = useState<SortKey>(
-    () => (searchParams.get("sort") as SortKey) || initialBinder.sort
-  );
+  const [sortKey, setSortKey] = useState<SortKey>(() => {
+    const v = searchParams.get("sort");
+    return isSortKey(v) ? v : initialBinder.sort;
+  });
   const [sortDir, setSortDir] = useState<SortDir>(
     () => (searchParams.get("dir") === "desc" ? "desc" : "asc")
   );
@@ -71,8 +74,8 @@ export default function PortfolioTracker() {
     if (typeFilter !== "all") p.set("type", typeFilter);
     if (setFilter !== "all") p.set("set", setFilter);
     if (ownershipFilter !== "all") p.set("own", ownershipFilter);
-    if (illustrationOnly) p.set("illus", "1");
-    if (sortKey !== binder.sort) p.set("sort", String(sortKey));
+    if (illustrationOnly && binder.kind === "wants") p.set("illus", "1");
+    if (sortKey !== binder.sort) p.set("sort", sortKey);
     if (sortDir !== "asc") p.set("dir", sortDir);
     if (viewMode !== "grid") p.set("view", viewMode);
     if (modalCard) p.set("card", modalCard.id);
@@ -82,6 +85,7 @@ export default function PortfolioTracker() {
   }, [
     binderId,
     binder.sort,
+    binder.kind,
     search,
     typeFilter,
     setFilter,
@@ -175,7 +179,7 @@ export default function PortfolioTracker() {
       list = list.filter((c) => !ownership.has(c.id));
     }
 
-    if (illustrationOnly) {
+    if (illustrationOnly && binder.kind === "wants") {
       list = list.filter((c) => c.buyPrice != null);
     }
 
@@ -190,7 +194,7 @@ export default function PortfolioTracker() {
     });
 
     return list;
-  }, [binderCards, search, typeFilter, setFilter, ownershipFilter, illustrationOnly, sortKey, sortDir, ownership]);
+  }, [binderCards, binder.kind, search, typeFilter, setFilter, ownershipFilter, illustrationOnly, sortKey, sortDir, ownership]);
 
   function handleSort(key: SortKey) {
     if (sortKey === key) {
@@ -556,16 +560,4 @@ export default function PortfolioTracker() {
 
 function fmt(n: number): string {
   return n.toFixed(2).replace(".", ",");
-}
-
-function getSortValue(
-  c: Card,
-  key: SortKey,
-  ownership: OwnershipMap
-): string | number | boolean | null {
-  if (key === "pricePaid") return ownership.get(c.id)?.pricePaid ?? null;
-  if (key === "owned") return ownership.has(c.id);
-  const v = c[key as keyof Card];
-  if (v === undefined) return null;
-  return v as string | number | null;
 }
