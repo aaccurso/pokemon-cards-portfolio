@@ -23,6 +23,28 @@ export type Binder = {
 
 export const DEFAULT_BINDER_ID = "kanto-151";
 
+export const SITE_TITLE = "Pokémon card binders";
+
+/** Comma-separated binder names in data order; empty string for no binders. */
+export function binderNames(binders: Binder[]): string {
+  return binders.map((b) => b.name).join(", ");
+}
+
+/** Site-wide meta description, enumerating every binder so shared links stay honest. */
+export function siteDescription(binders: Binder[]): string {
+  const names = binderNames(binders);
+  const lead = names
+    ? `Personal tracker for Japanese Pokémon TCG binders: ${names}.`
+    : "Personal tracker for Japanese Pokémon TCG binders.";
+  return `${lead} Log Cardmarket shipments and booster pulls, watch each binder fill in, and print placeholder sheets.`;
+}
+
+/** Alt text for the Open Graph image. */
+export function ogAlt(binders: Binder[]): string {
+  const names = binderNames(binders);
+  return names ? `${SITE_TITLE}: ${names}` : SITE_TITLE;
+}
+
 export function resolveBinderId(
   param: string | null | undefined,
   binders: Binder[]
@@ -48,10 +70,9 @@ export function buildCardBinderMap(cards: Card[]): Map<string, string> {
 /**
  * Returns human-readable problems; empty when the data is consistent.
  *
- * Shipment rules exist because stats derive from purchases with no further
- * checks: an empty shipment gets binderShare 0, so its `total` would vanish
- * from every binder's outlay; qty < 1 or a negative pricePaid would silently
- * skew duplicates and spend; a duplicate shipment id makes the log ambiguous.
+ * This is the data gate: `lib/data.ts` throws on any problem (so `next build`
+ * fails before a deploy), `tests/data.test.ts` runs it on the real files, and
+ * `.githooks/pre-commit` runs that test before every commit.
  */
 export function validateData(
   cards: Card[],
@@ -59,17 +80,27 @@ export function validateData(
   binders: Binder[]
 ): string[] {
   const problems: string[] = [];
-  const binderIds = new Set(binders.map((b) => b.id));
-  const cardIds = new Set(cards.map((c) => c.id));
+
+  const binderIds = new Set<string>();
+  for (const b of binders) {
+    if (binderIds.has(b.id)) problems.push(`duplicate binder id ${b.id}`);
+    binderIds.add(b.id);
+    if (b.kind === "master-set" && b.officialCount == null) {
+      problems.push(`master-set binder ${b.id} has no officialCount`);
+    }
+  }
+
+  const cardIds = new Set<string>();
   for (const c of cards) {
+    if (cardIds.has(c.id)) problems.push(`duplicate card id ${c.id}`);
+    cardIds.add(c.id);
     if (!binderIds.has(c.binderId)) {
       problems.push(`card ${c.id} has unknown binderId ${c.binderId}`);
     }
   }
+
   const shipmentIds = new Set<string>();
   for (const sh of purchases.shipments) {
-    if (shipmentIds.has(sh.id)) problems.push(`duplicate shipment id ${sh.id}`);
-    shipmentIds.add(sh.id);
     if (sh.items.length === 0) problems.push(`shipment ${sh.id} has no items`);
     for (const item of sh.items) {
       if (!cardIds.has(item.cardId)) {
@@ -77,10 +108,8 @@ export function validateData(
           `shipment ${sh.id} item references unknown card ${item.cardId}`
         );
       }
-      if (item.qty != null && !(item.qty >= 1)) {
-        problems.push(
-          `shipment ${sh.id} item ${item.cardId} has qty ${item.qty} (must be >= 1)`
-        );
+      if (item.qty != null && item.qty < 1) {
+        problems.push(`shipment ${sh.id} item ${item.cardId} has qty ${item.qty}`);
       }
       if (item.pricePaid != null && item.pricePaid < 0) {
         problems.push(
@@ -88,6 +117,11 @@ export function validateData(
         );
       }
     }
+    // A null total is silently counted as 0 in totalOutlay, so require it.
+    if (sh.total == null) problems.push(`shipment ${sh.id} has no total`);
+    if (shipmentIds.has(sh.id)) problems.push(`duplicate shipment id ${sh.id}`);
+    shipmentIds.add(sh.id);
   }
+
   return problems;
 }

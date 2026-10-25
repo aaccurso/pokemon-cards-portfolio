@@ -7,12 +7,16 @@
  * - On a card's first refresh, seeds a "manual" snapshot of its current
  *   buyPrice so the pre-refresh target is never lost.
  * - Sets buyPrice = round(trend, 2), except a null buyPrice in a "wants"
- *   binder stays null (it means "no illustration chosen yet"). A trend that
- *   is not a positive number counts as "no Cardmarket price" and is skipped.
- * - Builds both files in memory and writes once at the end: each file goes
- *   to a *.tmp sibling first and is then renamed into place, so a crash can
- *   never leave a half-written JSON file. A crash between the two renames
- *   can still leave one file stale; git is the real backstop for that.
+ *   binder stays null (it means "no illustration chosen yet").
+ * - Builds both files in memory and writes once at the end. prices.json is
+ *   written one snapshot per line (formatPrices) so a refresh diff is an
+ *   append per card rather than a rewrite of every history array.
+ *
+ * Data growth (roadmap engineering item 7): ~98 bytes per snapshot, 313 per
+ * refresh, so weekly runs add roughly 1.6 MB a year. Nothing imports this
+ * file into the client bundle, and it must stay that way; a future history
+ * view derives what it needs at build time. Shard to data/prices/<year>.json
+ * only if the file passes a few MB.
  *
  *   node scripts/refresh_prices.mjs            # refresh and write
  *   node scripts/refresh_prices.mjs --dry-run  # print changes only
@@ -20,11 +24,11 @@
 import fs from "node:fs";
 import { fetchCard } from "./lib/tcgdex.mjs";
 import {
-  hasTrend,
   seedManual,
   upsertCardmarket,
   nextBuyPrice,
   topMovers,
+  formatPrices,
 } from "./lib/prices.mjs";
 
 const CARDS_FILE = "data/cards.json";
@@ -53,7 +57,7 @@ for (let i = 0; i < cards.length; i++) {
   }
   const tc = await fetchCard(card.tcgdexId);
   const cm = tc?.pricing?.cardmarket;
-  if (!cm || !hasTrend(cm.trend)) {
+  if (!cm || cm.trend == null) {
     skippedNoPrice.push(card.code);
     continue;
   }
@@ -89,14 +93,8 @@ if (DRY_RUN) {
   process.exit(0);
 }
 
-// Write both to *.tmp first, then rename both: a rename is atomic on the same
-// filesystem, so a crash mid-write cannot leave a truncated JSON file.
-const outputs = [
-  [PRICES_FILE, JSON.stringify(prices, null, 2) + "\n"],
-  [CARDS_FILE, JSON.stringify(cards, null, 2) + "\n"],
-];
-for (const [file, text] of outputs) fs.writeFileSync(`${file}.tmp`, text);
-for (const [file] of outputs) fs.renameSync(`${file}.tmp`, file);
+fs.writeFileSync(PRICES_FILE, formatPrices(prices));
+fs.writeFileSync(CARDS_FILE, JSON.stringify(cards, null, 2) + "\n");
 console.log("top movers:");
 for (const c of topMovers(changes.filter((c) => c.from != null), 10)) {
   console.log(`  ${c.id}: ${fmt(c.from)} -> ${fmt(c.to)}`);

@@ -27,7 +27,7 @@ Four git-tracked JSON files are the single source of truth:
   - No `owned` or `pricePaid` — those are derived from purchases.
 - **`data/purchases.json`** — the shipment log. `{ shipments: Shipment[] }`, each `{ id, seller, date, shipping, fees, total, product?, items[] }`, each item `{ cardId, pricePaid, condition, qty? }`.
   - `pricePaid: null` means pulled from sealed product. `qty` defaults to 1. `product` is a free label such as `"30th CELEBRATION booster box x2"`.
-- **`data/prices.json`** — append-only price history keyed by card id. Each entry is a list of snapshots: `{ date, source: "manual", price }` for the pre-refresh target, and `{ date, source: "cardmarket", trend, avg7, avg30, low }` per refresh. Nothing in the UI reads it yet.
+- **`data/prices.json`** — append-only price history keyed by card id. Each entry is a list of snapshots: `{ date, source: "manual", price }` for the pre-refresh target, and `{ date, source: "cardmarket", trend, avg7, avg30, low }` per refresh. Nothing in the UI reads it yet. On disk it is stored one snapshot per line (`formatPrices` in `scripts/lib/prices.mjs`) so a refresh diff is an append per card; `tests/data.test.ts` fails if the file drifts from that format, so after a hand edit rerun the formatter rather than `JSON.stringify`.
 
 A card is "owned" if it appears in at least one purchase item. Its effective `pricePaid` is the min across priced purchases, or null when every copy was pulled. Duplicates are recorded but don't double-count in collection stats.
 
@@ -43,8 +43,11 @@ app/
   print/page.tsx     — printable placeholder-card binder sheet (per binder)
   globals.css
 components/
-  PortfolioTracker.tsx — main dashboard (binder tabs, stats, filters, grid/table, modals)
+  PortfolioTracker.tsx — main dashboard: URL-backed state, derived data, composition of the parts below
   BinderTabs.tsx       — binder selector pills with owned / total counts
+  StatsGrid.tsx        — the six stat cards (props: stats, kind)
+  FilterBar.tsx        — search, type/set/ownership selects, illustration toggle, view toggle, Share/CSV; exports the Filters type
+  CardTable.tsx        — table view with sortable headers and hover preview
   CardTile.tsx         — grid-view 3D-tilt holo card
   CardModal.tsx        — per-card details modal
   PlaceholderCard.tsx  — per-card print sheet placeholder
@@ -53,7 +56,8 @@ lib/
   cards.ts       — Card type, typeColors, numberLabel/typeBadges display helpers
   purchases.ts   — ownership/stats derivation + CSV export (pure)
   binders.ts     — Binder type, resolveBinderId/getBinder/cardsForBinder, validateData (pure)
-  sort.ts        — SortKey, SORT_KEYS, isSortKey (validates ?sort=), getSortValue (pure)
+  sort.ts        — SortKey/SortDir, getSortValue, compareBySort nulls-last comparator (pure)
+  format.ts      — fmtEur, the one place prices are formatted for display (pure)
 data/
   binders.json    — binder registry
   cards.json      — all cards
@@ -65,7 +69,7 @@ scripts/
 tests/            — node --test suites (*.test.ts), run with npm test
 ```
 
-`lib/cards.ts`, `lib/purchases.ts`, `lib/binders.ts`, `lib/sort.ts` must not import JSON or use the `@/` alias and may only `import type` from each other, so Node can run the tests directly.
+`lib/cards.ts`, `lib/purchases.ts`, `lib/binders.ts`, `lib/sort.ts`, `lib/format.ts` must not import JSON or use the `@/` alias and may only `import type` from each other, so Node can run the tests directly.
 
 ## Source of truth rule
 **The four `data/*.json` files are the only places collection data lives.** `lib/data.ts` is a thin loader — do not hand-edit card objects anywhere else. Never set `owned` or `pricePaid` on a card — those are derived.
@@ -107,7 +111,10 @@ Whenever a card is added or updated without a bundled image (e.g. a new set not 
 ## Adding a new binder
 1. Add an entry to `data/binders.json`.
 2. Add cards with that `binderId` to `data/cards.json` (for a full set, write a builder like `scripts/build_m6a.mjs`).
-3. Download images, run `node scripts/refresh_prices.mjs`, run `npm test && npm run build`. `lib/data.ts` throws in development if any card references an unknown binder.
+3. Download images, run `node scripts/refresh_prices.mjs`, run `npm test && npm run build`. `lib/data.ts` throws in every environment (so `next build` fails) if `validateData` finds a problem: unknown or duplicate binder, card or shipment ids, a master-set binder without `officialCount`, an empty shipment, a null `total`, `qty < 1`, or a negative `pricePaid`.
+
+## Data validation gate
+`validateData` in `lib/binders.ts` is the single checker. It runs in three places: `lib/data.ts` throws at module load (fails the build), `tests/data.test.ts` runs it on the real JSON, and the tracked `.githooks/pre-commit` runs that test before every commit (`git commit --no-verify` skips it once). `npm install` / `npm ci` enables the hook through the `prepare` script; after a fresh clone with no install, run `git config core.hooksPath .githooks`. Every shipment needs a numeric `total`; when shipping is unknown, use the sum of item prices.
 
 ## Current Features
 - Binder tabs (`?binder=<id>` in the URL, default `kanto-151`); switching resets filters and sort
@@ -118,7 +125,7 @@ Whenever a card is added or updated without a bundled image (e.g. a new set not 
 - Pokemon type badges with canonical game colors; neutral badge for Trainers
 - Variant badges (ex, GX, V, VMAX, VSTAR, BREAK, LEGEND, Alolan/Galarian/Hisuian/Mega forms)
 - CSV download of the active binder
-- Print page (`/print?binder=<id>`) for blank placeholder cards, sorted by the binder's sort key
+- Print page (`/print?binder=<id>`) for blank placeholder cards, sorted by the binder's sort key; `&ink=1` is the ink saver (no card photo, outlined badges and watermark, same geometry)
 
 ## Known Limitations / Planned Work
 - **Price history is captured but not visualized** — `data/prices.json` is write-only for now.
@@ -132,4 +139,8 @@ npm run dev    # Start dev server on localhost:3000
 npm test       # Run unit tests (node --test)
 npm run build  # Production build
 npm start      # Serve production build
+npm run smoke  # Headless Chrome DOM checks on the real pages (see below)
+git config core.hooksPath .githooks  # Enable the pre-commit data gate (npm install does this too)
 ```
+
+`npm run smoke` renders every binder, the table view, the card modal, and the print pages in headless Chrome and asserts on the DOM (h1, counts, tabs, no `undefined`/`NaN`). Expectations come from `data/*.json`. It starts `next start` on `SMOKE_PORT` (default 3000; needs a prior `npm run build`, otherwise falls back to `next dev`), or reuses a running server when `SMOKE_URL` is set. Without Chrome it prints SKIP and exits 0; CI passes `--require-chrome`. Helpers live in `scripts/lib/smoke.mjs` and are unit-tested.

@@ -1,0 +1,13 @@
+#!/bin/sh
+# Data validation gate. Runs the real-data test (validateData on data/*.json,
+# unique ids, price-history keys) before every commit; well under a second.
+#
+# Enabled per clone by `npm install` / `npm ci` through the "prepare" script,
+# or by hand: git config core.hooksPath .githooks
+# Skip once with: git commit --no-verify
+#
+# Note: this checks the working tree, not the staged snapshot. Stage data
+# files whole and the two are identical.
+set -e
+cd "$(git rev-parse --show-toplevel)"
+exec node --test tests/data.test.ts

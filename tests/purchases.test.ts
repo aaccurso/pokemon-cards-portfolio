@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { buildOwnershipMap, computeStats, buildCsv } from "../lib/purchases.ts";
+import { buildOwnershipMap, computeStats, buildCsv, progressLabel } from "../lib/purchases.ts";
 import type { Card } from "../lib/cards.ts";
 import type { PurchaseData } from "../lib/purchases.ts";
 import { card } from "./helpers.ts";
@@ -76,4 +76,11 @@ test("buildCsv includes the new columns and renders a pulled Trainer row", () =>
   const [header, row] = buildCsv(cards, o).trim().split("\n");
   assert.equal(header, "Card Name,Card Code,Set,Qty,Language,Condition,Buy Price (EUR),Price Paid (EUR),Owned,Pokedex #,Type 1,Type 2,Generation,Card Variant,Binder,Category,Set Number,Japanese Name,Rarity,Qty Owned");
   assert.equal(row, "N,M6a 153,30th CELEBRATION,1,Japanese,NM,,,true,,,,,,m6a-30th,Trainer,153,N,Classic Collection,2");
+});
+
+test("progressLabel renders owned / total and a rounded percent, guarding an empty binder", () => {
+  assert.equal(progressLabel({ owned: 97, total: 165 }), "97 / 165 · 59%");
+  assert.equal(progressLabel({ owned: 0, total: 40 }), "0 / 40 · 0%");
+  assert.equal(progressLabel({ owned: 151, total: 151 }), "151 / 151 · 100%");
+  assert.equal(progressLabel({ owned: 0, total: 0 }), "0 / 0 · 0%");
 });

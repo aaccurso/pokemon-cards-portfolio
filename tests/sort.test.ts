@@ -1,36 +1,35 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { SORT_KEYS, isSortKey, getSortValue } from "../lib/sort.ts";
+import { getSortValue, compareBySort } from "../lib/sort.ts";
 import type { OwnershipMap } from "../lib/purchases.ts";
 import { card } from "./helpers.ts";
 
-test("isSortKey accepts exactly the eight sortable keys", () => {
-  for (const k of ["owned", "pokedexNumber", "setNumber", "name", "code", "set", "buyPrice", "pricePaid"]) {
-    assert.equal(isSortKey(k), true, k);
-  }
-  assert.equal(SORT_KEYS.size, 8);
-  assert.equal(isSortKey("id"), false, "a Card field that is not sortable");
-  assert.equal(isSortKey("__proto__"), false);
-  assert.equal(isSortKey(""), false);
-  assert.equal(isSortKey(null), false);
-  assert.equal(isSortKey(undefined), false);
-});
+const owned = (id: string, pricePaid: number | null) =>
+  [id, { owned: true as const, pricePaid, duplicateCount: 0, purchaseCount: 1 }] as const;
 
-test("getSortValue reads derived keys from ownership and card keys from the card", () => {
-  const ownership: OwnershipMap = new Map([
-    ["a", { owned: true, pricePaid: 3.5, duplicateCount: 0, purchaseCount: 1 }],
-    ["b", { owned: true, pricePaid: null, duplicateCount: 0, purchaseCount: 1 }],
-  ]);
-  const a = card({ id: "a", name: "A", buyPrice: 10 });
-  const b = card({ id: "b", name: "B", buyPrice: null });
-  const c = card({ id: "c", name: "C", setNumber: 7 });
-  assert.equal(getSortValue(a, "pricePaid", ownership), 3.5);
-  assert.equal(getSortValue(b, "pricePaid", ownership), null, "pulled copy has no price");
-  assert.equal(getSortValue(c, "pricePaid", ownership), null, "unowned has no price");
+const ownership: OwnershipMap = new Map([owned("a", 3.5), owned("b", null)]);
+
+test("getSortValue reads card fields and derives owned and pricePaid", () => {
+  const a = card({ id: "a", name: "Abra", buyPrice: 2 });
+  const c = card({ id: "c", name: "Cubone", buyPrice: null });
+  assert.equal(getSortValue(a, "name", ownership), "Abra");
+  assert.equal(getSortValue(a, "buyPrice", ownership), 2);
+  assert.equal(getSortValue(c, "buyPrice", ownership), null);
   assert.equal(getSortValue(a, "owned", ownership), true);
   assert.equal(getSortValue(c, "owned", ownership), false);
-  assert.equal(getSortValue(a, "buyPrice", ownership), 10);
-  assert.equal(getSortValue(b, "buyPrice", ownership), null);
-  assert.equal(getSortValue(c, "setNumber", ownership), 7);
-  assert.equal(getSortValue(c, "name", ownership), "C");
+  assert.equal(getSortValue(a, "pricePaid", ownership), 3.5);
+  assert.equal(getSortValue(card({ id: "b" }), "pricePaid", ownership), null);
+  assert.equal(getSortValue(c, "pricePaid", ownership), null);
+});
+
+test("compareBySort orders by key, puts nulls last in both directions", () => {
+  const a = card({ id: "a", name: "Abra", buyPrice: 2 });
+  const b = card({ id: "b", name: "Bulbasaur", buyPrice: 5 });
+  const c = card({ id: "c", name: "Cubone", buyPrice: null });
+  const ids = (list: ReturnType<typeof card>[]) => list.map((x) => x.id);
+
+  assert.deepEqual(ids([c, b, a].sort(compareBySort("buyPrice", "asc", ownership))), ["a", "b", "c"]);
+  assert.deepEqual(ids([c, a, b].sort(compareBySort("buyPrice", "desc", ownership))), ["b", "a", "c"]);
+  assert.deepEqual(ids([b, c, a].sort(compareBySort("name", "desc", ownership))), ["c", "b", "a"]);
+  assert.equal(compareBySort("buyPrice", "asc", ownership)(c, card({ id: "d", buyPrice: null })), 0);
 });

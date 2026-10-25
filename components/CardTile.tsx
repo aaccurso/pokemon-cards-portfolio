@@ -118,7 +118,7 @@ export function CardTile({ card, owned, onClick, binder }: Props) {
           <span className="card-tile-num">{numberLabel(card, binder)}</span>
           <span className="card-tile-name">
             {card.name}
-            {card.nameJa && <span className="name-ja">{card.nameJa}</span>}
+            {card.nameJa && <span className="name-ja" lang="ja">{card.nameJa}</span>}
           </span>
           <div className="card-tile-types">
             {typeBadges(card).map((b) => (

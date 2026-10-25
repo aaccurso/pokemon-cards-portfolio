@@ -8,6 +8,10 @@
   --accent: #f8d030;
   --owned-bg: #1a3a2e;
   --owned-border: #2a5a3e;
+  /* Keyboard focus: double ring (bg gap + accent) reads on dark surfaces and on the yellow active pill.
+     --ring-inset is the same ring drawn inside, for buttons under an overflow: hidden parent. */
+  --ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+  --ring-inset: inset 0 0 0 2px var(--bg), inset 0 0 0 4px var(--accent);
 }
 
 * {
@@ -42,6 +46,13 @@ header h1 {
 
 header p {
   color: var(--text-muted);
+}
+
+header .binder-description {
+  max-width: 36rem;
+  margin: 0 auto;
+  font-size: 0.95rem;
+  line-height: 1.4;
 }
 
 .header-link {
@@ -85,12 +96,27 @@ header p {
   margin-top: 0.25rem;
 }
 
+.progress {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
 .progress-bar-container {
+  flex: 1 1 auto;
   background: var(--border);
   border-radius: 999px;
   height: 12px;
   overflow: hidden;
-  margin-bottom: 2rem;
+}
+
+.progress-label {
+  flex: 0 0 auto;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 
 .progress-bar-fill {
@@ -795,6 +821,13 @@ header p {
   right: 0.5rem;
 }
 
+/* Wrapper for the two nav buttons. On desktop it generates no box, so the
+   buttons keep their absolute positioning against .modal-content. On phones
+   it becomes a sticky footer row (see the 768px block). */
+.modal-nav-row {
+  display: contents;
+}
+
 .modal-image-clip--zoomable {
   cursor: zoom-in;
 }
@@ -960,6 +993,13 @@ header p {
   min-height: 100vh;
   padding: 2rem 1rem 3rem;
   color: #222;
+  /* Inherited by every descendant: badge colours, the watermark and the
+     calibration ruler ticks print without the manual "Background graphics"
+     step in the print dialog. */
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+  /* Light page: white gap + the print button blue, so tabs and the button share one ring */
+  --ring: 0 0 0 2px #fff, 0 0 0 4px #2a6fdb;
 }
 
 .print-controls {
@@ -1023,11 +1063,41 @@ header p {
   line-height: 1.5;
 }
 
+/* Binder tabs re-skinned for the light print page (the app's pills are navy) */
+.print-page .binder-tabs {
+  margin: 0.75rem 0 0;
+}
+.print-page .binder-tab {
+  background: #fff;
+  border-color: #d0d0d0;
+  color: #444;
+}
+.print-page .binder-tab:hover {
+  color: #222;
+  border-color: #888;
+}
+.print-page .binder-tab.active {
+  background: #2a6fdb;
+  border-color: #2a6fdb;
+  color: #fff;
+}
+.print-page .binder-tab:focus-visible {
+  outline: 2px solid #2a6fdb;
+  outline-offset: 2px;
+}
+
 .print-controls-actions {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.print-opts {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
   flex-wrap: wrap;
 }
 
@@ -1215,6 +1285,28 @@ header p {
   overflow: hidden;
   break-inside: avoid;
   page-break-inside: avoid;
+}
+
+/* Ink saver (?ink=1): same geometry, less toner. The grey photo goes, the
+   dashed box and watermark stay, badges become outlines in their own colour. */
+.ink-light .ph-thumb img {
+  display: none;
+}
+.ink-light .ph-thumb {
+  background: #fff;
+}
+.ink-light .placeholder-card {
+  border-width: 0.3mm;
+}
+.ink-light .ph-watermark {
+  color: rgba(0, 0, 0, 0.3);
+  border-color: rgba(0, 0, 0, 0.3);
+}
+.ink-light .ph-type-badge {
+  background: none !important;
+  color: var(--badge);
+  border: 0.25mm solid var(--badge);
+  text-shadow: none;
 }
 
 .ph-header {
@@ -1475,6 +1567,24 @@ header p {
   cursor: not-allowed;
 }
 
+/* Runtime error boundary (app/error.tsx) */
+.error-page {
+  text-align: center;
+  padding-top: 4rem;
+}
+
+.error-page h1 {
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+
+.error-detail {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  word-break: break-word;
+}
+
 /* Read-only ownership indicator (replaces the old checkbox) */
 .own-cell {
   text-align: center;
@@ -1496,6 +1606,24 @@ header p {
   margin-top: 1rem;
   color: var(--text-muted);
   font-size: 0.8rem;
+}
+
+/* Shown in place of the grid or table when filters match no cards */
+.empty-state {
+  display: grid;
+  place-items: center;
+  gap: 0.75rem;
+  padding: 3rem 1rem;
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.empty-state p {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--text);
 }
 
 /* Duplicate purchase note inside modal */
@@ -1719,9 +1847,42 @@ header p {
     display: none;
   }
 
+  .modal-backdrop {
+    padding: 0.75rem;
+  }
+
   .modal-content {
     grid-template-columns: 1fr;
     padding: 1.25rem;
+    padding-bottom: 0;
+    /* dvh tracks the iOS URL bar; vh first so older browsers keep a value */
+    max-height: 90vh;
+    max-height: 90dvh;
+  }
+
+  /* Nav buttons leave the absolute left/right slots (which land over the
+     details text once the layout stacks) and become a sticky footer row. */
+  .modal-nav-row {
+    display: flex;
+    justify-content: space-between;
+    position: sticky;
+    bottom: 0;
+    margin: 0 -1.25rem;
+    padding: 0.6rem 1.25rem;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+  }
+
+  .modal-nav-row .modal-nav,
+  .modal-nav-row .modal-nav:hover {
+    position: static;
+    transform: none;
+  }
+
+  /* On the last card only "next" is missing; keep "previous" on the left and
+     a lone "next" on the right instead of letting it slide left. */
+  .modal-nav-row .modal-nav-next {
+    margin-left: auto;
   }
 
   .modal-close {
@@ -1794,10 +1955,50 @@ header p {
   font-weight: 400;
   opacity: 0.7;
   line-height: 1.2;
+  /* lang="ja" picks Japanese glyph forms; this list prefers the system CJK face on each OS. */
+  font-family: -apple-system, "Hiragino Sans", "Yu Gothic UI", "Noto Sans JP", sans-serif;
+}
+/* Modal: subtitle, not a second yellow title. */
+.modal-info h2 .name-ja {
+  color: var(--text-muted);
+  font-size: 1rem;
+  font-weight: 400;
+  margin-top: 2px;
+  opacity: 1;
+}
+/* Table: floor the smallest text on the page at ~11.5px. */
+.card-table .name-ja {
+  font-size: 0.72rem;
 }
 .type-badge.trainer {
   background: #777;
 }
 .placeholder-card .name-ja {
   font-size: 7pt;
+}
+
+/* ---- Keyboard focus rings (design lane item 2) ----
+   Replace the browser default ring, which is nearly invisible on the yellow
+   active pill in Chrome and clipped by border-radius: 999px in Safari. */
+.binder-tab:focus-visible,
+.pill-toggle:focus-visible,
+.action-button:focus-visible,
+.modal-nav:focus-visible,
+.print-btn:focus-visible,
+.card-tile:focus-visible,
+.card-name-cell:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+}
+/* .view-toggle clips its children (overflow: hidden), so draw the ring inside */
+.view-toggle button:focus-visible {
+  outline: none;
+  box-shadow: var(--ring-inset);
+}
+/* Focused tile also lights the image frame, reusing the hover glow */
+.card-tile:focus-visible .card-tile-image {
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.55),
+    0 0 24px rgba(248, 208, 48, 0.25);
+  border-color: rgba(248, 208, 48, 0.5);
 }
