@@ -7,8 +7,12 @@
  * - On a card's first refresh, seeds a "manual" snapshot of its current
  *   buyPrice so the pre-refresh target is never lost.
  * - Sets buyPrice = round(trend, 2), except a null buyPrice in a "wants"
- *   binder stays null (it means "no illustration chosen yet").
- * - Builds both files in memory and writes once at the end.
+ *   binder stays null (it means "no illustration chosen yet"). A trend that
+ *   is not a positive number counts as "no Cardmarket price" and is skipped.
+ * - Builds both files in memory and writes once at the end: each file goes
+ *   to a *.tmp sibling first and is then renamed into place, so a crash can
+ *   never leave a half-written JSON file. A crash between the two renames
+ *   can still leave one file stale; git is the real backstop for that.
  *
  *   node scripts/refresh_prices.mjs            # refresh and write
  *   node scripts/refresh_prices.mjs --dry-run  # print changes only
@@ -16,6 +20,7 @@
 import fs from "node:fs";
 import { fetchCard } from "./lib/tcgdex.mjs";
 import {
+  hasTrend,
   seedManual,
   upsertCardmarket,
   nextBuyPrice,
@@ -48,7 +53,7 @@ for (let i = 0; i < cards.length; i++) {
   }
   const tc = await fetchCard(card.tcgdexId);
   const cm = tc?.pricing?.cardmarket;
-  if (!cm || cm.trend == null) {
+  if (!cm || !hasTrend(cm.trend)) {
     skippedNoPrice.push(card.code);
     continue;
   }
@@ -84,8 +89,14 @@ if (DRY_RUN) {
   process.exit(0);
 }
 
-fs.writeFileSync(PRICES_FILE, JSON.stringify(prices, null, 2) + "\n");
-fs.writeFileSync(CARDS_FILE, JSON.stringify(cards, null, 2) + "\n");
+// Write both to *.tmp first, then rename both: a rename is atomic on the same
+// filesystem, so a crash mid-write cannot leave a truncated JSON file.
+const outputs = [
+  [PRICES_FILE, JSON.stringify(prices, null, 2) + "\n"],
+  [CARDS_FILE, JSON.stringify(cards, null, 2) + "\n"],
+];
+for (const [file, text] of outputs) fs.writeFileSync(`${file}.tmp`, text);
+for (const [file] of outputs) fs.renameSync(`${file}.tmp`, file);
 console.log("top movers:");
 for (const c of topMovers(changes.filter((c) => c.from != null), 10)) {
   console.log(`  ${c.id}: ${fmt(c.from)} -> ${fmt(c.to)}`);

@@ -25,6 +25,15 @@ test("nextBuyPrice respects the wants-null rule", () => {
   assert.equal(nextBuyPrice({ buyPrice: 5 }, "master-set", null), 5);
 });
 
+test("nextBuyPrice treats a zero or negative trend as no price", () => {
+  assert.equal(nextBuyPrice({ buyPrice: 5 }, "master-set", 0), 5);
+  assert.equal(nextBuyPrice({ buyPrice: 5 }, "wants", 0), 5);
+  assert.equal(nextBuyPrice({ buyPrice: null }, "master-set", 0), null);
+  assert.equal(nextBuyPrice({ buyPrice: 5 }, "master-set", -1), 5);
+  assert.equal(nextBuyPrice({ buyPrice: 5 }, "master-set", undefined), 5);
+  assert.equal(nextBuyPrice({ buyPrice: 5 }, "master-set", 0.004), 0, "a positive trend still rounds normally");
+});
+
 test("topMovers sorts by absolute change", () => {
   assert.deepEqual(
     topMovers([{ id: "a", from: 1, to: 2 }, { id: "b", from: 10, to: 5 }, { id: "c", from: 0, to: 3 }], 2).map((m: { id: string }) => m.id),

@@ -22,12 +22,18 @@ export function upsertCardmarket(history, snap) {
   return next;
 }
 
+/** A usable Cardmarket trend is a positive number; 0, null, or NaN is "no price". */
+export function hasTrend(trend) {
+  return typeof trend === "number" && trend > 0;
+}
+
 /**
  * round(trend, 2), except: a null buyPrice in a "wants" binder means "no
- * illustration chosen yet" and stays null; a null trend leaves the price.
+ * illustration chosen yet" and stays null; a missing trend (see hasTrend)
+ * leaves the price.
  */
 export function nextBuyPrice(card, binderKind, trend) {
-  if (trend == null) return card.buyPrice;
+  if (!hasTrend(trend)) return card.buyPrice;
   if (binderKind === "wants" && card.buyPrice == null) return card.buyPrice;
   return Math.round(trend * 100) / 100;
 }
