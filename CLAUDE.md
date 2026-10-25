@@ -61,7 +61,7 @@ lib/
   needed.ts      — needed-list blocks, labels and text export (pure)
   shortlist.ts   - Cardmarket search URL for the card modal (pure)
   binders.ts     — Binder type, resolveBinderId/getBinder/cardsForBinder, validateData (pure)
-  sort.ts        — SortKey/SortDir, getSortValue, compareBySort nulls-last comparator (pure)
+  sort.ts        — SortKey/SortDir, SORT_KEYS + isSortKey (validates ?sort=), getSortValue, compareBySort nulls-last comparator (pure)
   format.ts      — fmtEur, the one place prices are formatted for display (pure)
 data/
   binders.json    — binder registry
@@ -69,7 +69,7 @@ data/
   purchases.json  — shipment log
   prices.json     — price history
 scripts/
-  lib/            — pure helpers (tcgdex, pricecharting, m6a, prices), unit-tested
+  lib/            — helpers (tcgdex, pricecharting, m6a, prices; atomic = tmp + rename writer), unit-tested
   download_images.mjs, backfill_card_fields.mjs, build_m6a.mjs, refresh_prices.mjs
 tests/            — node --test suites (*.test.ts), run with npm test
 ```
