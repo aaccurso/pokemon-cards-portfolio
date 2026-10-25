@@ -127,6 +127,56 @@ export function computeStats(
   };
 }
 
+export type RarityRow = {
+  rarity: string;
+  label: string;
+  total: number;
+  owned: number;
+  /** Sum of buyPrice over every card of this rarity. */
+  value: number;
+  /** Sum of buyPrice over the unowned cards of this rarity. */
+  toComplete: number;
+};
+
+// Mirrors rarityOrder in lib/cards.ts; inlined because lib modules may only
+// type-import each other.
+const rarityDisplayOrder: [string, string][] = [
+  ["None", "Common / Uncommon"],
+  ["Double rare", "RR"],
+  ["Illustration rare", "AR"],
+  ["Special illustration rare", "SAR"],
+  ["Futuristic Rare", "Futuristic"],
+  ["Classic Collection", "Classic"],
+];
+
+/**
+ * Per-rarity completion for the cards given, in display order. Cards without
+ * a rarity are skipped; rarities outside the known list come last, in first
+ * seen order, labelled with their raw rarity string.
+ */
+export function rarityBreakdown(cards: Card[], ownership: OwnershipMap): RarityRow[] {
+  const rows = new Map<string, RarityRow>();
+  for (const [rarity, label] of rarityDisplayOrder) {
+    rows.set(rarity, { rarity, label, total: 0, owned: 0, value: 0, toComplete: 0 });
+  }
+  for (const c of cards) {
+    if (!c.rarity) continue;
+    let row = rows.get(c.rarity);
+    if (!row) {
+      row = { rarity: c.rarity, label: c.rarity, total: 0, owned: 0, value: 0, toComplete: 0 };
+      rows.set(c.rarity, row);
+    }
+    const isOwned = ownership.has(c.id);
+    row.total++;
+    if (isOwned) row.owned++;
+    if (c.buyPrice != null) {
+      row.value += c.buyPrice;
+      if (!isOwned) row.toComplete += c.buyPrice;
+    }
+  }
+  return [...rows.values()].filter((r) => r.total > 0);
+}
+
 /** Fraction of a shipment's items (by qty) that belong to `binderId`. */
 function binderShare(
   sh: Shipment,
