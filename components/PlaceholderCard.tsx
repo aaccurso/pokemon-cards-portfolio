@@ -20,7 +20,7 @@ export function PlaceholderCard({
       </div>
       <div className="ph-name">
         {card.name}
-        {card.nameJa && <span className="name-ja">{card.nameJa}</span>}
+        {card.nameJa && <span className="name-ja" lang="ja">{card.nameJa}</span>}
       </div>
       <div className="ph-thumb">
         {imgUrl ? (

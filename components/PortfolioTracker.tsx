@@ -14,6 +14,8 @@ import {
 import {
   buildOwnershipMap,
   computeStats,
+  collectedPct,
+  progressLabel,
   buildCsv,
   OwnershipMap,
 } from "@/lib/purchases";
@@ -206,8 +208,7 @@ export default function PortfolioTracker() {
     URL.revokeObjectURL(url);
   }
 
-  const collectedPct =
-    stats.total === 0 ? 0 : Math.round((stats.owned / stats.total) * 100);
+  const pct = collectedPct(stats);
 
   return (
     <div className="container">
@@ -220,16 +221,17 @@ export default function PortfolioTracker() {
 
       <header>
         <h1>{binder.name}</h1>
-        <p>
-          {stats.owned} / {stats.total} cards collected · {collectedPct}%
-        </p>
+        <p className="binder-description">{binder.description}</p>
       </header>
 
-      <div className="progress-bar-container" aria-label="Collection progress">
-        <div
-          className="progress-bar-fill"
-          style={{ width: `${collectedPct}%` }}
-        />
+      <div className="progress">
+        <div className="progress-bar-container" aria-label="Collection progress">
+          <div
+            className="progress-bar-fill"
+            style={{ width: `${pct}%` }}
+          />
+        </div>
+        <span className="progress-label">{progressLabel(stats)}</span>
       </div>
 
       <StatsGrid stats={stats} kind={binder.kind} />
