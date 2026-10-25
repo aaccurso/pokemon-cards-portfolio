@@ -9,7 +9,7 @@ a recommended order within the lane, and a "not recommended" list.
 
 | Lane | File | Items | Serves |
 |---|---|---|---|
-| Collecting workflow | [collecting-workflow.md](collecting-workflow.md) | 5 | Logging pack pulls, carrying a needed list, duplicates, binder page view |
+| Collecting workflow | [collecting-workflow.md](collecting-workflow.md) | 5 (item 2 shipped in e0740ef) | Logging pack pulls, ~~carrying a needed list~~, duplicates, binder page view |
 | Collector insight | [collector-insight.md](collector-insight.md) | 6 | Collection value, rarity progress, price movement, pack economics |
 | Design and usability | [design-usability.md](design-usability.md) | 8 | Mobile layout, focus states, typography, empty states, rarity-aware tiles, print |
 | Engineering | [engineering.md](engineering.md) | 8 | CI running tests, review minors, smoke script, scheduled refresh, component split |
