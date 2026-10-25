@@ -100,7 +100,7 @@ export function CardTable({ cards, ownership, binder, sortKey, sortDir, onSort, 
                   </span>
                   <strong>
                     {card.name}
-                    {card.nameJa && <span className="name-ja">{card.nameJa}</span>}
+                    {card.nameJa && <span className="name-ja" lang="ja">{card.nameJa}</span>}
                   </strong>
                   {hoveredId === card.id && card.imageUrl && (
                     <span className="preview-tooltip">

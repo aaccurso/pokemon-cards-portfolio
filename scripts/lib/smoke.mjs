@@ -132,5 +132,9 @@ export function checkPage(page, html) {
   const bad = BAD_TOKENS.filter((t) => text.includes(t));
   if (bad.length > 0) failures.push(`bad tokens in text: ${bad.join(", ")}`);
 
+  // Japanese names need lang="ja" on the element or the kanji fall back to Han-unification glyphs.
+  const bareJa = (html.match(/<span class="name-ja"(?![^>]*\blang="ja")[^>]*>/g) ?? []).length;
+  if (bareJa > 0) failures.push(`name-ja spans without lang="ja": ${bareJa}`);
+
   return failures;
 }
