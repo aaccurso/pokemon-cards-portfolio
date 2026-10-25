@@ -35,7 +35,7 @@ A card is "owned" if it appears in at least one purchase item. Its effective `pr
 
 **Total outlay** per binder attributes each shipment's `total` in proportion to how many of its items (by qty) belong to that binder, so the binders' outlays sum to the global total. Every shipment must have a `total` (a test enforces it); the `legacy` shipment's is the sum of its item prices.
 
-**Collection value** (`marketValue`, `marketValueAllCopies`, `unpricedOwned` in `computeStats`) is the Cardmarket trend (`buyPrice`) summed over owned priced cards, once per card or once per copy. Gain vs paid (`marketValue - spentOnCards`) and value / outlay are derived in the component, not stored. `savings` is the pre-value figure and is kept for one release.
+**Collection value** (`marketValue`, `marketValueAllCopies`, `unpricedOwned` in `computeStats`) is the Cardmarket trend (`buyPrice`) summed over owned priced cards, once per card or once per copy. Gain vs paid (`marketValue - spentOnCards`) is derived in the component, not stored. Value / outlay (`valueVsOutlayPct`) always uses `marketValueAllCopies`, on every binder kind and on the "All binders" line, because outlay already paid for the duplicate copies. `savings` is the pre-value figure and is kept for one release.
 
 ## Project Structure
 ```

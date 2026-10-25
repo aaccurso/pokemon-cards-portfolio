@@ -14,6 +14,7 @@ import {
 import {
   buildOwnershipMap,
   computeStats,
+  valueVsOutlayPct,
   buildCsv,
   OwnershipMap,
 } from "@/lib/purchases";
@@ -102,8 +103,9 @@ export default function PortfolioTracker() {
     [binderCards, ownership, binderId, cardBinder]
   );
 
-  // Per-tab counts plus the one "all binders" summary line: distinct market
-  // value of everything owned vs the global sum of shipment totals.
+  // Per-tab counts plus the one "all binders" summary line: market value of
+  // every owned copy vs the global sum of shipment totals (same basis as the
+  // per-binder value / outlay figure).
   const { binderCounts, allValue, allOutlay } = useMemo(() => {
     const counts: BinderCounts = {};
     let value = 0;
@@ -113,7 +115,7 @@ export default function PortfolioTracker() {
         owned: list.filter((c) => ownership.has(c.id)).length,
         total: list.length,
       };
-      value += computeStats(list, ownership, purchases, b.id, cardBinder).marketValue;
+      value += computeStats(list, ownership, purchases, b.id, cardBinder).marketValueAllCopies;
     }
     const outlay = purchases.shipments.reduce((sum, sh) => sum + (sh.total ?? 0), 0);
     return { binderCounts: counts, allValue: value, allOutlay: outlay };
@@ -242,9 +244,7 @@ export default function PortfolioTracker() {
   // Derived here, not stored: unrealised gain and the only honest ROI (outlay
   // includes shipping, fees and duplicates, so compare it to every copy's value).
   const gainVsPaid = stats.marketValue - stats.spentOnCards;
-  const valueForOutlay = isMasterSet ? stats.marketValueAllCopies : stats.marketValue;
-  const valueVsOutlayPct =
-    stats.totalOutlay > 0 ? Math.round((valueForOutlay / stats.totalOutlay) * 100) : null;
+  const valueOutlayPct = valueVsOutlayPct(stats);
 
   return (
     <div className="container">
@@ -256,7 +256,7 @@ export default function PortfolioTracker() {
       />
       <p
         className="binder-summary"
-        title="Cardmarket trend price of every owned card across all binders, against the sum of all shipment totals"
+        title="Cardmarket trend price of every owned copy (duplicates included) across all binders, against the sum of all shipment totals"
       >
         All binders: {fmt(allValue)} &euro; value vs {fmt(allOutlay)} &euro; outlay
       </p>
@@ -339,9 +339,9 @@ export default function PortfolioTracker() {
         >
           <div className="value">{fmt(stats.totalOutlay)} &euro;</div>
           <div className="label">Total outlay</div>
-          {valueVsOutlayPct != null && (
-            <div className={`stat-sub${valueVsOutlayPct < 100 ? " negative" : ""}`}>
-              value = {valueVsOutlayPct}%
+          {valueOutlayPct != null && (
+            <div className={`stat-sub${valueOutlayPct < 100 ? " negative" : ""}`}>
+              value = {valueOutlayPct}%
             </div>
           )}
         </div>

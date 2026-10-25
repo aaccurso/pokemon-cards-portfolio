@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { buildOwnershipMap, computeStats, buildCsv } from "../lib/purchases.ts";
+import { buildOwnershipMap, computeStats, buildCsv, valueVsOutlayPct } from "../lib/purchases.ts";
 import type { Card } from "../lib/cards.ts";
 import type { PurchaseData } from "../lib/purchases.ts";
 import { card } from "./helpers.ts";
@@ -97,6 +97,21 @@ test("market value: wants binder sums buyPrice over owned priced cards and count
   assert.equal(s.spentOnCards, 23);            // 6 + 15 + 2
   assert.equal(s.marketValue - s.spentOnCards, 7);
   assert.equal(s.savings, 9);                  // legacy figure skips the unpriced card: (10-6)+(20-15)
+  // value / outlay compares like with like: outlay paid for the duplicate copy of b,
+  // so the ratio uses every copy's value (50 / 46), not the distinct value (30 / 46 = 65%).
+  assert.equal(s.totalOutlay, 46);
+  assert.equal(valueVsOutlayPct(s), 109);
+});
+
+test("value / outlay uses all copies on a master set too, and is null without outlay", () => {
+  const cards = [card({ id: "m1", binderId: "m6a-30th", buyPrice: 30 })];
+  const data: PurchaseData = { shipments: [
+    { id: "box", seller: null, date: null, shipping: 0, fees: 0, total: 120, product: "booster box",
+      items: [{ cardId: "m1", pricePaid: null, condition: "NM", qty: 4 }] },
+  ] };
+  const s = computeStats(cards, buildOwnershipMap(data), data, "m6a-30th", binderMap(cards));
+  assert.equal(valueVsOutlayPct(s), 100);      // 30 * 4 copies / 120
+  assert.equal(valueVsOutlayPct(computeStats([], new Map(), { shipments: [] }, "kanto-151", new Map())), null);
 });
 
 test("market value: master-set pulls carry no price but still have market value", () => {

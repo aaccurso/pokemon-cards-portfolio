@@ -149,6 +149,17 @@ export function computeStats(
   };
 }
 
+/**
+ * Value / outlay as a whole percentage, or null when nothing has been spent.
+ * Outlay already paid for shipping, fees and every duplicate copy, so the
+ * numerator is marketValueAllCopies on every binder kind; the "All binders"
+ * line sums the same figure so the three ratios agree.
+ */
+export function valueVsOutlayPct(stats: CollectionStats): number | null {
+  if (stats.totalOutlay <= 0) return null;
+  return Math.round((stats.marketValueAllCopies / stats.totalOutlay) * 100);
+}
+
 /** Fraction of a shipment's items (by qty) that belong to `binderId`. */
 function binderShare(
   sh: Shipment,
