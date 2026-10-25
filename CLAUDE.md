@@ -64,7 +64,7 @@ data/
   purchases.json  — shipment log
   prices.json     — price history
 scripts/
-  lib/            — pure helpers (tcgdex, pricecharting, m6a, prices), unit-tested
+  lib/            — helpers (tcgdex, pricecharting, m6a, prices; atomic = tmp + rename writer), unit-tested
   download_images.mjs, backfill_card_fields.mjs, build_m6a.mjs, refresh_prices.mjs
 tests/            — node --test suites (*.test.ts), run with npm test
 ```
