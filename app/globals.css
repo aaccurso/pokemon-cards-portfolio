@@ -960,6 +960,11 @@ header p {
   min-height: 100vh;
   padding: 2rem 1rem 3rem;
   color: #222;
+  /* Inherited by every descendant: badge colours, the watermark and the
+     calibration ruler ticks print without the manual "Background graphics"
+     step in the print dialog. */
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
 }
 
 .print-controls {
@@ -1023,11 +1028,41 @@ header p {
   line-height: 1.5;
 }
 
+/* Binder tabs re-skinned for the light print page (the app's pills are navy) */
+.print-page .binder-tabs {
+  margin: 0.75rem 0 0;
+}
+.print-page .binder-tab {
+  background: #fff;
+  border-color: #d0d0d0;
+  color: #444;
+}
+.print-page .binder-tab:hover {
+  color: #222;
+  border-color: #888;
+}
+.print-page .binder-tab.active {
+  background: #2a6fdb;
+  border-color: #2a6fdb;
+  color: #fff;
+}
+.print-page .binder-tab:focus-visible {
+  outline: 2px solid #2a6fdb;
+  outline-offset: 2px;
+}
+
 .print-controls-actions {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.print-opts {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
   flex-wrap: wrap;
 }
 
@@ -1215,6 +1250,28 @@ header p {
   overflow: hidden;
   break-inside: avoid;
   page-break-inside: avoid;
+}
+
+/* Ink saver (?ink=1): same geometry, less toner. The grey photo goes, the
+   dashed box and watermark stay, badges become outlines in their own colour. */
+.ink-light .ph-thumb img {
+  display: none;
+}
+.ink-light .ph-thumb {
+  background: #fff;
+}
+.ink-light .placeholder-card {
+  border-width: 0.3mm;
+}
+.ink-light .ph-watermark {
+  color: rgba(0, 0, 0, 0.3);
+  border-color: rgba(0, 0, 0, 0.3);
+}
+.ink-light .ph-type-badge {
+  background: none !important;
+  color: var(--badge);
+  border: 0.25mm solid var(--badge);
+  text-shadow: none;
 }
 
 .ph-header {
