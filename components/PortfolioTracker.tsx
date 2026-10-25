@@ -102,17 +102,22 @@ export default function PortfolioTracker() {
     [binderCards, ownership, binderId, cardBinder]
   );
 
-  const binderCounts = useMemo<BinderCounts>(() => {
+  // Per-tab counts plus the one "all binders" summary line: distinct market
+  // value of everything owned vs the global sum of shipment totals.
+  const { binderCounts, allValue, allOutlay } = useMemo(() => {
     const counts: BinderCounts = {};
+    let value = 0;
     for (const b of binders) {
       const list = cardsForBinder(b.id, allCards);
       counts[b.id] = {
         owned: list.filter((c) => ownership.has(c.id)).length,
         total: list.length,
       };
+      value += computeStats(list, ownership, purchases, b.id, cardBinder).marketValue;
     }
-    return counts;
-  }, [ownership]);
+    const outlay = purchases.shipments.reduce((sum, sh) => sum + (sh.total ?? 0), 0);
+    return { binderCounts: counts, allValue: value, allOutlay: outlay };
+  }, [ownership, cardBinder]);
 
   const allTypes = useMemo(() => {
     const types = new Set<string>();
@@ -234,6 +239,12 @@ export default function PortfolioTracker() {
   const collectedPct =
     stats.total === 0 ? 0 : Math.round((stats.owned / stats.total) * 100);
   const isMasterSet = binder.kind === "master-set";
+  // Derived here, not stored: unrealised gain and the only honest ROI (outlay
+  // includes shipping, fees and duplicates, so compare it to every copy's value).
+  const gainVsPaid = stats.marketValue - stats.spentOnCards;
+  const valueForOutlay = isMasterSet ? stats.marketValueAllCopies : stats.marketValue;
+  const valueVsOutlayPct =
+    stats.totalOutlay > 0 ? Math.round((valueForOutlay / stats.totalOutlay) * 100) : null;
 
   return (
     <div className="container">
@@ -243,6 +254,12 @@ export default function PortfolioTracker() {
         counts={binderCounts}
         onSelect={selectBinder}
       />
+      <p
+        className="binder-summary"
+        title="Cardmarket trend price of every owned card across all binders, against the sum of all shipment totals"
+      >
+        All binders: {fmt(allValue)} &euro; value vs {fmt(allOutlay)} &euro; outlay
+      </p>
 
       <header>
         <h1>{binder.name}</h1>
@@ -266,25 +283,42 @@ export default function PortfolioTracker() {
           </div>
           <div className="label">Collected</div>
         </div>
-        <div className="stat-card">
-          <div className="value">{fmt(stats.spentOnCards)} &euro;</div>
-          <div className="label">Spent on cards</div>
-        </div>
+        {isMasterSet ? (
+          <div
+            className="stat-card"
+            title="Cardmarket trend price of every pulled copy, duplicates included"
+          >
+            <div className="value">{fmt(stats.marketValueAllCopies)} &euro;</div>
+            <div className="label">Pulled value</div>
+            <div className="stat-sub">distinct {fmt(stats.marketValue)} &euro;</div>
+          </div>
+        ) : (
+          <div className="stat-card">
+            <div className="value">{fmt(stats.spentOnCards)} &euro;</div>
+            <div className="label">Spent on cards</div>
+          </div>
+        )}
         {isMasterSet ? (
           <div className="stat-card" title="Extra copies pulled beyond the first">
             <div className="value">{stats.duplicates}</div>
             <div className="label">Duplicates</div>
           </div>
         ) : (
-          <div className="stat-card">
-            <div
-              className="value"
-              title="Sum of (buy price − price paid) for owned cards"
-            >
-              {stats.savings >= 0 ? "+" : ""}
-              {fmt(stats.savings)} &euro;
+          <div
+            className="stat-card"
+            title={
+              "Cardmarket trend price summed over owned cards" +
+              (stats.unpricedOwned > 0
+                ? `; ${stats.unpricedOwned} owned without a price are not counted`
+                : "")
+            }
+          >
+            <div className="value">{fmt(stats.marketValue)} &euro;</div>
+            <div className="label">Value ({stats.owned} owned)</div>
+            <div className={`stat-sub${gainVsPaid < 0 ? " negative" : ""}`}>
+              {gainVsPaid >= 0 ? "+" : ""}
+              {fmt(gainVsPaid)} &euro; vs paid
             </div>
-            <div className="label">Saved vs target</div>
           </div>
         )}
         <div className="stat-card">
@@ -305,6 +339,11 @@ export default function PortfolioTracker() {
         >
           <div className="value">{fmt(stats.totalOutlay)} &euro;</div>
           <div className="label">Total outlay</div>
+          {valueVsOutlayPct != null && (
+            <div className={`stat-sub${valueVsOutlayPct < 100 ? " negative" : ""}`}>
+              value = {valueVsOutlayPct}%
+            </div>
+          )}
         </div>
       </div>
 
