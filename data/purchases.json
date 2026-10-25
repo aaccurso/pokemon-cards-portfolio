@@ -1278,6 +1278,101 @@
           "cardId": "m6a-103-switch",
           "pricePaid": null,
           "condition": "NM"
+        },
+        {
+          "cardId": "m6a-104-alolan-exeggutor",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-105-moltres",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-106-lapras",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-108-zapdos",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-109-toxtricity",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-113-lycanroc",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-114-nidorina",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-115-alolan-meowth",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-116-scraggy",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-118-gholdengo",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-127-pikachu-ex",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-129-mew-ex",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-133-salamence-ex",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-138-misty",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-140-sneasel",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-143-delcatty",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-149-crobat-g",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-150-gengar",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-155-genesect-ex",
+          "pricePaid": null,
+          "condition": "NM"
         }
       ]
     }
