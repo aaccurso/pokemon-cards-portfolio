@@ -8,6 +8,10 @@
   --accent: #f8d030;
   --owned-bg: #1a3a2e;
   --owned-border: #2a5a3e;
+  /* Keyboard focus: double ring (bg gap + accent) reads on dark surfaces and on the yellow active pill.
+     --ring-inset is the same ring drawn inside, for buttons under an overflow: hidden parent. */
+  --ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+  --ring-inset: inset 0 0 0 2px var(--bg), inset 0 0 0 4px var(--accent);
 }
 
 * {
@@ -960,6 +964,8 @@ header p {
   min-height: 100vh;
   padding: 2rem 1rem 3rem;
   color: #222;
+  /* Light page: white gap + the print button blue, so tabs and the button share one ring */
+  --ring: 0 0 0 2px #fff, 0 0 0 4px #2a6fdb;
 }
 
 .print-controls {
@@ -1800,4 +1806,30 @@ header p {
 }
 .placeholder-card .name-ja {
   font-size: 7pt;
+}
+
+/* ---- Keyboard focus rings (design lane item 2) ----
+   Replace the browser default ring, which is nearly invisible on the yellow
+   active pill in Chrome and clipped by border-radius: 999px in Safari. */
+.binder-tab:focus-visible,
+.pill-toggle:focus-visible,
+.action-button:focus-visible,
+.modal-nav:focus-visible,
+.print-btn:focus-visible,
+.card-tile:focus-visible,
+.card-name-cell:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+}
+/* .view-toggle clips its children (overflow: hidden), so draw the ring inside */
+.view-toggle button:focus-visible {
+  outline: none;
+  box-shadow: var(--ring-inset);
+}
+/* Focused tile also lights the image frame, reusing the hover glow */
+.card-tile:focus-visible .card-tile-image {
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.55),
+    0 0 24px rgba(248, 208, 48, 0.25);
+  border-color: rgba(248, 208, 48, 0.5);
 }
