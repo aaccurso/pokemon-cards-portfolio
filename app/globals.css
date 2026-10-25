@@ -1532,6 +1532,25 @@ header .binder-description {
   font-weight: 500;
 }
 
+/* Stat sub-line under the label ("+330,61 EUR vs paid", "value = 123%") */
+.stat-card .stat-sub {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 0.35rem;
+  font-variant-numeric: tabular-nums;
+}
+.stat-card .stat-sub.negative {
+  color: #e07070;
+}
+
+/* One-line "all binders" value summary under the tab strip */
+.binder-summary {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin: -0.5rem 0 1.25rem;
+  font-variant-numeric: tabular-nums;
+}
+
 /* Action buttons in the controls row (Import, CSV) */
 .action-button {
   background: var(--surface);

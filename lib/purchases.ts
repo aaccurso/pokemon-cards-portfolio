@@ -70,10 +70,20 @@ export type CollectionStats = {
   budget: number;
   spentOnCards: number;
   totalOutlay: number;
+  /**
+   * sum(buyPrice - pricePaid) over owned cards that have both. Superseded by
+   * marketValue - spentOnCards; kept for one release, then dropped.
+   */
   savings: number;
   toComplete: number;
   /** Extra copies beyond the first, summed over owned cards. */
   duplicates: number;
+  /** Cardmarket trend (buyPrice) summed over owned priced cards, one copy each. */
+  marketValue: number;
+  /** Same, but every owned copy counts (buyPrice * purchaseCount). */
+  marketValueAllCopies: number;
+  /** Owned cards with buyPrice == null; they contribute nothing to marketValue. */
+  unpricedOwned: number;
 };
 
 /** Rounded completion percent; 0 for an empty binder. */
@@ -100,17 +110,26 @@ export function computeStats(
   let savings = 0;
   let toComplete = 0;
   let duplicates = 0;
+  let marketValue = 0;
+  let marketValueAllCopies = 0;
+  let unpricedOwned = 0;
 
   for (const c of cards) {
     const o = ownership.get(c.id);
     if (o) {
       owned++;
       duplicates += o.duplicateCount;
+      if (c.buyPrice == null) unpricedOwned++;
     }
     if (c.buyPrice != null) {
       pricedCount++;
       budget += c.buyPrice;
-      if (!o) toComplete += c.buyPrice;
+      if (o) {
+        marketValue += c.buyPrice;
+        marketValueAllCopies += c.buyPrice * o.purchaseCount;
+      } else {
+        toComplete += c.buyPrice;
+      }
     }
     if (o && o.pricePaid != null) {
       spentOnCards += o.pricePaid;
@@ -134,7 +153,21 @@ export function computeStats(
     savings,
     toComplete,
     duplicates,
+    marketValue,
+    marketValueAllCopies,
+    unpricedOwned,
   };
+}
+
+/**
+ * Value / outlay as a whole percentage, or null when nothing has been spent.
+ * Outlay already paid for shipping, fees and every duplicate copy, so the
+ * numerator is marketValueAllCopies on every binder kind; the "All binders"
+ * line sums the same figure so the three ratios agree.
+ */
+export function valueVsOutlayPct(stats: CollectionStats): number | null {
+  if (stats.totalOutlay <= 0) return null;
+  return Math.round((stats.marketValueAllCopies / stats.totalOutlay) * 100);
 }
 
 /** Fraction of a shipment's items (by qty) that belong to `binderId`. */

@@ -19,7 +19,7 @@ Four git-tracked JSON files are the single source of truth:
 
 - **`data/binders.json`** — the binder registry. Fields: `id, name, description, kind, sort, officialCount?`.
   - `kind: "wants"` — a curated list. `buyPrice == null` means "no illustrated print chosen yet"; the "Illustration only" toggle is shown; the price refresh never prices a null card.
-  - `kind: "master-set"` — every card is the target. `buyPrice` is the current Cardmarket single price (auto-filled by the refresh); the toggle is hidden; the "Saved vs target" tile becomes "Duplicates".
+  - `kind: "master-set"` — every card is the target. `buyPrice` is the current Cardmarket single price (auto-filled by the refresh); the toggle is hidden; the "Spent on cards" and "Value" tiles become "Pulled value" and "Duplicates".
   - `sort` is the default sort key (`pokedexNumber` or `setNumber`). `officialCount` is the number of non-secret cards; master-set binders label every card with its slot index as printed on the card (`126/103`) in grid, table, modal, and placeholders, and the table "#" column sorts by `setNumber` there. Wants binders show the Pokedex number (`#025`).
 - **`data/cards.json`** — all cards across all binders. Fields: `id, name, code, set, qty, language, condition, buyPrice, imageUrl, localImage, pokedexNumber, type1, type2, generation, variant, binderId, setNumber, category?, nameJa?, tcgdexId?, rarity?`.
   - `category` defaults to `"Pokemon"`; Trainers and Energies have `pokedexNumber: null`, `type1: null`, `generation: null`.
@@ -33,7 +33,9 @@ A card is "owned" if it appears in at least one purchase item. Its effective `pr
 
 **Illustration cards** (wants binders only) are entries with `buyPrice != null`. The "Illustration only" toggle filters to those.
 
-**Total outlay** per binder attributes each shipment's `total` in proportion to how many of its items (by qty) belong to that binder, so the binders' outlays sum to the global total.
+**Total outlay** per binder attributes each shipment's `total` in proportion to how many of its items (by qty) belong to that binder, so the binders' outlays sum to the global total. Every shipment must have a `total` (a test enforces it); the `legacy` shipment's is the sum of its item prices.
+
+**Collection value** (`marketValue`, `marketValueAllCopies`, `unpricedOwned` in `computeStats`) is the Cardmarket trend (`buyPrice`) summed over owned priced cards, once per card or once per copy. Gain vs paid (`marketValue - spentOnCards`) is derived in the component, not stored. Value / outlay (`valueVsOutlayPct`) always uses `marketValueAllCopies`, on every binder kind and on the "All binders" line, because outlay already paid for the duplicate copies. `savings` is the pre-value figure and is kept for one release.
 
 ## Project Structure
 ```
@@ -118,7 +120,8 @@ Whenever a card is added or updated without a bundled image (e.g. a new set not 
 
 ## Current Features
 - Binder tabs (`?binder=<id>` in the URL, default `kanto-151`); switching resets filters and sort
-- Progress bar and stats grid per binder: Collected, Spent on cards, Saved vs target / Duplicates, To complete, Budget / Set value (N priced), Total outlay
+- Progress bar and stats grid per binder: Collected, Spent on cards / Pulled value, Value (N owned) with gain vs paid / Duplicates, To complete, Budget / Set value (N priced), Total outlay with value / outlay percentage
+- One "All binders" line under the tabs: market value of everything owned vs the sum of all shipment totals
 - Grid view with 3D tilt + holographic hover; Japanese names under English ones
 - Table view with sortable columns (incl. derived `owned` and `pricePaid`)
 - Search by name, code, or set name; filter by type (incl. Trainer), set, ownership
