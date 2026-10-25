@@ -56,7 +56,7 @@ lib/
   cards.ts       — Card type, typeColors, numberLabel/typeBadges display helpers
   purchases.ts   — ownership/stats derivation + CSV export (pure)
   binders.ts     — Binder type, resolveBinderId/getBinder/cardsForBinder, validateData (pure)
-  sort.ts        — SortKey/SortDir, getSortValue, compareBySort nulls-last comparator (pure)
+  sort.ts        — SortKey/SortDir, SORT_KEYS + isSortKey (validates ?sort=), getSortValue, compareBySort nulls-last comparator (pure)
   format.ts      — fmtEur, the one place prices are formatted for display (pure)
 data/
   binders.json    — binder registry

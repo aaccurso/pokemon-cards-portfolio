@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useState, useMemo } from "react";
+import { Suspense, useEffect, useState, useMemo } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { cards, purchases, binders } from "@/lib/data";
 import { buildOwnershipMap } from "@/lib/purchases";
@@ -54,6 +54,14 @@ function PrintSheets() {
   function setInkLight(on: boolean) {
     router.replace(printHref(pathname, binderId, on), { scroll: false });
   }
+
+  // ?binder=typo resolves to the default binder; make the URL say so too, so
+  // the address bar never shows an id the page is not rendering.
+  const binderParam = searchParams.get("binder");
+  useEffect(() => {
+    if (binderParam == null || binderParam === binderId) return;
+    router.replace(printHref(pathname, binderId, inkLight), { scroll: false });
+  }, [binderParam, binderId, inkLight, pathname, router]);
 
   const sheets = useMemo(() => {
     const filtered = includeOwned

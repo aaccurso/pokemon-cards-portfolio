@@ -5,6 +5,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { cards as allCards, purchases, binders } from "@/lib/data";
 import { cardCategory, emptyStateMessage, Card } from "@/lib/cards";
 import {
+  BinderKind,
   DEFAULT_BINDER_ID,
   buildCardBinderMap,
   cardsForBinder,
@@ -19,7 +20,7 @@ import {
   buildCsv,
   OwnershipMap,
 } from "@/lib/purchases";
-import { compareBySort, SortDir, SortKey } from "@/lib/sort";
+import { compareBySort, isSortKey, SortDir, SortKey } from "@/lib/sort";
 import { CardModal } from "./CardModal";
 import { CardTile } from "./CardTile";
 import { CardTable } from "./CardTable";
@@ -27,14 +28,18 @@ import { StatsGrid } from "./StatsGrid";
 import { FilterBar, EMPTY_FILTERS, Filters, ViewMode } from "./FilterBar";
 import { BinderTabs, BinderCounts } from "./BinderTabs";
 
-function readFilters(params: URLSearchParams): Filters {
+/**
+ * Only a "wants" binder shows the Illustration toggle, so ?illus=1 is ignored
+ * elsewhere: a master-set binder must never filter invisibly.
+ */
+function readFilters(params: URLSearchParams, kind: BinderKind): Filters {
   const own = params.get("own");
   return {
     q: params.get("q") ?? "",
     type: params.get("type") ?? "all",
     set: params.get("set") ?? "all",
     own: own === "owned" || own === "wanted" ? own : "all",
-    illus: params.get("illus") === "1",
+    illus: params.get("illus") === "1" && kind === "wants",
   };
 }
 
@@ -47,10 +52,14 @@ export default function PortfolioTracker() {
   const initialBinder = getBinder(initialBinderId, binders);
 
   const [binderId, setBinderId] = useState(initialBinderId);
-  const [filters, setFilters] = useState<Filters>(() => readFilters(searchParams));
-  const [sortKey, setSortKey] = useState<SortKey>(
-    () => (searchParams.get("sort") as SortKey) || initialBinder.sort
+  const [filters, setFilters] = useState<Filters>(() =>
+    readFilters(searchParams, initialBinder.kind)
   );
+  // An unknown ?sort= (stale link, hand-typed) falls back to the binder's default.
+  const [sortKey, setSortKey] = useState<SortKey>(() => {
+    const v = searchParams.get("sort");
+    return isSortKey(v) ? v : initialBinder.sort;
+  });
   const [sortDir, setSortDir] = useState<SortDir>(
     () => (searchParams.get("dir") === "desc" ? "desc" : "asc")
   );
@@ -75,15 +84,15 @@ export default function PortfolioTracker() {
     if (filters.type !== "all") p.set("type", filters.type);
     if (filters.set !== "all") p.set("set", filters.set);
     if (filters.own !== "all") p.set("own", filters.own);
-    if (filters.illus) p.set("illus", "1");
-    if (sortKey !== binder.sort) p.set("sort", String(sortKey));
+    if (filters.illus && binder.kind === "wants") p.set("illus", "1");
+    if (sortKey !== binder.sort) p.set("sort", sortKey);
     if (sortDir !== "asc") p.set("dir", sortDir);
     if (viewMode !== "grid") p.set("view", viewMode);
     if (modalCard) p.set("card", modalCard.id);
 
     const qs = p.toString();
     router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
-  }, [binderId, binder.sort, filters, sortKey, sortDir, viewMode, modalCard, pathname, router]);
+  }, [binderId, binder.sort, binder.kind, filters, sortKey, sortDir, viewMode, modalCard, pathname, router]);
 
   const ownership: OwnershipMap = useMemo(() => buildOwnershipMap(purchases), []);
 
@@ -169,12 +178,12 @@ export default function PortfolioTracker() {
       list = list.filter((c) => !ownership.has(c.id));
     }
 
-    if (filters.illus) {
+    if (filters.illus && binder.kind === "wants") {
       list = list.filter((c) => c.buyPrice != null);
     }
 
     return [...list].sort(compareBySort(sortKey, sortDir, ownership));
-  }, [binderCards, filters, sortKey, sortDir, ownership]);
+  }, [binderCards, binder.kind, filters, sortKey, sortDir, ownership]);
 
   function handleSort(key: SortKey) {
     if (sortKey === key) {

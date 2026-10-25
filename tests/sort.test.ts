@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { getSortValue, compareBySort } from "../lib/sort.ts";
+import { SORT_KEYS, isSortKey, getSortValue, compareBySort } from "../lib/sort.ts";
 import type { OwnershipMap } from "../lib/purchases.ts";
 import { card } from "./helpers.ts";
 
@@ -32,4 +32,15 @@ test("compareBySort orders by key, puts nulls last in both directions", () => {
   assert.deepEqual(ids([c, a, b].sort(compareBySort("buyPrice", "desc", ownership))), ["b", "a", "c"]);
   assert.deepEqual(ids([b, c, a].sort(compareBySort("name", "desc", ownership))), ["c", "b", "a"]);
   assert.equal(compareBySort("buyPrice", "asc", ownership)(c, card({ id: "d", buyPrice: null })), 0);
+});
+
+test("isSortKey accepts exactly the eight keys the table and binders sort by", () => {
+  const keys = ["owned", "pokedexNumber", "setNumber", "name", "code", "set", "buyPrice", "pricePaid"];
+  for (const k of keys) assert.equal(isSortKey(k), true, k);
+  assert.equal(SORT_KEYS.size, keys.length);
+  assert.equal(isSortKey("id"), false, "a Card field that is not a sortable column");
+  assert.equal(isSortKey("__proto__"), false);
+  assert.equal(isSortKey(""), false);
+  assert.equal(isSortKey(null), false, "?sort= absent");
+  assert.equal(isSortKey(undefined), false);
 });
