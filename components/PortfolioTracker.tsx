@@ -3,7 +3,14 @@
 import { useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { cards as allCards, purchases, binders } from "@/lib/data";
-import { languageFlags, cardCategory, numberLabel, typeBadges, Card } from "@/lib/cards";
+import {
+  languageFlags,
+  cardCategory,
+  emptyStateMessage,
+  numberLabel,
+  typeBadges,
+  Card,
+} from "@/lib/cards";
 import {
   DEFAULT_BINDER_ID,
   buildCardBinderMap,
@@ -131,14 +138,18 @@ export default function PortfolioTracker() {
     [binderCards]
   );
 
-  function selectBinder(id: string) {
-    if (id === binderId) return;
-    setBinderId(id);
+  function resetFilters() {
     setSearch("");
     setTypeFilter("all");
     setSetFilter("all");
     setOwnershipFilter("all");
     setIllustrationOnly(false);
+  }
+
+  function selectBinder(id: string) {
+    if (id === binderId) return;
+    setBinderId(id);
+    resetFilters();
     setSortKey(getBinder(id, binders).sort);
     setSortDir("asc");
     setModalCard(null);
@@ -383,7 +394,23 @@ export default function PortfolioTracker() {
         </button>
       </div>
 
-      {viewMode === "grid" ? (
+      {filtered.length === 0 ? (
+        <div className="empty-state" role="status">
+          <div className="placeholder-pokeball" aria-hidden>
+            &#9679;
+          </div>
+          <p>
+            {emptyStateMessage({
+              search,
+              ownershipFilter,
+              binderOwned: stats.owned,
+            })}
+          </p>
+          <button className="action-button" onClick={resetFilters}>
+            Clear filters
+          </button>
+        </div>
+      ) : viewMode === "grid" ? (
         <div className="card-grid">
           {filtered.map((card) => (
             <CardTile
