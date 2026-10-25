@@ -613,6 +613,61 @@ header .binder-description {
   pointer-events: none;
 }
 
+/* "x3" copies badge beside the pokeball (grid tile footer + table "Own" column) */
+.copies-badge {
+  display: inline-block;
+  margin-left: 4px;
+  padding: 0 5px;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  color: var(--accent);
+  font-size: 0.7rem;
+  font-weight: 600;
+  line-height: 1.5;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+/* Trade list export: a details disclosure styled like the other action buttons */
+.trade-menu {
+  position: relative;
+}
+
+.trade-menu > summary {
+  list-style: none;
+  display: inline-block;
+  user-select: none;
+}
+
+.trade-menu > summary::-webkit-details-marker {
+  display: none;
+}
+
+.trade-menu[open] > summary {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.trade-menu-items {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 4px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.trade-menu-items .action-button {
+  white-space: nowrap;
+  text-align: left;
+}
+
 /* Flag emoji glyph (small leading decorator before the language name) */
 .language-flag {
   display: inline-block;

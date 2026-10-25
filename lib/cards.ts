@@ -116,19 +116,23 @@ export function typeBadges(c: Card): TypeBadge[] {
 export type EmptyStateInput = {
   /** Raw search box text. */
   search: string;
-  ownershipFilter: "all" | "owned" | "wanted";
+  ownershipFilter: "all" | "owned" | "wanted" | "dupes";
   /** Owned cards in the current binder, before any filter. */
   binderOwned: number;
 };
 
 /**
  * Copy for the empty state shown when a filter combination matches no cards.
- * Most specific cause first: "Owned only" on a binder with nothing owned
- * (clearing the search would not help), then the search text, then generic.
+ * Most specific cause first: "Owned only" on a binder with nothing owned, or
+ * "Duplicates only" anywhere (clearing the search would not help either),
+ * then the search text, then generic.
  */
 export function emptyStateMessage(input: EmptyStateInput): string {
   if (input.ownershipFilter === "owned" && input.binderOwned === 0) {
     return "Nothing owned yet in this binder.";
+  }
+  if (input.ownershipFilter === "dupes") {
+    return "No duplicates in this binder.";
   }
   const q = input.search.trim();
   if (q) return `No cards match "${q}".`;

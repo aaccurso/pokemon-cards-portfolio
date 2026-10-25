@@ -64,11 +64,21 @@ export function CardTable({ cards, ownership, binder, sortKey, sortDir, onSort, 
             <tr key={card.id} className={own ? "owned" : ""}>
               <td className="own-cell">
                 {own ? (
-                  <span
-                    className="pokeball pokeball-xs"
-                    aria-label="Owned"
-                    title="Owned"
-                  />
+                  <>
+                    <span
+                      className="pokeball pokeball-xs"
+                      aria-label="Owned"
+                      title="Owned"
+                    />
+                    {own.purchaseCount > 1 && (
+                      <span
+                        className="copies-badge"
+                        title={`${own.purchaseCount} copies owned (${own.duplicateCount} extra)`}
+                      >
+                        x{own.purchaseCount}
+                      </span>
+                    )}
+                  </>
                 ) : (
                   <span
                     className="own-indicator wanted"
