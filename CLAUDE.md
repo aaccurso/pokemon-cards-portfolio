@@ -73,7 +73,7 @@ scripts/
 tests/            — node --test suites (*.test.ts), run with npm test
 ```
 
-`lib/cards.ts`, `lib/purchases.ts`, `lib/binders.ts`, `lib/sort.ts`, `lib/format.ts`, `lib/needed.ts` must not import JSON or use the `@/` alias and may only `import type` from each other, so Node can run the tests directly.
+`lib/cards.ts`, `lib/purchases.ts`, `lib/binders.ts`, `lib/sort.ts`, `lib/format.ts`, `lib/needed.ts`, `lib/print.ts` must not import JSON or use the `@/` alias, so Node can run the tests directly. Imports between them use a relative path with an explicit `.ts` extension (`import { rarityOrder } from "./cards.ts"`), which both Node and the Next bundler resolve; keep the graph acyclic (`cards.ts` imports nothing from the others).
 
 ## Source of truth rule
 **The four `data/*.json` files are the only places collection data lives.** `lib/data.ts` is a thin loader — do not hand-edit card objects anywhere else. Never set `owned` or `pricePaid` on a card — those are derived.
@@ -127,6 +127,7 @@ Whenever a card is added or updated without a bundled image (e.g. a new set not 
 - Grid view with 3D tilt + holographic hover; Japanese names under English ones
 - Table view with sortable columns (incl. derived `owned` and `pricePaid`)
 - Search by name, code, or set name; filter by type (incl. Trainer), set, ownership
+- Rarity filter (`?rarity=<tcgdex label>`), shown whenever a card in the binder has `rarity`; master-set binders also get a clickable per-rarity completion breakdown under the progress bar and a value-weighted progress figure in the header (`rarityBreakdown` in `lib/purchases.ts`, display order and labels in `rarityOrder` in `lib/cards.ts`)
 - Pokemon type badges with canonical game colors; neutral badge for Trainers
 - Variant badges (ex, GX, V, VMAX, VSTAR, BREAK, LEGEND, Alolan/Galarian/Hisuian/Mega forms)
 - CSV download of the active binder
@@ -149,4 +150,4 @@ npm run smoke  # Headless Chrome DOM checks on the real pages (see below)
 git config core.hooksPath .githooks  # Enable the pre-commit data gate (npm install does this too)
 ```
 
-`npm run smoke` renders every binder, the table view, the card modal, and the print pages in headless Chrome and asserts on the DOM (h1, counts, tabs, no `undefined`/`NaN`). Expectations come from `data/*.json`. It starts `next start` on `SMOKE_PORT` (default 3000; needs a prior `npm run build`, otherwise falls back to `next dev`), or reuses a running server when `SMOKE_URL` is set. Without Chrome it prints SKIP and exits 0; CI passes `--require-chrome`. Helpers live in `scripts/lib/smoke.mjs` and are unit-tested.
+`npm run smoke` renders every binder, the table view, the card modal, the rarity-filtered master-set view (breakdown rows, active row, filtered count), and the print pages in headless Chrome and asserts on the DOM (h1, counts, tabs, no `undefined`/`NaN`). Expectations come from `data/*.json`. It starts `next start` on `SMOKE_PORT` (default 3000; needs a prior `npm run build`, otherwise falls back to `next dev`), or reuses a running server when `SMOKE_URL` is set. Without Chrome it prints SKIP and exits 0; CI passes `--require-chrome`. Helpers live in `scripts/lib/smoke.mjs` and are unit-tested.

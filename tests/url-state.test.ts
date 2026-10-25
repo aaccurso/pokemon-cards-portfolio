@@ -19,8 +19,7 @@ test("?sort= is validated with isSortKey instead of being cast to SortKey", () =
 });
 
 test("?illus=1 is read, written and applied only in a wants binder", () => {
-  assert.match(tracker, /illus:\s*params\.get\("illus"\) === "1" && kind === "wants"/, "readFilters ignores ?illus=1 outside a wants binder");
-  assert.match(tracker, /readFilters\(searchParams, initialBinder\.kind\)/, "the initial read passes the binder kind");
+  assert.match(tracker, /const f = readFilters\(searchParams\);[\s\S]{0,240}?illus: f\.illus && initialBinder\.kind === "wants"/, "the initial read drops ?illus=1 outside a wants binder");
   assert.match(tracker, /if \(filters\.illus && binder\.kind === "wants"\) p\.set\("illus", "1"\)/, "the URL write is guarded");
   assert.match(tracker, /if \(filters\.illus && binder\.kind === "wants"\) \{\s*list = list\.filter\(\(c\) => c\.buyPrice != null\)/, "the filter is guarded");
 });
