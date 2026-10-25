@@ -24,6 +24,7 @@ Personal tracker for Japanese Pokémon TCG binders. Each binder is its own colle
 - **Price refresh** — one script pulls Cardmarket trend prices from tcgdex into `buyPrice` and appends every snapshot to `data/prices.json`, so history is kept for later charts.
 - **CDN-independent images** — every card image is bundled as WebP in `public/cards/`.
 - **CSV export** of the active binder.
+- **Duplicates and trade list**: filter to cards with extra copies (`?own=dupes`), see an `x2` badge beside the Pokéball, and copy or download the extras as a trade list (`M6a 045 Pikachu ex x2 (1,20 EUR)`) for a trade partner or buylist.
 
 ## Tech stack
 
