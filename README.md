@@ -18,12 +18,14 @@ Personal tracker for Japanese Pokémon TCG binders. Each binder is its own colle
 - **Table view** with sortable columns (Pokédex #, name, code, set, buy price, price paid).
 - **Search and filter** by name/code/set, Pokémon type (incl. Trainer), card set, or ownership status.
 - **Per-card modal** with the full-resolution image, set/code, price paid, and purchase history.
-- **Derived stats per binder**: Collected, Spent on cards, Saved vs target (or Duplicates for a master set), To complete, Budget / Set value, Total outlay. Shipments that span binders split their total by item share.
+- **Derived stats per binder**: Collected, Spent on cards, Value of owned cards with gain vs paid (or Pulled value and Duplicates for a master set), To complete, Budget / Set value, Total outlay with a value / outlay percentage. Shipments that span binders split their total by item share. One line under the tabs sums value across all binders.
 - **Booster pulls** — log a box opening as one shipment; pulled cards count as owned without inventing a per-card price.
 - **Print route** (`/print?binder=…`) generates an A4 PDF of placeholder cards (9 per page) with a calibration sheet so you can confirm the print scale first.
 - **Price refresh** — one script pulls Cardmarket trend prices from tcgdex into `buyPrice` and appends every snapshot to `data/prices.json`, so history is kept for later charts.
 - **CDN-independent images** — every card image is bundled as WebP in `public/cards/`.
 - **CSV export** of the active binder.
+- **Duplicates and trade list**: filter to cards with extra copies (`?own=dupes`), see an `x2` badge beside the Pokéball, and copy or download the extras as a trade list (`M6a 045 Pikachu ex x2 (1,20 EUR)`) for a trade partner or buylist.
+- **Finish-as-singles shortlist**: a "Buy as singles" link on the master-set tile jumps to the wanted cards as a table, priciest first (`?own=wanted&view=table&sort=buyPrice&dir=desc`); "Copy as text" turns the wanted set into one line (`Need (62): 003 007 012 ...`) for a seller chat; the card modal links the set code to a Cardmarket search.
 
 ## Tech stack
 
@@ -44,6 +46,8 @@ Four git-tracked JSON files are the single source of truth:
 Full schema and workflows documented in [`CLAUDE.md`](CLAUDE.md).
 
 ## Local development
+
+Requires Node 24 (see `.nvmrc`; `nvm use` picks it up). The tests rely on Node's built-in TypeScript type stripping, so anything older than 22.18 gets an `EBADENGINE` warning on `npm install` and cannot run `npm test`.
 
 ```bash
 npm install

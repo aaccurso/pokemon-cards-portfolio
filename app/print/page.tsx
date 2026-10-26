@@ -1,15 +1,11 @@
 "use client";
 
-import { Suspense, useState, useMemo } from "react";
+import { Suspense, useEffect, useState, useMemo } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { cards, purchases, binders } from "@/lib/data";
 import { buildOwnershipMap } from "@/lib/purchases";
-import {
-  DEFAULT_BINDER_ID,
-  cardsForBinder,
-  getBinder,
-  resolveBinderId,
-} from "@/lib/binders";
+import { cardsForBinder, getBinder, resolveBinderId } from "@/lib/binders";
+import { isInkLight, printHref } from "@/lib/print";
 import type { Card } from "@/lib/cards";
 import { PlaceholderCard } from "@/components/PlaceholderCard";
 import { BinderTabs, BinderCounts } from "@/components/BinderTabs";
@@ -33,6 +29,7 @@ function PrintSheets() {
   const searchParams = useSearchParams();
   const binderId = resolveBinderId(searchParams.get("binder"), binders);
   const binder = getBinder(binderId, binders);
+  const inkLight = isInkLight(searchParams.get("ink"));
 
   const [includeOwned, setIncludeOwned] = useState(false);
   const ownership = useMemo(() => buildOwnershipMap(purchases), []);
@@ -51,10 +48,20 @@ function PrintSheets() {
   }, [ownership]);
 
   function selectBinder(id: string) {
-    router.replace(id === DEFAULT_BINDER_ID ? pathname : `${pathname}?binder=${id}`, {
-      scroll: false,
-    });
+    router.replace(printHref(pathname, id, inkLight), { scroll: false });
   }
+
+  function setInkLight(on: boolean) {
+    router.replace(printHref(pathname, binderId, on), { scroll: false });
+  }
+
+  // ?binder=typo resolves to the default binder; make the URL say so too, so
+  // the address bar never shows an id the page is not rendering.
+  const binderParam = searchParams.get("binder");
+  useEffect(() => {
+    if (binderParam == null || binderParam === binderId) return;
+    router.replace(printHref(pathname, binderId, inkLight), { scroll: false });
+  }, [binderParam, binderId, inkLight, pathname, router]);
 
   const sheets = useMemo(() => {
     const filtered = includeOwned
@@ -73,7 +80,7 @@ function PrintSheets() {
   const totalCards = sheets.reduce((s, p) => s + p.length, 0);
 
   return (
-    <div className="print-page">
+    <div className={`print-page${inkLight ? " ink-light" : ""}`}>
       <div className="print-controls no-print">
         <div className="print-controls-header">
           <h1>{binder.name} placeholder cards</h1>
@@ -83,6 +90,12 @@ function PrintSheets() {
             calibration guide, then 3&times;3 card grids) &middot; each card
             63&times;88&nbsp;mm.
           </p>
+          <BinderTabs
+            binders={binders}
+            activeId={binderId}
+            counts={binderCounts}
+            onSelect={selectBinder}
+          />
         </div>
 
         <div className="print-instructions">
@@ -110,10 +123,6 @@ function PrintSheets() {
               <strong>Headers and footers:</strong> off.
             </li>
             <li>
-              <strong>Background graphics:</strong> on (so type colors and
-              watermarks print).
-            </li>
-            <li>
               <strong>Two-sided / Duplex:</strong> off.
             </li>
           </ol>
@@ -126,20 +135,27 @@ function PrintSheets() {
         </div>
 
         <div className="print-controls-actions">
-          <BinderTabs
-            binders={binders}
-            activeId={binderId}
-            counts={binderCounts}
-            onSelect={selectBinder}
-          />
-          <label className="print-opt">
-            <input
-              type="checkbox"
-              checked={includeOwned}
-              onChange={(e) => setIncludeOwned(e.target.checked)}
-            />
-            Include owned cards
-          </label>
+          <div className="print-opts">
+            <label className="print-opt">
+              <input
+                type="checkbox"
+                checked={includeOwned}
+                onChange={(e) => setIncludeOwned(e.target.checked)}
+              />
+              Include owned cards
+            </label>
+            <label
+              className="print-opt"
+              title="Hides the grey card photo and prints type badges and the watermark as outlines"
+            >
+              <input
+                type="checkbox"
+                checked={inkLight}
+                onChange={(e) => setInkLight(e.target.checked)}
+              />
+              Ink saver
+            </label>
+          </div>
           <button className="print-btn" onClick={() => window.print()}>
             Print / Save as PDF
           </button>

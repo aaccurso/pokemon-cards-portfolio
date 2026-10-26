@@ -1,4 +1,6 @@
+import type { CSSProperties } from "react";
 import { BinderDisplay, Card, numberLabel, typeBadges } from "@/lib/cards";
+import { fmtEur } from "@/lib/format";
 
 export function PlaceholderCard({
   card,
@@ -18,7 +20,7 @@ export function PlaceholderCard({
       </div>
       <div className="ph-name">
         {card.name}
-        {card.nameJa && <span className="name-ja">{card.nameJa}</span>}
+        {card.nameJa && <span className="name-ja" lang="ja">{card.nameJa}</span>}
       </div>
       <div className="ph-thumb">
         {imgUrl ? (
@@ -37,7 +39,9 @@ export function PlaceholderCard({
             <span
               key={b.label}
               className="ph-type-badge"
-              style={{ background: b.color }}
+              style={
+                { "--badge": b.color, background: "var(--badge)" } as CSSProperties
+              }
             >
               {b.label}
             </span>
@@ -48,7 +52,7 @@ export function PlaceholderCard({
           <span className="ph-code">{card.code}</span>
           {card.buyPrice != null && (
             <span className="ph-budget">
-              &le; {card.buyPrice.toFixed(2).replace(".", ",")} &euro;
+              &le; {fmtEur(card.buyPrice)}
             </span>
           )}
         </div>

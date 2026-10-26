@@ -19,7 +19,7 @@ Four git-tracked JSON files are the single source of truth:
 
 - **`data/binders.json`** — the binder registry. Fields: `id, name, description, kind, sort, officialCount?`.
   - `kind: "wants"` — a curated list. `buyPrice == null` means "no illustrated print chosen yet"; the "Illustration only" toggle is shown; the price refresh never prices a null card.
-  - `kind: "master-set"` — every card is the target. `buyPrice` is the current Cardmarket single price (auto-filled by the refresh); the toggle is hidden; the "Saved vs target" tile becomes "Duplicates".
+  - `kind: "master-set"` — every card is the target. `buyPrice` is the current Cardmarket single price (auto-filled by the refresh); the toggle is hidden; the "Spent on cards" and "Value" tiles become "Pulled value" and "Duplicates".
   - `sort` is the default sort key (`pokedexNumber` or `setNumber`). `officialCount` is the number of non-secret cards; master-set binders label every card with its slot index as printed on the card (`126/103`) in grid, table, modal, and placeholders, and the table "#" column sorts by `setNumber` there. Wants binders show the Pokedex number (`#025`).
 - **`data/cards.json`** — all cards across all binders. Fields: `id, name, code, set, qty, language, condition, buyPrice, imageUrl, localImage, pokedexNumber, type1, type2, generation, variant, binderId, setNumber, category?, nameJa?, tcgdexId?, rarity?`.
   - `category` defaults to `"Pokemon"`; Trainers and Energies have `pokedexNumber: null`, `type1: null`, `generation: null`.
@@ -27,13 +27,15 @@ Four git-tracked JSON files are the single source of truth:
   - No `owned` or `pricePaid` — those are derived from purchases.
 - **`data/purchases.json`** — the shipment log. `{ shipments: Shipment[] }`, each `{ id, seller, date, shipping, fees, total, product?, items[] }`, each item `{ cardId, pricePaid, condition, qty? }`.
   - `pricePaid: null` means pulled from sealed product. `qty` defaults to 1. `product` is a free label such as `"30th CELEBRATION booster box x2"`.
-- **`data/prices.json`** — append-only price history keyed by card id. Each entry is a list of snapshots: `{ date, source: "manual", price }` for the pre-refresh target, and `{ date, source: "cardmarket", trend, avg7, avg30, low }` per refresh. Nothing in the UI reads it yet.
+- **`data/prices.json`** — append-only price history keyed by card id. Each entry is a list of snapshots: `{ date, source: "manual", price }` for the pre-refresh target, and `{ date, source: "cardmarket", trend, avg7, avg30, low }` per refresh. Nothing in the UI reads it yet. On disk it is stored one snapshot per line (`formatPrices` in `scripts/lib/prices.mjs`) so a refresh diff is an append per card; `tests/data.test.ts` fails if the file drifts from that format, so after a hand edit rerun the formatter rather than `JSON.stringify`.
 
 A card is "owned" if it appears in at least one purchase item. Its effective `pricePaid` is the min across priced purchases, or null when every copy was pulled. Duplicates are recorded but don't double-count in collection stats.
 
 **Illustration cards** (wants binders only) are entries with `buyPrice != null`. The "Illustration only" toggle filters to those.
 
-**Total outlay** per binder attributes each shipment's `total` in proportion to how many of its items (by qty) belong to that binder, so the binders' outlays sum to the global total.
+**Total outlay** per binder attributes each shipment's `total` in proportion to how many of its items (by qty) belong to that binder, so the binders' outlays sum to the global total. Every shipment must have a `total` (a test enforces it); the `legacy` shipment's is the sum of its item prices.
+
+**Collection value** (`marketValue`, `marketValueAllCopies`, `unpricedOwned` in `computeStats`) is the Cardmarket trend (`buyPrice`) summed over owned priced cards, once per card or once per copy. Gain vs paid (`marketValue - spentOnCards`) is derived in the component, not stored. Value / outlay (`valueVsOutlayPct`) always uses `marketValueAllCopies`, on every binder kind and on the "All binders" line, because outlay already paid for the duplicate copies. `savings` is the pre-value figure and is kept for one release.
 
 ## Project Structure
 ```
@@ -41,10 +43,14 @@ app/
   layout.tsx
   page.tsx           — renders PortfolioTracker
   print/page.tsx     — printable placeholder-card binder sheet (per binder)
+  needed/page.tsx    — pocket needed list (number grid, copy as text, one-sheet print)
   globals.css
 components/
-  PortfolioTracker.tsx — main dashboard (binder tabs, stats, filters, grid/table, modals)
+  PortfolioTracker.tsx — main dashboard: URL-backed state, derived data, composition of the parts below
   BinderTabs.tsx       — binder selector pills with owned / total counts
+  StatsGrid.tsx        — the six stat cards (props: stats, kind)
+  FilterBar.tsx        — search, type/set/ownership selects, illustration toggle, view toggle, Share/CSV; exports the Filters type
+  CardTable.tsx        — table view with sortable headers and hover preview
   CardTile.tsx         — grid-view 3D-tilt holo card
   CardModal.tsx        — per-card details modal
   PlaceholderCard.tsx  — per-card print sheet placeholder
@@ -52,19 +58,23 @@ lib/
   data.ts        — the ONLY module that imports the JSON files; validates them at load
   cards.ts       — Card type, typeColors, numberLabel/typeBadges display helpers
   purchases.ts   — ownership/stats derivation + CSV export (pure)
+  needed.ts      — needed-list blocks, labels and text export (pure)
+  shortlist.ts   - Cardmarket search URL for the card modal (pure)
   binders.ts     — Binder type, resolveBinderId/getBinder/cardsForBinder, validateData (pure)
+  sort.ts        — SortKey/SortDir, SORT_KEYS + isSortKey (validates ?sort=), getSortValue, compareBySort nulls-last comparator (pure)
+  format.ts      — fmtEur, the one place prices are formatted for display (pure)
 data/
   binders.json    — binder registry
   cards.json      — all cards
   purchases.json  — shipment log
   prices.json     — price history
 scripts/
-  lib/            — pure helpers (tcgdex, pricecharting, m6a, prices), unit-tested
+  lib/            — helpers (tcgdex, pricecharting, m6a, prices; atomic = tmp + rename writer), unit-tested
   download_images.mjs, backfill_card_fields.mjs, build_m6a.mjs, refresh_prices.mjs
 tests/            — node --test suites (*.test.ts), run with npm test
 ```
 
-`lib/cards.ts`, `lib/purchases.ts`, `lib/binders.ts` must not import JSON or use the `@/` alias and may only `import type` from each other, so Node can run the tests directly.
+`lib/cards.ts`, `lib/purchases.ts`, `lib/binders.ts`, `lib/sort.ts`, `lib/format.ts`, `lib/needed.ts`, `lib/print.ts`, `lib/shortlist.ts` must not import JSON or use the `@/` alias, so Node can run the tests directly. Imports between them use a relative path with an explicit `.ts` extension (`import { rarityOrder } from "./cards.ts"`), which both Node and the Next bundler resolve; keep the graph acyclic (`cards.ts` imports nothing from the others).
 
 ## Source of truth rule
 **The four `data/*.json` files are the only places collection data lives.** `lib/data.ts` is a thin loader — do not hand-edit card objects anywhere else. Never set `owned` or `pricePaid` on a card — those are derived.
@@ -106,18 +116,26 @@ Whenever a card is added or updated without a bundled image (e.g. a new set not 
 ## Adding a new binder
 1. Add an entry to `data/binders.json`.
 2. Add cards with that `binderId` to `data/cards.json` (for a full set, write a builder like `scripts/build_m6a.mjs`).
-3. Download images, run `node scripts/refresh_prices.mjs`, run `npm test && npm run build`. `lib/data.ts` throws in development if any card references an unknown binder.
+3. Download images, run `node scripts/refresh_prices.mjs`, run `npm test && npm run build`. `lib/data.ts` throws in every environment (so `next build` fails) if `validateData` finds a problem: unknown or duplicate binder, card or shipment ids, a master-set binder without `officialCount`, an empty shipment, a null `total`, `qty < 1`, or a negative `pricePaid`.
+
+## Data validation gate
+`validateData` in `lib/binders.ts` is the single checker. It runs in three places: `lib/data.ts` throws at module load (fails the build), `tests/data.test.ts` runs it on the real JSON, and the tracked `.githooks/pre-commit` runs that test before every commit (`git commit --no-verify` skips it once). `npm install` / `npm ci` enables the hook through the `prepare` script; after a fresh clone with no install, run `git config core.hooksPath .githooks`. Every shipment needs a numeric `total`; when shipping is unknown, use the sum of item prices.
 
 ## Current Features
 - Binder tabs (`?binder=<id>` in the URL, default `kanto-151`); switching resets filters and sort
-- Progress bar and stats grid per binder: Collected, Spent on cards, Saved vs target / Duplicates, To complete, Budget / Set value (N priced), Total outlay
+- Progress bar and stats grid per binder: Collected, Spent on cards / Pulled value, Value (N owned) with gain vs paid / Duplicates, To complete, Budget / Set value (N priced), Total outlay with value / outlay percentage
+- One "All binders" line under the tabs: market value of everything owned vs the sum of all shipment totals
 - Grid view with 3D tilt + holographic hover; Japanese names under English ones
 - Table view with sortable columns (incl. derived `owned` and `pricePaid`)
-- Search by name, code, or set name; filter by type (incl. Trainer), set, ownership
+- Search by name, code, or set name; filter by type (incl. Trainer), set, ownership (All, Owned, Wanted, Duplicates; `own=dupes` in the URL)
+- Rarity filter (`?rarity=<tcgdex label>`), shown whenever a card in the binder has `rarity`; master-set binders also get a clickable per-rarity completion breakdown under the progress bar and a value-weighted progress figure in the header (`rarityBreakdown` in `lib/purchases.ts`, display order and labels in `rarityOrder` in `lib/cards.ts`)
+- Duplicates: `xN` copies badge beside the Pokeball (grid and table), and a "Trade list" export beside CSV (copy text or download CSV via `buildTradeList` in `lib/purchases.ts`), shown only when the binder has extra copies
 - Pokemon type badges with canonical game colors; neutral badge for Trainers
 - Variant badges (ex, GX, V, VMAX, VSTAR, BREAK, LEGEND, Alolan/Galarian/Hisuian/Mega forms)
 - CSV download of the active binder
-- Print page (`/print?binder=<id>`) for blank placeholder cards, sorted by the binder's sort key
+- Finish-as-singles shortlist: "Buy as singles" on the master-set "To complete as singles" tile (wanted, table, buyPrice desc), "Copy as text" when the Wanted filter is on (`Need (N): 003 007 ...`, Pokedex number + name for wants binders), Cardmarket search link in the card modal
+- Print page (`/print?binder=<id>`) for blank placeholder cards, sorted by the binder's sort key; `&ink=1` is the ink saver (no card photo, outlined badges and watermark, same geometry)
+- Needed list (`/needed?binder=<id>`): one-screen or one-A4 view of the missing numbers (master sets as a 001 to 165 grid with secrets in their own block, wants binders as `#025 Pikachu` rows), owned cells dimmed, plus a "Copy as text" button that emits `Need (62): 003 007 ...` for seller chats
 
 ## Known Limitations / Planned Work
 - **Price history is captured but not visualized** — `data/prices.json` is write-only for now.
@@ -131,4 +149,8 @@ npm run dev    # Start dev server on localhost:3000
 npm test       # Run unit tests (node --test)
 npm run build  # Production build
 npm start      # Serve production build
+npm run smoke  # Headless Chrome DOM checks on the real pages (see below)
+git config core.hooksPath .githooks  # Enable the pre-commit data gate (npm install does this too)
 ```
+
+`npm run smoke` renders every binder, the table view, the finish-as-singles shortlist (wanted, table, buyPrice desc), the card modal, the rarity-filtered master-set view (breakdown rows, active row, filtered count), and the print pages in headless Chrome and asserts on the DOM (h1, counts, tabs, no `undefined`/`NaN`). Expectations come from `data/*.json`. It starts `next start` on `SMOKE_PORT` (default 3000; needs a prior `npm run build`, otherwise falls back to `next dev`), or reuses a running server when `SMOKE_URL` is set. Without Chrome it prints SKIP and exits 0; CI passes `--require-chrome`. Helpers live in `scripts/lib/smoke.mjs` and are unit-tested.

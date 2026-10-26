@@ -7,6 +7,7 @@ The current look (dark navy, yellow accent, type colours, 3D holo tiles, silhoue
 ---
 
 ## 1. Mobile pass: stats grid, controls row, tab strip, table
+Status: shipped 2026-10-23 in 77b411b.
 
 **Problem.** Only one breakpoint exists (`@media (max-width: 768px)`, line ~1709). Consequences on a phone:
 
@@ -59,6 +60,7 @@ Wrap the table in `<div className="table-wrap">` with `overflow-x: auto` (markup
 ---
 
 ## 2. Focus states on tabs, pills and tiles
+Status: shipped 2026-10-23 in 9bf9ef9.
 
 **Problem.** `grep focus` in `globals.css` finds rules only for `.controls input/select` (outline removed, border recoloured), `.card-tile:not(.owned):focus-visible` (restores colour, no ring), `.card-name-cell:focus-visible` (`outline: none`, faint background) and `.modal-close`. `.binder-tab`, `.pill-toggle`, `.view-toggle button`, `.action-button`, `.modal-nav`, `.print-btn` and `.card-tile` itself all fall back to the browser's default ring, which on an active yellow pill (`.binder-tab.active { background: var(--accent) }`) is nearly invisible in Chrome and clipped by `border-radius: 999px` in Safari.
 
@@ -86,6 +88,7 @@ Wrap the table in `<div className="table-wrap">` with `overflow-x: auto` (markup
 ---
 
 ## 3. Typography with the Japanese line, and the header tagline
+Status: shipped 2026-10-23 in 50531fd.
 
 **Problem.** `.name-ja { display: block; font-size: 0.75em; opacity: 0.7 }` is applied inside four very different parents:
 
@@ -116,6 +119,7 @@ The span has no `lang="ja"`, so browsers pick CJK glyphs via Han unification heu
 ---
 
 ## 4. Empty states: zero results and a binder with zero owned
+Status: shipped 2026-10-23 in 7ee85ad.
 
 **Problem.** When filters produce no matches, `.card-grid` renders as an empty element and the table renders a header row with nothing under it. The only feedback is `.results-count` ("Showing 0 of 165 cards") in 0.8rem muted text at the bottom. A binder with zero owned cards (Kanto evolutions, Eeveelutions today) is actually fine: the silhouettes are the design, the bar is an empty track, and the stats are honest zeros. No change needed there beyond item 3's tagline, which gives those pages a sentence of purpose.
 
@@ -144,6 +148,7 @@ The span has no `lang="ja"`, so browsers pick CJK glyphs via Han unification heu
 ---
 
 ## 5. Card modal on small screens
+Status: shipped 2026-10-23 in f7361bd.
 
 **Problem.** At ≤768px `.modal-content` collapses to one column, but `.modal-nav-prev/next` stay `position: absolute; top: 50%; left/right: 0.5rem` inside the scrolling `.modal-content`. In a stacked layout that is somewhere over the details list, 32px into the text (content padding is 1.25rem, buttons are 44px wide), and it scrolls away with the content. `max-height: 90vh` uses the large viewport unit, so with the iOS URL bar visible the bottom of the modal can sit under the toolbar. `.modal-backdrop { padding: 1.5rem }` leaves 311px for content on a 359px inner width, which is fine.
 
@@ -222,6 +227,7 @@ Unowned cards keep idle 0, so the grey silhouette is never lit; the chip is the 
 ---
 
 ## 7. Print page: controls layout with tabs, and an ink-light variant
+Status: shipped 2026-10-23 in 9d95218.
 
 **Problem.** `BinderTabs` was dropped into `.print-controls-actions` (a `space-between` flex row with the checkbox and the blue button). Four dark pills (`.binder-tab { background: var(--surface) }` is navy) now sit inside the white `.print-controls` card on the light `#f4f4f4` page; they wrap because the card is 780px wide and the tabs need ~800px, which pushes the checkbox and button onto odd rows. The tabs still look like the dark app, not like the light print page. For ink: `.ph-thumb img { filter: grayscale(1) opacity(0.45) }` prints a 50x50mm grey photo on every card, nine per sheet; type badges print solid colour; `.ph-watermark` prints red at 0.35. The instructions tell the owner to enable "Background graphics" manually because `print-color-adjust` is never set.
 
@@ -265,6 +271,7 @@ The last rule needs `PlaceholderCard.tsx` to set `style={{ "--badge": b.color, b
 ---
 
 ## 8. OG image and title for several binders
+Status: shipped 2026-10-23 in daef75d.
 
 **Problem.** `app/opengraph-image.tsx` hard-codes "Pokédex 151 full-art" and the alt text "Japanese Pokémon TCG wishlist tracker". `app/layout.tsx` titles the site "Pokémon card binders" (good) but its description enumerates exactly two binders while `data/binders.json` has four. Sharing a `?binder=m6a-30th` link produces a 151 card.
 

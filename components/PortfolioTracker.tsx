@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { cards as allCards, purchases, binders } from "@/lib/data";
-import { languageFlags, cardCategory, numberLabel, typeBadges, Card } from "@/lib/cards";
+import { cardCategory, emptyStateMessage, Card } from "@/lib/cards";
 import {
   DEFAULT_BINDER_ID,
   buildCardBinderMap,
@@ -14,15 +14,37 @@ import {
 import {
   buildOwnershipMap,
   computeStats,
+  collectedPct,
+  progressLabel,
   buildCsv,
+  rarityBreakdown,
+  buildTradeList,
+  tradeListCsv,
+  tradeListText,
   OwnershipMap,
 } from "@/lib/purchases";
+import { fmtEur } from "@/lib/format";
+import { compareBySort, isSortKey, SortDir, SortKey } from "@/lib/sort";
+import { fmt0 } from "@/lib/format";
+import { neededText } from "@/lib/needed";
 import { CardModal } from "./CardModal";
 import { CardTile } from "./CardTile";
+import { CardTable } from "./CardTable";
+import { StatsGrid } from "./StatsGrid";
+import { FilterBar, EMPTY_FILTERS, Filters, ViewMode } from "./FilterBar";
 import { BinderTabs, BinderCounts } from "./BinderTabs";
 
-type SortKey = keyof Card | "pricePaid" | "owned";
-type SortDir = "asc" | "desc";
+function readFilters(params: URLSearchParams): Filters {
+  const own = params.get("own");
+  return {
+    q: params.get("q") ?? "",
+    type: params.get("type") ?? "all",
+    set: params.get("set") ?? "all",
+    own: own === "owned" || own === "wanted" || own === "dupes" ? own : "all",
+    illus: params.get("illus") === "1",
+    rarity: params.get("rarity") ?? "all",
+  };
+}
 
 export default function PortfolioTracker() {
   const router = useRouter();
@@ -33,32 +55,31 @@ export default function PortfolioTracker() {
   const initialBinder = getBinder(initialBinderId, binders);
 
   const [binderId, setBinderId] = useState(initialBinderId);
-  const [search, setSearch] = useState(() => searchParams.get("q") ?? "");
-  const [typeFilter, setTypeFilter] = useState(() => searchParams.get("type") ?? "all");
-  const [setFilter, setSetFilter] = useState(() => searchParams.get("set") ?? "all");
-  const [ownershipFilter, setOwnershipFilter] = useState<"all" | "owned" | "wanted">(() => {
-    const v = searchParams.get("own");
-    return v === "owned" || v === "wanted" ? v : "all";
+  const [filters, setFilters] = useState<Filters>(() => {
+    const f = readFilters(searchParams);
+    // Only a "wants" binder shows the Illustration toggle, so ?illus=1 is
+    // ignored elsewhere: a master-set binder must never filter invisibly.
+    return { ...f, illus: f.illus && initialBinder.kind === "wants" };
   });
-  const [illustrationOnly, setIllustrationOnly] = useState(
-    () => searchParams.get("illus") === "1"
-  );
-  const [sortKey, setSortKey] = useState<SortKey>(
-    () => (searchParams.get("sort") as SortKey) || initialBinder.sort
-  );
+  // An unknown ?sort= (stale link, hand-typed) falls back to the binder's default.
+  const [sortKey, setSortKey] = useState<SortKey>(() => {
+    const v = searchParams.get("sort");
+    return isSortKey(v) ? v : initialBinder.sort;
+  });
   const [sortDir, setSortDir] = useState<SortDir>(
     () => (searchParams.get("dir") === "desc" ? "desc" : "asc")
   );
-  const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [modalCard, setModalCard] = useState<Card | null>(() => {
     const id = searchParams.get("card");
     if (!id) return null;
     return cardsForBinder(initialBinderId, allCards).find((c) => c.id === id) ?? null;
   });
-  const [viewMode, setViewMode] = useState<"table" | "grid">(
+  const [viewMode, setViewMode] = useState<ViewMode>(
     () => (searchParams.get("view") === "table" ? "table" : "grid")
   );
   const [copied, setCopied] = useState(false);
+  const [tradeCopied, setTradeCopied] = useState(false);
+  const [copiedNeeded, setCopiedNeeded] = useState(false);
 
   const binder = getBinder(binderId, binders);
   const binderCards = useMemo(() => cardsForBinder(binderId, allCards), [binderId]);
@@ -67,33 +88,20 @@ export default function PortfolioTracker() {
   useEffect(() => {
     const p = new URLSearchParams();
     if (binderId !== DEFAULT_BINDER_ID) p.set("binder", binderId);
-    if (search) p.set("q", search);
-    if (typeFilter !== "all") p.set("type", typeFilter);
-    if (setFilter !== "all") p.set("set", setFilter);
-    if (ownershipFilter !== "all") p.set("own", ownershipFilter);
-    if (illustrationOnly) p.set("illus", "1");
-    if (sortKey !== binder.sort) p.set("sort", String(sortKey));
+    if (filters.q) p.set("q", filters.q);
+    if (filters.type !== "all") p.set("type", filters.type);
+    if (filters.set !== "all") p.set("set", filters.set);
+    if (filters.own !== "all") p.set("own", filters.own);
+    if (filters.illus && binder.kind === "wants") p.set("illus", "1");
+    if (filters.rarity !== "all") p.set("rarity", filters.rarity);
+    if (sortKey !== binder.sort) p.set("sort", sortKey);
     if (sortDir !== "asc") p.set("dir", sortDir);
     if (viewMode !== "grid") p.set("view", viewMode);
     if (modalCard) p.set("card", modalCard.id);
 
     const qs = p.toString();
     router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
-  }, [
-    binderId,
-    binder.sort,
-    search,
-    typeFilter,
-    setFilter,
-    ownershipFilter,
-    illustrationOnly,
-    sortKey,
-    sortDir,
-    viewMode,
-    modalCard,
-    pathname,
-    router,
-  ]);
+  }, [binderId, binder.sort, binder.kind, filters, sortKey, sortDir, viewMode, modalCard, pathname, router]);
 
   const ownership: OwnershipMap = useMemo(() => buildOwnershipMap(purchases), []);
 
@@ -102,17 +110,23 @@ export default function PortfolioTracker() {
     [binderCards, ownership, binderId, cardBinder]
   );
 
-  const binderCounts = useMemo<BinderCounts>(() => {
+  // Per-tab counts plus the one "all binders" summary line: market value of
+  // every owned copy vs the global sum of shipment totals (same basis as the
+  // per-binder value / outlay figure).
+  const { binderCounts, allValue, allOutlay } = useMemo(() => {
     const counts: BinderCounts = {};
+    let value = 0;
     for (const b of binders) {
       const list = cardsForBinder(b.id, allCards);
       counts[b.id] = {
         owned: list.filter((c) => ownership.has(c.id)).length,
         total: list.length,
       };
+      value += computeStats(list, ownership, purchases, b.id, cardBinder).marketValueAllCopies;
     }
-    return counts;
-  }, [ownership]);
+    const outlay = purchases.shipments.reduce((sum, sh) => sum + (sh.total ?? 0), 0);
+    return { binderCounts: counts, allValue: value, allOutlay: outlay };
+  }, [ownership, cardBinder]);
 
   const allTypes = useMemo(() => {
     const types = new Set<string>();
@@ -131,24 +145,34 @@ export default function PortfolioTracker() {
     [binderCards]
   );
 
+  // Empty when no card in the binder carries a rarity (all wants binders today).
+  const rarityRows = useMemo(
+    () => rarityBreakdown(binderCards, ownership),
+    [binderCards, ownership]
+  );
+
+  function resetFilters() {
+    setFilters(EMPTY_FILTERS);
+  }
+
   function selectBinder(id: string) {
     if (id === binderId) return;
     setBinderId(id);
-    setSearch("");
-    setTypeFilter("all");
-    setSetFilter("all");
-    setOwnershipFilter("all");
-    setIllustrationOnly(false);
+    resetFilters();
     setSortKey(getBinder(id, binders).sort);
     setSortDir("asc");
     setModalCard(null);
   }
 
+  function updateFilters(patch: Partial<Filters>) {
+    setFilters((f) => ({ ...f, ...patch }));
+  }
+
   const filtered = useMemo(() => {
     let list = binderCards;
 
-    if (search) {
-      const q = search.toLowerCase();
+    if (filters.q) {
+      const q = filters.q.toLowerCase();
       list = list.filter(
         (c) =>
           c.name.toLowerCase().includes(q) ||
@@ -157,40 +181,36 @@ export default function PortfolioTracker() {
       );
     }
 
-    if (typeFilter === "Trainer") {
+    if (filters.type === "Trainer") {
       list = list.filter((c) => cardCategory(c) === "Trainer");
-    } else if (typeFilter !== "all") {
+    } else if (filters.type !== "all") {
       list = list.filter(
-        (c) => c.type1 === typeFilter || c.type2 === typeFilter
+        (c) => c.type1 === filters.type || c.type2 === filters.type
       );
     }
 
-    if (setFilter !== "all") {
-      list = list.filter((c) => c.set === setFilter);
+    if (filters.set !== "all") {
+      list = list.filter((c) => c.set === filters.set);
     }
 
-    if (ownershipFilter === "owned") {
+    if (filters.own === "owned") {
       list = list.filter((c) => ownership.has(c.id));
-    } else if (ownershipFilter === "wanted") {
+    } else if (filters.own === "wanted") {
       list = list.filter((c) => !ownership.has(c.id));
+    } else if (filters.own === "dupes") {
+      list = list.filter((c) => (ownership.get(c.id)?.duplicateCount ?? 0) > 0);
     }
 
-    if (illustrationOnly) {
+    if (filters.illus && binder.kind === "wants") {
       list = list.filter((c) => c.buyPrice != null);
     }
 
-    list = [...list].sort((a, b) => {
-      const av = getSortValue(a, sortKey, ownership);
-      const bv = getSortValue(b, sortKey, ownership);
-      if (av == null && bv == null) return 0;
-      if (av == null) return 1;
-      if (bv == null) return -1;
-      const cmp = av < bv ? -1 : av > bv ? 1 : 0;
-      return sortDir === "asc" ? cmp : -cmp;
-    });
+    if (filters.rarity !== "all") {
+      list = list.filter((c) => c.rarity === filters.rarity);
+    }
 
-    return list;
-  }, [binderCards, search, typeFilter, setFilter, ownershipFilter, illustrationOnly, sortKey, sortDir, ownership]);
+    return [...list].sort(compareBySort(sortKey, sortDir, ownership));
+  }, [binderCards, binder.kind, filters, sortKey, sortDir, ownership]);
 
   function handleSort(key: SortKey) {
     if (sortKey === key) {
@@ -201,39 +221,77 @@ export default function PortfolioTracker() {
     }
   }
 
-  function sortIndicator(key: SortKey) {
-    if (sortKey !== key) return null;
-    return (
-      <span className="sort-indicator">{sortDir === "asc" ? "▲" : "▼"}</span>
-    );
-  }
-
   async function handleShare() {
     try {
       await navigator.clipboard.writeText(window.location.href);
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
     } catch {
-      // clipboard unavailable (e.g. non-HTTPS) — silently no-op
+      // clipboard unavailable (e.g. non-HTTPS): silently no-op
     }
   }
 
-  function handleDownloadCsv() {
-    const csv = buildCsv(binderCards, ownership);
-    const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+  /** Wanted cards, table view, priciest first: the finish-as-singles shopping list. */
+  function showSinglesShortlist() {
+    setFilters({ ...EMPTY_FILTERS, own: "wanted" });
+    setViewMode("table");
+    setSortKey("buyPrice");
+    setSortDir("desc");
+  }
+
+  async function handleCopyNeeded() {
+    try {
+      await navigator.clipboard.writeText(neededText(filtered, ownership, binder));
+      setCopiedNeeded(true);
+      setTimeout(() => setCopiedNeeded(false), 1500);
+    } catch {
+      // clipboard unavailable (e.g. non-HTTPS): silently no-op
+    }
+  }
+
+  function downloadFile(suffix: string, content: string, mime: string) {
+    const blob = new Blob([content], { type: `${mime};charset=utf-8` });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `${binderId}-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.download = `${binderId}-${new Date().toISOString().slice(0, 10)}${suffix}`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
   }
 
-  const collectedPct =
-    stats.total === 0 ? 0 : Math.round((stats.owned / stats.total) * 100);
+  function handleDownloadCsv() {
+    downloadFile(".csv", buildCsv(binderCards, ownership), "text/csv");
+  }
+
+  const tradeRows = useMemo(
+    () => buildTradeList(binderCards, ownership),
+    [binderCards, ownership]
+  );
+
+  async function handleCopyTradeText() {
+    const text = tradeListText(tradeRows);
+    try {
+      await navigator.clipboard.writeText(text);
+      setTradeCopied(true);
+      setTimeout(() => setTradeCopied(false), 1500);
+    } catch {
+      // clipboard unavailable (e.g. non-HTTPS): hand over the same text as a file
+      downloadFile("-trade.txt", text, "text/plain");
+    }
+  }
+
+  function handleDownloadTradeCsv() {
+    downloadFile("-trade.csv", tradeListCsv(tradeRows), "text/csv");
+  }
+
+  const pct = collectedPct(stats);
   const isMasterSet = binder.kind === "master-set";
+  // Value-weighted completion: Cardmarket trend of the owned priced cards over
+  // the whole set's value (item 1's marketValue); the honest master-set progress.
+  const valuePct = stats.budget === 0 ? 0 : Math.round((stats.marketValue / stats.budget) * 100);
+  const showRarity = isMasterSet && rarityRows.length > 0;
 
   return (
     <div className="container">
@@ -243,286 +301,128 @@ export default function PortfolioTracker() {
         counts={binderCounts}
         onSelect={selectBinder}
       />
+      <p
+        className="binder-summary"
+        title="Cardmarket trend price of every owned copy (duplicates included) across all binders, against the sum of all shipment totals"
+      >
+        All binders: {fmtEur(allValue)} value vs {fmtEur(allOutlay)} outlay
+      </p>
 
       <header>
         <h1>{binder.name}</h1>
-        <p>
-          {stats.owned} / {stats.total} cards collected · {collectedPct}%
-        </p>
+        <p className="binder-description">{binder.description}</p>
       </header>
 
-      <div className="progress-bar-container" aria-label="Collection progress">
-        <div
-          className="progress-bar-fill"
-          style={{ width: `${collectedPct}%` }}
-        />
-      </div>
-
-      <div className="stats-grid">
-        <div className="stat-card">
-          <div className="value">
-            {stats.owned}
-            <span className="value-sub"> / {stats.total}</span>
-          </div>
-          <div className="label">Collected</div>
+      <div className="progress">
+        <div className="progress-bar-container" aria-label="Collection progress">
+          <div
+            className="progress-bar-fill"
+            style={{ width: `${pct}%` }}
+          />
         </div>
-        <div className="stat-card">
-          <div className="value">{fmt(stats.spentOnCards)} &euro;</div>
-          <div className="label">Spent on cards</div>
-        </div>
-        {isMasterSet ? (
-          <div className="stat-card" title="Extra copies pulled beyond the first">
-            <div className="value">{stats.duplicates}</div>
-            <div className="label">Duplicates</div>
-          </div>
-        ) : (
-          <div className="stat-card">
-            <div
-              className="value"
-              title="Sum of (buy price − price paid) for owned cards"
-            >
-              {stats.savings >= 0 ? "+" : ""}
-              {fmt(stats.savings)} &euro;
-            </div>
-            <div className="label">Saved vs target</div>
-          </div>
+        <span className="progress-label">{progressLabel(stats)}</span>
+        {isMasterSet && (
+          <span
+            className="progress-label value-progress"
+            title="Share of the set's single-card value you already own; the honest master-set progress"
+          >
+            value {fmt0(stats.marketValue)} / {fmt0(stats.budget)} &euro; ({valuePct}%)
+          </span>
         )}
-        <div className="stat-card">
-          <div className="value">{fmt(stats.toComplete)} &euro;</div>
-          <div className="label">
-            {isMasterSet ? "To complete as singles" : "To complete (est.)"}
-          </div>
-        </div>
-        <div className="stat-card">
-          <div className="value">{fmt(stats.budget)} &euro;</div>
-          <div className="label">
-            {isMasterSet ? "Set value" : "Budget"} ({stats.pricedCount} priced)
-          </div>
-        </div>
-        <div
-          className="stat-card"
-          title="Actual total paid including shipping, fees and duplicates"
-        >
-          <div className="value">{fmt(stats.totalOutlay)} &euro;</div>
-          <div className="label">Total outlay</div>
-        </div>
       </div>
 
-      <div className="controls">
-        <input
-          type="text"
-          placeholder="Search by name, code, or set..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)}>
-          <option value="all">All Types</option>
-          {allTypes.map((t) => (
-            <option key={t} value={t}>
-              {t}
-            </option>
-          ))}
-        </select>
-        <select value={setFilter} onChange={(e) => setSetFilter(e.target.value)}>
-          <option value="all">All Sets</option>
-          {allSets.map((s) => (
-            <option key={s} value={s}>
-              {s}
-            </option>
-          ))}
-        </select>
-        <select
-          value={ownershipFilter}
-          onChange={(e) => setOwnershipFilter(e.target.value as typeof ownershipFilter)}
-        >
-          <option value="all">All Cards</option>
-          <option value="owned">Owned Only</option>
-          <option value="wanted">Wanted Only</option>
-        </select>
-        {binder.kind === "wants" && (
-          <button
-            className={`pill-toggle${illustrationOnly ? " active" : ""}`}
-            onClick={() => setIllustrationOnly((v) => !v)}
-            aria-pressed={illustrationOnly}
-            title="Show only cards with a priced illustration target"
-          >
-            Illustration only
-          </button>
-        )}
-        <div className="view-toggle" role="group" aria-label="View mode">
-          <button
-            className={viewMode === "table" ? "active" : ""}
-            onClick={() => setViewMode("table")}
-            aria-pressed={viewMode === "table"}
-            title="Table view"
-          >
-            &#9776; Table
-          </button>
-          <button
-            className={viewMode === "grid" ? "active" : ""}
-            onClick={() => setViewMode("grid")}
-            aria-pressed={viewMode === "grid"}
-            title="Grid view"
-          >
-            &#9638; Grid
+      {showRarity && (
+        <div className="rarity-breakdown" aria-label="Completion by rarity">
+          {rarityRows.map((r) => {
+            const pct = r.total === 0 ? 0 : Math.round((r.owned / r.total) * 100);
+            const active = filters.rarity === r.rarity;
+            return (
+              <button
+                key={r.rarity}
+                type="button"
+                className={`rarity-row${active ? " active" : ""}`}
+                aria-pressed={active}
+                onClick={() => updateFilters({ rarity: active ? "all" : r.rarity })}
+                title={active ? "Clear the rarity filter" : `Show only ${r.label}`}
+              >
+                <span className="rarity-label">{r.label}</span>
+                <span className="rarity-bar">
+                  <span className="rarity-bar-fill" style={{ width: `${pct}%` }} />
+                </span>
+                <span className="rarity-count">
+                  {r.owned} / {r.total}
+                </span>
+                <span className="rarity-togo">
+                  {r.toComplete > 0 ? `to go ${fmt0(r.toComplete)} €` : ""}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      )}
+
+      <StatsGrid stats={stats} kind={binder.kind} onBuySingles={showSinglesShortlist} />
+
+      <FilterBar
+        filters={filters}
+        onChange={updateFilters}
+        types={allTypes}
+        sets={allSets}
+        rarities={rarityRows}
+        viewMode={viewMode}
+        onViewMode={setViewMode}
+        onShare={handleShare}
+        onCsv={handleDownloadCsv}
+        neededHref={binderId === DEFAULT_BINDER_ID ? "/needed" : `/needed?binder=${binderId}`}
+        copied={copied}
+        tradeCount={tradeRows.length}
+        tradeCopied={tradeCopied}
+        onTradeText={handleCopyTradeText}
+        onTradeCsv={handleDownloadTradeCsv}
+        onCopyNeeded={handleCopyNeeded}
+        copiedNeeded={copiedNeeded}
+        showIllustration={binder.kind === "wants"}
+      />
+
+      {filtered.length === 0 ? (
+        <div className="empty-state" role="status">
+          <div className="placeholder-pokeball" aria-hidden>
+            &#9679;
+          </div>
+          <p>
+            {emptyStateMessage({
+              search: filters.q,
+              ownershipFilter: filters.own,
+              binderOwned: stats.owned,
+            })}
+          </p>
+          <button className="action-button" onClick={resetFilters}>
+            Clear filters
           </button>
         </div>
-        <button
-          className="action-button"
-          onClick={handleShare}
-          title="Copy a shareable link to the current view"
-        >
-          {copied ? "✓ Copied" : "↗ Share"}
-        </button>
-        <button
-          className="action-button"
-          onClick={handleDownloadCsv}
-          title="Download the current portfolio as CSV"
-        >
-          ↓ CSV
-        </button>
-      </div>
-
-      {viewMode === "grid" ? (
+      ) : viewMode === "grid" ? (
         <div className="card-grid">
           {filtered.map((card) => (
             <CardTile
               key={card.id}
               card={card}
               owned={ownership.has(card.id)}
+              copies={ownership.get(card.id)?.purchaseCount}
               onClick={() => setModalCard(card)}
               binder={binder}
             />
           ))}
         </div>
       ) : (
-        <table className="card-table">
-          <thead>
-            <tr>
-              <th onClick={() => handleSort("owned")}>
-                Own {sortIndicator("owned")}
-              </th>
-              <th onClick={() => handleSort(binder.sort)}>
-                # {sortIndicator(binder.sort)}
-              </th>
-              <th onClick={() => handleSort("name")}>
-                Name {sortIndicator("name")}
-              </th>
-              <th className="hide-mobile">Type</th>
-              <th onClick={() => handleSort("code")}>
-                Code {sortIndicator("code")}
-              </th>
-              <th className="hide-mobile" onClick={() => handleSort("set")}>
-                Set {sortIndicator("set")}
-              </th>
-              <th className="hide-mobile">Language</th>
-              <th className="hide-mobile">Variant</th>
-              <th onClick={() => handleSort("buyPrice")}>
-                Buy Price {sortIndicator("buyPrice")}
-              </th>
-              <th onClick={() => handleSort("pricePaid")}>
-                Paid {sortIndicator("pricePaid")}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {filtered.map((card) => {
-              const own = ownership.get(card.id);
-              return (
-                <tr key={card.id} className={own ? "owned" : ""}>
-                  <td className="own-cell">
-                    {own ? (
-                      <span
-                        className="pokeball pokeball-xs"
-                        aria-label="Owned"
-                        title="Owned"
-                      />
-                    ) : (
-                      <span
-                        className="own-indicator wanted"
-                        aria-label="Wanted"
-                        title="Wanted"
-                      >
-                        ○
-                      </span>
-                    )}
-                  </td>
-                  <td className="pokedex-num">{numberLabel(card, binder)}</td>
-                  <td>
-                    <span
-                      className="card-name-cell"
-                      onMouseEnter={() => setHoveredId(card.id)}
-                      onMouseLeave={() => setHoveredId(null)}
-                      onClick={() => setModalCard(card)}
-                      role="button"
-                      tabIndex={0}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter" || e.key === " ") {
-                          e.preventDefault();
-                          setModalCard(card);
-                        }
-                      }}
-                    >
-                      <span className="preview-icon" aria-label="Preview card">
-                        &#128065;
-                      </span>
-                      <strong>
-                        {card.name}
-                        {card.nameJa && <span className="name-ja">{card.nameJa}</span>}
-                      </strong>
-                      {hoveredId === card.id && card.imageUrl && (
-                        <span className="preview-tooltip">
-                          <img
-                            src={card.imageUrl}
-                            alt=""
-                            loading="lazy"
-                            onError={(e) => {
-                              (e.currentTarget.parentElement as HTMLElement).style.display = "none";
-                            }}
-                          />
-                        </span>
-                      )}
-                    </span>
-                  </td>
-                  <td className="hide-mobile">
-                    {typeBadges(card).map((b) => (
-                      <span
-                        key={b.label}
-                        className={`type-badge${b.label === "Trainer" || b.label === "Energy" ? " trainer" : ""}`}
-                        style={{ background: b.color }}
-                      >
-                        {b.label}
-                      </span>
-                    ))}
-                  </td>
-                  <td>{card.code}</td>
-                  <td className="hide-mobile">{card.set}</td>
-                  <td className="hide-mobile">
-                    {languageFlags[card.language] && (
-                      <span className="language-flag" aria-hidden>
-                        {languageFlags[card.language]}
-                      </span>
-                    )}
-                    {card.language}
-                  </td>
-                  <td className="hide-mobile">
-                    {card.variant && (
-                      <span className="variant-badge">{card.variant}</span>
-                    )}
-                  </td>
-                  <td className="price">
-                    {card.buyPrice != null
-                      ? `${fmt(card.buyPrice)} \u20AC`
-                      : "\u2014"}
-                  </td>
-                  <td className="price">
-                    {own && own.pricePaid != null ? `${fmt(own.pricePaid)} \u20AC` : "\u2014"}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <CardTable
+          cards={filtered}
+          ownership={ownership}
+          binder={binder}
+          sortKey={sortKey}
+          sortDir={sortDir}
+          onSort={handleSort}
+          onOpen={setModalCard}
+        />
       )}
 
       <p className="results-count">
@@ -552,20 +452,4 @@ export default function PortfolioTracker() {
 
     </div>
   );
-}
-
-function fmt(n: number): string {
-  return n.toFixed(2).replace(".", ",");
-}
-
-function getSortValue(
-  c: Card,
-  key: SortKey,
-  ownership: OwnershipMap
-): string | number | boolean | null {
-  if (key === "pricePaid") return ownership.get(c.id)?.pricePaid ?? null;
-  if (key === "owned") return ownership.has(c.id);
-  const v = c[key as keyof Card];
-  if (v === undefined) return null;
-  return v as string | number | null;
 }

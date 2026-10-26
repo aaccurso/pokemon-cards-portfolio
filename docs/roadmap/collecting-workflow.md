@@ -60,7 +60,10 @@ Product [booster box x1] Total [60]
 2. One session per binder in localStorage, or allow naming sessions (box 1, box 2) before export?
 3. Default `condition` for pulls: always `NM`, or a per-session picker?
 
-## 2. Pocket "needed" list
+## 2. ~~Pocket "needed" list~~ (shipped in e0740ef)
+Status: shipped 2026-10-23 in b7df070.
+
+Shipped: `lib/needed.ts`, `app/needed/page.tsx`, a "Needed" link beside CSV. Rulings on the open questions: whole grid with owned dimmed (the lane default; missing-only would lose the context of where the gaps sit); text export in English only (smallest option; `nameJa` can be added to `neededLabel` later without touching the page). Page hints from item 4 were not added since item 4 has not landed.
 
 **Problem.** The print page produces 63x88 mm placeholders, which is right for the binder but useless at a card shop or when scrolling a Cardmarket listing on a phone. What is needed there is the set of missing numbers at a glance, on one A4 sheet or one phone screen.
 
@@ -79,6 +82,7 @@ Product [booster box x1] Total [60]
 2. Should the text export include Japanese names for sellers in Japan?
 
 ## 3. Duplicates view and trade list
+Status: shipped 2026-10-23 in 736ee04.
 
 **Problem.** `buildOwnershipMap` already computes `duplicateCount` per card and the master-set stats tile shows the total, but there is no way to see which cards are duplicated or to hand that list to a trade partner or a buylist.
 
@@ -127,6 +131,7 @@ Page 1                      Page 2
 3. Any binder with a non-default sort order, for example Kanto by set rather than Pokedex? Then `paginate` needs a per-binder order field.
 
 ## 5. Finish-as-singles shortlist
+Status: shipped 2026-10-23 in 4d05b28.
 
 **Problem.** After the packs are done, the remaining M6a cards will be bought as singles, and the "To complete as singles" tile already prices that. But getting from the tile to a shopping list means setting four filters by hand, and nothing links a card to a Cardmarket search.
 
@@ -144,7 +149,7 @@ Page 1                      Page 2
 1. **Item 1, first half** (number entry + clipboard/download, `lib/pulls.ts`, session bar). This is the only item with a deadline: the first booster box. Dictating numbers into a text field already beats dictating to Claude, and the clipboard block removes the transcription step entirely.
 2. **Item 3** (duplicates filter, badge, trade list). S effort, and the first box will create duplicates immediately. Share the `xN` badge with item 1.
 3. **Item 1, second half** (tile tapping, localStorage persistence, undo). Only worth doing after a real box has shown whether typing numbers is enough; if it is, this half may never be needed.
-4. **Item 2** (needed list). S effort, needed when the owner starts hunting singles or visits a shop, which comes after the packs.
+4. ~~**Item 2** (needed list)~~ shipped in e0740ef. S effort, needed when the owner starts hunting singles or visits a shop, which comes after the packs.
 5. **Item 4** (binder page view). M effort, needed when the physical binder is being filled and for better placeholders; it also unlocks page hints in item 2.
 6. **Item 5** (singles shortlist). Last, since most of it is already reachable by URL and it reuses item 2.
 

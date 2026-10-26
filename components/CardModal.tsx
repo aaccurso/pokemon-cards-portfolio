@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { BinderDisplay, Card, languageFlags, conditionNames, numberLabel, typeBadges } from "@/lib/cards";
 import type { CardOwnership } from "@/lib/purchases";
+import { fmtEur } from "@/lib/format";
+import { cardmarketSearchUrl } from "@/lib/shortlist";
 
 type Props = {
   card: Card;
@@ -69,24 +71,6 @@ export function CardModal({ card, ownership, onClose, onPrev, onNext, binder }: 
             <line x1="18" y1="6" x2="6" y2="18" />
           </svg>
         </button>
-        {onPrev && (
-          <button
-            className="modal-nav modal-nav-prev"
-            onClick={onPrev}
-            aria-label="Previous card"
-          >
-            &#8249;
-          </button>
-        )}
-        {onNext && (
-          <button
-            className="modal-nav modal-nav-next"
-            onClick={onNext}
-            aria-label="Next card"
-          >
-            &#8250;
-          </button>
-        )}
         <div className="modal-image-wrapper">
           {imgUrl && !imgFailed ? (
             <div
@@ -135,7 +119,7 @@ export function CardModal({ card, ownership, onClose, onPrev, onNext, binder }: 
         <div className="modal-info">
           <h2>
             {card.name}
-            {card.nameJa && <span className="name-ja">{card.nameJa}</span>}
+            {card.nameJa && <span className="name-ja" lang="ja">{card.nameJa}</span>}
           </h2>
           <div className="modal-badges">
             {typeBadges(card).map((b) => (
@@ -172,7 +156,18 @@ export function CardModal({ card, ownership, onClose, onPrev, onNext, binder }: 
             </div>
             <div>
               <dt>Code</dt>
-              <dd>{card.code}</dd>
+              <dd>
+                {card.code}
+                <a
+                  className="cardmarket-link"
+                  href={cardmarketSearchUrl(card.code)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Search this code on Cardmarket"
+                >
+                  Cardmarket &#8599;
+                </a>
+              </dd>
             </div>
             <div>
               <dt>Language</dt>
@@ -199,7 +194,7 @@ export function CardModal({ card, ownership, onClose, onPrev, onNext, binder }: 
             {card.buyPrice != null && (
               <div>
                 <dt>Buy Price</dt>
-                <dd>{card.buyPrice.toFixed(2).replace(".", ",")} &euro;</dd>
+                <dd>{fmtEur(card.buyPrice)}</dd>
               </div>
             )}
             {ownership && (
@@ -207,7 +202,7 @@ export function CardModal({ card, ownership, onClose, onPrev, onNext, binder }: 
                 <dt>Paid</dt>
                 <dd>
                   {ownership.pricePaid != null
-                    ? `${ownership.pricePaid.toFixed(2).replace(".", ",")} €`
+                    ? fmtEur(ownership.pricePaid)
                     : "Pulled from pack"}
                   {ownership.duplicateCount > 0 && (
                     <span className="dupe-note">
@@ -229,6 +224,30 @@ export function CardModal({ card, ownership, onClose, onPrev, onNext, binder }: 
             </div>
           </dl>
         </div>
+        {(onPrev || onNext) && (
+          // Desktop: display: contents, so the buttons stay absolutely
+          // positioned against .modal-content. Mobile: a sticky bottom row.
+          <div className="modal-nav-row">
+            {onPrev && (
+              <button
+                className="modal-nav modal-nav-prev"
+                onClick={onPrev}
+                aria-label="Previous card"
+              >
+                &#8249;
+              </button>
+            )}
+            {onNext && (
+              <button
+                className="modal-nav modal-nav-next"
+                onClick={onNext}
+                aria-label="Next card"
+              >
+                &#8250;
+              </button>
+            )}
+          </div>
+        )}
       </div>
       {zoomed && imgUrl && !imgFailed && (
         <div

@@ -8,6 +8,12 @@
   --accent: #f8d030;
   --owned-bg: #1a3a2e;
   --owned-border: #2a5a3e;
+  /* Keyboard focus: double ring (bg gap + accent) reads on dark surfaces and on the yellow active pill.
+     --ring-inset is the same ring drawn inside, for buttons under an overflow: hidden parent. */
+  --ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+  --ring-inset: inset 0 0 0 2px var(--bg), inset 0 0 0 4px var(--accent);
+  --stat-pad: 1.25rem;
+  --stat-value: 1.75rem;
 }
 
 * {
@@ -44,6 +50,13 @@ header p {
   color: var(--text-muted);
 }
 
+header .binder-description {
+  max-width: 36rem;
+  margin: 0 auto;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
 .header-link {
   display: inline-block;
   margin-top: 0.5rem;
@@ -69,12 +82,12 @@ header p {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 1.25rem;
+  padding: var(--stat-pad);
   text-align: center;
 }
 
 .stat-card .value {
-  font-size: 1.75rem;
+  font-size: var(--stat-value);
   font-weight: 700;
   color: var(--accent);
 }
@@ -85,12 +98,27 @@ header p {
   margin-top: 0.25rem;
 }
 
+.progress {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
 .progress-bar-container {
+  flex: 1 1 auto;
   background: var(--border);
   border-radius: 999px;
   height: 12px;
   overflow: hidden;
-  margin-bottom: 2rem;
+}
+
+.progress-label {
+  flex: 0 0 auto;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 
 .progress-bar-fill {
@@ -100,11 +128,111 @@ header p {
   transition: width 0.5s ease;
 }
 
-.controls {
+/* Value-weighted completion next to the count label in the progress row */
+.progress .value-progress {
+  color: var(--text-muted);
+}
+
+/* Completion by rarity (master-set binders): one clickable row per rarity */
+.rarity-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin: -1rem 0 2rem;
+}
+
+.rarity-row {
+  display: grid;
+  grid-template-columns: 9rem minmax(6rem, 1fr) 5rem 7rem;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.3rem 0.6rem;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: var(--text-muted);
+  font: inherit;
+  font-size: 0.8rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.rarity-row:hover {
+  color: var(--text);
+  background: var(--surface-hover);
+}
+
+.rarity-row.active {
+  color: var(--text);
+  border-color: var(--accent);
+  background: var(--surface);
+}
+
+.rarity-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rarity-bar {
+  display: block;
+  height: 6px;
+  background: var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.rarity-bar-fill {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #f8d030, #78c850);
+  border-radius: 999px;
+  transition: width 0.5s ease;
+}
+
+.rarity-count {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.rarity-togo {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  text-align: right;
+}
+
+@media (max-width: 640px) {
+  .rarity-row {
+    grid-template-columns: 7rem 1fr 4rem;
+  }
+  .rarity-togo {
+    display: none;
+  }
+}
+
+/* Filters on the left, Share/CSV on the right. On phones the row dissolves
+   (display: contents) and .controls-secondary is reordered below the results. */
+.controls-row {
   display: flex;
   gap: 0.75rem;
   margin-bottom: 1.5rem;
   flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.controls {
+  display: flex;
+  gap: 0.75rem;
+  flex: 1 1 0;
+  min-width: 0;
+  flex-wrap: wrap;
+}
+
+.controls-secondary {
+  display: flex;
+  gap: 0.75rem;
 }
 
 .controls input,
@@ -587,6 +715,61 @@ header p {
   pointer-events: none;
 }
 
+/* "x3" copies badge beside the pokeball (grid tile footer + table "Own" column) */
+.copies-badge {
+  display: inline-block;
+  margin-left: 4px;
+  padding: 0 5px;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  color: var(--accent);
+  font-size: 0.7rem;
+  font-weight: 600;
+  line-height: 1.5;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+/* Trade list export: a details disclosure styled like the other action buttons */
+.trade-menu {
+  position: relative;
+}
+
+.trade-menu > summary {
+  list-style: none;
+  display: inline-block;
+  user-select: none;
+}
+
+.trade-menu > summary::-webkit-details-marker {
+  display: none;
+}
+
+.trade-menu[open] > summary {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.trade-menu-items {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 4px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.trade-menu-items .action-button {
+  white-space: nowrap;
+  text-align: left;
+}
+
 /* Flag emoji glyph (small leading decorator before the language name) */
 .language-flag {
   display: inline-block;
@@ -795,6 +978,13 @@ header p {
   right: 0.5rem;
 }
 
+/* Wrapper for the two nav buttons. On desktop it generates no box, so the
+   buttons keep their absolute positioning against .modal-content. On phones
+   it becomes a sticky footer row (see the 768px block). */
+.modal-nav-row {
+  display: contents;
+}
+
 .modal-image-clip--zoomable {
   cursor: zoom-in;
 }
@@ -960,6 +1150,13 @@ header p {
   min-height: 100vh;
   padding: 2rem 1rem 3rem;
   color: #222;
+  /* Inherited by every descendant: badge colours, the watermark and the
+     calibration ruler ticks print without the manual "Background graphics"
+     step in the print dialog. */
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+  /* Light page: white gap + the print button blue, so tabs and the button share one ring */
+  --ring: 0 0 0 2px #fff, 0 0 0 4px #2a6fdb;
 }
 
 .print-controls {
@@ -1023,11 +1220,41 @@ header p {
   line-height: 1.5;
 }
 
+/* Binder tabs re-skinned for the light print page (the app's pills are navy) */
+.print-page .binder-tabs {
+  margin: 0.75rem 0 0;
+}
+.print-page .binder-tab {
+  background: #fff;
+  border-color: #d0d0d0;
+  color: #444;
+}
+.print-page .binder-tab:hover {
+  color: #222;
+  border-color: #888;
+}
+.print-page .binder-tab.active {
+  background: #2a6fdb;
+  border-color: #2a6fdb;
+  color: #fff;
+}
+.print-page .binder-tab:focus-visible {
+  outline: 2px solid #2a6fdb;
+  outline-offset: 2px;
+}
+
 .print-controls-actions {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.print-opts {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
   flex-wrap: wrap;
 }
 
@@ -1215,6 +1442,28 @@ header p {
   overflow: hidden;
   break-inside: avoid;
   page-break-inside: avoid;
+}
+
+/* Ink saver (?ink=1): same geometry, less toner. The grey photo goes, the
+   dashed box and watermark stay, badges become outlines in their own colour. */
+.ink-light .ph-thumb img {
+  display: none;
+}
+.ink-light .ph-thumb {
+  background: #fff;
+}
+.ink-light .placeholder-card {
+  border-width: 0.3mm;
+}
+.ink-light .ph-watermark {
+  color: rgba(0, 0, 0, 0.3);
+  border-color: rgba(0, 0, 0, 0.3);
+}
+.ink-light .ph-type-badge {
+  background: none !important;
+  color: var(--badge);
+  border: 0.25mm solid var(--badge);
+  text-shadow: none;
 }
 
 .ph-header {
@@ -1440,6 +1689,25 @@ header p {
   font-weight: 500;
 }
 
+/* Stat sub-line under the label ("+330,61 EUR vs paid", "value = 123%") */
+.stat-card .stat-sub {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 0.35rem;
+  font-variant-numeric: tabular-nums;
+}
+.stat-card .stat-sub.negative {
+  color: #e07070;
+}
+
+/* One-line "all binders" value summary under the tab strip */
+.binder-summary {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin: -0.5rem 0 1.25rem;
+  font-variant-numeric: tabular-nums;
+}
+
 /* Action buttons in the controls row (Import, CSV) */
 .action-button {
   background: var(--surface);
@@ -1475,6 +1743,24 @@ header p {
   cursor: not-allowed;
 }
 
+/* Runtime error boundary (app/error.tsx) */
+.error-page {
+  text-align: center;
+  padding-top: 4rem;
+}
+
+.error-page h1 {
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+
+.error-detail {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  word-break: break-word;
+}
+
 /* Read-only ownership indicator (replaces the old checkbox) */
 .own-cell {
   text-align: center;
@@ -1498,11 +1784,67 @@ header p {
   font-size: 0.8rem;
 }
 
+/* Shown in place of the grid or table when filters match no cards */
+.empty-state {
+  display: grid;
+  place-items: center;
+  gap: 0.75rem;
+  padding: 3rem 1rem;
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.empty-state p {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--text);
+}
+
 /* Duplicate purchase note inside modal */
 .dupe-note {
   color: var(--text-muted);
   font-size: 0.8rem;
   font-weight: 400;
+}
+
+/* Cardmarket search link beside the set code in the modal */
+.cardmarket-link {
+  margin-left: 0.6rem;
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.cardmarket-link:hover {
+  text-decoration: underline;
+}
+
+/* Text-style link inside a stat tile ("Buy as singles") */
+.stat-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0;
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.stat-link:hover {
+  text-decoration: underline;
+}
+
+.stat-link:focus-visible,
+.cardmarket-link:focus-visible {
+  outline: none;
+  border-radius: 4px;
+  box-shadow: var(--ring);
 }
 
 /* --- Importer modal --- */
@@ -1706,22 +2048,114 @@ header p {
   font-size: 0.85rem;
 }
 
+/* Tablet and half-screen desktop: six stat cards in two rows, no orphan. */
+@media (max-width: 1190px) {
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
+  /* Flex column so .controls-secondary can be reordered below the results. */
   .container {
+    display: flex;
+    flex-direction: column;
     padding: 1rem 0.5rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .stat-card {
+    --stat-pad: 0.85rem;
+    --stat-value: 1.35rem;
+  }
+
+  .controls-row {
+    display: contents;
+  }
+
+  .controls {
+    margin-bottom: 1.25rem;
+  }
+
+  /* 16px keeps iOS Safari from zooming the page when a field is focused. */
+  .controls input,
+  .controls select {
+    font-size: 16px;
+  }
+
+  .controls input {
+    flex-basis: 100%;
+    min-width: 0;
+  }
+
+  .controls select {
+    flex: 1 1 40%;
+    min-width: 0;
+  }
+
+  .controls-secondary {
+    order: 1;
+    justify-content: center;
+    margin-top: 0.75rem;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
   }
 
   .card-table {
     font-size: 0.75rem;
   }
 
+  .preview-icon {
+    display: none;
+  }
+
   .hide-mobile {
     display: none;
+  }
+
+  .modal-backdrop {
+    padding: 0.75rem;
   }
 
   .modal-content {
     grid-template-columns: 1fr;
     padding: 1.25rem;
+    padding-bottom: 0;
+    /* dvh tracks the iOS URL bar; vh first so older browsers keep a value */
+    max-height: 90vh;
+    max-height: 90dvh;
+  }
+
+  /* Nav buttons leave the absolute left/right slots (which land over the
+     details text once the layout stacks) and become a sticky footer row. */
+  .modal-nav-row {
+    display: flex;
+    justify-content: space-between;
+    position: sticky;
+    bottom: 0;
+    margin: 0 -1.25rem;
+    padding: 0.6rem 1.25rem;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+  }
+
+  .modal-nav-row .modal-nav,
+  .modal-nav-row .modal-nav:hover {
+    position: static;
+    transform: none;
+  }
+
+  /* On the last card only "next" is missing; keep "previous" on the left and
+     a lone "next" on the right instead of letting it slide left. */
+  .modal-nav-row .modal-nav-next {
+    margin-left: auto;
   }
 
   .modal-close {
@@ -1787,6 +2221,31 @@ header p {
   opacity: 0.8;
 }
 
+/* Phones: one scrollable strip instead of two or three wrapped rows. This block
+   must stay below the base tab rules above, which would otherwise win on order. */
+@media (max-width: 768px) {
+  .binder-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+    margin-inline: -0.5rem;
+    padding-inline: 0.5rem;
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
+    mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
+  }
+
+  .binder-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .binder-tab {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    white-space: nowrap;
+  }
+}
+
 /* ---- Japanese secondary name + neutral category badge ---- */
 .name-ja {
   display: block;
@@ -1794,10 +2253,237 @@ header p {
   font-weight: 400;
   opacity: 0.7;
   line-height: 1.2;
+  /* lang="ja" picks Japanese glyph forms; this list prefers the system CJK face on each OS. */
+  font-family: -apple-system, "Hiragino Sans", "Yu Gothic UI", "Noto Sans JP", sans-serif;
+}
+/* Modal: subtitle, not a second yellow title. */
+.modal-info h2 .name-ja {
+  color: var(--text-muted);
+  font-size: 1rem;
+  font-weight: 400;
+  margin-top: 2px;
+  opacity: 1;
+}
+/* Table: floor the smallest text on the page at ~11.5px. */
+.card-table .name-ja {
+  font-size: 0.72rem;
 }
 .type-badge.trainer {
   background: #777;
 }
 .placeholder-card .name-ja {
   font-size: 7pt;
+}
+
+/* ---- Keyboard focus rings (design lane item 2) ----
+   Replace the browser default ring, which is nearly invisible on the yellow
+   active pill in Chrome and clipped by border-radius: 999px in Safari. */
+.binder-tab:focus-visible,
+.pill-toggle:focus-visible,
+.action-button:focus-visible,
+.modal-nav:focus-visible,
+.print-btn:focus-visible,
+.card-tile:focus-visible,
+.card-name-cell:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+}
+/* .view-toggle clips its children (overflow: hidden), so draw the ring inside */
+.view-toggle button:focus-visible {
+  outline: none;
+  box-shadow: var(--ring-inset);
+}
+/* Focused tile also lights the image frame, reusing the hover glow */
+.card-tile:focus-visible .card-tile-image {
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.55),
+    0 0 24px rgba(248, 208, 48, 0.25);
+  border-color: rgba(248, 208, 48, 0.5);
+}
+
+/* =====================================================
+   Needed list page (/needed): one-sheet view of missing numbers
+   ===================================================== */
+.needed-page {
+  background: #f4f4f4;
+  min-height: 100vh;
+  padding: 1.25rem 1rem 3rem;
+  color: #222;
+}
+
+.needed-controls,
+.needed-header,
+.needed-block {
+  max-width: 780px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.needed-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.needed-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+a.action-button {
+  display: inline-block;
+  text-decoration: none;
+}
+
+.needed-page .action-button {
+  background: #fff;
+  border-color: #ccc;
+  color: #222;
+}
+
+.needed-page .action-button:hover {
+  background: #fff;
+  border-color: #2a6fdb;
+  color: #2a6fdb;
+}
+
+.needed-header {
+  margin-bottom: 1rem;
+}
+
+.needed-header h1 {
+  color: #222;
+  font-size: 1.3rem;
+  margin-bottom: 0.2rem;
+}
+
+.needed-summary {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.needed-block {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.needed-block h2 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #666;
+  margin-bottom: 0.6rem;
+}
+
+.needed-grid {
+  list-style: none;
+  display: grid;
+  gap: 2px;
+}
+
+.needed-grid.numbers {
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+}
+
+.needed-grid.rows {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2px 1rem;
+}
+
+.needed-cell {
+  min-width: 0;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  color: #111;
+  background: #fff6cc;
+  padding: 0.35rem 0.2rem;
+  text-align: center;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.needed-grid.rows .needed-cell {
+  text-align: left;
+  padding: 0.25rem 0.4rem;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.needed-cell.owned {
+  font-weight: 400;
+  color: #b4b4b4;
+  background: transparent;
+}
+
+@media (max-width: 600px) {
+  .needed-page {
+    padding: 1rem 0.6rem 2rem;
+  }
+  .needed-block {
+    padding: 0.75rem 0.5rem;
+  }
+  .needed-grid.rows {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px 0.5rem;
+  }
+  .needed-grid.numbers .needed-cell {
+    padding: 0.45rem 0;
+    font-size: 0.85rem;
+  }
+}
+
+@media print {
+  .needed-page {
+    background: #fff !important;
+    padding: 0 !important;
+    min-height: 0;
+  }
+  .needed-header {
+    margin-bottom: 3mm;
+  }
+  .needed-header h1 {
+    font-size: 14pt;
+  }
+  .needed-summary {
+    font-size: 9pt;
+  }
+  .needed-block {
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+    margin-bottom: 4mm;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .needed-block h2 {
+    font-size: 9pt;
+    margin-bottom: 1.5mm;
+  }
+  .needed-grid {
+    gap: 0;
+  }
+  .needed-grid.numbers .needed-cell {
+    font-size: 16pt;
+    padding: 0.8mm 0;
+    background: none;
+    border-radius: 0;
+  }
+  .needed-grid.rows {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0 3mm;
+  }
+  .needed-grid.rows .needed-cell {
+    font-size: 10pt;
+    padding: 0.4mm 0;
+  }
+  .needed-cell.owned {
+    color: #9a9a9a !important;
+  }
 }

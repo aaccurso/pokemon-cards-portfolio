@@ -7,6 +7,7 @@ The M6a work left the codebase in good shape (pure `lib/` modules, 33 fast tests
 ---
 
 ## 1. Make CI run the tests (Node 24, `npm test`, `.nvmrc`)
+Status: shipped 2026-10-23 in 356d965.
 
 **Problem.** `ci.yml` pins `node-version: 20` and runs only `npx tsc --noEmit` and `npm run build`. Node 20 cannot run `node --test "tests/**/*.test.ts"` (type stripping is unflagged from 22.18 / 24), so the suite that guards stats math and real-data consistency never runs on a push or PR. Every later item here adds tests, so this is the foundation.
 
@@ -20,6 +21,7 @@ The M6a work left the codebase in good shape (pure `lib/` modules, 33 fast tests
 ---
 
 ## 2. Clear the deferred review minors in two small PRs
+Status: shipped 2026-10-23 in bdcb468.
 
 **Problem.** Eight known nits from the post-merge review are small individually but together they are the kind of thing that never gets done unless batched.
 
@@ -44,6 +46,7 @@ PR B, data and scripts (`lib/binders.ts`, `lib/purchases.ts`, `scripts/lib/price
 ---
 
 ## 3. `npm run smoke`: headless Chrome DOM assertions without Playwright
+Status: shipped 2026-10-23 in 1ca3960.
 
 **Problem.** Every UI change during M6a was verified by hand with `Google Chrome --headless=new --dump-dom URL | grep`. That worked, but it is unrepeatable, and the server-rendered HTML alone is useless for assertions: `.next/server/app/index.html` contains only the Suspense shell because `useSearchParams` bails to client rendering, so `curl` cannot see the `<h1>`, the counts, or the tabs. Only a real browser can.
 
@@ -115,6 +118,7 @@ Push to `main` versus PR: a push made with `GITHUB_TOKEN` does not trigger `ci.y
 ---
 
 ## 5. Data validation gate: stronger `validateData`, a pre-commit hook, one throw policy
+Status: shipped 2026-10-23 in 0a5cbbb.
 
 **Problem.** Three partial mechanisms exist: `lib/data.ts` throws only when `NODE_ENV !== "production"`, and `next build` sets production, so Vercel preview and production builds log and ship, while CI never runs the test that would catch it (`tests/data.test.ts`). Preview therefore behaves exactly like production here, which defeats the purpose of the environment check. Hand-edited `data/purchases.json` is the most common change in this repo and the most likely to introduce a bad `cardId`.
 
@@ -132,6 +136,7 @@ Push to `main` versus PR: a push made with `GITHUB_TOKEN` does not trigger `ci.y
 ---
 
 ## 6. Split `components/PortfolioTracker.tsx` along its existing seams
+Status: shipped 2026-10-23 in b830402.
 
 **Problem.** The component is 571 lines mixing URL state, derived data, three render blocks, and two helper functions. It is not buggy, but every design-lane change (table wrapper, moving Share/CSV, empty states) and every binder feature lands in the same file.
 
@@ -153,6 +158,7 @@ Behavior lock: run item 3 against `main`, dump every URL's DOM to files, do the 
 ---
 
 ## 7. Data growth: `prices.json`, client payload, images
+Status: shipped 2026-10-23 in 583bdcc.
 
 **Problem.** Three numbers worth knowing before the refresh job runs weekly. `data/cards.json` (180 KB) is imported by `"use client"` code and ships in chunk `609-*.js` (154 KB minified, a few tens of KB gzipped). `data/prices.json` is 60 KB today with 388 snapshots at about 98 bytes each pretty-printed; a weekly run adds 313 snapshots, so roughly 31 KB a week and 1.6 MB a year, and each run rewrites 313 arrays, producing a 3,000-line diff. Nothing imports it, so it costs the site nothing until the price-history view (another lane) does. `public/cards` is 52 MB across 320 WebP files, largest 460 KB (`m6a-165-magikarp.webp`); tiles lazy-load, so page cost is bounded by what is on screen, and the git pack is 21.5 MB, fine for `actions/checkout`.
 
