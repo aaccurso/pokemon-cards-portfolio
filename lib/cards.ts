@@ -98,6 +98,11 @@ export const rarityOrder: RarityLabel[] = [
   { rarity: "Classic Collection", label: "Classic" },
 ];
 
+/** Short UI label for a tcgdex rarity ("Special illustration rare" -> "SAR"); unknown labels pass through. */
+export function rarityLabel(rarity: string): string {
+  return rarityOrder.find((r) => r.rarity === rarity)?.label ?? rarity;
+}
+
 /**
  * Master-set binders show the slot index as printed on the card ("126/103",
  * or "126" without an official count). Wants binders show the Pokedex number

@@ -297,25 +297,43 @@ header .binder-description {
   font-size: 0.85rem;
 }
 
+/* Headers: 12px sentence case. Only the sort buttons take the pointer; Type and Rarity do not sort. */
 .card-table thead th {
   background: var(--surface);
   padding: 0.75rem 0.5rem;
   text-align: left;
   color: var(--text-muted);
   font-weight: 600;
-  text-transform: uppercase;
-  font-size: 0.7rem;
-  letter-spacing: 0.05em;
+  font-size: 0.75rem;
   border-bottom: 2px solid var(--border);
   position: sticky;
   top: 0;
   z-index: 1;
-  cursor: pointer;
+  cursor: default;
   user-select: none;
 }
 
-.card-table thead th:hover {
+.th-sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.th-sort:hover {
   color: var(--accent);
+}
+
+.th-sort:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
 }
 
 .card-table tbody tr {
@@ -381,8 +399,12 @@ header .binder-description {
 }
 
 .sort-indicator {
-  margin-left: 4px;
   font-size: 0.7rem;
+}
+
+/* Inactive sortable headers still say they sort: the two-way arrow at 40%. */
+.sort-indicator.idle {
+  opacity: 0.4;
 }
 
 /* View toggle buttons */
@@ -2117,7 +2139,99 @@ header .binder-description {
   }
 
   .card-table {
+    font-size: 0.85rem;
+  }
+
+  /* Two-line rows (design critique item 5). Line one: Own, #, Name, Buy price.
+     Line two: Type, Rarity, Code, Set, Paid as one muted metadata line. The
+     tr::after pseudo-element is the line break, so no price or code ever wraps
+     mid-value. The header turns into a "Sort by" row of the sortable labels. */
+  .card-table thead tr,
+  .card-table tbody tr {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    column-gap: 0.5rem;
+  }
+
+  .card-table thead tr {
+    padding: 0.5rem;
+    row-gap: 0.35rem;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .card-table thead tr::before {
+    content: "Sort by";
+    color: var(--text-muted);
     font-size: 0.75rem;
+  }
+
+  .card-table thead th {
+    position: static;
+    border: 0;
+    padding: 0;
+  }
+
+  .card-table thead th:not(.sortable) {
+    display: none;
+  }
+
+  .th-sort {
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 2px 8px;
+  }
+
+  .card-table tbody tr {
+    padding: 0.55rem 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .card-table tbody tr::after {
+    content: "";
+    flex-basis: 100%;
+    height: 0;
+    order: 1;
+  }
+
+  .card-table td {
+    display: block;
+    padding: 0;
+    border: 0;
+    white-space: nowrap;
+  }
+
+  .card-table td.name-cell {
+    flex: 1 1 0;
+    min-width: 0;
+    white-space: normal;
+  }
+
+  .card-table td.row-meta {
+    order: 2;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-weight: 400;
+  }
+
+  .card-table td.row-meta:empty,
+  .card-table td.paid.is-empty {
+    display: none;
+  }
+
+  .card-table td.row-meta + td.row-meta::before {
+    content: "\00b7";
+    margin-right: 0.5rem;
+  }
+
+  /* Literal middle dot: after a hex escape the next space is eaten as the terminator. */
+  .card-table td.paid::before {
+    content: "· paid";
+    margin-right: 0.3rem;
+  }
+
+  .card-table td.row-meta .type-badge {
+    margin-right: 0;
   }
 
   .preview-icon {
