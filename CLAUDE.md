@@ -59,7 +59,7 @@ lib/
   cards.ts       — Card type, typeColors, numberLabel/typeBadges display helpers
   purchases.ts   — ownership/stats derivation + CSV export (pure)
   needed.ts      — needed-list blocks, labels and text export (pure)
-  shortlist.ts   - Cardmarket search URL for the card modal (pure)
+  shortlist.ts   - Cardmarket search URL and the "Open on Cardmarket · <price>" button label for the card modal (pure)
   binders.ts     — Binder type, resolveBinderId/getBinder/cardsForBinder, validateData (pure)
   sort.ts        — SortKey/SortDir, SORT_KEYS + isSortKey (validates ?sort=), getSortValue, compareBySort nulls-last comparator (pure)
   format.ts      — fmtEur, the one place prices are formatted for display (pure)
@@ -133,7 +133,8 @@ Whenever a card is added or updated without a bundled image (e.g. a new set not 
 - Pokemon type badges with canonical game colors; neutral badge for Trainers
 - Variant badges (ex, GX, V, VMAX, VSTAR, BREAK, LEGEND, Alolan/Galarian/Hisuian/Mega forms)
 - CSV download of the active binder
-- Finish-as-singles shortlist: "Buy as singles" on the master-set "to go" line of the stats strip (wanted, table, buyPrice desc), "Copy as text" when the Wanted filter is on (`Need (N): 003 007 ...`, Pokedex number + name for wants binders), Cardmarket search link in the card modal
+- Finish-as-singles shortlist: "Buy as singles" on the master-set "to go" line of the stats strip (wanted, table, buyPrice desc), "Copy as text" when the Wanted filter is on (`Need (N): 003 007 ...`, Pokedex number + name for wants binders), Cardmarket search in the card modal
+- Card modal as a buying surface: on a wanted card the one filled button is "Open on Cardmarket · <trend price>" (`cardmarketButtonLabel` in `lib/shortlist.ts`; no price when the wants-binder card has no print chosen), the details list leads with Status, Trend price and Paid, owned cards keep the quiet Cardmarket link in the Code row, and on phones the card image is capped at 45dvh so the facts sit on the first screen. Price history from `data/prices.json` is still not shown (the UI does not load it)
 - Print page (`/print?binder=<id>`) for blank placeholder cards, sorted by the binder's sort key; `&ink=1` is the ink saver (no card photo, outlined badges and watermark, same geometry)
 - Needed list (`/needed?binder=<id>`): one-screen or one-A4 view of the missing numbers (master sets as a 001 to 165 grid with secrets in their own block, wants binders as `#025 Pikachu` rows), owned cells dimmed, plus a "Copy as text" button that emits `Need (62): 003 007 ...` for seller chats
 

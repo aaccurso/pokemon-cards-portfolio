@@ -1821,7 +1821,32 @@ header .binder-description {
   font-weight: 400;
 }
 
-/* Cardmarket search link beside the set code in the modal */
+/* Wanted-card modal: the one filled button, "Open on Cardmarket · 78,72 €"
+   (design critique item 8). Sits between the badges and the details list. */
+.modal-buy {
+  display: inline-block;
+  margin-bottom: 1.25rem;
+  padding: 0.6rem 1rem;
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  color: #222;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  font-variant-numeric: tabular-nums;
+}
+
+.modal-buy:hover {
+  filter: brightness(1.05);
+}
+
+.modal-buy:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+}
+
+/* Cardmarket search link beside the set code in the modal (owned cards) */
 .cardmarket-link {
   margin-left: 0.6rem;
   color: var(--accent);
@@ -2139,6 +2164,25 @@ header .binder-description {
     /* dvh tracks the iOS URL bar; vh first so older browsers keep a value */
     max-height: 90vh;
     max-height: 90dvh;
+  }
+
+  /* Cap the card photo at under half the screen so the name, the Cardmarket
+     button and the price rows are on the first screen (critique item 8). */
+  .modal-image-clip {
+    width: auto;
+    max-width: 100%;
+  }
+
+  .modal-image {
+    width: auto;
+    max-width: 100%;
+    max-height: 45vh;
+    max-height: 45dvh;
+  }
+
+  .modal-placeholder {
+    max-height: 45vh;
+    max-height: 45dvh;
   }
 
   /* Nav buttons leave the absolute left/right slots (which land over the
