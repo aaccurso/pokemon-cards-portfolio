@@ -15,8 +15,15 @@ test("refresh_prices skips a card whose trend is not a positive number", () => {
   assert.match(src, /if \(!cm \|\| !hasTrend\(cm\.trend\)\)/);
 });
 
-test("refresh_prices writes prices.json via formatPrices and both files via writeAllAtomic", () => {
+test("refresh_prices writes prices.json via formatPrices and all three files via writeAllAtomic", () => {
   assert.doesNotMatch(src, /JSON\.stringify\(prices/, "prices.json must not go back to the eight-lines-per-snapshot format");
-  assert.doesNotMatch(src, /fs\.writeFileSync\((PRICES|CARDS)_FILE/, "no direct writes of the data files");
-  assert.match(src, /writeAllAtomic\(\[\s*\[PRICES_FILE, formatPrices\(prices\)\],\s*\[CARDS_FILE, JSON\.stringify\(cards, null, 2\) \+ "\\n"\],?\s*\]\)/);
+  assert.doesNotMatch(src, /fs\.writeFileSync\((PRICES|CARDS|META)_FILE/, "no direct writes of the data files");
+  assert.match(
+    src,
+    /writeAllAtomic\(\[\s*\[PRICES_FILE, formatPrices\(prices\)\],\s*\[CARDS_FILE, JSON\.stringify\(cards, null, 2\) \+ "\\n"\],\s*\[META_FILE, formatMeta\(\{[^}]*pricesRefreshed: today[^}]*\}\)\],?\s*\]\)/
+  );
+});
+
+test("refresh_prices dates the prices in data/meta.json, the one freshness file the UI reads", () => {
+  assert.match(src, /const META_FILE = "data\/meta\.json"/);
 });
