@@ -31,3 +31,25 @@ export function activeTabScrollLeft(m: TabStripMetrics): number | null {
   const centred = elContentLeft - (m.navWidth - m.elWidth) / 2;
   return Math.min(max, Math.max(0, centred));
 }
+
+export type TabStripFade = "none" | "start" | "end" | "both";
+
+/**
+ * Which edges of the strip still have tabs hidden behind them, so the CSS
+ * fades only those edges and never the tab that is fully in view. Sub-pixel
+ * scroll positions within 1px of an edge count as that edge.
+ */
+export function tabStripFade(m: {
+  scrollLeft: number;
+  scrollWidth: number;
+  clientWidth: number;
+}): TabStripFade {
+  const max = m.scrollWidth - m.clientWidth;
+  if (max <= 1) return "none";
+  const atStart = m.scrollLeft <= 1;
+  const atEnd = m.scrollLeft >= max - 1;
+  if (atStart && atEnd) return "none";
+  if (atStart) return "end";
+  if (atEnd) return "start";
+  return "both";
+}

@@ -61,7 +61,8 @@ test("the stats strip keeps two lead figures side by side and scales them throug
 test("form fields are at least 16px on phones so iOS Safari does not zoom on focus", () => {
   assert.match(declarations(phone, ".controls input"), /font-size:\s*16px/);
   assert.match(declarations(phone, ".controls select"), /font-size:\s*16px/);
-  assert.match(declarations(phone, ".controls input"), /flex-basis:\s*100%/);
+  // The search box shares its row with the Filters button and the view toggle (critique item 4).
+  assert.match(declarations(phone, ".controls input"), /flex:\s*1 1 0/);
   assert.match(declarations(phone, ".controls select"), /min-width:\s*0/);
 });
 
