@@ -1,3 +1,5 @@
+import { fmtEur } from "./format.ts";
+
 /**
  * Cardmarket has no derivable product URL for Japanese prints, so link to a
  * search on the printed set code ("M6a 001", "sv2a 063") instead.
@@ -9,4 +11,13 @@ export function cardmarketSearchUrl(code: string): string {
     "https://www.cardmarket.com/en/Pokemon/Products/Search?searchString=" +
     encodeURIComponent(code)
   );
+}
+
+/**
+ * Label of the wanted-card modal's primary button: "Open on Cardmarket · 78,72 €".
+ * `buyPrice` is the Cardmarket trend; a wants-binder card with no print chosen
+ * yet has none, so the label is just the verb.
+ */
+export function cardmarketButtonLabel(buyPrice: number | null): string {
+  return buyPrice == null ? "Open on Cardmarket" : `Open on Cardmarket · ${fmtEur(buyPrice)}`;
 }
