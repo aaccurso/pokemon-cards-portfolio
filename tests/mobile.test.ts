@@ -49,13 +49,13 @@ const base = css.replace(/@media[^{]+\{(?:[^{}]|\{[^{}]*\})*\}/g, "");
 const phone = mediaBlocks(css, "(max-width: 768px)");
 const tablet = mediaBlocks(css, "(max-width: 1190px)");
 
-test("stat cards fall to 3 columns on tablets and 2 on phones", () => {
-  assert.match(declarations(tablet, ".stats-grid"), /grid-template-columns:\s*repeat\(3,\s*1fr\)/);
-  assert.match(declarations(phone, ".stats-grid"), /grid-template-columns:\s*repeat\(2,\s*1fr\)/);
-  // The card scales through variables so the phone override is two lines, not a restyle.
-  assert.match(declarations(base, ".stat-card"), /padding:\s*var\(--stat-pad\)/);
-  assert.match(declarations(base, ".stat-card .value"), /font-size:\s*var\(--stat-value\)/);
-  assert.match(declarations(phone, ".stat-card"), /--stat-value:/);
+test("the stats strip keeps two lead figures side by side and scales them through a variable on phones", () => {
+  assert.match(declarations(base, ".stat-leads"), /grid-template-columns:\s*1fr 1fr/);
+  // The lead size goes through a variable so the phone override is one line, not a restyle.
+  assert.match(declarations(base, ".stat-lead .value"), /font-size:\s*var\(--stat-lead\)/);
+  assert.match(declarations(phone, ".stats-strip"), /--stat-lead:/);
+  // Values are ink, not accent: the accent is reserved for the active tab, the progress fill and actions.
+  assert.match(declarations(base, ".stat-lead .value"), /color:\s*var\(--text\)/);
 });
 
 test("form fields are at least 16px on phones so iOS Safari does not zoom on focus", () => {

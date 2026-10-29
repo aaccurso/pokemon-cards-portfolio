@@ -30,7 +30,7 @@ import { neededText } from "@/lib/needed";
 import { CardModal } from "./CardModal";
 import { CardTile } from "./CardTile";
 import { CardTable } from "./CardTable";
-import { StatsGrid } from "./StatsGrid";
+import { StatsStrip } from "./StatsStrip";
 import { FilterBar, EMPTY_FILTERS, Filters, ViewMode } from "./FilterBar";
 import { BinderTabs, BinderCounts } from "./BinderTabs";
 
@@ -288,9 +288,6 @@ export default function PortfolioTracker() {
 
   const pct = collectedPct(stats);
   const isMasterSet = binder.kind === "master-set";
-  // Value-weighted completion: Cardmarket trend of the owned priced cards over
-  // the whole set's value (item 1's marketValue); the honest master-set progress.
-  const valuePct = stats.budget === 0 ? 0 : Math.round((stats.marketValue / stats.budget) * 100);
   const showRarity = isMasterSet && rarityRows.length > 0;
 
   return (
@@ -321,15 +318,9 @@ export default function PortfolioTracker() {
           />
         </div>
         <span className="progress-label">{progressLabel(stats)}</span>
-        {isMasterSet && (
-          <span
-            className="progress-label value-progress"
-            title="Share of the set's single-card value you already own; the honest master-set progress"
-          >
-            value {fmt0(stats.marketValue)} / {fmt0(stats.budget)} &euro; ({valuePct}%)
-          </span>
-        )}
       </div>
+
+      <StatsStrip stats={stats} kind={binder.kind} onBuySingles={showSinglesShortlist} />
 
       {showRarity && (
         <div className="rarity-breakdown" aria-label="Completion by rarity">
@@ -353,15 +344,17 @@ export default function PortfolioTracker() {
                   {r.owned} / {r.total}
                 </span>
                 <span className="rarity-togo">
-                  {r.toComplete > 0 ? `to go ${fmt0(r.toComplete)} €` : ""}
+                  {r.toComplete <= 0
+                    ? ""
+                    : r.toComplete < 0.5
+                      ? "to go under 1 €"
+                      : `to go ${fmt0(r.toComplete)} €`}
                 </span>
               </button>
             );
           })}
         </div>
       )}
-
-      <StatsGrid stats={stats} kind={binder.kind} onBuySingles={showSinglesShortlist} />
 
       <FilterBar
         filters={filters}
