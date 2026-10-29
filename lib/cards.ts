@@ -98,6 +98,22 @@ export const rarityOrder: RarityLabel[] = [
   { rarity: "Classic Collection", label: "Classic" },
 ];
 
+/** Short display label for a tcgdex rarity ("Special illustration rare" -> "SAR"); unknown rarities stay raw. */
+export function rarityLabel(rarity: string): string {
+  return rarityOrder.find((r) => r.rarity === rarity)?.label ?? rarity;
+}
+
+/**
+ * The rarity chip a tile shows beside its number: the short label, or null
+ * when the card has no rarity or is a plain Common / Uncommon print ("None"),
+ * which is most of a master set and would put the same chip on most tiles.
+ * The modal shows every rarity through rarityLabel.
+ */
+export function tileRarity(c: Card): string | null {
+  if (!c.rarity || c.rarity === rarityOrder[0].rarity) return null;
+  return rarityLabel(c.rarity);
+}
+
 /**
  * Master-set binders show the slot index as printed on the card ("126/103",
  * or "126" without an official count). Wants binders show the Pokedex number

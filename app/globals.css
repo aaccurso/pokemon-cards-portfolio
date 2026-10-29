@@ -604,6 +604,23 @@ header .binder-description {
   font-variant-numeric: tabular-nums;
 }
 
+/* Rarity beside the number label (tile and modal): a quiet outlined chip,
+   neutral on purpose so the type badges keep the colour. */
+.rarity-chip {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 0 5px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
 .card-tile-name {
   font-size: 0.9rem;
   font-weight: 600;
