@@ -5,6 +5,7 @@
 import { cardsForBinder, resolveBinderId, getBinder } from "../../lib/binders.ts";
 import { buildOwnershipMap, rarityBreakdown } from "../../lib/purchases.ts";
 import { rarityOrder } from "../../lib/cards.ts";
+import { tableColumns } from "../../lib/tableColumns.ts";
 
 /** Strings that must never appear in rendered text on any page. */
 export const BAD_TOKENS = ["#null", "undefined", "NaN", "[object Object]", "Application error"];
@@ -56,7 +57,12 @@ export function buildPlan({ cards, purchases, binders }) {
   }
 
   const largest = perBinder.reduce((a, b) => (b.list.length > a.list.length ? b : a));
-  plan.push({ path: `/?binder=${largest.binder.id}&view=table`, expect: { h1: largest.binder.name, tbodyRows: largest.list.length } });
+  // Header labels come from the same column model the table renders (Set only across several sets, Rarity only when present).
+  const headers = ({ list, binder }) => tableColumns(list, binder).map((c) => c.label);
+  plan.push({
+    path: `/?binder=${largest.binder.id}&view=table`,
+    expect: { h1: largest.binder.name, tbodyRows: largest.list.length, tableHeaders: headers(largest) },
+  });
 
   // Rarity filter + breakdown (collector-insight item 2): for every master-set
   // binder with rarities, filter on the first known rarity present and expect
@@ -84,7 +90,7 @@ export function buildPlan({ cards, purchases, binders }) {
   if (master) {
     plan.push({
       path: `/?binder=${master.binder.id}&own=wanted&view=table&sort=buyPrice&dir=desc`,
-      expect: { h1: master.binder.name, tbodyRows: master.list.length - master.owned },
+      expect: { h1: master.binder.name, tbodyRows: master.list.length - master.owned, tableHeaders: headers(master) },
     });
   }
 
@@ -144,6 +150,15 @@ export function checkPage(page, html) {
     const tbody = first(html, /<tbody\b[^>]*>([\s\S]*?)<\/tbody>/i) ?? "";
     const got = (tbody.match(/<tr[\s>]/g) ?? []).length;
     if (got !== expect.tbodyRows) failures.push(`tbody rows: expected ${expect.tbodyRows}, got ${got}`);
+  }
+
+  if (expect.tableHeaders != null) {
+    const thead = first(html, /<thead\b[^>]*>([\s\S]*?)<\/thead>/i) ?? "";
+    // Sort glyphs (direction or the idle two-way arrow) are aria-hidden decoration, not part of the label.
+    const got = [...thead.matchAll(/<th\b[^>]*>([\s\S]*?)<\/th>/gi)].map((m) => textOf(m[1]).replace(/[▲▼⇅]/g, "").trim());
+    if (JSON.stringify(got) !== JSON.stringify(expect.tableHeaders)) {
+      failures.push(`table headers: expected [${expect.tableHeaders.join(", ")}], got [${got.join(", ")}]`);
+    }
   }
 
   if (expect.modalStatus != null) {

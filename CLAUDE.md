@@ -62,6 +62,7 @@ lib/
   shortlist.ts   - Cardmarket search URL for the card modal (pure)
   binders.ts     — Binder type, resolveBinderId/getBinder/cardsForBinder, validateData (pure)
   sort.ts        — SortKey/SortDir, SORT_KEYS + isSortKey (validates ?sort=), getSortValue, compareBySort nulls-last comparator (pure)
+  tableColumns.ts — tableColumns(binderCards, binder): the table's column list per binder (Set only across several sets, Rarity only when present; no Language or Variant) (pure)
   format.ts      — fmtEur, the one place prices are formatted for display (pure)
 data/
   binders.json    — binder registry
@@ -74,7 +75,7 @@ scripts/
 tests/            — node --test suites (*.test.ts), run with npm test
 ```
 
-`lib/cards.ts`, `lib/purchases.ts`, `lib/binders.ts`, `lib/sort.ts`, `lib/format.ts`, `lib/needed.ts`, `lib/print.ts`, `lib/shortlist.ts` must not import JSON or use the `@/` alias, so Node can run the tests directly. Imports between them use a relative path with an explicit `.ts` extension (`import { rarityOrder } from "./cards.ts"`), which both Node and the Next bundler resolve; keep the graph acyclic (`cards.ts` imports nothing from the others).
+`lib/cards.ts`, `lib/purchases.ts`, `lib/binders.ts`, `lib/sort.ts`, `lib/tableColumns.ts`, `lib/format.ts`, `lib/needed.ts`, `lib/print.ts`, `lib/shortlist.ts` must not import JSON or use the `@/` alias, so Node can run the tests directly. Imports between them use a relative path with an explicit `.ts` extension (`import { rarityOrder } from "./cards.ts"`), which both Node and the Next bundler resolve; keep the graph acyclic (`cards.ts` imports nothing from the others).
 
 ## Source of truth rule
 **The four `data/*.json` files are the only places collection data lives.** `lib/data.ts` is a thin loader — do not hand-edit card objects anywhere else. Never set `owned` or `pricePaid` on a card — those are derived.
@@ -126,7 +127,7 @@ Whenever a card is added or updated without a bundled image (e.g. a new set not 
 - Progress bar and a stats strip per binder. Two lead figures: cards collected with percent, and either the owned share of set value (master set, `setValuePct`) or worth vs paid (wants). Then two lines: what is left (`31 to go · 374,74 € as singles · 11 over 10 € = … · 20 under 10 € = …` with the "Buy as singles" link on master sets; `69 to go · 66 prints still to choose · 3 chosen, 109,04 € to buy` on wants binders; `Complete` when nothing is wanted) and where the money went (outlay, then pulled value and duplicates, or cards plus shipping and fees). Zero figures are hidden, values are ink not accent, nothing is red. The 10 € band boundary is `SINGLES_BAND_EUR` in `lib/purchases.ts`
 - One "All binders" line under the tabs: market value of everything owned vs the sum of all shipment totals
 - Grid view with 3D tilt + holographic hover; Japanese names under English ones
-- Table view with sortable columns (incl. derived `owned` and `pricePaid`)
+- Table view with sortable columns (incl. derived `owned` and `pricePaid`). Columns come from `tableColumns` in `lib/tableColumns.ts`: Own, #, Name, Type, Rarity (when any card has one), Code, Set (only when the binder spans several sets), Buy price, Paid; no Language or Variant column (CSV export still has every field). Headers are sentence case; every sortable header is a button with `aria-sort` and a visible glyph (direction when active, a muted two-way arrow otherwise). Below 768px rows render as two lines (own, number, name, buy price; then type, rarity, code, set, paid as a muted metadata line) and the header becomes a "Sort by" chip row. The smoke test checks the rendered header list against `tableColumns`.
 - Search by name, code, or set name; filter by type (incl. Trainer), set, ownership (All, Owned, Wanted, Duplicates; `own=dupes` in the URL)
 - Rarity filter (`?rarity=<tcgdex label>`), shown whenever a card in the binder has `rarity`; master-set binders also get a clickable per-rarity completion breakdown under the progress bar and a value-weighted progress figure in the header (`rarityBreakdown` in `lib/purchases.ts`, display order and labels in `rarityOrder` in `lib/cards.ts`)
 - Duplicates: `xN` copies badge beside the Pokeball (grid and table), and a "Trade list" export beside CSV (copy text or download CSV via `buildTradeList` in `lib/purchases.ts`), shown only when the binder has extra copies

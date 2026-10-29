@@ -53,6 +53,8 @@ test("buildPlan derives every URL and expectation from the data", () => {
   });
   assert.equal(byPath["/?binder=typo"].h1, "Pokedex 151 full-art");
   assert.equal(byPath["/?binder=m6a-30th&view=table"].tbodyRows, 4);
+  // Column set follows the binder: one set and rarities present, so no Set column and a Rarity one.
+  assert.deepEqual(byPath["/?binder=m6a-30th&view=table"].tableHeaders, ["Own", "#", "Name", "Type", "Rarity", "Code", "Buy price", "Paid"]);
   assert.deepEqual(byPath["/?card=ivysaur"], { h1: "Pokedex 151 full-art", modalStatus: "Owned" });
   // Print excludes owned cards: 2 unowned Kanto cards -> 1 grid sheet + 1 calibration sheet.
   assert.deepEqual(byPath["/print"], { h1: "Pokedex 151 full-art placeholder cards", printCards: 2, printSheets: 2 });
@@ -69,6 +71,7 @@ test("buildPlan derives every URL and expectation from the data", () => {
   assert.deepEqual(byPath["/?binder=m6a-30th&own=wanted&view=table&sort=buyPrice&dir=desc"], {
     h1: "30th CELEBRATION",
     tbodyRows: 3,
+    tableHeaders: ["Own", "#", "Name", "Type", "Rarity", "Code", "Buy price", "Paid"],
   });
   assert.equal(plan.length, 9);
 });
@@ -119,6 +122,13 @@ test("checkPage counts table rows, finds the modal status, and reads the print h
   const table = `<html><body><h1>X</h1><table><thead><tr><th>a</th></tr></thead><tbody><tr><td>1</td></tr><tr><td>2</td></tr></tbody></table></body></html>`;
   assert.deepEqual(checkPage({ path: "/t", expect: { h1: "X", tbodyRows: 2 } }, table), []);
   assert.equal(checkPage({ path: "/t", expect: { h1: "X", tbodyRows: 3 } }, table).length, 1);
+
+  // Header labels are read without the sort glyphs; the comparison is on the whole ordered list.
+  const headed = `<html><body><h1>X</h1><table><thead><tr><th aria-sort="none"><button class="th-sort">Own<span class="sort-indicator idle">⇅</span></button></th><th>Type</th><th aria-sort="descending"><button class="th-sort">Buy price<span class="sort-indicator">▼</span></button></th></tr></thead><tbody><tr><td>1</td></tr></tbody></table></body></html>`;
+  assert.deepEqual(checkPage({ path: "/t", expect: { h1: "X", tableHeaders: ["Own", "Type", "Buy price"] } }, headed), []);
+  const wrong = checkPage({ path: "/t", expect: { h1: "X", tableHeaders: ["Own", "Type", "Set", "Buy price"] } }, headed);
+  assert.equal(wrong.length, 1);
+  assert.match(wrong[0], /headers/);
 
   const modal = `<html><body><h1>X</h1><div class="modal-content"><dl><dd><span class="status-owned">Owned</span></dd></dl></div></body></html>`;
   assert.deepEqual(checkPage({ path: "/m", expect: { h1: "X", modalStatus: "Owned" } }, modal), []);
