@@ -87,7 +87,26 @@ export type CollectionStats = {
   marketValueAllCopies: number;
   /** Owned cards with buyPrice == null; they contribute nothing to marketValue. */
   unpricedOwned: number;
+  /** Wanted cards with a buyPrice; toComplete is their sum. */
+  wantedPriced: number;
+  /** Wanted cards without a buyPrice. In a wants binder: prints still to choose. */
+  wantedUnpriced: number;
+  /** Wanted priced cards at or above SINGLES_BAND_EUR: the expensive part of toComplete. */
+  toCompleteOver: PriceBand;
+  /** Wanted priced cards below SINGLES_BAND_EUR. */
+  toCompleteUnder: PriceBand;
 };
+
+export type PriceBand = { count: number; total: number };
+
+/** Boundary between "cheap filler" and "the cards that cost real money" when finishing as singles. */
+export const SINGLES_BAND_EUR = 10;
+
+/** Owned share of the set's single-card value, whole percent; null when nothing is priced. */
+export function setValuePct(s: Pick<CollectionStats, "marketValue" | "budget">): number | null {
+  if (s.budget === 0) return null;
+  return Math.round((s.marketValue / s.budget) * 100);
+}
 
 /** Rounded completion percent; 0 for an empty binder. */
 export function collectedPct(s: Pick<CollectionStats, "owned" | "total">): number {
@@ -116,6 +135,10 @@ export function computeStats(
   let marketValue = 0;
   let marketValueAllCopies = 0;
   let unpricedOwned = 0;
+  let wantedPriced = 0;
+  let wantedUnpriced = 0;
+  const toCompleteOver: PriceBand = { count: 0, total: 0 };
+  const toCompleteUnder: PriceBand = { count: 0, total: 0 };
 
   for (const c of cards) {
     const o = ownership.get(c.id);
@@ -132,7 +155,13 @@ export function computeStats(
         marketValueAllCopies += c.buyPrice * o.purchaseCount;
       } else {
         toComplete += c.buyPrice;
+        wantedPriced++;
+        const band = c.buyPrice >= SINGLES_BAND_EUR ? toCompleteOver : toCompleteUnder;
+        band.count++;
+        band.total += c.buyPrice;
       }
+    } else if (!o) {
+      wantedUnpriced++;
     }
     if (o && o.pricePaid != null) {
       spentOnCards += o.pricePaid;
@@ -159,6 +188,10 @@ export function computeStats(
     marketValue,
     marketValueAllCopies,
     unpricedOwned,
+    wantedPriced,
+    wantedUnpriced,
+    toCompleteOver,
+    toCompleteUnder,
   };
 }
 

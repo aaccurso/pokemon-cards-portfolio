@@ -12,8 +12,6 @@
      --ring-inset is the same ring drawn inside, for buttons under an overflow: hidden parent. */
   --ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
   --ring-inset: inset 0 0 0 2px var(--bg), inset 0 0 0 4px var(--accent);
-  --stat-pad: 1.25rem;
-  --stat-value: 1.75rem;
 }
 
 * {
@@ -71,31 +69,66 @@ header .binder-description {
   border-bottom-color: var(--accent);
 }
 
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-
-.stat-card {
+/* Collection summary strip: two lead figures, then two quiet lines.
+   Values are ink, not accent; the accent stays on the active tab, the
+   progress fill and actions, so the two leads are the only loud numbers. */
+.stats-strip {
+  --stat-lead: 2rem;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: var(--stat-pad);
-  text-align: center;
+  padding: 1.1rem 1.25rem 1rem;
+  margin-bottom: 2rem;
 }
 
-.stat-card .value {
-  font-size: var(--stat-value);
+.stat-leads {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 2rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.stat-lead .value {
+  font-size: var(--stat-lead);
   font-weight: 700;
-  color: var(--accent);
+  line-height: 1.1;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
 }
 
-.stat-card .label {
+.stat-lead .value-sub {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.stat-lead .label {
   font-size: 0.8rem;
   color: var(--text-muted);
-  margin-top: 0.25rem;
+  margin-top: 0.3rem;
+}
+
+.stat-lines {
+  list-style: none;
+  margin: 0.85rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-lines strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.stat-lines .stat-link {
+  margin: 0 0 0 0.6rem;
+  font-size: 0.85rem;
 }
 
 .progress {
@@ -126,11 +159,6 @@ header .binder-description {
   background: linear-gradient(90deg, #f8d030, #78c850);
   border-radius: 999px;
   transition: width 0.5s ease;
-}
-
-/* Value-weighted completion next to the count label in the progress row */
-.progress .value-progress {
-  color: var(--text-muted);
 }
 
 /* Completion by rarity (master-set binders): one clickable row per rarity */
@@ -1682,24 +1710,6 @@ header .binder-description {
   }
 }
 
-/* Stat sub-value (the "/ 151" next to a headline number) */
-.stat-card .value-sub {
-  font-size: 1rem;
-  color: var(--text-muted);
-  font-weight: 500;
-}
-
-/* Stat sub-line under the label ("+330,61 EUR vs paid", "value = 123%") */
-.stat-card .stat-sub {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  margin-top: 0.35rem;
-  font-variant-numeric: tabular-nums;
-}
-.stat-card .stat-sub.negative {
-  color: #e07070;
-}
-
 /* One-line "all binders" value summary under the tab strip */
 .binder-summary {
   font-size: 0.8rem;
@@ -2048,13 +2058,6 @@ header .binder-description {
   font-size: 0.85rem;
 }
 
-/* Tablet and half-screen desktop: six stat cards in two rows, no orphan. */
-@media (max-width: 1190px) {
-  .stats-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
 @media (max-width: 768px) {
   /* Flex column so .controls-secondary can be reordered below the results. */
   .container {
@@ -2063,15 +2066,18 @@ header .binder-description {
     padding: 1rem 0.5rem;
   }
 
-  .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.6rem;
+  .stats-strip {
+    --stat-lead: 1.5rem;
+    padding: 0.9rem 1rem 0.85rem;
     margin-bottom: 1.25rem;
   }
 
-  .stat-card {
-    --stat-pad: 0.85rem;
-    --stat-value: 1.35rem;
+  .stat-leads {
+    gap: 0.75rem 1rem;
+  }
+
+  .stat-lines {
+    font-size: 0.85rem;
   }
 
   .controls-row {

@@ -48,7 +48,7 @@ app/
 components/
   PortfolioTracker.tsx — main dashboard: URL-backed state, derived data, composition of the parts below
   BinderTabs.tsx       — binder selector pills with owned / total counts
-  StatsGrid.tsx        — the six stat cards (props: stats, kind)
+  StatsStrip.tsx       — collection summary: two lead figures plus two "what is left / where the money went" lines (props: stats, kind, onBuySingles?)
   FilterBar.tsx        — search, type/set/ownership selects, illustration toggle, view toggle, Share/CSV; exports the Filters type
   CardTable.tsx        — table view with sortable headers and hover preview
   CardTile.tsx         — grid-view 3D-tilt holo card
@@ -123,7 +123,7 @@ Whenever a card is added or updated without a bundled image (e.g. a new set not 
 
 ## Current Features
 - Binder tabs (`?binder=<id>` in the URL, default `kanto-151`); switching resets filters and sort
-- Progress bar and stats grid per binder: Collected, Spent on cards / Pulled value, Value (N owned) with gain vs paid / Duplicates, To complete, Budget / Set value (N priced), Total outlay with value / outlay percentage
+- Progress bar and a stats strip per binder. Two lead figures: cards collected with percent, and either the owned share of set value (master set, `setValuePct`) or worth vs paid (wants). Then two lines: what is left (`31 to go · 374,74 € as singles · 11 over 10 € = … · 20 under 10 € = …` with the "Buy as singles" link on master sets; `69 to go · 66 prints still to choose · 3 chosen, 109,04 € to buy` on wants binders; `Complete` when nothing is wanted) and where the money went (outlay, then pulled value and duplicates, or cards plus shipping and fees). Zero figures are hidden, values are ink not accent, nothing is red. The 10 € band boundary is `SINGLES_BAND_EUR` in `lib/purchases.ts`
 - One "All binders" line under the tabs: market value of everything owned vs the sum of all shipment totals
 - Grid view with 3D tilt + holographic hover; Japanese names under English ones
 - Table view with sortable columns (incl. derived `owned` and `pricePaid`)
@@ -133,7 +133,7 @@ Whenever a card is added or updated without a bundled image (e.g. a new set not 
 - Pokemon type badges with canonical game colors; neutral badge for Trainers
 - Variant badges (ex, GX, V, VMAX, VSTAR, BREAK, LEGEND, Alolan/Galarian/Hisuian/Mega forms)
 - CSV download of the active binder
-- Finish-as-singles shortlist: "Buy as singles" on the master-set "To complete as singles" tile (wanted, table, buyPrice desc), "Copy as text" when the Wanted filter is on (`Need (N): 003 007 ...`, Pokedex number + name for wants binders), Cardmarket search link in the card modal
+- Finish-as-singles shortlist: "Buy as singles" on the master-set "to go" line of the stats strip (wanted, table, buyPrice desc), "Copy as text" when the Wanted filter is on (`Need (N): 003 007 ...`, Pokedex number + name for wants binders), Cardmarket search link in the card modal
 - Print page (`/print?binder=<id>`) for blank placeholder cards, sorted by the binder's sort key; `&ink=1` is the ink saver (no card photo, outlined badges and watermark, same geometry)
 - Needed list (`/needed?binder=<id>`): one-screen or one-A4 view of the missing numbers (master sets as a 001 to 165 grid with secrets in their own block, wants binders as `#025 Pikachu` rows), owned cells dimmed, plus a "Copy as text" button that emits `Need (62): 003 007 ...` for seller chats
 

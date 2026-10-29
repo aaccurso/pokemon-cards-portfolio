@@ -12,15 +12,15 @@ import path from "node:path";
 const root = path.resolve(import.meta.dirname, "..");
 const read = (rel: string) => fs.readFileSync(path.join(root, rel), "utf8");
 
-const statsGrid = read("components/StatsGrid.tsx");
+const statsGrid = read("components/StatsStrip.tsx");
 const filterBar = read("components/FilterBar.tsx");
 const tracker = read("components/PortfolioTracker.tsx");
 const modal = read("components/CardModal.tsx");
 const css = read("app/globals.css").replace(/\/\*[\s\S]*?\*\//g, "");
 
-test("StatsGrid takes an optional onBuySingles and renders the stat-link button only for a master set with wanted cards", () => {
-  assert.match(statsGrid, /onBuySingles\?: \(\) => void/, "StatsGrid should declare onBuySingles as optional");
-  assert.match(statsGrid, /className="stat-link"/, "StatsGrid should render the .stat-link button");
+test("StatsStrip takes an optional onBuySingles and renders the stat-link button only for a master set with wanted cards", () => {
+  assert.match(statsGrid, /onBuySingles\?: \(\) => void/, "StatsStrip should declare onBuySingles as optional");
+  assert.match(statsGrid, /className="stat-link"/, "StatsStrip should render the .stat-link button");
   assert.match(
     statsGrid,
     /isMasterSet && stats\.wanted > 0 && onBuySingles && \(/,
