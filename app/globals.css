@@ -163,6 +163,17 @@ header .binder-description {
   transition: width 0.5s ease;
 }
 
+/* Freshness of every trend price on the page, from data/meta.json */
+.prices-stamp {
+  flex: 0 0 auto;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  padding-left: 0.75rem;
+  border-left: 1px solid var(--border);
+}
+
 /* Completion by rarity (master-set binders): one clickable row per rarity */
 .rarity-breakdown {
   display: flex;
@@ -263,6 +274,58 @@ header .binder-description {
 .controls-secondary {
   display: flex;
   gap: 0.75rem;
+}
+
+/* Tools row under the controls: the two pages and the two exports as quiet
+   text links, dot-separated, so the filter row stays the only strip of buttons. */
+.tools-row {
+  flex-basis: 100%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.75rem;
+  margin-top: -0.25rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.tools-label {
+  margin-right: 0.25rem;
+}
+
+.tools-row > :not(.tools-label) + :not(.tools-label)::before {
+  content: "·";
+  margin-right: 0.75rem;
+  color: var(--text-muted);
+}
+
+.tool-link {
+  display: inline-block;
+  background: none;
+  border: none;
+  padding: 0.15rem 0;
+  margin: 0;
+  font: inherit;
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.tool-link:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.tool-link:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+  border-radius: 2px;
+}
+
+.trade-menu[open] > summary.tool-link {
+  border-bottom-color: var(--accent);
 }
 
 .controls input,
@@ -2110,6 +2173,27 @@ header .binder-description {
     order: 1;
     justify-content: center;
     margin-top: 0.75rem;
+  }
+
+  /* Below the results with the other secondary controls, so the first card
+     stays as high as it was. */
+  .tools-row {
+    order: 1;
+    justify-content: center;
+    margin-top: 0.75rem;
+  }
+
+  /* The stamp wraps under the bar instead of squeezing it. */
+  .progress {
+    flex-wrap: wrap;
+    gap: 0.5rem 0.75rem;
+  }
+
+  .prices-stamp {
+    flex-basis: 100%;
+    padding-left: 0;
+    border-left: none;
+    text-align: right;
   }
 
   .table-wrap {
