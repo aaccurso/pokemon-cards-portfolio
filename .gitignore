@@ -42,3 +42,7 @@ next-env.d.ts
 # editor
 .vscode/
 .idea/
+
+# claude code: personal settings and agent worktrees stay local
+.claude/settings.local.json
+.claude/worktrees/
