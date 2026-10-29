@@ -1,1008 +1,1317 @@
 {
   "abra": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.1,"avg30":0.34,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.1,"avg30":0.34,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.12,"avg7":0.08,"avg30":0.21,"low":0.02}
   ],
   "alakazam": [
     {"date":"2026-10-23","source":"manual","price":4},
-    {"date":"2026-10-23","source":"cardmarket","trend":2.86,"avg7":3.77,"avg30":4.11,"low":3}
+    {"date":"2026-10-23","source":"cardmarket","trend":2.86,"avg7":3.77,"avg30":4.11,"low":3},
+    {"date":"2026-10-29","source":"cardmarket","trend":4.74,"avg7":4.51,"avg30":4.04,"low":2.5}
   ],
   "alolan-dugtrio": [
     {"date":"2026-10-23","source":"manual","price":1.5},
-    {"date":"2026-10-23","source":"cardmarket","trend":2.6,"avg7":2.36,"avg30":2.97,"low":1}
+    {"date":"2026-10-23","source":"cardmarket","trend":2.6,"avg7":2.36,"avg30":2.97,"low":1},
+    {"date":"2026-10-29","source":"cardmarket","trend":1.27,"avg7":2.3,"avg30":2.88,"low":1}
   ],
   "alolan-golem-gx": [
     {"date":"2026-10-23","source":"manual","price":10},
-    {"date":"2026-10-23","source":"cardmarket","trend":6.14,"avg7":7.03,"avg30":7.7,"low":2.9}
+    {"date":"2026-10-23","source":"cardmarket","trend":6.14,"avg7":7.03,"avg30":7.7,"low":2.9},
+    {"date":"2026-10-29","source":"cardmarket","trend":6.14,"avg7":7.03,"avg30":7.7,"low":2.9}
   ],
   "arbok": [
     {"date":"2026-10-23","source":"manual","price":3.5},
-    {"date":"2026-10-23","source":"cardmarket","trend":4.76,"avg7":4.86,"avg30":5.82,"low":3.8}
+    {"date":"2026-10-23","source":"cardmarket","trend":4.76,"avg7":4.86,"avg30":5.82,"low":3.8},
+    {"date":"2026-10-29","source":"cardmarket","trend":5.07,"avg7":5.91,"avg30":5.95,"low":3.3}
   ],
   "beedrill-v": [
     {"date":"2026-10-23","source":"manual","price":40},
-    {"date":"2026-10-23","source":"cardmarket","trend":38.64,"avg7":42.99,"avg30":44.46,"low":29.58}
+    {"date":"2026-10-23","source":"cardmarket","trend":38.64,"avg7":42.99,"avg30":44.46,"low":29.58},
+    {"date":"2026-10-29","source":"cardmarket","trend":41.07,"avg7":42.55,"avg30":41.75,"low":29.58}
   ],
   "bellsprout": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.07,"avg7":0.04,"avg30":0.09,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.07,"avg7":0.04,"avg30":0.09,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.03,"avg7":0.04,"avg30":0.09,"low":0.02}
   ],
   "bulbasaur": [
     {"date":"2026-10-23","source":"manual","price":9},
-    {"date":"2026-10-23","source":"cardmarket","trend":6.99,"avg7":6.69,"avg30":7.25,"low":5}
+    {"date":"2026-10-23","source":"cardmarket","trend":6.99,"avg7":6.69,"avg30":7.25,"low":5},
+    {"date":"2026-10-29","source":"cardmarket","trend":8,"avg7":8.33,"avg30":7.51,"low":4.98}
   ],
   "butterfree": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.05,"avg7":0.11,"avg30":0.93,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.05,"avg7":0.11,"avg30":0.93,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":0.05,"avg30":0.96,"low":0.02}
   ],
   "caterpie": [
     {"date":"2026-10-23","source":"manual","price":3.5},
-    {"date":"2026-10-23","source":"cardmarket","trend":7.93,"avg7":8.08,"avg30":6.74,"low":4}
+    {"date":"2026-10-23","source":"cardmarket","trend":7.93,"avg7":8.08,"avg30":6.74,"low":4},
+    {"date":"2026-10-29","source":"cardmarket","trend":6.37,"avg7":5.43,"avg30":6.75,"low":4.49}
   ],
   "chansey": [
     {"date":"2026-10-23","source":"manual","price":15},
-    {"date":"2026-10-23","source":"cardmarket","trend":18.57,"avg7":19.29,"avg30":17.11,"low":5.99}
+    {"date":"2026-10-23","source":"cardmarket","trend":18.57,"avg7":19.29,"avg30":17.11,"low":5.99},
+    {"date":"2026-10-29","source":"cardmarket","trend":15.16,"avg7":15.09,"avg30":16.85,"low":10}
   ],
   "charizard": [
     {"date":"2026-10-23","source":"manual","price":15},
-    {"date":"2026-10-23","source":"cardmarket","trend":19.22,"avg7":21.62,"avg30":21.99,"low":10}
+    {"date":"2026-10-23","source":"cardmarket","trend":19.22,"avg7":21.62,"avg30":21.99,"low":10},
+    {"date":"2026-10-29","source":"cardmarket","trend":18.64,"avg7":22.47,"avg30":19.92,"low":12}
   ],
   "charmander": [
     {"date":"2026-10-23","source":"manual","price":20},
-    {"date":"2026-10-23","source":"cardmarket","trend":24.11,"avg7":23.2,"avg30":25.53,"low":16}
+    {"date":"2026-10-23","source":"cardmarket","trend":24.11,"avg7":23.2,"avg30":25.53,"low":16},
+    {"date":"2026-10-29","source":"cardmarket","trend":24.05,"avg7":23.95,"avg30":25.4,"low":14.9}
   ],
   "charmeleon": [
     {"date":"2026-10-23","source":"manual","price":15},
-    {"date":"2026-10-23","source":"cardmarket","trend":16.22,"avg7":15.36,"avg30":17.8,"low":8}
+    {"date":"2026-10-23","source":"cardmarket","trend":16.22,"avg7":15.36,"avg30":17.8,"low":8},
+    {"date":"2026-10-29","source":"cardmarket","trend":16.47,"avg7":17.61,"avg30":18.1,"low":10}
   ],
   "clefairy": [
     {"date":"2026-10-23","source":"manual","price":10},
-    {"date":"2026-10-23","source":"cardmarket","trend":7.07,"avg7":7.33,"avg30":7.98,"low":6}
+    {"date":"2026-10-23","source":"cardmarket","trend":7.07,"avg7":7.33,"avg30":7.98,"low":6},
+    {"date":"2026-10-29","source":"cardmarket","trend":7.45,"avg7":7.35,"avg30":7.64,"low":5}
   ],
   "cloyster": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.12,"avg7":0.1,"avg30":0.11,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.12,"avg7":0.1,"avg30":0.11,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.08,"avg7":0.07,"avg30":0.11,"low":0.02}
   ],
   "crobat": [
     {"date":"2026-10-23","source":"manual","price":3.25},
-    {"date":"2026-10-23","source":"cardmarket","trend":2.15,"avg7":2.23,"avg30":2.35,"low":0.5}
+    {"date":"2026-10-23","source":"cardmarket","trend":2.15,"avg7":2.23,"avg30":2.35,"low":0.5},
+    {"date":"2026-10-29","source":"cardmarket","trend":1.98,"avg7":2.17,"avg30":2.24,"low":0.8}
   ],
   "cubone": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.1,"avg7":0.12,"avg30":0.08,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.1,"avg7":0.12,"avg30":0.08,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.16,"avg7":0.14,"avg30":0.09,"low":0.02}
   ],
   "dewgong": [
     {"date":"2026-10-23","source":"manual","price":2},
-    {"date":"2026-10-23","source":"cardmarket","trend":1.43,"avg7":2.08,"avg30":2.62,"low":0.99}
+    {"date":"2026-10-23","source":"cardmarket","trend":1.43,"avg7":2.08,"avg30":2.62,"low":0.99},
+    {"date":"2026-10-29","source":"cardmarket","trend":1.77,"avg7":2.39,"avg30":2.45,"low":0.97}
   ],
   "diglett": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.25,"avg7":0.27,"avg30":0.14,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.25,"avg7":0.27,"avg30":0.14,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.32,"avg7":0.34,"avg30":0.14,"low":0.02}
   ],
   "ditto": [
     {"date":"2026-10-23","source":"manual","price":4},
-    {"date":"2026-10-23","source":"cardmarket","trend":6.49,"avg7":6.13,"avg30":6.83,"low":4.95}
+    {"date":"2026-10-23","source":"cardmarket","trend":6.49,"avg7":6.13,"avg30":6.83,"low":4.95},
+    {"date":"2026-10-29","source":"cardmarket","trend":6.37,"avg7":6.07,"avg30":6.75,"low":3.95}
   ],
   "dodrio": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.16,"avg7":0.16,"avg30":0.15,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.16,"avg7":0.16,"avg30":0.15,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.33,"avg7":0.22,"avg30":0.16,"low":0.02}
   ],
   "doduo": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.08,"avg7":0.09,"avg30":0.1,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.08,"avg7":0.09,"avg30":0.1,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.56,"avg7":0.09,"avg30":0.1,"low":0.02}
   ],
   "dragonair": [
     {"date":"2026-10-23","source":"manual","price":10},
-    {"date":"2026-10-23","source":"cardmarket","trend":11.55,"avg7":11.51,"avg30":13.22,"low":9}
+    {"date":"2026-10-23","source":"cardmarket","trend":11.55,"avg7":11.51,"avg30":13.22,"low":9},
+    {"date":"2026-10-29","source":"cardmarket","trend":11.48,"avg7":12.21,"avg30":12.85,"low":8.99}
   ],
   "dratini": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.07,"avg7":0.05,"avg30":0.07,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.07,"avg7":0.05,"avg30":0.07,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.31,"avg7":0.04,"avg30":0.07,"low":0.02}
   ],
   "drowzee": [
     {"date":"2026-10-23","source":"manual","price":12},
-    {"date":"2026-10-23","source":"cardmarket","trend":12.82,"avg7":13.82,"avg30":15.52,"low":10}
+    {"date":"2026-10-23","source":"cardmarket","trend":12.82,"avg7":13.82,"avg30":15.52,"low":10},
+    {"date":"2026-10-29","source":"cardmarket","trend":16.48,"avg7":17.43,"avg30":15.39,"low":10}
   ],
   "eevee": [
     {"date":"2026-10-23","source":"manual","price":25},
-    {"date":"2026-10-23","source":"cardmarket","trend":30.47,"avg7":39.26,"avg30":37.65,"low":20.5}
+    {"date":"2026-10-23","source":"cardmarket","trend":30.47,"avg7":39.26,"avg30":37.65,"low":20.5},
+    {"date":"2026-10-29","source":"cardmarket","trend":33.54,"avg7":31.69,"avg30":37.21,"low":20.5}
   ],
   "electabuzz": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.05,"avg7":0.05,"avg30":0.07,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.05,"avg7":0.05,"avg30":0.07,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.03,"avg7":0.05,"avg30":0.07,"low":0.02}
   ],
   "electrode": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.15,"avg7":0.12,"avg30":0.14,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.15,"avg7":0.12,"avg30":0.14,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.18,"avg7":0.13,"avg30":0.14,"low":0.02}
   ],
   "exeggcute": [
     {"date":"2026-10-23","source":"manual","price":2},
-    {"date":"2026-10-23","source":"cardmarket","trend":2.79,"avg7":2.58,"avg30":2.79,"low":1.5}
+    {"date":"2026-10-23","source":"cardmarket","trend":2.79,"avg7":2.58,"avg30":2.79,"low":1.5},
+    {"date":"2026-10-29","source":"cardmarket","trend":2.45,"avg7":2.26,"avg30":2.74,"low":1}
   ],
   "exeggutor": [
     {"date":"2026-10-23","source":"manual","price":2},
-    {"date":"2026-10-23","source":"cardmarket","trend":2.04,"avg7":2,"avg30":2.32,"low":0.55}
+    {"date":"2026-10-23","source":"cardmarket","trend":2.04,"avg7":2,"avg30":2.32,"low":0.55},
+    {"date":"2026-10-29","source":"cardmarket","trend":2.15,"avg7":3.16,"avg30":2.62,"low":1.2}
   ],
   "farfetchd": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.1,"avg7":0.23,"avg30":0.13,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.1,"avg7":0.23,"avg30":0.13,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.09,"avg7":0.23,"avg30":0.13,"low":0.02}
   ],
   "fearow": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.06,"avg7":0.04,"avg30":0.1,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.06,"avg7":0.04,"avg30":0.1,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.04,"avg7":0.04,"avg30":0.1,"low":0.02}
   ],
   "flareon": [
     {"date":"2026-10-23","source":"manual","price":12},
-    {"date":"2026-10-23","source":"cardmarket","trend":18.74,"avg7":15.86,"avg30":16.97,"low":8.99}
+    {"date":"2026-10-23","source":"cardmarket","trend":18.74,"avg7":15.86,"avg30":16.97,"low":8.99},
+    {"date":"2026-10-29","source":"cardmarket","trend":13.32,"avg7":12.56,"avg30":16.6,"low":9}
   ],
   "galarian-articuno": [
     {"date":"2026-10-23","source":"manual","price":3},
-    {"date":"2026-10-23","source":"cardmarket","trend":3.21,"avg7":3.23,"avg30":3.45,"low":2}
+    {"date":"2026-10-23","source":"cardmarket","trend":3.21,"avg7":3.23,"avg30":3.45,"low":2},
+    {"date":"2026-10-29","source":"cardmarket","trend":3.95,"avg7":3.04,"avg30":3.4,"low":2}
   ],
   "galarian-moltres": [
     {"date":"2026-10-23","source":"manual","price":10},
-    {"date":"2026-10-23","source":"cardmarket","trend":17.5,"avg7":16.59,"avg30":13.39,"low":2.9}
+    {"date":"2026-10-23","source":"cardmarket","trend":17.5,"avg7":16.59,"avg30":13.39,"low":2.9},
+    {"date":"2026-10-29","source":"cardmarket","trend":17.19,"avg7":12.05,"avg30":12.92,"low":2.9}
   ],
   "galarian-zapdos": [
     {"date":"2026-10-23","source":"manual","price":2},
-    {"date":"2026-10-23","source":"cardmarket","trend":1.81,"avg7":1.78,"avg30":2,"low":0.99}
+    {"date":"2026-10-23","source":"cardmarket","trend":1.81,"avg7":1.78,"avg30":2,"low":0.99},
+    {"date":"2026-10-29","source":"cardmarket","trend":1.62,"avg7":1.52,"avg30":1.91,"low":1}
   ],
   "gastly": [
     {"date":"2026-10-23","source":"manual","price":22},
-    {"date":"2026-10-23","source":"cardmarket","trend":29.45,"avg7":29.88,"avg30":31.88,"low":22.9}
+    {"date":"2026-10-23","source":"cardmarket","trend":29.45,"avg7":29.88,"avg30":31.88,"low":22.9},
+    {"date":"2026-10-29","source":"cardmarket","trend":29.56,"avg7":30.53,"avg30":31.03,"low":22}
   ],
   "gengar": [
     {"date":"2026-10-23","source":"manual","price":24},
-    {"date":"2026-10-23","source":"cardmarket","trend":40.35,"avg7":36.8,"avg30":38.7,"low":20}
+    {"date":"2026-10-23","source":"cardmarket","trend":40.35,"avg7":36.8,"avg30":38.7,"low":20},
+    {"date":"2026-10-29","source":"cardmarket","trend":29.59,"avg7":33.86,"avg30":37.49,"low":19.99}
   ],
   "geodude": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.2,"avg7":0.33,"avg30":0.13,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.2,"avg7":0.33,"avg30":0.13,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.17,"avg7":0.32,"avg30":0.14,"low":0.02}
   ],
   "gloom": [
     {"date":"2026-10-23","source":"manual","price":4},
-    {"date":"2026-10-23","source":"cardmarket","trend":6.14,"avg7":7.24,"avg30":5.87,"low":2.5}
+    {"date":"2026-10-23","source":"cardmarket","trend":6.14,"avg7":7.24,"avg30":5.87,"low":2.5},
+    {"date":"2026-10-29","source":"cardmarket","trend":5.09,"avg7":5.42,"avg30":5.94,"low":2.7}
   ],
   "golbat": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.49,"avg7":0.1,"avg30":0.45,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.49,"avg7":0.1,"avg30":0.45,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.48,"avg7":0.1,"avg30":0.45,"low":0.02}
   ],
   "golduck": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.16,"avg7":0.06,"avg30":0.17,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.16,"avg7":0.06,"avg30":0.17,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.08,"avg7":0.06,"avg30":0.17,"low":0.02}
   ],
   "graveler": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.06,"avg7":0.07,"avg30":0.07,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.06,"avg7":0.07,"avg30":0.07,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.29,"avg7":0.32,"avg30":0.11,"low":0.02}
   ],
   "grimer": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.04,"avg7":0.03,"avg30":0.06,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.04,"avg7":0.03,"avg30":0.06,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.3,"avg7":0.34,"avg30":0.11,"low":0.02}
   ],
   "gyarados-ex": [
     {"date":"2026-10-23","source":"manual","price":10},
-    {"date":"2026-10-23","source":"cardmarket","trend":8.88,"avg7":9.54,"avg30":9.02,"low":5.9}
+    {"date":"2026-10-23","source":"cardmarket","trend":8.88,"avg7":9.54,"avg30":9.02,"low":5.9},
+    {"date":"2026-10-29","source":"cardmarket","trend":9.04,"avg7":9.54,"avg30":9.02,"low":5.9}
   ],
   "hisuian-arcanine": [
     {"date":"2026-10-23","source":"manual","price":2},
-    {"date":"2026-10-23","source":"cardmarket","trend":2.91,"avg7":2.84,"avg30":3.04,"low":1.55}
+    {"date":"2026-10-23","source":"cardmarket","trend":2.91,"avg7":2.84,"avg30":3.04,"low":1.55},
+    {"date":"2026-10-29","source":"cardmarket","trend":2.34,"avg7":2.48,"avg30":2.8,"low":1.55}
   ],
   "hisuian-growlithe": [
     {"date":"2026-10-23","source":"manual","price":5},
-    {"date":"2026-10-23","source":"cardmarket","trend":5.78,"avg7":5.59,"avg30":5.86,"low":2.5}
+    {"date":"2026-10-23","source":"cardmarket","trend":5.78,"avg7":5.59,"avg30":5.86,"low":2.5},
+    {"date":"2026-10-29","source":"cardmarket","trend":5.38,"avg7":5.38,"avg30":5.69,"low":4.5}
   ],
   "hisuian-voltorb": [
     {"date":"2026-10-23","source":"manual","price":1.25},
-    {"date":"2026-10-23","source":"cardmarket","trend":1.77,"avg7":1.57,"avg30":1.65,"low":0.99}
+    {"date":"2026-10-23","source":"cardmarket","trend":1.77,"avg7":1.57,"avg30":1.65,"low":0.99},
+    {"date":"2026-10-29","source":"cardmarket","trend":2.26,"avg7":2.86,"avg30":1.95,"low":0.89}
   ],
   "hitmonchan": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.07,"avg7":0.07,"avg30":0.08,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.07,"avg7":0.07,"avg30":0.08,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.31,"avg7":0.28,"avg30":0.12,"low":0.02}
   ],
   "hitmonlee": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.07,"avg7":0.06,"avg30":0.08,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.07,"avg7":0.06,"avg30":0.08,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.06,"avg7":0.07,"avg30":0.08,"low":0.02}
   ],
   "horsea": [
     {"date":"2026-10-23","source":"manual","price":6},
-    {"date":"2026-10-23","source":"cardmarket","trend":7.54,"avg7":7.93,"avg30":7.34,"low":4}
+    {"date":"2026-10-23","source":"cardmarket","trend":7.54,"avg7":7.93,"avg30":7.34,"low":4},
+    {"date":"2026-10-29","source":"cardmarket","trend":8.25,"avg7":8.7,"avg30":7.4,"low":2}
   ],
   "hypno": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.05,"avg30":0.08,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.05,"avg30":0.08,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.03,"avg7":0.04,"avg30":0.08,"low":0.02}
   ],
   "ivysaur": [
     {"date":"2026-10-23","source":"manual","price":5},
-    {"date":"2026-10-23","source":"cardmarket","trend":5.48,"avg7":5.08,"avg30":5.58,"low":3.5}
+    {"date":"2026-10-23","source":"cardmarket","trend":5.48,"avg7":5.08,"avg30":5.58,"low":3.5},
+    {"date":"2026-10-29","source":"cardmarket","trend":6.03,"avg7":6.29,"avg30":5.79,"low":3.49}
   ],
   "jigglypuff": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.1,"avg30":0.09,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.1,"avg30":0.09,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":1.74,"avg7":1.69,"avg30":0.26,"low":0.02}
   ],
   "jolteon": [
     {"date":"2026-10-23","source":"manual","price":10},
-    {"date":"2026-10-23","source":"cardmarket","trend":13.02,"avg7":13.62,"avg30":14.46,"low":9}
+    {"date":"2026-10-23","source":"cardmarket","trend":13.02,"avg7":13.62,"avg30":14.46,"low":9},
+    {"date":"2026-10-29","source":"cardmarket","trend":9.82,"avg7":13.51,"avg30":14.38,"low":9}
   ],
   "jynx": [
     {"date":"2026-10-23","source":"manual","price":2},
-    {"date":"2026-10-23","source":"cardmarket","trend":2.94,"avg7":2.17,"avg30":2.51,"low":1}
+    {"date":"2026-10-23","source":"cardmarket","trend":2.94,"avg7":2.17,"avg30":2.51,"low":1},
+    {"date":"2026-10-29","source":"cardmarket","trend":2.2,"avg7":2.22,"avg30":2.5,"low":1}
   ],
   "kabuto": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.08,"avg7":0.03,"avg30":0.08,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.08,"avg7":0.03,"avg30":0.08,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.09,"avg7":0.07,"avg30":0.09,"low":0.02}
   ],
   "kabutops": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.29,"avg7":0.24,"avg30":0.25,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.29,"avg7":0.24,"avg30":0.25,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.28,"avg7":0.25,"avg30":0.24,"low":0.02}
   ],
   "kadabra": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":1.06,"avg30":2.02,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":1.06,"avg30":2.02,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":1.13,"avg7":0.04,"avg30":0.31,"low":0.02}
   ],
   "kakuna": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.05,"avg7":0.04,"avg30":0.06,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.05,"avg7":0.04,"avg30":0.06,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.06,"avg7":0.05,"avg30":0.06,"low":0.02}
   ],
   "kangaskhan": [
     {"date":"2026-10-23","source":"manual","price":3},
-    {"date":"2026-10-23","source":"cardmarket","trend":3.99,"avg7":4.68,"avg30":3.98,"low":1.9}
+    {"date":"2026-10-23","source":"cardmarket","trend":3.99,"avg7":4.68,"avg30":3.98,"low":1.9},
+    {"date":"2026-10-29","source":"cardmarket","trend":3.69,"avg7":3.17,"avg30":3.73,"low":1.5}
   ],
   "kingler": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.14,"avg7":0.09,"avg30":0.13,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.14,"avg7":0.09,"avg30":0.13,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.21,"avg7":0.24,"avg30":0.16,"low":0.02}
   ],
   "koffing": [
     {"date":"2026-10-23","source":"manual","price":22},
-    {"date":"2026-10-23","source":"cardmarket","trend":22.6,"avg7":24.21,"avg30":17.86,"low":6.99}
+    {"date":"2026-10-23","source":"cardmarket","trend":22.6,"avg7":24.21,"avg30":17.86,"low":6.99},
+    {"date":"2026-10-29","source":"cardmarket","trend":18.68,"avg7":15.74,"avg30":17.42,"low":6.95}
   ],
   "krabby": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.05,"avg7":0.05,"avg30":0.06,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.05,"avg7":0.05,"avg30":0.06,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.03,"avg7":0.05,"avg30":0.06,"low":0.02}
   ],
   "lapras": [
     {"date":"2026-10-23","source":"manual","price":5},
-    {"date":"2026-10-23","source":"cardmarket","trend":7.54,"avg7":7.31,"avg30":8.11,"low":6}
+    {"date":"2026-10-23","source":"cardmarket","trend":7.54,"avg7":7.31,"avg30":8.11,"low":6},
+    {"date":"2026-10-29","source":"cardmarket","trend":8.11,"avg7":7.42,"avg30":7.98,"low":4.9}
   ],
   "lickitung": [
     {"date":"2026-10-23","source":"manual","price":5},
-    {"date":"2026-10-23","source":"cardmarket","trend":5.54,"avg7":6.14,"avg30":6.67,"low":4.9}
+    {"date":"2026-10-23","source":"cardmarket","trend":5.54,"avg7":6.14,"avg30":6.67,"low":4.9},
+    {"date":"2026-10-29","source":"cardmarket","trend":6.53,"avg7":6.25,"avg30":6.07,"low":4.25}
   ],
   "machoke": [
     {"date":"2026-10-23","source":"manual","price":4},
-    {"date":"2026-10-23","source":"cardmarket","trend":6.03,"avg7":5.58,"avg30":6.38,"low":4}
+    {"date":"2026-10-23","source":"cardmarket","trend":6.03,"avg7":5.58,"avg30":6.38,"low":4},
+    {"date":"2026-10-29","source":"cardmarket","trend":4.95,"avg7":5.13,"avg30":6.27,"low":3.98}
   ],
   "machop": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.06,"avg7":0.1,"avg30":0.09,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.06,"avg7":0.1,"avg30":0.09,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.27,"avg7":0.27,"avg30":0.12,"low":0.02}
   ],
   "magikarp": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.72,"avg7":0.25,"avg30":1.11,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.72,"avg7":0.25,"avg30":1.11,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.42,"avg7":0.22,"avg30":1.32,"low":0.02}
   ],
   "magmar": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.42,"avg7":0.8,"avg30":0.26,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.42,"avg7":0.8,"avg30":0.26,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.35,"avg7":0.82,"avg30":0.26,"low":0.02}
   ],
   "magnemite": [
     {"date":"2026-10-23","source":"manual","price":15},
-    {"date":"2026-10-23","source":"cardmarket","trend":15.53,"avg7":13.71,"avg30":14.12,"low":6.98}
+    {"date":"2026-10-23","source":"cardmarket","trend":15.53,"avg7":13.71,"avg30":14.12,"low":6.98},
+    {"date":"2026-10-29","source":"cardmarket","trend":16.24,"avg7":12.89,"avg30":14.16,"low":6.98}
   ],
   "magneton": [
     {"date":"2026-10-23","source":"manual","price":10},
-    {"date":"2026-10-23","source":"cardmarket","trend":11.16,"avg7":14.6,"avg30":13.59,"low":5}
+    {"date":"2026-10-23","source":"cardmarket","trend":11.16,"avg7":14.6,"avg30":13.59,"low":5},
+    {"date":"2026-10-29","source":"cardmarket","trend":11.25,"avg7":8.72,"avg30":10.74,"low":5}
   ],
   "mankey": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.41,"avg7":0.25,"avg30":0.12,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.41,"avg7":0.25,"avg30":0.12,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.37,"avg7":0.22,"avg30":0.12,"low":0.02}
   ],
   "marowak": [
-    {"date":"2026-10-23","source":"cardmarket","trend":1.25,"avg7":1.6,"avg30":0.47,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":1.25,"avg7":1.6,"avg30":0.47,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":1.05,"avg7":2,"avg30":0.52,"low":0.02}
   ],
   "mega-clefable-ex": [
     {"date":"2026-10-23","source":"manual","price":30},
-    {"date":"2026-10-23","source":"cardmarket","trend":18.65,"avg7":21.57,"avg30":24.41,"low":18.99}
+    {"date":"2026-10-23","source":"cardmarket","trend":18.65,"avg7":21.57,"avg30":24.41,"low":18.99},
+    {"date":"2026-10-29","source":"cardmarket","trend":21.34,"avg7":21.39,"avg30":23.01,"low":17}
   ],
   "mega-dragonite-ex": [
     {"date":"2026-10-23","source":"manual","price":12},
-    {"date":"2026-10-23","source":"cardmarket","trend":9.39,"avg7":9.97,"avg30":13.38,"low":7.99}
+    {"date":"2026-10-23","source":"cardmarket","trend":9.39,"avg7":9.97,"avg30":13.38,"low":7.99},
+    {"date":"2026-10-29","source":"cardmarket","trend":10.75,"avg7":10.48,"avg30":12.79,"low":7.99}
   ],
   "meowth": [
     {"date":"2026-10-23","source":"manual","price":60},
-    {"date":"2026-10-23","source":"cardmarket","trend":80.3,"avg7":82.69,"avg30":79.35,"low":28}
+    {"date":"2026-10-23","source":"cardmarket","trend":80.3,"avg7":82.69,"avg30":79.35,"low":28},
+    {"date":"2026-10-29","source":"cardmarket","trend":74.35,"avg7":77.34,"avg30":79.48,"low":28}
   ],
   "metapod": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.04,"avg7":0.03,"avg30":0.04,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.04,"avg7":0.03,"avg30":0.04,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.04,"avg7":0.04,"avg30":0.04,"low":0.02}
   ],
   "mew-v": [
     {"date":"2026-10-23","source":"manual","price":30},
-    {"date":"2026-10-23","source":"cardmarket","trend":39.37,"avg7":39.95,"avg30":43.49,"low":29.95}
+    {"date":"2026-10-23","source":"cardmarket","trend":39.37,"avg7":39.95,"avg30":43.49,"low":29.95},
+    {"date":"2026-10-29","source":"cardmarket","trend":49.51,"avg7":55.33,"avg30":46.25,"low":28.99}
   ],
   "mewtwo": [
     {"date":"2026-10-23","source":"manual","price":20},
-    {"date":"2026-10-23","source":"cardmarket","trend":25.85,"avg7":24.17,"avg30":26.88,"low":17}
+    {"date":"2026-10-23","source":"cardmarket","trend":25.85,"avg7":24.17,"avg30":26.88,"low":17},
+    {"date":"2026-10-29","source":"cardmarket","trend":23.02,"avg7":21.66,"avg30":25.26,"low":17}
   ],
   "psyduck": [
     {"date":"2026-10-23","source":"manual","price":13},
-    {"date":"2026-10-23","source":"cardmarket","trend":13.32,"avg7":13.72,"avg30":14.1,"low":10}
+    {"date":"2026-10-23","source":"cardmarket","trend":13.32,"avg7":13.72,"avg30":14.1,"low":10},
+    {"date":"2026-10-29","source":"cardmarket","trend":12.53,"avg7":13.98,"avg30":14.03,"low":9.95}
   ],
   "mr-mime": [
     {"date":"2026-10-23","source":"manual","price":2},
-    {"date":"2026-10-23","source":"cardmarket","trend":3.34,"avg7":2.85,"avg30":3.19,"low":1.5}
+    {"date":"2026-10-23","source":"cardmarket","trend":3.34,"avg7":2.85,"avg30":3.19,"low":1.5},
+    {"date":"2026-10-29","source":"cardmarket","trend":2.84,"avg7":2.97,"avg30":3.16,"low":1.5}
   ],
   "muk": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.04,"avg30":0.39,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.04,"avg30":0.39,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.07,"avg7":0.08,"avg30":0.43,"low":0.02}
   ],
   "nidoking": [
     {"date":"2026-10-23","source":"manual","price":5},
-    {"date":"2026-10-23","source":"cardmarket","trend":4.5,"avg7":4.96,"avg30":6.25,"low":3.3}
+    {"date":"2026-10-23","source":"cardmarket","trend":4.5,"avg7":4.96,"avg30":6.25,"low":3.3},
+    {"date":"2026-10-29","source":"cardmarket","trend":4.89,"avg7":5.21,"avg30":5.92,"low":3.4}
   ],
   "nidoqueen": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.1,"avg7":0.09,"avg30":0.08,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.1,"avg7":0.09,"avg30":0.08,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.4,"avg7":0.24,"avg30":0.12,"low":0.02}
   ],
   "nidoran-f": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.07,"avg7":0.07,"avg30":0.06,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.07,"avg7":0.07,"avg30":0.06,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.06,"avg7":0.07,"avg30":0.06,"low":0.02}
   ],
   "nidoran-m": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.04,"avg30":0.06,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.04,"avg30":0.06,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.04,"avg7":0.07,"avg30":0.06,"low":0.02}
   ],
   "nidorina": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.11,"avg7":0.12,"avg30":0.08,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.11,"avg7":0.12,"avg30":0.08,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.38,"avg7":0.27,"avg30":0.11,"low":0.02}
   ],
   "nidorino": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.08,"avg7":0.08,"avg30":0.08,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.08,"avg7":0.08,"avg30":0.08,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.06,"avg7":0.07,"avg30":0.08,"low":0.02}
   ],
   "ninetales": [
     {"date":"2026-10-23","source":"manual","price":10},
-    {"date":"2026-10-23","source":"cardmarket","trend":15.88,"avg7":18.14,"avg30":16.16,"low":7.5}
+    {"date":"2026-10-23","source":"cardmarket","trend":15.88,"avg7":18.14,"avg30":16.16,"low":7.5},
+    {"date":"2026-10-29","source":"cardmarket","trend":12.35,"avg7":12.29,"avg30":15.88,"low":7.5}
   ],
   "oddish": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.06,"avg7":0.05,"avg30":0.07,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.06,"avg7":0.05,"avg30":0.07,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.16,"avg7":0.19,"avg30":0.11,"low":0.02}
   ],
   "omanyte": [
     {"date":"2026-10-23","source":"manual","price":3},
-    {"date":"2026-10-23","source":"cardmarket","trend":6.06,"avg7":5.66,"avg30":5.54,"low":1.9}
+    {"date":"2026-10-23","source":"cardmarket","trend":6.06,"avg7":5.66,"avg30":5.54,"low":1.9},
+    {"date":"2026-10-29","source":"cardmarket","trend":4.33,"avg7":6.64,"avg30":5.74,"low":2.49}
   ],
   "omastar-v": [
     {"date":"2026-10-23","source":"manual","price":0.99},
-    {"date":"2026-10-23","source":"cardmarket","trend":0.37,"avg7":0.44,"avg30":0.53,"low":0.17}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.37,"avg7":0.44,"avg30":0.53,"low":0.17},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.42,"avg7":0.48,"avg30":0.5,"low":0.17}
   ],
   "onix": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.23,"avg7":0.38,"avg30":0.15,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.23,"avg7":0.38,"avg30":0.15,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.19,"avg7":0.38,"avg30":0.15,"low":0.02}
   ],
   "paldean-tauros": [
     {"date":"2026-10-23","source":"manual","price":3},
-    {"date":"2026-10-23","source":"cardmarket","trend":2.44,"avg7":2.27,"avg30":2.57,"low":1.85}
+    {"date":"2026-10-23","source":"cardmarket","trend":2.44,"avg7":2.27,"avg30":2.57,"low":1.85},
+    {"date":"2026-10-29","source":"cardmarket","trend":2.68,"avg7":2.46,"avg30":2.55,"low":1.85}
   ],
   "paras": [
     {"date":"2026-10-23","source":"manual","price":20},
-    {"date":"2026-10-23","source":"cardmarket","trend":17.93,"avg7":18.6,"avg30":19.16,"low":16}
+    {"date":"2026-10-23","source":"cardmarket","trend":17.93,"avg7":18.6,"avg30":19.16,"low":16},
+    {"date":"2026-10-29","source":"cardmarket","trend":17.36,"avg7":18.28,"avg30":19.06,"low":16}
   ],
   "parasect": [
     {"date":"2026-10-23","source":"manual","price":1.5},
-    {"date":"2026-10-23","source":"cardmarket","trend":1.81,"avg7":1.91,"avg30":2.02,"low":1.3}
+    {"date":"2026-10-23","source":"cardmarket","trend":1.81,"avg7":1.91,"avg30":2.02,"low":1.3},
+    {"date":"2026-10-29","source":"cardmarket","trend":1.99,"avg7":2.04,"avg30":1.99,"low":1.3}
   ],
   "persian": [
     {"date":"2026-10-23","source":"manual","price":10},
-    {"date":"2026-10-23","source":"cardmarket","trend":10.88,"avg7":12.01,"avg30":11.28,"low":7.99}
+    {"date":"2026-10-23","source":"cardmarket","trend":10.88,"avg7":12.01,"avg30":11.28,"low":7.99},
+    {"date":"2026-10-29","source":"cardmarket","trend":11.36,"avg7":13.02,"avg30":11.11,"low":8}
   ],
   "pidgeot-ex": [
     {"date":"2026-10-23","source":"manual","price":22},
-    {"date":"2026-10-23","source":"cardmarket","trend":21.28,"avg7":22.8,"avg30":24.63,"low":20}
+    {"date":"2026-10-23","source":"cardmarket","trend":21.28,"avg7":22.8,"avg30":24.63,"low":20},
+    {"date":"2026-10-29","source":"cardmarket","trend":21.05,"avg7":22.28,"avg30":24.39,"low":20}
   ],
   "pidgeotto": [
     {"date":"2026-10-23","source":"manual","price":2.5},
-    {"date":"2026-10-23","source":"cardmarket","trend":3.57,"avg7":2.86,"avg30":3.23,"low":1.9}
+    {"date":"2026-10-23","source":"cardmarket","trend":3.57,"avg7":2.86,"avg30":3.23,"low":1.9},
+    {"date":"2026-10-29","source":"cardmarket","trend":4.73,"avg7":4.43,"avg30":3.55,"low":2}
   ],
   "pidgey": [
     {"date":"2026-10-23","source":"manual","price":4},
-    {"date":"2026-10-23","source":"cardmarket","trend":4.88,"avg7":4.37,"avg30":5,"low":2.1}
+    {"date":"2026-10-23","source":"cardmarket","trend":4.88,"avg7":4.37,"avg30":5,"low":2.1},
+    {"date":"2026-10-29","source":"cardmarket","trend":3.84,"avg7":4.17,"avg30":5.05,"low":2.1}
   ],
   "pikachu": [
     {"date":"2026-10-23","source":"manual","price":27.95},
-    {"date":"2026-10-23","source":"cardmarket","trend":30.45,"avg7":27.99,"avg30":31.49,"low":16}
+    {"date":"2026-10-23","source":"cardmarket","trend":30.45,"avg7":27.99,"avg30":31.49,"low":16},
+    {"date":"2026-10-29","source":"cardmarket","trend":24.77,"avg7":26.92,"avg30":30.79,"low":17.98}
   ],
   "pinsir": [
     {"date":"2026-10-23","source":"manual","price":4},
-    {"date":"2026-10-23","source":"cardmarket","trend":4.05,"avg7":3.82,"avg30":3.92,"low":2.99}
+    {"date":"2026-10-23","source":"cardmarket","trend":4.05,"avg7":3.82,"avg30":3.92,"low":2.99},
+    {"date":"2026-10-29","source":"cardmarket","trend":3.97,"avg7":3.87,"avg30":3.94,"low":2.99}
   ],
   "poliwag": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.05,"avg7":0.04,"avg30":0.08,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.05,"avg7":0.04,"avg30":0.08,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.28,"avg7":0.24,"avg30":0.11,"low":0.02}
   ],
   "poliwhirl": [
     {"date":"2026-10-23","source":"manual","price":10},
-    {"date":"2026-10-23","source":"cardmarket","trend":10.34,"avg7":11.48,"avg30":13.46,"low":9}
+    {"date":"2026-10-23","source":"cardmarket","trend":10.34,"avg7":11.48,"avg30":13.46,"low":9},
+    {"date":"2026-10-29","source":"cardmarket","trend":16.55,"avg7":14.32,"avg30":13.47,"low":7.99}
   ],
   "poliwrath": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.62,"avg7":0.07,"avg30":0.77,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.62,"avg7":0.07,"avg30":0.77,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.35,"avg7":0.06,"avg30":0.8,"low":0.02}
   ],
   "ponyta": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.05,"avg7":0.05,"avg30":0.05,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.05,"avg7":0.05,"avg30":0.05,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.33,"avg7":0.2,"avg30":0.09,"low":0.02}
   ],
   "porygon": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.62,"avg7":0.3,"avg30":0.26,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.62,"avg7":0.3,"avg30":0.26,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.65,"avg7":0.55,"avg30":0.3,"low":0.02}
   ],
   "primeape": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.11,"avg7":0.06,"avg30":0.12,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.11,"avg7":0.06,"avg30":0.12,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.1,"avg7":0.07,"avg30":0.13,"low":0.02}
   ],
   "raichu": [
     {"date":"2026-10-23","source":"manual","price":14},
-    {"date":"2026-10-23","source":"cardmarket","trend":13.44,"avg7":15.92,"avg30":18.06,"low":12}
+    {"date":"2026-10-23","source":"cardmarket","trend":13.44,"avg7":15.92,"avg30":18.06,"low":12},
+    {"date":"2026-10-29","source":"cardmarket","trend":15.25,"avg7":16.04,"avg30":17.39,"low":10}
   ],
   "raticate": [
     {"date":"2026-10-23","source":"manual","price":2.5},
-    {"date":"2026-10-23","source":"cardmarket","trend":1.88,"avg7":2.05,"avg30":2.16,"low":1}
+    {"date":"2026-10-23","source":"cardmarket","trend":1.88,"avg7":2.05,"avg30":2.16,"low":1},
+    {"date":"2026-10-29","source":"cardmarket","trend":1.5,"avg7":1.8,"avg30":2.1,"low":0.99}
   ],
   "rattata": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.02,"avg30":0.03,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.02,"avg30":0.03,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.03,"avg7":0.02,"avg30":0.03,"low":0.02}
   ],
   "rhydon": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.91,"avg7":0.72,"avg30":0.27,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.91,"avg7":0.72,"avg30":0.27,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.74,"avg7":0.06,"avg30":0.26,"low":0.02}
   ],
   "rhyhorn": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.06,"avg7":0.09,"avg30":0.08,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.06,"avg7":0.09,"avg30":0.08,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.27,"avg7":0.25,"avg30":0.12,"low":0.02}
   ],
   "sandshrew": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.02,"avg30":0.03,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.02,"avg30":0.03,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.03,"avg7":0.02,"avg30":0.03,"low":0.02}
   ],
   "sandslash": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.02,"avg30":0.02,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.02,"avg30":0.02,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.04,"avg7":0.02,"avg30":0.02,"low":0.02}
   ],
   "scyther": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.16,"avg7":0.2,"avg30":0.11,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.16,"avg7":0.2,"avg30":0.11,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.11,"avg7":0.04,"avg30":0.11,"low":0.02}
   ],
   "seadra": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.26,"avg7":0.04,"avg30":0.43,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.26,"avg7":0.04,"avg30":0.43,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.38,"avg7":0.25,"avg30":0.48,"low":0.02}
   ],
   "seaking": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.9,"avg7":1.23,"avg30":0.37,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.9,"avg7":1.23,"avg30":0.37,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":1.25,"avg7":2.01,"avg30":0.59,"low":0.02}
   ],
   "seel": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.04,"avg30":0.07,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.04,"avg30":0.07,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.13,"avg7":0.17,"avg30":0.09,"low":0.02}
   ],
   "shellder": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.07,"avg7":0.04,"avg30":0.2,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.07,"avg7":0.04,"avg30":0.2,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.25,"avg7":0.04,"avg30":0.16,"low":0.02}
   ],
   "slowpoke": [
     {"date":"2026-10-23","source":"manual","price":9},
-    {"date":"2026-10-23","source":"cardmarket","trend":13.54,"avg7":12.58,"avg30":13.74,"low":9}
+    {"date":"2026-10-23","source":"cardmarket","trend":13.54,"avg7":12.58,"avg30":13.74,"low":9},
+    {"date":"2026-10-29","source":"cardmarket","trend":14.07,"avg7":13.17,"avg30":13.65,"low":9}
   ],
   "snorlax": [
     {"date":"2026-10-23","source":"manual","price":10},
-    {"date":"2026-10-23","source":"cardmarket","trend":12.12,"avg7":11.65,"avg30":13.08,"low":9.5}
+    {"date":"2026-10-23","source":"cardmarket","trend":12.12,"avg7":11.65,"avg30":13.08,"low":9.5},
+    {"date":"2026-10-29","source":"cardmarket","trend":11.08,"avg7":12.36,"avg30":13.04,"low":9.5}
   ],
   "spearow": [
     {"date":"2026-10-23","source":"manual","price":1},
-    {"date":"2026-10-23","source":"cardmarket","trend":2.05,"avg7":1.92,"avg30":2.35,"low":0.99}
+    {"date":"2026-10-23","source":"cardmarket","trend":2.05,"avg7":1.92,"avg30":2.35,"low":0.99},
+    {"date":"2026-10-29","source":"cardmarket","trend":1.71,"avg7":2.44,"avg30":2.48,"low":1}
   ],
   "squirtle": [
     {"date":"2026-10-23","source":"manual","price":20},
-    {"date":"2026-10-23","source":"cardmarket","trend":23.08,"avg7":23.1,"avg30":23.34,"low":13}
+    {"date":"2026-10-23","source":"cardmarket","trend":23.08,"avg7":23.1,"avg30":23.34,"low":13},
+    {"date":"2026-10-29","source":"cardmarket","trend":21.69,"avg7":24.14,"avg30":23.88,"low":15.5}
   ],
   "starmie-v": [
     {"date":"2026-10-23","source":"manual","price":3.97},
-    {"date":"2026-10-23","source":"cardmarket","trend":129.1,"avg7":117.3,"avg30":111.33,"low":58.5}
+    {"date":"2026-10-23","source":"cardmarket","trend":129.1,"avg7":117.3,"avg30":111.33,"low":58.5},
+    {"date":"2026-10-29","source":"cardmarket","trend":135.12,"avg7":118.17,"avg30":107.57,"low":54.5}
   ],
   "staryu": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.05,"avg7":0.07,"avg30":0.09,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.05,"avg7":0.07,"avg30":0.09,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.05,"avg7":0.05,"avg30":0.08,"low":0.02}
   ],
   "tangela": [
     {"date":"2026-10-23","source":"manual","price":3},
-    {"date":"2026-10-23","source":"cardmarket","trend":4.46,"avg7":5.33,"avg30":4.37,"low":3}
+    {"date":"2026-10-23","source":"cardmarket","trend":4.46,"avg7":5.33,"avg30":4.37,"low":3},
+    {"date":"2026-10-29","source":"cardmarket","trend":3.86,"avg7":4.58,"avg30":4.32,"low":1.99}
   ],
   "team-rockets-weezing": [
     {"date":"2026-10-23","source":"manual","price":3},
-    {"date":"2026-10-23","source":"cardmarket","trend":2.49,"avg7":2.61,"avg30":2.77,"low":0.9}
+    {"date":"2026-10-23","source":"cardmarket","trend":2.49,"avg7":2.61,"avg30":2.77,"low":0.9},
+    {"date":"2026-10-29","source":"cardmarket","trend":1.98,"avg7":2.58,"avg30":2.84,"low":0.9}
   ],
   "tentacool": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.97,"avg7":1.5,"avg30":0.4,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.97,"avg7":1.5,"avg30":0.4,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.92,"avg7":1.36,"avg30":0.4,"low":0.02}
   ],
   "tentacruel": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.04,"avg7":0.13,"avg30":0.15,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.04,"avg7":0.13,"avg30":0.15,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":0.07,"avg30":0.14,"low":0.02}
   ],
   "vaporeon": [
     {"date":"2026-10-23","source":"manual","price":10},
-    {"date":"2026-10-23","source":"cardmarket","trend":22.04,"avg7":18.22,"avg30":18.61,"low":9.99}
+    {"date":"2026-10-23","source":"cardmarket","trend":22.04,"avg7":18.22,"avg30":18.61,"low":9.99},
+    {"date":"2026-10-29","source":"cardmarket","trend":18.11,"avg7":20.09,"avg30":18.57,"low":9.99}
   ],
   "venomoth-gx": [
     {"date":"2026-10-23","source":"manual","price":1.99},
-    {"date":"2026-10-23","source":"cardmarket","trend":2.21,"avg7":2.34,"avg30":2.08,"low":1.4}
+    {"date":"2026-10-23","source":"cardmarket","trend":2.21,"avg7":2.34,"avg30":2.08,"low":1.4},
+    {"date":"2026-10-29","source":"cardmarket","trend":2.37,"avg7":2.16,"avg30":2.12,"low":1.4}
   ],
   "venonat": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.07,"avg7":0.12,"avg30":0.08,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.07,"avg7":0.12,"avg30":0.08,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.05,"avg7":0.04,"avg30":0.08,"low":0.02}
   ],
   "venusaur-ex": [
     {"date":"2026-10-23","source":"manual","price":9},
-    {"date":"2026-10-23","source":"cardmarket","trend":7.08,"avg7":7.4,"avg30":8.6,"low":3}
+    {"date":"2026-10-23","source":"cardmarket","trend":7.08,"avg7":7.4,"avg30":8.6,"low":3},
+    {"date":"2026-10-29","source":"cardmarket","trend":5.53,"avg7":7.66,"avg30":8.41,"low":3}
   ],
   "victreebel": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.15,"avg7":0.03,"avg30":0.1,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.15,"avg7":0.03,"avg30":0.1,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.11,"avg7":0.04,"avg30":0.1,"low":0.02}
   ],
   "vileplume-gx": [
     {"date":"2026-10-23","source":"manual","price":50},
-    {"date":"2026-10-23","source":"cardmarket","trend":101.49,"avg7":91.71,"avg30":85.63,"low":59.99}
+    {"date":"2026-10-23","source":"cardmarket","trend":101.49,"avg7":91.71,"avg30":85.63,"low":59.99},
+    {"date":"2026-10-29","source":"cardmarket","trend":99.38,"avg7":91.71,"avg30":85.63,"low":59.99}
   ],
   "vulpix": [
     {"date":"2026-10-23","source":"manual","price":4},
-    {"date":"2026-10-23","source":"cardmarket","trend":4.73,"avg7":4.45,"avg30":4.7,"low":3.5}
+    {"date":"2026-10-23","source":"cardmarket","trend":4.73,"avg7":4.45,"avg30":4.7,"low":3.5},
+    {"date":"2026-10-29","source":"cardmarket","trend":4.41,"avg7":4.45,"avg30":4.68,"low":3.94}
   ],
   "wartortle": [
     {"date":"2026-10-23","source":"manual","price":12},
-    {"date":"2026-10-23","source":"cardmarket","trend":11.03,"avg7":12.66,"avg30":14.05,"low":7}
+    {"date":"2026-10-23","source":"cardmarket","trend":11.03,"avg7":12.66,"avg30":14.05,"low":7},
+    {"date":"2026-10-29","source":"cardmarket","trend":11.52,"avg7":14,"avg30":13.41,"low":8}
   ],
   "weedle": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.18,"avg7":0.28,"avg30":0.11,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.18,"avg7":0.28,"avg30":0.11,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.15,"avg7":0.28,"avg30":0.11,"low":0.02}
   ],
   "weepinbell": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.05,"avg7":0.05,"avg30":0.06,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.05,"avg7":0.05,"avg30":0.06,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.03,"avg7":0.04,"avg30":0.06,"low":0.02}
   ],
   "wigglytuff": [
     {"date":"2026-10-23","source":"manual","price":2},
-    {"date":"2026-10-23","source":"cardmarket","trend":2.46,"avg7":2.95,"avg30":2.66,"low":1.3}
+    {"date":"2026-10-23","source":"cardmarket","trend":2.46,"avg7":2.95,"avg30":2.66,"low":1.3},
+    {"date":"2026-10-29","source":"cardmarket","trend":2.59,"avg7":2.74,"avg30":2.74,"low":0.99}
   ],
   "zubat": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.15,"avg7":0.23,"avg30":0.11,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.15,"avg7":0.23,"avg30":0.11,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.11,"avg7":0.1,"avg30":0.11,"low":0.02}
   ],
   "m6a-001-exeggcute": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.03,"avg30":0.02,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.03,"avg30":0.02,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.04,"avg7":0.03,"avg30":0.03,"low":0.02}
   ],
   "m6a-002-alolan-exeggutor": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.04,"avg7":0.03,"avg30":0.04,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.04,"avg7":0.03,"avg30":0.04,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.03,"avg7":0.03,"avg30":0.03,"low":0.02}
   ],
   "m6a-003-volbeat": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.05,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.05,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.04,"low":0.02}
   ],
   "m6a-004-illumise": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.03,"avg30":0.04,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.03,"avg30":0.04,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.03,"low":0.02}
   ],
   "m6a-005-vivillon": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.06,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.06,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.05,"low":0.02}
   ],
   "m6a-006-moltres": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.04,"avg7":0.04,"avg30":0.04,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.04,"avg7":0.04,"avg30":0.04,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.03,"avg7":0.03,"avg30":0.04,"low":0.02}
   ],
   "m6a-007-ho-oh": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.04,"avg30":0.07,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.04,"avg30":0.07,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":0.04,"avg30":0.06,"low":0.02}
   ],
   "m6a-008-reshiram": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.05,"avg30":0.08,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.05,"avg30":0.08,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":0.07,"avg30":0.09,"low":0.02}
   ],
   "m6a-009-fuecoco-ex": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.13,"avg30":0.19,"low":0.09}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.13,"avg30":0.19,"low":0.09},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":0.2,"avg30":0.19,"low":0.07}
   ],
   "m6a-010-slowpoke": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.06,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.06,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.05,"low":0.02}
   ],
   "m6a-011-lapras": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.06,"avg7":0.09,"avg30":0.08,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.06,"avg7":0.09,"avg30":0.08,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.04,"avg7":0.03,"avg30":0.07,"low":0.02}
   ],
   "m6a-012-articuno": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.07,"avg7":0.04,"avg30":0.04,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.07,"avg7":0.04,"avg30":0.04,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.05,"avg7":0.03,"avg30":0.04,"low":0.02}
   ],
   "m6a-013-kyogre": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.03,"avg30":0.04,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.03,"avg30":0.04,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.03,"avg7":0.04,"avg30":0.04,"low":0.02}
   ],
   "m6a-014-palkia": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.04,"avg7":0.04,"avg30":0.05,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.04,"avg7":0.04,"avg30":0.05,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.04,"avg7":0.04,"avg30":0.05,"low":0.02}
   ],
   "m6a-015-greninja-ex": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.05,"avg7":0.14,"avg30":0.16,"low":0.04}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.05,"avg7":0.14,"avg30":0.16,"low":0.04},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.07,"avg7":0.13,"avg30":0.16,"low":0.03}
   ],
   "m6a-016-wishiwashi": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.04,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.04,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.04,"avg7":0.05,"avg30":0.04,"low":0.02}
   ],
   "m6a-017-pikachu": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.27,"avg30":0.44,"low":0.1}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.27,"avg30":0.44,"low":0.1},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.13,"avg7":0.27,"avg30":0.38,"low":0.12}
   ],
   "m6a-018-pikachu": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.23,"avg7":0.3,"avg30":0.41,"low":0.1}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.23,"avg7":0.3,"avg30":0.41,"low":0.1},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.17,"avg7":0.25,"avg30":0.36,"low":0.1}
   ],
   "m6a-019-pikachu": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.38,"avg7":0.47,"avg30":0.59,"low":0.3}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.38,"avg7":0.47,"avg30":0.59,"low":0.3},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.45,"avg7":0.54,"avg30":0.58,"low":0.2}
   ],
   "m6a-020-pikachu": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.26,"avg7":0.43,"avg30":0.59,"low":0.24}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.26,"avg7":0.43,"avg30":0.59,"low":0.24},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.21,"avg7":0.37,"avg30":0.53,"low":0.19}
   ],
   "m6a-021-pikachu": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.13,"avg7":0.25,"avg30":0.41,"low":0.08}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.13,"avg7":0.25,"avg30":0.41,"low":0.08},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.1,"avg7":0.24,"avg30":0.37,"low":0.05}
   ],
   "m6a-022-pikachu": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.11,"avg7":0.32,"avg30":0.42,"low":0.1}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.11,"avg7":0.32,"avg30":0.42,"low":0.1},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.19,"avg7":0.27,"avg30":0.38,"low":0.12}
   ],
   "m6a-023-pikachu": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.25,"avg7":0.35,"avg30":0.58,"low":0.15}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.25,"avg7":0.35,"avg30":0.58,"low":0.15},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.17,"avg7":0.35,"avg30":0.52,"low":0.15}
   ],
   "m6a-024-pikachu": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.21,"avg7":0.31,"avg30":0.42,"low":0.12}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.21,"avg7":0.31,"avg30":0.42,"low":0.12},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.16,"avg7":0.3,"avg30":0.38,"low":0.07}
   ],
   "m6a-025-pikachu": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.05,"avg7":0.38,"avg30":0.55,"low":0.15}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.05,"avg7":0.38,"avg30":0.55,"low":0.15},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.26,"avg7":0.4,"avg30":0.52,"low":0.18}
   ],
   "m6a-026-pikachu": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.41,"avg30":0.56,"low":0.2}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.41,"avg30":0.56,"low":0.2},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.26,"avg7":0.4,"avg30":0.51,"low":0.2}
   ],
   "m6a-027-pikachu": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.19,"avg7":0.29,"avg30":0.38,"low":0.12}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.19,"avg7":0.29,"avg30":0.38,"low":0.12},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.18,"avg7":0.28,"avg30":0.35,"low":0.1}
   ],
   "m6a-028-pikachu": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.05,"avg7":0.23,"avg30":0.42,"low":0.05}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.05,"avg7":0.23,"avg30":0.42,"low":0.05},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.14,"avg7":0.25,"avg30":0.38,"low":0.1}
   ],
   "m6a-029-pikachu": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.28,"avg7":0.38,"avg30":0.5,"low":0.2}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.28,"avg7":0.38,"avg30":0.5,"low":0.2},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.24,"avg7":0.36,"avg30":0.47,"low":0.24}
   ],
   "m6a-030-pikachu": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.39,"avg30":0.58,"low":0.2}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.39,"avg30":0.58,"low":0.2},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.24,"avg7":0.37,"avg30":0.53,"low":0.17}
   ],
   "m6a-031-pikachu": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.05,"avg7":0.38,"avg30":0.52,"low":0.2}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.05,"avg7":0.38,"avg30":0.52,"low":0.2},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.17,"avg7":0.31,"avg30":0.46,"low":0.17}
   ],
   "m6a-032-pikachu": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.26,"avg30":0.44,"low":0.09}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.26,"avg30":0.44,"low":0.09},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.09,"avg7":0.26,"avg30":0.39,"low":0.1}
   ],
   "m6a-033-pikachu": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.19,"avg7":0.3,"avg30":0.41,"low":0.1}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.19,"avg7":0.3,"avg30":0.41,"low":0.1},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.2,"avg7":0.3,"avg30":0.38,"low":0.13}
   ],
   "m6a-034-pikachu": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.43,"avg30":0.66,"low":0.3}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.43,"avg30":0.66,"low":0.3},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.37,"avg7":0.49,"avg30":0.56,"low":0.29}
   ],
   "m6a-035-pikachu": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.23,"avg7":0.37,"avg30":0.49,"low":0.17}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.23,"avg7":0.37,"avg30":0.49,"low":0.17},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.13,"avg7":0.3,"avg30":0.44,"low":0.15}
   ],
   "m6a-036-pikachu": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.18,"avg7":0.35,"avg30":0.44,"low":0.2}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.18,"avg7":0.35,"avg30":0.44,"low":0.2},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.2,"avg7":0.3,"avg30":0.4,"low":0.15}
   ],
   "m6a-037-pikachu": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.07,"avg7":0.29,"avg30":0.44,"low":0.1}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.07,"avg7":0.29,"avg30":0.44,"low":0.1},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.14,"avg7":0.27,"avg30":0.4,"low":0.1}
   ],
   "m6a-038-pikachu": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.09,"avg7":0.24,"avg30":0.36,"low":0.09}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.09,"avg7":0.24,"avg30":0.36,"low":0.09},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.1,"avg7":0.24,"avg30":0.33,"low":0.09}
   ],
   "m6a-039-pikachu": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.15,"avg7":0.41,"avg30":0.57,"low":0.15}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.15,"avg7":0.41,"avg30":0.57,"low":0.15},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.25,"avg7":0.36,"avg30":0.52,"low":0.15}
   ],
   "m6a-040-pikachu": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.34,"avg7":0.48,"avg30":0.6,"low":0.2}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.34,"avg7":0.48,"avg30":0.6,"low":0.2},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.32,"avg7":0.43,"avg30":0.55,"low":0.25}
   ],
   "m6a-041-pikachu": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.4,"avg30":0.64,"low":0.1}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.4,"avg30":0.64,"low":0.1},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.18,"avg7":0.41,"avg30":0.57,"low":0.2}
   ],
   "m6a-042-pikachu": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.46,"avg30":0.66,"low":0.03}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.46,"avg30":0.66,"low":0.03},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.29,"avg7":0.57,"avg30":0.64,"low":0.25}
   ],
   "m6a-043-pikachu": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.12,"avg7":0.4,"avg30":0.56,"low":0.12}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.12,"avg7":0.4,"avg30":0.56,"low":0.12},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.11,"avg7":0.35,"avg30":0.5,"low":0.2}
   ],
   "m6a-044-pikachu": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.28,"avg30":0.45,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.28,"avg30":0.45,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.16,"avg7":0.29,"avg30":0.39,"low":0.05}
   ],
   "m6a-045-pikachu": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.25,"avg7":0.33,"avg30":0.47,"low":0.15}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.25,"avg7":0.33,"avg30":0.47,"low":0.15},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.23,"avg7":0.33,"avg30":0.43,"low":0.16}
   ],
   "m6a-046-pikachu": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.39,"avg7":0.44,"avg30":0.59,"low":0.3}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.39,"avg7":0.44,"avg30":0.59,"low":0.3},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.34,"avg7":0.37,"avg30":0.54,"low":0.2}
   ],
   "m6a-047-pikachu-ex": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.32,"avg30":0.51,"low":0.15}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.32,"avg30":0.51,"low":0.15},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.15,"avg7":0.43,"avg30":0.48,"low":0.1}
   ],
   "m6a-048-pikachu-ex": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.06,"avg7":0.35,"avg30":0.51,"low":0.13}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.06,"avg7":0.35,"avg30":0.51,"low":0.13},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.16,"avg7":0.49,"avg30":0.51,"low":0.14}
   ],
   "m6a-049-zapdos": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.06,"avg7":0.04,"avg30":0.04,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.06,"avg7":0.04,"avg30":0.04,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.04,"avg7":0.03,"avg30":0.04,"low":0.02}
   ],
   "m6a-050-zekrom": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.03,"avg30":0.04,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.03,"avg30":0.04,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.04,"avg7":0.05,"avg30":0.04,"low":0.02}
   ],
   "m6a-051-toxtricity": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.04,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.04,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.04,"low":0.02}
   ],
   "m6a-052-morpeko": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.05,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.05,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.05,"low":0.02}
   ],
   "m6a-053-miraidon": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.04,"avg30":0.05,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.04,"avg30":0.05,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":0.04,"avg30":0.05,"low":0.02}
   ],
   "m6a-054-mewtwo": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.09,"avg30":0.1,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.09,"avg30":0.1,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":0.05,"avg30":0.08,"low":0.02}
   ],
   "m6a-055-mewtwo-ex": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.31,"avg7":0.39,"avg30":0.48,"low":0.2}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.31,"avg7":0.39,"avg30":0.48,"low":0.2},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.2,"avg7":0.42,"avg30":0.46,"low":0.07}
   ],
   "m6a-056-mew": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.07,"avg30":0.14,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.07,"avg30":0.14,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":0.05,"avg30":0.1,"low":0.02}
   ],
   "m6a-057-mew-ex": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.36,"avg30":0.5,"low":0.1}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.36,"avg30":0.5,"low":0.1},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.13,"avg7":0.3,"avg30":0.42,"low":0.09}
   ],
   "m6a-058-espeon": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.05,"avg30":0.07,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.05,"avg30":0.07,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":0.05,"avg30":0.06,"low":0.02}
   ],
   "m6a-059-sylveon-ex": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.16,"avg7":0.22,"avg30":0.28,"low":0.04}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.16,"avg7":0.22,"avg30":0.28,"low":0.04},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.19,"avg7":0.17,"avg30":0.25,"low":0.04}
   ],
   "m6a-060-unown": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.03,"avg30":0.05,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.03,"avg30":0.05,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.04,"low":0.02}
   ],
   "m6a-061-drifloon": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.08,"avg7":0.06,"avg30":0.07,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.08,"avg7":0.06,"avg30":0.07,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.05,"avg7":0.04,"avg30":0.06,"low":0.02}
   ],
   "m6a-062-chandelure": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.04,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.04,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.03,"low":0.02}
   ],
   "m6a-063-xerneas": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.03,"avg30":0.05,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.03,"avg30":0.05,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.03,"avg7":0.05,"avg30":0.05,"low":0.02}
   ],
   "m6a-064-cosmog": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.05,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.05,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.04,"low":0.02}
   ],
   "m6a-065-cosmoem": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.04,"avg30":0.04,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.04,"avg30":0.04,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":0.02,"avg30":0.03,"low":0.02}
   ],
   "m6a-066-lunala": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.04,"avg7":0.04,"avg30":0.06,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.04,"avg7":0.04,"avg30":0.06,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.03,"avg7":0.04,"avg30":0.05,"low":0.02}
   ],
   "m6a-067-gimmighoul": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.03,"avg30":0.03,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.03,"avg30":0.03,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.03,"low":0.02}
   ],
   "m6a-068-groudon": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.05,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.05,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.03,"avg7":0.04,"avg30":0.05,"low":0.02}
   ],
   "m6a-069-lucario": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.04,"avg30":0.05,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.04,"avg30":0.05,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":0.04,"avg30":0.04,"low":0.02}
   ],
   "m6a-070-seismitoad": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.05,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.05,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.04,"low":0.02}
   ],
   "m6a-071-lycanroc": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.04,"avg30":0.05,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.04,"avg30":0.05,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.04,"low":0.02}
   ],
   "m6a-072-koraidon": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.05,"avg30":0.05,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.05,"avg30":0.05,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.03,"avg7":0.04,"avg30":0.05,"low":0.02}
   ],
   "m6a-073-nidoran": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.03,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.03,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.04,"avg7":0.05,"avg30":0.04,"low":0.02}
   ],
   "m6a-074-nidorina": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.03,"avg30":0.03,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.03,"avg30":0.03,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.04,"avg7":0.03,"avg30":0.03,"low":0.02}
   ],
   "m6a-075-alolan-meowth": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.04,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.04,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.04,"low":0.02}
   ],
   "m6a-076-gengar-ex": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.24,"avg7":0.33,"avg30":0.51,"low":0.15}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.24,"avg7":0.33,"avg30":0.51,"low":0.15},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.2,"avg7":0.38,"avg30":0.48,"low":0.18}
   ],
   "m6a-077-umbreon": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.05,"avg30":0.06,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.05,"avg30":0.06,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":0.06,"avg30":0.06,"low":0.02}
   ],
   "m6a-078-scraggy": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.05,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.05,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.04,"low":0.02}
   ],
   "m6a-079-yveltal": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.04,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.04,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":0.04,"avg30":0.04,"low":0.02}
   ],
   "m6a-080-galarian-meowth": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.04,"avg7":0.03,"avg30":0.03,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.04,"avg7":0.03,"avg30":0.03,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.03,"avg7":0.03,"avg30":0.04,"low":0.02}
   ],
   "m6a-081-jirachi-ex": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.05,"avg7":0.13,"avg30":0.21,"low":0.04}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.05,"avg7":0.13,"avg30":0.21,"low":0.04},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.08,"avg7":0.22,"avg30":0.21,"low":0.02}
   ],
   "m6a-082-dialga": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.05,"avg30":0.05,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.05,"avg30":0.05,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":0.04,"avg30":0.05,"low":0.02}
   ],
   "m6a-083-ferrothorn": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.03,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.03,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.03,"low":0.02}
   ],
   "m6a-084-solgaleo": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.03,"avg30":0.04,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.03,"avg30":0.04,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.04,"avg7":0.04,"avg30":0.04,"low":0.02}
   ],
   "m6a-085-zacian": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.04,"avg30":0.04,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.04,"avg30":0.04,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":0.04,"avg30":0.04,"low":0.02}
   ],
   "m6a-086-zamazenta": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.05,"avg7":0.06,"avg30":0.06,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.05,"avg7":0.06,"avg30":0.06,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.03,"avg7":0.04,"avg30":0.05,"low":0.02}
   ],
   "m6a-087-gholdengo": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.04,"avg30":0.05,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.04,"avg30":0.05,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":0.04,"avg30":0.05,"low":0.02}
   ],
   "m6a-088-salamence-ex": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.14,"avg30":0.16,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.14,"avg30":0.16,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":0.16,"avg30":0.16,"low":0.04}
   ],
   "m6a-089-jangmo-o": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.03,"avg30":0.03,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.03,"avg30":0.03,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.04,"avg7":0.03,"avg30":0.03,"low":0.02}
   ],
   "m6a-090-hakamo-o": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.03,"avg30":0.03,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.03,"avg30":0.03,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.03,"avg7":0.03,"avg30":0.03,"low":0.02}
   ],
   "m6a-091-kommo-o": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.04,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.04,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.03,"low":0.02}
   ],
   "m6a-092-meowth": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.03,"avg30":0.04,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.03,"avg30":0.04,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.03,"avg7":0.04,"avg30":0.04,"low":0.02}
   ],
   "m6a-093-ditto": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.05,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.05,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.05,"low":0.02}
   ],
   "m6a-094-eevee": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.04,"avg30":0.06,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.04,"avg30":0.06,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":0.04,"avg30":0.06,"low":0.02}
   ],
   "m6a-095-snorlax": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.08,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.08,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":0.05,"avg30":0.07,"low":0.02}
   ],
   "m6a-096-igglybuff": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.05,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.05,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":0.04,"avg30":0.05,"low":0.02}
   ],
   "m6a-097-lugia": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.07,"avg30":0.12,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.07,"avg30":0.12,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":0.05,"avg30":0.1,"low":0.02}
   ],
   "m6a-098-hisuian-zorua": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.03,"avg30":0.03,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.03,"avg30":0.03,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.03,"avg7":0.03,"avg30":0.03,"low":0.02}
   ],
   "m6a-099-hisuian-zoroark": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.03,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.03,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.04,"avg7":0.03,"avg30":0.03,"low":0.02}
   ],
   "m6a-100-maushold": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.04,"avg30":0.07,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.04,"avg30":0.07,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":0.04,"avg30":0.06,"low":0.02}
   ],
   "m6a-101-ultra-ball": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.04,"avg7":0.04,"avg30":0.04,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.04,"avg7":0.04,"avg30":0.04,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.03,"avg7":0.03,"avg30":0.04,"low":0.02}
   ],
   "m6a-102-poke-pad": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.03,"avg30":0.03,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.03,"avg7":0.03,"avg30":0.03,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.03,"avg7":0.03,"avg30":0.03,"low":0.02}
   ],
   "m6a-103-switch": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.05,"low":0.02}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.05,"low":0.02},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":0.03,"avg30":0.04,"low":0.02}
   ],
   "m6a-104-alolan-exeggutor": [
-    {"date":"2026-10-23","source":"cardmarket","trend":1.07,"avg7":1.92,"avg30":2.1,"low":1.4}
+    {"date":"2026-10-23","source":"cardmarket","trend":1.07,"avg7":1.92,"avg30":2.1,"low":1.4},
+    {"date":"2026-10-29","source":"cardmarket","trend":1.03,"avg7":1.63,"avg30":1.96,"low":1}
   ],
   "m6a-105-moltres": [
-    {"date":"2026-10-23","source":"cardmarket","trend":2.16,"avg7":2.98,"avg30":3.52,"low":2}
+    {"date":"2026-10-23","source":"cardmarket","trend":2.16,"avg7":2.98,"avg30":3.52,"low":2},
+    {"date":"2026-10-29","source":"cardmarket","trend":1.94,"avg7":2.54,"avg30":3.17,"low":1.5}
   ],
   "m6a-106-lapras": [
-    {"date":"2026-10-23","source":"cardmarket","trend":1.66,"avg7":2.37,"avg30":3.24,"low":1}
+    {"date":"2026-10-23","source":"cardmarket","trend":1.66,"avg7":2.37,"avg30":3.24,"low":1},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.64,"avg7":2.34,"avg30":2.89,"low":1}
   ],
   "m6a-107-articuno": [
-    {"date":"2026-10-23","source":"cardmarket","trend":1.91,"avg7":2.73,"avg30":3.42,"low":2}
+    {"date":"2026-10-23","source":"cardmarket","trend":1.91,"avg7":2.73,"avg30":3.42,"low":2},
+    {"date":"2026-10-29","source":"cardmarket","trend":1.9,"avg7":2.39,"avg30":2.98,"low":1.85}
   ],
   "m6a-108-zapdos": [
-    {"date":"2026-10-23","source":"cardmarket","trend":1.57,"avg7":2.5,"avg30":3.4,"low":1.9}
+    {"date":"2026-10-23","source":"cardmarket","trend":1.57,"avg7":2.5,"avg30":3.4,"low":1.9},
+    {"date":"2026-10-29","source":"cardmarket","trend":1.38,"avg7":2.39,"avg30":3.05,"low":1.8}
   ],
   "m6a-109-toxtricity": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.96,"avg7":1.42,"avg30":1.75,"low":0.99}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.96,"avg7":1.42,"avg30":1.75,"low":0.99},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.9,"avg7":1.35,"avg30":1.63,"low":0.75}
   ],
   "m6a-110-morpeko": [
-    {"date":"2026-10-23","source":"cardmarket","trend":2.17,"avg7":2.44,"avg30":3.07,"low":1.5}
+    {"date":"2026-10-23","source":"cardmarket","trend":2.17,"avg7":2.44,"avg30":3.07,"low":1.5},
+    {"date":"2026-10-29","source":"cardmarket","trend":1.53,"avg7":2.1,"avg30":2.77,"low":1.39}
   ],
   "m6a-111-drifloon": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.91,"avg7":1.59,"avg30":1.82,"low":1.25}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.91,"avg7":1.59,"avg30":1.82,"low":1.25},
+    {"date":"2026-10-29","source":"cardmarket","trend":1.03,"avg7":1.6,"avg30":1.75,"low":1.05}
   ],
   "m6a-112-chandelure": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.71,"avg7":1.13,"avg30":1.27,"low":0.5}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.71,"avg7":1.13,"avg30":1.27,"low":0.5},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.67,"avg7":1,"avg30":1.16,"low":0.5}
   ],
   "m6a-113-lycanroc": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.65,"avg7":1.11,"avg30":1.45,"low":0.72}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.65,"avg7":1.11,"avg30":1.45,"low":0.72},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.91,"avg7":1.31,"avg30":1.41,"low":0.74}
   ],
   "m6a-114-nidorina": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.42,"avg7":1.07,"avg30":1.7,"low":0.6}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.42,"avg7":1.07,"avg30":1.7,"low":0.6},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.64,"avg7":1.28,"avg30":1.56,"low":0.55}
   ],
   "m6a-115-alolan-meowth": [
-    {"date":"2026-10-23","source":"cardmarket","trend":1.64,"avg7":2.85,"avg30":3.66,"low":1.75}
+    {"date":"2026-10-23","source":"cardmarket","trend":1.64,"avg7":2.85,"avg30":3.66,"low":1.75},
+    {"date":"2026-10-29","source":"cardmarket","trend":1.18,"avg7":2.42,"avg30":3.2,"low":1.75}
   ],
   "m6a-116-scraggy": [
-    {"date":"2026-10-23","source":"cardmarket","trend":1.11,"avg7":1.11,"avg30":1.22,"low":0.74}
+    {"date":"2026-10-23","source":"cardmarket","trend":1.11,"avg7":1.11,"avg30":1.22,"low":0.74},
+    {"date":"2026-10-29","source":"cardmarket","trend":1.07,"avg7":1.15,"avg30":1.2,"low":0.49}
   ],
   "m6a-117-galarian-meowth": [
-    {"date":"2026-10-23","source":"cardmarket","trend":1.72,"avg7":2.77,"avg30":3.36,"low":1.9}
+    {"date":"2026-10-23","source":"cardmarket","trend":1.72,"avg7":2.77,"avg30":3.36,"low":1.9},
+    {"date":"2026-10-29","source":"cardmarket","trend":1.43,"avg7":2.38,"avg30":3.03,"low":1.65}
   ],
   "m6a-118-gholdengo": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.71,"avg7":0.84,"avg30":0.91,"low":0.4}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.71,"avg7":0.84,"avg30":0.91,"low":0.4},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.78,"avg7":0.89,"avg30":0.91,"low":0.4}
   ],
   "m6a-119-kommo-o": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.45,"avg7":0.97,"avg30":1.25,"low":0.5}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.45,"avg7":0.97,"avg30":1.25,"low":0.5},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.53,"avg7":1.05,"avg30":1.17,"low":0.5}
   ],
   "m6a-120-meowth": [
-    {"date":"2026-10-23","source":"cardmarket","trend":2.48,"avg7":2.98,"avg30":3.57,"low":2.4}
+    {"date":"2026-10-23","source":"cardmarket","trend":2.48,"avg7":2.98,"avg30":3.57,"low":2.4},
+    {"date":"2026-10-29","source":"cardmarket","trend":2.14,"avg7":2.78,"avg30":3.31,"low":2}
   ],
   "m6a-121-ditto": [
-    {"date":"2026-10-23","source":"cardmarket","trend":2.38,"avg7":3.19,"avg30":3.45,"low":2.5}
+    {"date":"2026-10-23","source":"cardmarket","trend":2.38,"avg7":3.19,"avg30":3.45,"low":2.5},
+    {"date":"2026-10-29","source":"cardmarket","trend":2.7,"avg7":3.21,"avg30":3.38,"low":1}
   ],
   "m6a-122-hisuian-zorua": [
-    {"date":"2026-10-23","source":"cardmarket","trend":1.31,"avg7":1.98,"avg30":2.52,"low":1.28}
+    {"date":"2026-10-23","source":"cardmarket","trend":1.31,"avg7":1.98,"avg30":2.52,"low":1.28},
+    {"date":"2026-10-29","source":"cardmarket","trend":1.41,"avg7":1.86,"avg30":2.33,"low":1.19}
   ],
   "m6a-123-maushold": [
-    {"date":"2026-10-23","source":"cardmarket","trend":1.86,"avg7":4.12,"avg30":4.7,"low":3.45}
+    {"date":"2026-10-23","source":"cardmarket","trend":1.86,"avg7":4.12,"avg30":4.7,"low":3.45},
+    {"date":"2026-10-29","source":"cardmarket","trend":2.54,"avg7":3.57,"avg30":4.35,"low":2.6}
   ],
   "m6a-124-fuecoco-ex": [
-    {"date":"2026-10-23","source":"cardmarket","trend":6.73,"avg7":7.36,"avg30":8.24,"low":5.4}
+    {"date":"2026-10-23","source":"cardmarket","trend":6.73,"avg7":7.36,"avg30":8.24,"low":5.4},
+    {"date":"2026-10-29","source":"cardmarket","trend":5.57,"avg7":6.19,"avg30":7.43,"low":5}
   ],
   "m6a-125-greninja-ex": [
-    {"date":"2026-10-23","source":"cardmarket","trend":7.17,"avg7":8.67,"avg30":9.61,"low":6.7}
+    {"date":"2026-10-23","source":"cardmarket","trend":7.17,"avg7":8.67,"avg30":9.61,"low":6.7},
+    {"date":"2026-10-29","source":"cardmarket","trend":6.18,"avg7":7,"avg30":8.74,"low":5}
   ],
   "m6a-126-pikachu-ex": [
-    {"date":"2026-10-23","source":"cardmarket","trend":17.87,"avg7":23.65,"avg30":29.16,"low":19.75}
+    {"date":"2026-10-23","source":"cardmarket","trend":17.87,"avg7":23.65,"avg30":29.16,"low":19.75},
+    {"date":"2026-10-29","source":"cardmarket","trend":15.9,"avg7":20.85,"avg30":26.48,"low":18}
   ],
   "m6a-127-pikachu-ex": [
-    {"date":"2026-10-23","source":"cardmarket","trend":25.58,"avg7":29.19,"avg30":36.89,"low":25.5}
+    {"date":"2026-10-23","source":"cardmarket","trend":25.58,"avg7":29.19,"avg30":36.89,"low":25.5},
+    {"date":"2026-10-29","source":"cardmarket","trend":20.9,"avg7":26.18,"avg30":32.95,"low":23.5}
   ],
   "m6a-128-mewtwo-ex": [
-    {"date":"2026-10-23","source":"cardmarket","trend":18.68,"avg7":19.84,"avg30":22.52,"low":16.9}
+    {"date":"2026-10-23","source":"cardmarket","trend":18.68,"avg7":19.84,"avg30":22.52,"low":16.9},
+    {"date":"2026-10-29","source":"cardmarket","trend":15.03,"avg7":17.39,"avg30":20.74,"low":13.5}
   ],
   "m6a-129-mew-ex": [
-    {"date":"2026-10-23","source":"cardmarket","trend":31.83,"avg7":36.74,"avg30":40.16,"low":28.9}
+    {"date":"2026-10-23","source":"cardmarket","trend":31.83,"avg7":36.74,"avg30":40.16,"low":28.9},
+    {"date":"2026-10-29","source":"cardmarket","trend":27.98,"avg7":29.93,"avg30":36.59,"low":28.99}
   ],
   "m6a-130-sylveon-ex": [
-    {"date":"2026-10-23","source":"cardmarket","trend":18.25,"avg7":21.48,"avg30":25.61,"low":18.99}
+    {"date":"2026-10-23","source":"cardmarket","trend":18.25,"avg7":21.48,"avg30":25.61,"low":18.99},
+    {"date":"2026-10-29","source":"cardmarket","trend":16.92,"avg7":19.88,"avg30":23.54,"low":19.79}
   ],
   "m6a-131-gengar-ex": [
-    {"date":"2026-10-23","source":"cardmarket","trend":28.02,"avg7":29.36,"avg30":35.35,"low":24.89}
+    {"date":"2026-10-23","source":"cardmarket","trend":28.02,"avg7":29.36,"avg30":35.35,"low":24.89},
+    {"date":"2026-10-29","source":"cardmarket","trend":22.43,"avg7":25.87,"avg30":32.27,"low":21.5}
   ],
   "m6a-132-jirachi-ex": [
-    {"date":"2026-10-23","source":"cardmarket","trend":23.12,"avg7":21.27,"avg30":23.47,"low":18}
+    {"date":"2026-10-23","source":"cardmarket","trend":23.12,"avg7":21.27,"avg30":23.47,"low":18},
+    {"date":"2026-10-29","source":"cardmarket","trend":17.5,"avg7":17.64,"avg30":21.88,"low":13.99}
   ],
   "m6a-133-salamence-ex": [
-    {"date":"2026-10-23","source":"cardmarket","trend":8.36,"avg7":9.1,"avg30":9.92,"low":6.9}
+    {"date":"2026-10-23","source":"cardmarket","trend":8.36,"avg7":9.1,"avg30":9.92,"low":6.9},
+    {"date":"2026-10-29","source":"cardmarket","trend":7.24,"avg7":7.99,"avg30":9.27,"low":7}
   ],
   "m6a-134-mewtwo-ex": [
-    {"date":"2026-10-23","source":"cardmarket","trend":16.74,"avg7":20.59,"avg30":25.16,"low":17.25}
+    {"date":"2026-10-23","source":"cardmarket","trend":16.74,"avg7":20.59,"avg30":25.16,"low":17.25},
+    {"date":"2026-10-29","source":"cardmarket","trend":12.89,"avg7":17.78,"avg30":23.23,"low":14.9}
   ],
   "m6a-135-mew-ex": [
-    {"date":"2026-10-23","source":"cardmarket","trend":11.36,"avg7":19.07,"avg30":25.84,"low":16}
+    {"date":"2026-10-23","source":"cardmarket","trend":11.36,"avg7":19.07,"avg30":25.84,"low":16},
+    {"date":"2026-10-29","source":"cardmarket","trend":11.47,"avg7":16.8,"avg30":22,"low":16}
   ],
   "m6a-136-pikachu": [
-    {"date":"2026-10-23","source":"cardmarket","trend":10.91,"avg7":14.16,"avg30":16.23,"low":12}
+    {"date":"2026-10-23","source":"cardmarket","trend":10.91,"avg7":14.16,"avg30":16.23,"low":12},
+    {"date":"2026-10-29","source":"cardmarket","trend":10.03,"avg7":12.84,"avg30":14.88,"low":14.99}
   ],
   "m6a-137-charizard": [
-    {"date":"2026-10-23","source":"cardmarket","trend":65.72,"avg7":73.95,"avg30":83.12,"low":68.95}
+    {"date":"2026-10-23","source":"cardmarket","trend":65.72,"avg7":73.95,"avg30":83.12,"low":68.95},
+    {"date":"2026-10-29","source":"cardmarket","trend":59.41,"avg7":68.77,"avg30":79.01,"low":65}
   ],
   "m6a-138-misty": [
-    {"date":"2026-10-23","source":"cardmarket","trend":7.96,"avg7":8.33,"avg30":8.75,"low":8.5}
+    {"date":"2026-10-23","source":"cardmarket","trend":7.96,"avg7":8.33,"avg30":8.75,"low":8.5},
+    {"date":"2026-10-29","source":"cardmarket","trend":8.66,"avg7":10.25,"avg30":9.25,"low":6}
   ],
   "m6a-139-erikas-jigglypuff": [
-    {"date":"2026-10-23","source":"cardmarket","trend":4.91,"avg7":6.75,"avg30":7.57,"low":5.79}
+    {"date":"2026-10-23","source":"cardmarket","trend":4.91,"avg7":6.75,"avg30":7.57,"low":5.79},
+    {"date":"2026-10-29","source":"cardmarket","trend":4.24,"avg7":5.91,"avg30":7.07,"low":4.99}
   ],
   "m6a-140-sneasel": [
-    {"date":"2026-10-23","source":"cardmarket","trend":3.31,"avg7":4.15,"avg30":4.87,"low":2.9}
+    {"date":"2026-10-23","source":"cardmarket","trend":3.31,"avg7":4.15,"avg30":4.87,"low":2.9},
+    {"date":"2026-10-29","source":"cardmarket","trend":2.69,"avg7":3.31,"avg30":4.17,"low":2.99}
   ],
   "m6a-141-shining-celebi": [
-    {"date":"2026-10-23","source":"cardmarket","trend":12.75,"avg7":12.9,"avg30":14.39,"low":10.5}
+    {"date":"2026-10-23","source":"cardmarket","trend":12.75,"avg7":12.9,"avg30":14.39,"low":10.5},
+    {"date":"2026-10-29","source":"cardmarket","trend":10.27,"avg7":10.61,"avg30":13.25,"low":8}
   ],
   "m6a-142-lugia": [
-    {"date":"2026-10-23","source":"cardmarket","trend":78.72,"avg7":78.61,"avg30":92.74,"low":74.5}
+    {"date":"2026-10-23","source":"cardmarket","trend":78.72,"avg7":78.61,"avg30":92.74,"low":74.5},
+    {"date":"2026-10-29","source":"cardmarket","trend":67.69,"avg7":71.07,"avg30":88.88,"low":63}
   ],
   "m6a-143-delcatty": [
-    {"date":"2026-10-23","source":"cardmarket","trend":3.23,"avg7":4.81,"avg30":5.25,"low":3.25}
+    {"date":"2026-10-23","source":"cardmarket","trend":3.23,"avg7":4.81,"avg30":5.25,"low":3.25},
+    {"date":"2026-10-29","source":"cardmarket","trend":3.99,"avg7":5.19,"avg30":5.22,"low":3.25}
   ],
   "m6a-144-dark-tyranitar": [
-    {"date":"2026-10-23","source":"cardmarket","trend":9.78,"avg7":10.01,"avg30":9.77,"low":8}
+    {"date":"2026-10-23","source":"cardmarket","trend":9.78,"avg7":10.01,"avg30":9.77,"low":8},
+    {"date":"2026-10-29","source":"cardmarket","trend":8.97,"avg7":9.02,"avg30":9.37,"low":8.5}
   ],
   "m6a-145-scizor-ex": [
-    {"date":"2026-10-23","source":"cardmarket","trend":4.19,"avg7":4.65,"avg30":5.29,"low":4}
+    {"date":"2026-10-23","source":"cardmarket","trend":4.19,"avg7":4.65,"avg30":5.29,"low":4},
+    {"date":"2026-10-29","source":"cardmarket","trend":3.79,"avg7":4.62,"avg30":5.01,"low":2.99}
   ],
   "m6a-146-metagross": [
-    {"date":"2026-10-23","source":"cardmarket","trend":6.42,"avg7":7.33,"avg30":7.83,"low":6.9}
+    {"date":"2026-10-23","source":"cardmarket","trend":6.42,"avg7":7.33,"avg30":7.83,"low":6.9},
+    {"date":"2026-10-29","source":"cardmarket","trend":6.15,"avg7":6.74,"avg30":7.33,"low":5.5}
   ],
   "m6a-147-palkia-lv-x": [
-    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":4.13,"avg30":6.38,"low":2.9}
+    {"date":"2026-10-23","source":"cardmarket","trend":0.02,"avg7":4.13,"avg30":6.38,"low":2.9},
+    {"date":"2026-10-29","source":"cardmarket","trend":0.02,"avg7":3.96,"avg30":5.19,"low":3.2}
   ],
   "m6a-148-uxie": [
-    {"date":"2026-10-23","source":"cardmarket","trend":4.66,"avg7":4.82,"avg30":5.01,"low":3.7}
+    {"date":"2026-10-23","source":"cardmarket","trend":4.66,"avg7":4.82,"avg30":5.01,"low":3.7},
+    {"date":"2026-10-29","source":"cardmarket","trend":3.76,"avg7":4.05,"avg30":4.6,"low":3.2}
   ],
   "m6a-149-crobat-g": [
-    {"date":"2026-10-23","source":"cardmarket","trend":6.73,"avg7":6.71,"avg30":6.83,"low":5.99}
+    {"date":"2026-10-23","source":"cardmarket","trend":6.73,"avg7":6.71,"avg30":6.83,"low":5.99},
+    {"date":"2026-10-29","source":"cardmarket","trend":6.26,"avg7":6.21,"avg30":6.51,"low":5.49}
   ],
   "m6a-150-gengar": [
-    {"date":"2026-10-23","source":"cardmarket","trend":23.98,"avg7":25.22,"avg30":29.34,"low":21.9}
+    {"date":"2026-10-23","source":"cardmarket","trend":23.98,"avg7":25.22,"avg30":29.34,"low":21.9},
+    {"date":"2026-10-29","source":"cardmarket","trend":18.72,"avg7":20.64,"avg30":25.74,"low":18.9}
   ],
   "m6a-151-darkrai-cresselia-legend": [
-    {"date":"2026-10-23","source":"cardmarket","trend":9.84,"avg7":9.54,"avg30":10.22,"low":7}
+    {"date":"2026-10-23","source":"cardmarket","trend":9.84,"avg7":9.54,"avg30":10.22,"low":7},
+    {"date":"2026-10-29","source":"cardmarket","trend":8.76,"avg7":8.88,"avg30":9.83,"low":7.99}
   ],
   "m6a-152-darkrai-cresselia-legend": [
-    {"date":"2026-10-23","source":"cardmarket","trend":6.57,"avg7":7.26,"avg30":8.4,"low":7.1}
+    {"date":"2026-10-23","source":"cardmarket","trend":6.57,"avg7":7.26,"avg30":8.4,"low":7.1},
+    {"date":"2026-10-29","source":"cardmarket","trend":6.42,"avg7":7.21,"avg30":8.02,"low":7}
   ],
   "m6a-153-n": [
-    {"date":"2026-10-23","source":"cardmarket","trend":5.62,"avg7":6.38,"avg30":6.84,"low":5.4}
+    {"date":"2026-10-23","source":"cardmarket","trend":5.62,"avg7":6.38,"avg30":6.84,"low":5.4},
+    {"date":"2026-10-29","source":"cardmarket","trend":5.11,"avg7":5.83,"avg30":6.51,"low":5}
   ],
   "m6a-154-rayquaza-ex": [
-    {"date":"2026-10-23","source":"cardmarket","trend":12.05,"avg7":12.26,"avg30":12.4,"low":11}
+    {"date":"2026-10-23","source":"cardmarket","trend":12.05,"avg7":12.26,"avg30":12.4,"low":11},
+    {"date":"2026-10-29","source":"cardmarket","trend":11.3,"avg7":11.67,"avg30":12.12,"low":9}
   ],
   "m6a-155-genesect-ex": [
-    {"date":"2026-10-23","source":"cardmarket","trend":2.5,"avg7":3.7,"avg30":4.45,"low":3.25}
+    {"date":"2026-10-23","source":"cardmarket","trend":2.5,"avg7":3.7,"avg30":4.45,"low":3.25},
+    {"date":"2026-10-29","source":"cardmarket","trend":2.54,"avg7":3.62,"avg30":4.19,"low":3}
   ],
   "m6a-156-m-gardevoir-ex": [
-    {"date":"2026-10-23","source":"cardmarket","trend":4.77,"avg7":5.55,"avg30":5.68,"low":5}
+    {"date":"2026-10-23","source":"cardmarket","trend":4.77,"avg7":5.55,"avg30":5.68,"low":5},
+    {"date":"2026-10-29","source":"cardmarket","trend":4.74,"avg7":5.49,"avg30":5.62,"low":4}
   ],
   "m6a-157-greninja-break": [
-    {"date":"2026-10-23","source":"cardmarket","trend":3.28,"avg7":5.27,"avg30":6.21,"low":3.98}
+    {"date":"2026-10-23","source":"cardmarket","trend":3.28,"avg7":5.27,"avg30":6.21,"low":3.98},
+    {"date":"2026-10-29","source":"cardmarket","trend":2.71,"avg7":4.33,"avg30":5.43,"low":3.58}
   ],
   "m6a-158-solgaleo-gx": [
-    {"date":"2026-10-23","source":"cardmarket","trend":3.7,"avg7":3.92,"avg30":4.15,"low":2.5}
+    {"date":"2026-10-23","source":"cardmarket","trend":3.7,"avg7":3.92,"avg30":4.15,"low":2.5},
+    {"date":"2026-10-29","source":"cardmarket","trend":3.46,"avg7":3.69,"avg30":3.99,"low":2.99}
   ],
   "m6a-159-buzzwole-gx": [
-    {"date":"2026-10-23","source":"cardmarket","trend":3.91,"avg7":4.3,"avg30":4.4,"low":3.95}
+    {"date":"2026-10-23","source":"cardmarket","trend":3.91,"avg7":4.3,"avg30":4.4,"low":3.95},
+    {"date":"2026-10-29","source":"cardmarket","trend":4.12,"avg7":4.45,"avg30":4.43,"low":3.89}
   ],
   "m6a-161-zacian-v": [
-    {"date":"2026-10-23","source":"cardmarket","trend":3.51,"avg7":3.49,"avg30":3.79,"low":2.3}
+    {"date":"2026-10-23","source":"cardmarket","trend":3.51,"avg7":3.49,"avg30":3.79,"low":2.3},
+    {"date":"2026-10-29","source":"cardmarket","trend":3.13,"avg7":3.14,"avg30":3.61,"low":2.5}
   ],
   "m6a-162-raikou": [
-    {"date":"2026-10-23","source":"cardmarket","trend":5.44,"avg7":5.86,"avg30":6.49,"low":4.97}
+    {"date":"2026-10-23","source":"cardmarket","trend":5.44,"avg7":5.86,"avg30":6.49,"low":4.97},
+    {"date":"2026-10-29","source":"cardmarket","trend":5.09,"avg7":5.64,"avg30":6.15,"low":4.93}
   ],
   "m6a-163-mew-vmax": [
-    {"date":"2026-10-23","source":"cardmarket","trend":10.45,"avg7":9.72,"avg30":9.4,"low":9.98}
+    {"date":"2026-10-23","source":"cardmarket","trend":10.45,"avg7":9.72,"avg30":9.4,"low":9.98},
+    {"date":"2026-10-29","source":"cardmarket","trend":10.32,"avg7":9.86,"avg30":9.55,"low":8.5}
   ],
   "m6a-164-arceus-vstar": [
-    {"date":"2026-10-23","source":"cardmarket","trend":2.66,"avg7":5.83,"avg30":6.9,"low":4.69}
+    {"date":"2026-10-23","source":"cardmarket","trend":2.66,"avg7":5.83,"avg30":6.9,"low":4.69},
+    {"date":"2026-10-29","source":"cardmarket","trend":3.23,"avg7":5.76,"avg30":6.5,"low":4.15}
   ],
   "m6a-165-magikarp": [
-    {"date":"2026-10-23","source":"cardmarket","trend":40.01,"avg7":39.83,"avg30":44.94,"low":34.99}
+    {"date":"2026-10-23","source":"cardmarket","trend":40.01,"avg7":39.83,"avg30":44.94,"low":34.99},
+    {"date":"2026-10-29","source":"cardmarket","trend":31.7,"avg7":36.04,"avg30":41.75,"low":33.95}
   ],
   "m6a-160-pikachu-zekrom-gx": [
-    {"date":"2026-10-23","source":"cardmarket","trend":14.74,"avg7":14.68,"avg30":14.95,"low":11.7}
+    {"date":"2026-10-23","source":"cardmarket","trend":14.74,"avg7":14.68,"avg30":14.95,"low":11.7},
+    {"date":"2026-10-29","source":"cardmarket","trend":13.22,"avg7":13.23,"avg30":14.38,"low":11.9}
   ]
 }
