@@ -15,7 +15,7 @@ Next.js 15 (App Router, TypeScript) web app to track several Japanese Pokemon TC
 - Tests: Node 24 built-in runner (`node --test`), no test dependencies
 
 ## Data model
-Four git-tracked JSON files are the single source of truth:
+Five git-tracked JSON files are the single source of truth:
 
 - **`data/binders.json`** — the binder registry. Fields: `id, name, description, kind, sort, officialCount?`.
   - `kind: "wants"` — a curated list. `buyPrice == null` means "no illustrated print chosen yet"; the "Illustration only" toggle is shown; the price refresh never prices a null card.
@@ -28,6 +28,7 @@ Four git-tracked JSON files are the single source of truth:
 - **`data/purchases.json`** — the shipment log. `{ shipments: Shipment[] }`, each `{ id, seller, date, shipping, fees, total, product?, items[] }`, each item `{ cardId, pricePaid, condition, qty? }`.
   - `pricePaid: null` means pulled from sealed product. `qty` defaults to 1. `product` is a free label such as `"30th CELEBRATION booster box x2"`.
 - **`data/prices.json`** — append-only price history keyed by card id. Each entry is a list of snapshots: `{ date, source: "manual", price }` for the pre-refresh target, and `{ date, source: "cardmarket", trend, avg7, avg30, low }` per refresh. Nothing in the UI reads it yet. On disk it is stored one snapshot per line (`formatPrices` in `scripts/lib/prices.mjs`) so a refresh diff is an append per card; `tests/data.test.ts` fails if the file drifts from that format, so after a hand edit rerun the formatter rather than `JSON.stringify`.
+- **`data/meta.json`** — `{ "pricesRefreshed": "YYYY-MM-DD" }`, the date of the last Cardmarket refresh. Written by `scripts/refresh_prices.mjs` in the same atomic write as the other two files; the only freshness file the UI imports (`prices.json` never is). Shown as "Prices refreshed 29 Oct 2026" beside the progress bar. `tests/data.test.ts` fails if it differs from the newest cardmarket snapshot date in `prices.json`, and `lib/data.ts` throws on a malformed date.
 
 A card is "owned" if it appears in at least one purchase item. Its effective `pricePaid` is the min across priced purchases, or null when every copy was pulled. Duplicates are recorded but don't double-count in collection stats.
 
@@ -49,7 +50,7 @@ components/
   PortfolioTracker.tsx — main dashboard: URL-backed state, derived data, composition of the parts below
   BinderTabs.tsx       — binder selector pills with owned / total counts
   StatsStrip.tsx       — collection summary: two lead figures plus two "what is left / where the money went" lines (props: stats, kind, onBuySingles?)
-  FilterBar.tsx        — search, type/set/ownership selects, illustration toggle, view toggle, Share/CSV; exports the Filters type
+  FilterBar.tsx        — search, type/set/ownership selects, illustration toggle, view toggle, Share, and the Tools row (Needed list, Placeholder sheets, CSV, Trade list); exports the Filters type
   CardTable.tsx        — table view with sortable headers and hover preview
   CardTile.tsx         — grid-view 3D-tilt holo card
   CardModal.tsx        — per-card details modal
@@ -63,21 +64,23 @@ lib/
   binders.ts     — Binder type, resolveBinderId/getBinder/cardsForBinder, validateData (pure)
   sort.ts        — SortKey/SortDir, SORT_KEYS + isSortKey (validates ?sort=), getSortValue, compareBySort nulls-last comparator (pure)
   format.ts      — fmtEur, the one place prices are formatted for display (pure)
+  meta.ts        — Meta type, latestCardmarketDate, fmtRefreshed ("29 Oct 2026"), metaProblems (pure)
 data/
   binders.json    — binder registry
   cards.json      — all cards
   purchases.json  — shipment log
   prices.json     — price history
+  meta.json       — date of the last price refresh
 scripts/
   lib/            — helpers (tcgdex, pricecharting, m6a, prices; atomic = tmp + rename writer), unit-tested
   download_images.mjs, backfill_card_fields.mjs, build_m6a.mjs, refresh_prices.mjs
 tests/            — node --test suites (*.test.ts), run with npm test
 ```
 
-`lib/cards.ts`, `lib/purchases.ts`, `lib/binders.ts`, `lib/sort.ts`, `lib/format.ts`, `lib/needed.ts`, `lib/print.ts`, `lib/shortlist.ts` must not import JSON or use the `@/` alias, so Node can run the tests directly. Imports between them use a relative path with an explicit `.ts` extension (`import { rarityOrder } from "./cards.ts"`), which both Node and the Next bundler resolve; keep the graph acyclic (`cards.ts` imports nothing from the others).
+`lib/cards.ts`, `lib/purchases.ts`, `lib/binders.ts`, `lib/sort.ts`, `lib/format.ts`, `lib/needed.ts`, `lib/print.ts`, `lib/shortlist.ts`, `lib/meta.ts` must not import JSON or use the `@/` alias, so Node can run the tests directly. Imports between them use a relative path with an explicit `.ts` extension (`import { rarityOrder } from "./cards.ts"`), which both Node and the Next bundler resolve; keep the graph acyclic (`cards.ts` imports nothing from the others).
 
 ## Source of truth rule
-**The four `data/*.json` files are the only places collection data lives.** `lib/data.ts` is a thin loader — do not hand-edit card objects anywhere else. Never set `owned` or `pricePaid` on a card — those are derived.
+**The five `data/*.json` files are the only places collection data lives.** `lib/data.ts` is a thin loader — do not hand-edit card objects anywhere else. Never set `owned` or `pricePaid` on a card — those are derived.
 
 **Logging a Cardmarket shipment:** paste the email into Claude and ask it to append to `data/purchases.json`.
 
@@ -101,9 +104,9 @@ The old `data/wishlist.csv` has been retired. The active binder can be exported 
 ## Refreshing prices
 ```bash
 node scripts/refresh_prices.mjs --dry-run   # list what would change
-node scripts/refresh_prices.mjs             # update buyPrice + append to data/prices.json
+node scripts/refresh_prices.mjs             # update buyPrice + append to data/prices.json + stamp data/meta.json
 ```
-It fetches the Cardmarket block from tcgdex for every card with a `tcgdexId`, appends a dated snapshot (same-day reruns replace that day's snapshot), seeds a `manual` snapshot of the pre-refresh `buyPrice` on a card's first refresh, and sets `buyPrice` to the trend price. Null prices in wants binders stay null. Cards without `tcgdexId` (8 promos / odd sets) are listed as skipped and stay manual. Commit `data/cards.json` and `data/prices.json` together; paste the "top movers" into the commit body.
+It fetches the Cardmarket block from tcgdex for every card with a `tcgdexId`, appends a dated snapshot (same-day reruns replace that day's snapshot), seeds a `manual` snapshot of the pre-refresh `buyPrice` on a card's first refresh, sets `buyPrice` to the trend price, and writes today's date to `data/meta.json`. Null prices in wants binders stay null. Cards without `tcgdexId` (8 promos / odd sets) are listed as skipped and stay manual. Commit `data/cards.json`, `data/prices.json` and `data/meta.json` together; paste the "top movers" into the commit body.
 
 ## Adding or updating a card image
 Whenever a card is added or updated without a bundled image (e.g. a new set not on tcgdex, or a variant swap), find the PriceCharting image and download it locally — don't leave `imageUrl: null`.
@@ -123,6 +126,8 @@ Whenever a card is added or updated without a bundled image (e.g. a new set not 
 
 ## Current Features
 - Binder tabs (`?binder=<id>` in the URL, default `kanto-151`); switching resets filters and sort
+- "Prices refreshed 29 Oct 2026" stamp beside the progress label, from `data/meta.json` (`fmtRefreshed` in `lib/meta.ts`); wraps under the bar on phones
+- Tools row under the controls: Needed list (`/needed`), Placeholder sheets (`/print`, via `printHref`), CSV, Trade list (shown only with extra copies); quiet text links, moved below the results on phones together with the Share button
 - Progress bar and a stats strip per binder. Two lead figures: cards collected with percent, and either the owned share of set value (master set, `setValuePct`) or worth vs paid (wants). Then two lines: what is left (`31 to go · 374,74 € as singles · 11 over 10 € = … · 20 under 10 € = …` with the "Buy as singles" link on master sets; `69 to go · 66 prints still to choose · 3 chosen, 109,04 € to buy` on wants binders; `Complete` when nothing is wanted) and where the money went (outlay, then pulled value and duplicates, or cards plus shipping and fees). Zero figures are hidden, values are ink not accent, nothing is red. The 10 € band boundary is `SINGLES_BAND_EUR` in `lib/purchases.ts`
 - One "All binders" line under the tabs: market value of everything owned vs the sum of all shipment totals
 - Grid view with 3D tilt + holographic hover; Japanese names under English ones
