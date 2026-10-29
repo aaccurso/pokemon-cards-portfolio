@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { cards as allCards, purchases, binders } from "@/lib/data";
+import { cards as allCards, purchases, binders, meta } from "@/lib/data";
 import { cardCategory, emptyStateMessage, Card } from "@/lib/cards";
 import {
   DEFAULT_BINDER_ID,
@@ -27,6 +27,8 @@ import { fmtEur } from "@/lib/format";
 import { compareBySort, isSortKey, SortDir, SortKey } from "@/lib/sort";
 import { fmt0 } from "@/lib/format";
 import { neededText } from "@/lib/needed";
+import { printHref } from "@/lib/print";
+import { fmtRefreshed } from "@/lib/meta";
 import { CardModal } from "./CardModal";
 import { CardTile } from "./CardTile";
 import { CardTable } from "./CardTable";
@@ -318,6 +320,12 @@ export default function PortfolioTracker() {
           />
         </div>
         <span className="progress-label">{progressLabel(stats)}</span>
+        <span
+          className="prices-stamp"
+          title="Date of the last Cardmarket refresh; every trend price on this page is from that day"
+        >
+          Prices refreshed {fmtRefreshed(meta.pricesRefreshed)}
+        </span>
       </div>
 
       <StatsStrip stats={stats} kind={binder.kind} onBuySingles={showSinglesShortlist} />
@@ -367,6 +375,7 @@ export default function PortfolioTracker() {
         onShare={handleShare}
         onCsv={handleDownloadCsv}
         neededHref={binderId === DEFAULT_BINDER_ID ? "/needed" : `/needed?binder=${binderId}`}
+        printHref={printHref("/print", binderId, false)}
         copied={copied}
         tradeCount={tradeRows.length}
         tradeCopied={tradeCopied}

@@ -29,7 +29,7 @@ test("the tracker reads own=dupes from the URL and filters to cards with extra c
   assert.match(tracker, /duplicateCount \?\? 0\) > 0/);
 });
 
-test("the trade list sits in the FilterBar beside the CSV button, hidden with no extra copies", () => {
+test("the trade list sits in the FilterBar's tools row after CSV, hidden with no extra copies", () => {
   const csv = filterBar.indexOf("onClick={onCsv}");
   const trade = filterBar.indexOf('<details className="trade-menu">');
   assert.ok(csv !== -1, "CSV button should exist");
