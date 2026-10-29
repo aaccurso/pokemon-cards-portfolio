@@ -1,11 +1,16 @@
 :root {
-  --bg: #1a1a2e;
-  --surface: #16213e;
-  --surface-hover: #1a2745;
-  --border: #2a3a5c;
-  --text: #e0e0e0;
-  --text-muted: #8892a4;
+  /* Neutral dark ground so the card art is the only colour on the page.
+     The accent is spent on three things: the active binder tab, the one
+     primary action on a screen, and the progress fill. Everything else is ink. */
+  --bg: #141416;
+  --surface: #1d1d21;
+  --surface-hover: #242429;
+  --border: #2a2a30;
+  --text: #f2f2f2;
+  --text-muted: #9a9aa3;
   --accent: #f8d030;
+  /* Text on an accent fill (active tab, primary button). */
+  --accent-ink: #1a1a1a;
   --owned-bg: #1a3a2e;
   --owned-border: #2a5a3e;
   /* Keyboard focus: double ring (bg gap + accent) reads on dark surfaces and on the yellow active pill.
@@ -40,7 +45,7 @@ header {
 
 header h1 {
   font-size: 2rem;
-  color: var(--accent);
+  color: var(--text);
   margin-bottom: 0.25rem;
 }
 
@@ -60,15 +65,16 @@ header .binder-description {
 .header-link {
   display: inline-block;
   margin-top: 0.5rem;
-  color: var(--accent);
+  color: var(--text-muted);
   text-decoration: none;
   font-size: 0.85rem;
   border-bottom: 1px dashed transparent;
-  transition: border-color 0.15s;
+  transition: border-color 0.15s, color 0.15s;
 }
 
 .header-link:hover {
-  border-bottom-color: var(--accent);
+  color: var(--text);
+  border-bottom-color: var(--text-muted);
 }
 
 /* Collection summary strip: two lead figures, then two quiet lines.
@@ -158,7 +164,7 @@ header .binder-description {
 
 .progress-bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, #f8d030, #78c850);
+  background: var(--accent);
   border-radius: 999px;
   transition: width 0.5s ease;
 }
@@ -196,7 +202,7 @@ header .binder-description {
 
 .rarity-row.active {
   color: var(--text);
-  border-color: var(--accent);
+  border-color: var(--text-muted);
   background: var(--surface);
 }
 
@@ -217,7 +223,8 @@ header .binder-description {
 .rarity-bar-fill {
   display: block;
   height: 100%;
-  background: linear-gradient(90deg, #f8d030, #78c850);
+  /* Neutral: the one yellow bar on the page is the binder progress above. */
+  background: var(--text-muted);
   border-radius: 999px;
   transition: width 0.5s ease;
 }
@@ -315,7 +322,7 @@ header .binder-description {
 }
 
 .card-table thead th:hover {
-  color: var(--accent);
+  color: var(--text);
 }
 
 .card-table tbody tr {
@@ -341,6 +348,9 @@ header .binder-description {
   vertical-align: middle;
 }
 
+/* Fill and text colour come from typeBadges() as inline styles: white text on
+   the saturated fills, dark ink on the light ones (Electric, Ground, Ice,
+   Steel, Normal, Fairy). No text-shadow: contrast comes from the ink choice. */
 .type-badge {
   display: inline-block;
   padding: 2px 8px;
@@ -348,7 +358,6 @@ header .binder-description {
   font-size: 0.7rem;
   font-weight: 600;
   color: #fff;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
   margin-right: 4px;
 }
 
@@ -356,7 +365,6 @@ header .binder-description {
   width: 18px;
   height: 18px;
   cursor: pointer;
-  accent-color: var(--accent);
 }
 
 .price {
@@ -375,9 +383,9 @@ header .binder-description {
   border-radius: 4px;
   font-size: 0.65rem;
   font-weight: 600;
-  background: rgba(248, 208, 48, 0.15);
-  color: var(--accent);
-  border: 1px solid rgba(248, 208, 48, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .sort-indicator {
@@ -410,8 +418,8 @@ header .binder-description {
 }
 
 .view-toggle button.active {
-  background: var(--accent);
-  color: #222;
+  background: var(--border);
+  color: var(--text);
   font-weight: 600;
 }
 
@@ -433,9 +441,9 @@ header .binder-description {
 }
 
 .pill-toggle.active {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #222;
+  background: var(--border);
+  border-color: var(--text-muted);
+  color: var(--text);
   font-weight: 600;
 }
 
@@ -750,9 +758,9 @@ header .binder-description {
   display: inline-block;
   margin-left: 4px;
   padding: 0 5px;
-  border: 1px solid var(--accent);
+  border: 1px solid var(--text-muted);
   border-radius: 999px;
-  color: var(--accent);
+  color: var(--text);
   font-size: 0.7rem;
   font-weight: 600;
   line-height: 1.5;
@@ -776,8 +784,8 @@ header .binder-description {
 }
 
 .trade-menu[open] > summary {
-  border-color: var(--accent);
-  color: var(--accent);
+  border-color: var(--text-muted);
+  color: var(--text);
 }
 
 .trade-menu-items {
@@ -961,8 +969,8 @@ header .binder-description {
 .modal-close:hover,
 .modal-close:focus-visible {
   background: var(--surface);
-  color: var(--accent);
-  border-color: var(--accent);
+  color: var(--text);
+  border-color: var(--text-muted);
   transform: scale(1.05);
   outline: none;
 }
@@ -996,7 +1004,7 @@ header .binder-description {
 
 .modal-nav:hover {
   background: var(--surface-hover);
-  color: var(--accent);
+  color: var(--text);
   transform: translateY(-50%) scale(1.08);
 }
 
@@ -1099,7 +1107,7 @@ header .binder-description {
 
 .placeholder-pokeball {
   font-size: 3rem;
-  color: var(--accent);
+  color: var(--text-muted);
   opacity: 0.4;
 }
 
@@ -1124,7 +1132,7 @@ header .binder-description {
 
 .modal-info h2 {
   font-size: 1.6rem;
-  color: var(--accent);
+  color: var(--text);
   margin-bottom: 0.75rem;
 }
 
@@ -1250,7 +1258,7 @@ header .binder-description {
   line-height: 1.5;
 }
 
-/* Binder tabs re-skinned for the light print page (the app's pills are navy) */
+/* Binder tabs re-skinned for the light print page (the app's pills are dark) */
 .print-page .binder-tabs {
   margin: 0.75rem 0 0;
 }
@@ -1734,19 +1742,19 @@ header .binder-description {
 
 .action-button:hover {
   background: var(--surface-hover);
-  border-color: var(--accent);
-  color: var(--accent);
+  border-color: var(--text-muted);
+  color: var(--text);
 }
 
 .action-button.primary {
   background: var(--accent);
   border-color: var(--accent);
-  color: #222;
+  color: var(--accent-ink);
   font-weight: 600;
 }
 
 .action-button.primary:hover {
-  color: #222;
+  color: var(--accent-ink);
   filter: brightness(1.05);
 }
 
@@ -1762,7 +1770,7 @@ header .binder-description {
 }
 
 .error-page h1 {
-  color: var(--accent);
+  color: var(--text);
   margin-bottom: 0.75rem;
 }
 
@@ -1824,15 +1832,17 @@ header .binder-description {
 /* Cardmarket search link beside the set code in the modal */
 .cardmarket-link {
   margin-left: 0.6rem;
-  color: var(--accent);
+  color: var(--text);
   font-size: 0.8rem;
   font-weight: 500;
-  text-decoration: none;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: var(--text-muted);
   white-space: nowrap;
 }
 
 .cardmarket-link:hover {
-  text-decoration: underline;
+  text-decoration-color: var(--text);
 }
 
 /* Text-style link inside a stat tile ("Buy as singles") */
@@ -1866,7 +1876,7 @@ header .binder-description {
 }
 
 .importer-modal h2 {
-  color: var(--accent);
+  color: var(--text);
   font-size: 1.4rem;
   margin-bottom: 0.5rem;
 }
@@ -1915,13 +1925,13 @@ header .binder-description {
 
 .importer-actions button:hover:not(:disabled) {
   background: var(--surface-hover);
-  border-color: var(--accent);
+  border-color: var(--text-muted);
 }
 
 .importer-actions button.primary {
   background: var(--accent);
   border-color: var(--accent);
-  color: #222;
+  color: var(--accent-ink);
   font-weight: 600;
 }
 
@@ -2220,7 +2230,7 @@ header .binder-description {
 .binder-tab.active {
   background: var(--accent);
   border-color: var(--accent);
-  color: #222;
+  color: var(--accent-ink);
   font-weight: 600;
 }
 .binder-tab-count {

@@ -114,18 +114,29 @@ export function numberLabel(c: Card, binder: BinderDisplay): string {
   return `No. ${c.setNumber}`;
 }
 
-export type TypeBadge = { label: string; color: string };
+/** `ink` is the text colour that reads on `color`: dark on the light fills, white elsewhere. */
+export type TypeBadge = { label: string; color: string; ink: string };
+
+/** Type fills too light for white text; these badges get dark ink and no text-shadow. */
+const lightTypes = new Set(["Electric", "Ground", "Ice", "Steel", "Normal", "Fairy"]);
+
+export function badgeInk(type: string): string {
+  return lightTypes.has(type) ? "#1a1a1a" : "#fff";
+}
 
 /** Type badges for Pokemon; one neutral category badge otherwise. */
 export function typeBadges(c: Card): TypeBadge[] {
   const category = cardCategory(c);
   if (category !== "Pokemon" || c.type1 == null) {
-    return [{ label: category === "Pokemon" ? "Unknown" : category, color: "#777" }];
+    return [{ label: category === "Pokemon" ? "Unknown" : category, color: "#777", ink: "#fff" }];
   }
-  const badges: TypeBadge[] = [
-    { label: c.type1, color: typeColors[c.type1] ?? "#888" },
-  ];
-  if (c.type2) badges.push({ label: c.type2, color: typeColors[c.type2] ?? "#888" });
+  const badge = (type: string): TypeBadge => ({
+    label: type,
+    color: typeColors[type] ?? "#888",
+    ink: badgeInk(type),
+  });
+  const badges: TypeBadge[] = [badge(c.type1)];
+  if (c.type2) badges.push(badge(c.type2));
   return badges;
 }
 

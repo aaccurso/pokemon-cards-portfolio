@@ -126,7 +126,7 @@ export function CardModal({ card, ownership, onClose, onPrev, onNext, binder }: 
               <span
                 key={b.label}
                 className={`type-badge${b.label === "Trainer" || b.label === "Energy" ? " trainer" : ""}`}
-                style={{ background: b.color }}
+                style={{ background: b.color, color: b.ink }}
               >
                 {b.label}
               </span>

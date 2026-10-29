@@ -127,7 +127,7 @@ export function CardTile({ card, owned, onClick, binder, copies = 1 }: Props) {
               <span
                 key={b.label}
                 className={`type-badge${b.label === "Trainer" || b.label === "Energy" ? " trainer" : ""}`}
-                style={{ background: b.color }}
+                style={{ background: b.color, color: b.ink }}
               >
                 {b.label}
               </span>
