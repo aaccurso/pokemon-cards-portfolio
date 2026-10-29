@@ -56,7 +56,7 @@ components/
   PlaceholderCard.tsx  — per-card print sheet placeholder
 lib/
   data.ts        — the ONLY module that imports the JSON files; validates them at load
-  cards.ts       — Card type, typeColors, numberLabel/typeBadges display helpers
+  cards.ts       — Card type, typeColors, numberLabel/typeBadges/rarityLabel/tileRarity display helpers
   purchases.ts   — ownership/stats derivation + CSV export (pure)
   needed.ts      — needed-list blocks, labels and text export (pure)
   shortlist.ts   - Cardmarket search URL for the card modal (pure)
@@ -129,6 +129,7 @@ Whenever a card is added or updated without a bundled image (e.g. a new set not 
 - Table view with sortable columns (incl. derived `owned` and `pricePaid`)
 - Search by name, code, or set name; filter by type (incl. Trainer), set, ownership (All, Owned, Wanted, Duplicates; `own=dupes` in the URL)
 - Rarity filter (`?rarity=<tcgdex label>`), shown whenever a card in the binder has `rarity`; master-set binders also get a clickable per-rarity completion breakdown under the progress bar and a value-weighted progress figure in the header (`rarityBreakdown` in `lib/purchases.ts`, display order and labels in `rarityOrder` in `lib/cards.ts`)
+- Rarity chip: a small neutral outlined chip (`.rarity-chip`) beside the number label, showing the short `rarityOrder` label (SAR, AR, RR, Classic). The modal shows it for every card with a `rarity`; the grid tile skips Common / Uncommon (`tileRarity` in `lib/cards.ts`) so the chip only marks the prints that carry the price. Type badges are unchanged
 - Duplicates: `xN` copies badge beside the Pokeball (grid and table), and a "Trade list" export beside CSV (copy text or download CSV via `buildTradeList` in `lib/purchases.ts`), shown only when the binder has extra copies
 - Pokemon type badges with canonical game colors; neutral badge for Trainers
 - Variant badges (ex, GX, V, VMAX, VSTAR, BREAK, LEGEND, Alolan/Galarian/Hisuian/Mega forms)
