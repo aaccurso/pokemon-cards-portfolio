@@ -1325,7 +1325,17 @@
           "condition": "NM"
         },
         {
+          "cardId": "m6a-117-galarian-meowth",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
           "cardId": "m6a-118-gholdengo",
+          "pricePaid": null,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-124-fuecoco-ex",
           "pricePaid": null,
           "condition": "NM"
         },
@@ -1372,6 +1382,76 @@
         {
           "cardId": "m6a-155-genesect-ex",
           "pricePaid": null,
+          "condition": "NM"
+        }
+      ]
+    },
+    {
+      "id": "2026-10-29-cardmarket-m6a-hits",
+      "seller": null,
+      "date": "2026-10-29",
+      "shipping": 15.49,
+      "fees": 0.9,
+      "total": 195.46,
+      "items": [
+        {
+          "cardId": "m6a-147-palkia-lv-x",
+          "pricePaid": 7.95,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-122-hisuian-zorua",
+          "pricePaid": 3.9,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-130-sylveon-ex",
+          "pricePaid": 28.68,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-163-mew-vmax",
+          "pricePaid": 19.39,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-156-m-gardevoir-ex",
+          "pricePaid": 7.9,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-151-darkrai-cresselia-legend",
+          "pricePaid": 13.89,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-153-n",
+          "pricePaid": 11.99,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-152-darkrai-cresselia-legend",
+          "pricePaid": 11.69,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-145-scizor-ex",
+          "pricePaid": 7.75,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-144-dark-tyranitar",
+          "pricePaid": 17.95,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-154-rayquaza-ex",
+          "pricePaid": 20.99,
+          "condition": "NM"
+        },
+        {
+          "cardId": "m6a-132-jirachi-ex",
+          "pricePaid": 26.99,
           "condition": "NM"
         }
       ]
