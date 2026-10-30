@@ -25,8 +25,10 @@
  *
  * Guardrails (for the unattended weekly Action, .github/workflows/
  * refresh-prices.yml): exits 2 without writing when any card priced at
- * 1 EUR or more moves over 5x either way, or when more than 60% of the
- * refreshed cards change. --force writes anyway after a human has looked.
+ * 1 EUR or more moves over 5x either way, when more than 60% of the
+ * refreshed cards change, or when more than 10% of the attempted cards come
+ * back without a Cardmarket block (the first Action run skipped all 165 M6a
+ * cards that way). --force writes anyway after a human has looked.
  *
  *   node scripts/refresh_prices.mjs                       # refresh and write
  *   node scripts/refresh_prices.mjs --dry-run             # print changes only
@@ -45,6 +47,7 @@ import {
   formatPrices,
   formatMeta,
   guardrailViolations,
+  skipGuardrail,
   summaryMessage,
 } from "./lib/prices.mjs";
 
@@ -85,6 +88,15 @@ for (let i = 0; i < cards.length; i++) {
   const cm = tc?.pricing?.cardmarket;
   if (!cm || !hasTrend(cm.trend)) {
     skippedNoPrice.push(card.code);
+    // Diagnostics for an unattended run: show what the API actually returned
+    // for the first few skips, so a lagging replica or a changed shape is
+    // visible in the Action log without a rerun.
+    if (skippedNoPrice.length <= 3) {
+      const shape = tc == null
+        ? "404 / no record"
+        : `keys ${Object.keys(tc).join(",")}; pricing ${JSON.stringify(tc.pricing ?? null).slice(0, 160)}`;
+      console.log(`  no price for ${card.tcgdexId}: ${shape}`);
+    }
     continue;
   }
   let history = seedManual(prices[card.id], card.buyPrice, today);
@@ -120,6 +132,11 @@ if (DRY_RUN) {
 }
 
 const violations = guardrailViolations(changes, refreshed);
+const skipReason = skipGuardrail({
+  skippedNoPrice: skippedNoPrice.length,
+  attempted: refreshed + skippedNoPrice.length,
+});
+if (skipReason) violations.push(skipReason);
 if (violations.length > 0 && !FORCE) {
   console.error("guardrail tripped, nothing written (rerun with --force after checking):");
   for (const v of violations) console.error(`  ${v}`);

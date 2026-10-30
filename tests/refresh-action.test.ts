@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { guardrailViolations, summaryMessage } from "../scripts/lib/prices.mjs";
+import { guardrailViolations, skipGuardrail, summaryMessage } from "../scripts/lib/prices.mjs";
 import { withRetry, isRetryable } from "../scripts/lib/retry.mjs";
 
 // Guardrails and the commit message for the unattended weekly refresh
@@ -24,6 +24,16 @@ test("guardrailViolations ignores first-time prices and tiny bases, and flags a 
   const many = Array.from({ length: 200 }, (_, i) => ({ id: `c${i}`, from: 10, to: 11 }));
   assert.match(guardrailViolations(many, 300)[0], /200 of 300/);
   assert.deepEqual(guardrailViolations(many, 400), []);
+});
+
+test("skipGuardrail flags a refresh where many priced cards came back without a Cardmarket block", () => {
+  // The first unattended run skipped all 165 M6a cards (a lagging API replica)
+  // and still committed: 0 changes trips nothing. Skips need their own limit.
+  // Baseline today: 4 cards legitimately lack a price out of 313 attempted.
+  assert.equal(skipGuardrail({ skippedNoPrice: 4, attempted: 313 }), null);
+  assert.match(skipGuardrail({ skippedNoPrice: 169, attempted: 313 }) ?? "", /169 of 313/);
+  assert.match(skipGuardrail({ skippedNoPrice: 40, attempted: 313 }) ?? "", /limit 10%/);
+  assert.equal(skipGuardrail({ skippedNoPrice: 0, attempted: 0 }), null);
 });
 
 test("summaryMessage is a git commit message: title, blank line, top movers", () => {

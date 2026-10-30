@@ -69,6 +69,17 @@ export function guardrailViolations(
 }
 
 /**
+ * Guardrail on cards that came back without a usable Cardmarket block. A few
+ * promos legitimately have none (4 of 313 today); when a whole set does, the
+ * API is lagging and the refresh must not be committed as if complete.
+ * Returns a reason string or null.
+ */
+export function skipGuardrail({ skippedNoPrice, attempted }, { maxShare = 0.1 } = {}) {
+  if (attempted === 0 || skippedNoPrice / attempted <= maxShare) return null;
+  return `${skippedNoPrice} of ${attempted} cards came back without a Cardmarket price (limit ${Math.round(maxShare * 100)}%)`;
+}
+
+/**
  * The commit message for a refresh: a one-line title, a blank line, then the
  * top movers (the same list CLAUDE.md asks to paste by hand).
  */
