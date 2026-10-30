@@ -321,8 +321,8 @@ header .binder-description {
 }
 
 .tool-link:hover {
-  color: var(--accent);
-  border-bottom-color: var(--accent);
+  color: var(--text);
+  border-bottom-color: var(--text);
 }
 
 .tool-link:focus-visible {
@@ -332,7 +332,7 @@ header .binder-description {
 }
 
 .trade-menu[open] > summary.tool-link {
-  border-bottom-color: var(--accent);
+  border-bottom-color: var(--text);
 }
 
 .controls input,
