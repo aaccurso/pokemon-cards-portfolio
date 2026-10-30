@@ -79,9 +79,11 @@ test("binder tabs become a horizontal scroll strip on phones", () => {
   assert.match(declarations(phone, ".binder-tab"), /flex:\s*0 0 auto/);
 });
 
-test("Share and CSV live in a secondary group that moves below the results on phones", () => {
-  assert.match(filterBar, /<div className="controls-secondary">[\s\S]*Share[\s\S]*CSV[\s\S]*<\/div>/);
+test("Share lives in a secondary group, and CSV in the tools row, that both move below the results on phones", () => {
+  assert.match(filterBar, /<div className="controls-secondary">[\s\S]*Share[\s\S]*<\/div>\s*\{\/\*/);
+  assert.match(filterBar, /<nav className="tools-row"[\s\S]*CSV[\s\S]*<\/nav>/);
   assert.match(declarations(phone, ".controls-secondary"), /order:\s*\d+/);
+  assert.match(declarations(phone, ".tools-row"), /order:\s*\d+/);
 });
 
 // Keeping the active tab visible must only move the strip's own horizontal

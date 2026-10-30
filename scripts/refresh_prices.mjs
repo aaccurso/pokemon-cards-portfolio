@@ -9,11 +9,13 @@
  * - Sets buyPrice = round(trend, 2), except a null buyPrice in a "wants"
  *   binder stays null (it means "no illustration chosen yet"). A trend that
  *   is not a positive number counts as "no Cardmarket price" and is skipped.
- * - Builds both files in memory and writes once at the end, through
+ * - Builds the files in memory and writes once at the end, through
  *   writeAllAtomic (tmp + rename, so a crash never leaves a half-written
  *   JSON file; one stale file is still possible, git is the real backstop).
  *   prices.json is written one snapshot per line (formatPrices) so a refresh
  *   diff is an append per card rather than a rewrite of every history array.
+ * - Stamps data/meta.json with { pricesRefreshed: today }, the one freshness
+ *   file the UI imports (prices.json stays out of the client bundle).
  *
  * Data growth (roadmap engineering item 7): ~98 bytes per snapshot, 313 per
  * refresh, so weekly runs add roughly 1.6 MB a year. Nothing imports this
@@ -34,11 +36,13 @@ import {
   nextBuyPrice,
   topMovers,
   formatPrices,
+  formatMeta,
 } from "./lib/prices.mjs";
 
 const CARDS_FILE = "data/cards.json";
 const BINDERS_FILE = "data/binders.json";
 const PRICES_FILE = "data/prices.json";
+const META_FILE = "data/meta.json";
 const DRY_RUN = process.argv.includes("--dry-run");
 
 const cards = JSON.parse(fs.readFileSync(CARDS_FILE, "utf8"));
@@ -101,6 +105,7 @@ if (DRY_RUN) {
 writeAllAtomic([
   [PRICES_FILE, formatPrices(prices)],
   [CARDS_FILE, JSON.stringify(cards, null, 2) + "\n"],
+  [META_FILE, formatMeta({ pricesRefreshed: today })],
 ]);
 console.log("top movers:");
 for (const c of topMovers(changes.filter((c) => c.from != null), 10)) {

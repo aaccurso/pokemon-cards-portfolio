@@ -98,6 +98,22 @@ export const rarityOrder: RarityLabel[] = [
   { rarity: "Classic Collection", label: "Classic" },
 ];
 
+/** Short display label for a tcgdex rarity ("Special illustration rare" -> "SAR"); unknown rarities stay raw. */
+export function rarityLabel(rarity: string): string {
+  return rarityOrder.find((r) => r.rarity === rarity)?.label ?? rarity;
+}
+
+/**
+ * The rarity chip a tile shows beside its number: the short label, or null
+ * when the card has no rarity or is a plain Common / Uncommon print ("None"),
+ * which is most of a master set and would put the same chip on most tiles.
+ * The modal shows every rarity through rarityLabel.
+ */
+export function tileRarity(c: Card): string | null {
+  if (!c.rarity || c.rarity === rarityOrder[0].rarity) return null;
+  return rarityLabel(c.rarity);
+}
+
 /**
  * Master-set binders show the slot index as printed on the card ("126/103",
  * or "126" without an official count). Wants binders show the Pokedex number
@@ -114,18 +130,29 @@ export function numberLabel(c: Card, binder: BinderDisplay): string {
   return `No. ${c.setNumber}`;
 }
 
-export type TypeBadge = { label: string; color: string };
+/** `ink` is the text colour that reads on `color`: dark on the light fills, white elsewhere. */
+export type TypeBadge = { label: string; color: string; ink: string };
+
+/** Type fills too light for white text; these badges get dark ink and no text-shadow. */
+const lightTypes = new Set(["Electric", "Ground", "Ice", "Steel", "Normal", "Fairy"]);
+
+export function badgeInk(type: string): string {
+  return lightTypes.has(type) ? "#1a1a1a" : "#fff";
+}
 
 /** Type badges for Pokemon; one neutral category badge otherwise. */
 export function typeBadges(c: Card): TypeBadge[] {
   const category = cardCategory(c);
   if (category !== "Pokemon" || c.type1 == null) {
-    return [{ label: category === "Pokemon" ? "Unknown" : category, color: "#777" }];
+    return [{ label: category === "Pokemon" ? "Unknown" : category, color: "#777", ink: "#fff" }];
   }
-  const badges: TypeBadge[] = [
-    { label: c.type1, color: typeColors[c.type1] ?? "#888" },
-  ];
-  if (c.type2) badges.push({ label: c.type2, color: typeColors[c.type2] ?? "#888" });
+  const badge = (type: string): TypeBadge => ({
+    label: type,
+    color: typeColors[type] ?? "#888",
+    ink: badgeInk(type),
+  });
+  const badges: TypeBadge[] = [badge(c.type1)];
+  if (c.type2) badges.push(badge(c.type2));
   return badges;
 }
 
