@@ -132,7 +132,7 @@ export function CardTable({ cards, ownership, binder, sortKey, sortDir, onSort, 
                     <span
                       key={b.label}
                       className={`type-badge${b.label === "Trainer" || b.label === "Energy" ? " trainer" : ""}`}
-                      style={{ background: b.color }}
+                      style={{ background: b.color, color: b.ink }}
                     >
                       {b.label}
                     </span>

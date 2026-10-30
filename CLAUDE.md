@@ -12,6 +12,7 @@ Next.js 15 (App Router, TypeScript) web app to track several Japanese Pokemon TC
 - TypeScript (`resolveJsonModule` for JSON imports, `allowImportingTsExtensions` for the tests)
 - React 19
 - No external UI libraries — plain CSS with dark theme and Pokemon type colors
+- Theme: a neutral dark ground (`--bg #141416`, `--surface #1d1d21`, tokens in `:root` of `app/globals.css`) so the card art is the colour on the page. The accent (`--accent #f8d030`) is spent on three things only: the active binder tab, the one primary action on a screen (`.action-button.primary`, "Buy as singles") and the progress fill; keyboard focus rings also use it. Everything else, including the h1, stat values and hover states, is ink (`--text`), and text on an accent fill uses `--accent-ink`. `tests/accent.test.ts` fails if a new rule uses the accent (the token, the hex or a literal `rgba(248, 208, 48, ...)` tint) outside that allowlist; tile hover, table name-cell hover and the modal alt-image notice are neutral. `app/opengraph-image.tsx` hard-codes the same ground and surface; change both together.
 - Tests: Node 24 built-in runner (`node --test`), no test dependencies
 
 ## Data model
@@ -136,7 +137,7 @@ Whenever a card is added or updated without a bundled image (e.g. a new set not 
 - Rarity filter (`?rarity=<tcgdex label>`), shown whenever a card in the binder has `rarity`; master-set binders also get a clickable per-rarity completion breakdown under the progress bar and a value-weighted progress figure in the header (`rarityBreakdown` in `lib/purchases.ts`, display order and labels in `rarityOrder` in `lib/cards.ts`)
 - Rarity chip: a small neutral outlined chip (`.rarity-chip`) beside the number label, showing the short `rarityOrder` label (SAR, AR, RR, Classic). The modal shows it for every card with a `rarity`; the grid tile skips Common / Uncommon (`tileRarity` in `lib/cards.ts`) so the chip only marks the prints that carry the price. Type badges are unchanged
 - Duplicates: `xN` copies badge beside the Pokeball (grid and table), and a "Trade list" export beside CSV (copy text or download CSV via `buildTradeList` in `lib/purchases.ts`), shown only when the binder has extra copies
-- Pokemon type badges with canonical game colors; neutral badge for Trainers
+- Pokemon type badges with canonical game colors; neutral badge for Trainers. `typeBadges` in `lib/cards.ts` also returns the text `ink`: dark on the light fills (Electric, Ground, Ice, Steel, Normal, Fairy), white elsewhere, no text-shadow. The print placeholder badge keeps its own rules
 - Variant badges (ex, GX, V, VMAX, VSTAR, BREAK, LEGEND, Alolan/Galarian/Hisuian/Mega forms)
 - CSV download of the active binder
 - Finish-as-singles shortlist: "Buy as singles" on the master-set "to go" line of the stats strip (wanted, table, buyPrice desc), "Copy as text" when the Wanted filter is on (`Need (N): 003 007 ...`, Pokedex number + name for wants binders), Cardmarket search link in the card modal

@@ -22,7 +22,7 @@ test("typeBadges lists Pokemon types and a single neutral badge for Trainers", (
   assert.deepEqual(typeBadges(card({ type1: "Grass", type2: "Poison" })).map((b) => b.label), ["Grass", "Poison"]);
   assert.equal(typeBadges(card({ type1: "Grass" }))[0].color, "#78C850");
   assert.equal(typeBadges(card({ type1: "Mystery" }))[0].color, "#888");
-  assert.deepEqual(typeBadges(card({ pokedexNumber: null, type1: null, category: "Trainer" })), [{ label: "Trainer", color: "#777" }]);
+  assert.deepEqual(typeBadges(card({ pokedexNumber: null, type1: null, category: "Trainer" })), [{ label: "Trainer", color: "#777", ink: "#fff" }]);
 });
 
 test("emptyStateMessage names the cause: owned-only on an empty binder, then search text, then generic", () => {
