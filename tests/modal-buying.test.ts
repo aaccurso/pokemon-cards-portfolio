@@ -6,8 +6,11 @@ import fs from "node:fs";
 // buying surface. Like tests/modal-mobile.test.ts this pins source and CSS
 // shape, since the repo has no DOM runner.
 //
-// - On a wanted card the primary action is a filled "Open on Cardmarket · <price>"
-//   button above the details, built from lib/shortlist.ts.
+// - On a wanted card with a chosen print (buyPrice != null) the primary action
+//   is a filled "Open on Cardmarket · <price>" button above the details, built
+//   from lib/shortlist.ts. A wants-binder card with no print chosen yet keeps
+//   the quiet Code-row link: its code is a default regular print the collector
+//   has not picked, so a filled button would be a misleading buying prompt.
 // - The price facts (status, trend, paid) come first in the details list so they
 //   are on the first screen of a phone.
 // - On phones the card image is capped at 45dvh (45vh fallback first).
@@ -65,7 +68,7 @@ function rule(source: string, selector: string): string | null {
 const mobile = mobileBlocks(css);
 const desktop = withoutMobile(css);
 
-test("a wanted card gets a primary Cardmarket button with the price, owned cards keep the Code-row link", () => {
+test("a wanted card with a chosen print gets a primary Cardmarket button with the price", () => {
   assert.match(modalSrc, /import \{ cardmarketSearchUrl, cardmarketButtonLabel \} from "@\/lib\/shortlist"/);
   const buy = modalSrc.indexOf('className="modal-buy"');
   assert.ok(buy !== -1, "the modal should render an a.modal-buy");
@@ -74,11 +77,19 @@ test("a wanted card gets a primary Cardmarket button with the price, owned cards
   assert.match(buyTag, /target="_blank"/);
   assert.match(buyTag, /rel="noopener noreferrer"/);
   assert.match(buyTag, /\{cardmarketButtonLabel\(card\.buyPrice\)\}/);
-  // Gated on the card being wanted, placed before the details list.
-  assert.match(modalSrc, /\{!owned && \(\s*<a\s+className="modal-buy"/);
+  // Gated on the card being wanted AND having a chosen print (66 of the 69
+  // wanted Kanto cards have buyPrice == null and must not get the button).
+  assert.match(modalSrc, /\{!owned && card\.buyPrice != null && \(\s*<a\s+className="modal-buy"/);
   assert.ok(buy < modalSrc.indexOf('className="modal-details"'), "the button comes before the details list");
-  // The quiet Code-row link stays for owned cards only (price checks), not as the wanted card's call to action.
-  assert.match(modalSrc, /\{owned && \(\s*<a\s+className="cardmarket-link"/);
+});
+
+test("the quiet Code-row link stays whenever the primary button is absent", () => {
+  // Owned cards (price checks) and wants-binder cards with no print chosen yet.
+  assert.match(modalSrc, /\{\(owned \|\| card\.buyPrice == null\) && \(\s*<a\s+className="cardmarket-link"/);
+  // Exactly one Cardmarket link is rendered in either state: the two gates are complements.
+  const buyGate = modalSrc.indexOf("{!owned && card.buyPrice != null && (");
+  const linkGate = modalSrc.indexOf("{(owned || card.buyPrice == null) && (");
+  assert.ok(buyGate !== -1 && linkGate !== -1 && buyGate < linkGate, "button gate, then its complement on the link");
 });
 
 test("price facts lead the details list: Status, then price rows, before Set and Code", () => {

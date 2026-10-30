@@ -1,5 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
+import fs from "node:fs";
 import { cardmarketSearchUrl, cardmarketButtonLabel } from "../lib/shortlist.ts";
 
 // The "Need (N): ..." text export lives in lib/needed.ts (collecting-workflow
@@ -23,8 +24,12 @@ test("cardmarketButtonLabel carries the trend price when there is one", () => {
   assert.equal(cardmarketButtonLabel(0.31), "Open on Cardmarket · 0,31 €");
 });
 
-test("cardmarketButtonLabel drops the price for an unpriced wants-binder card", () => {
-  assert.equal(cardmarketButtonLabel(null), "Open on Cardmarket");
+test("cardmarketButtonLabel always carries a price: the modal never shows the button for an unpriced card", () => {
+  // The button is gated on buyPrice != null in CardModal, so the helper takes a
+  // number, not number | null; pin the signature so the null branch cannot creep back.
+  const src = fs.readFileSync(new URL("../lib/shortlist.ts", import.meta.url), "utf8");
+  assert.match(src, /export function cardmarketButtonLabel\(buyPrice: number\): string/);
+  assert.doesNotMatch(src, /buyPrice == null \? "Open on Cardmarket"/);
 });
 
 test("cardmarketSearchUrl escapes characters that would break the query string", () => {

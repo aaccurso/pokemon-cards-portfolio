@@ -15,9 +15,10 @@ export function cardmarketSearchUrl(code: string): string {
 
 /**
  * Label of the wanted-card modal's primary button: "Open on Cardmarket · 78,72 €".
- * `buyPrice` is the Cardmarket trend; a wants-binder card with no print chosen
- * yet has none, so the label is just the verb.
+ * `buyPrice` is the Cardmarket trend. The modal only renders the button for a
+ * card that has one (a wants-binder card with no print chosen keeps the quiet
+ * Code-row link instead), so the label always carries a price.
  */
-export function cardmarketButtonLabel(buyPrice: number | null): string {
-  return buyPrice == null ? "Open on Cardmarket" : `Open on Cardmarket · ${fmtEur(buyPrice)}`;
+export function cardmarketButtonLabel(buyPrice: number): string {
+  return `Open on Cardmarket · ${fmtEur(buyPrice)}`;
 }

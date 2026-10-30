@@ -135,9 +135,12 @@ export function CardModal({ card, ownership, onClose, onPrev, onNext, binder }: 
               <span className="variant-badge">{card.variant}</span>
             )}
           </div>
-          {/* Wanted card: the modal is a buying surface, so the one filled
-              button is the Cardmarket search with the trend price on it. */}
-          {!owned && (
+          {/* Wanted card with a chosen print: the modal is a buying surface,
+              so the one filled button is the Cardmarket search with the trend
+              price on it. A wants-binder card with no print chosen yet
+              (buyPrice == null) is not a buying target: its code is a default
+              regular print, so it keeps the quiet Code-row link instead. */}
+          {!owned && card.buyPrice != null && (
             <a
               className="modal-buy"
               href={cardmarketSearchUrl(card.code)}
@@ -202,9 +205,10 @@ export function CardModal({ card, ownership, onClose, onPrev, onNext, binder }: 
               <dt>Code</dt>
               <dd>
                 {card.code}
-                {/* Owned cards keep the quiet link for price checks; a wanted
-                    card already has the primary button above. */}
-                {owned && (
+                {/* The complement of the button gate: owned cards (price
+                    checks) and wants-binder cards with no print chosen keep
+                    the quiet link; a wanted priced card has the button above. */}
+                {(owned || card.buyPrice == null) && (
                   <a
                     className="cardmarket-link"
                     href={cardmarketSearchUrl(card.code)}
