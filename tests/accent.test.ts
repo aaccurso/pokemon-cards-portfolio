@@ -56,12 +56,25 @@ test("the accent appears only on the active tab, primary actions and the progres
     // Semantic status colour, not decoration.
     ".tag-warn",
   ]);
+  // The token, the hex, or a literal rgba tint of the same yellow all count.
   const offenders = rules
-    .filter((r) => /var\(--accent\)|#f8d030/i.test(r.decls))
+    .filter((r) => /var\(--accent\)|#f8d030|248,\s*208,\s*48/i.test(r.decls))
     .flatMap((r) => r.selectors)
     // Keyboard focus rings keep the accent: they are an indicator, not decoration.
     .filter((s) => !/:focus/.test(s) && !allowed.has(s));
   assert.deepEqual([...new Set(offenders)], []);
+});
+
+test("hover states and the alt-image notice are a neutral lift, not a yellow halo", () => {
+  const tileHover = declsFor(".card-tile:hover .card-tile-image");
+  assert.match(tileHover, /border-color:\s*var\(--text-muted\)/);
+  assert.match(tileHover, /rgba\(255,\s*255,\s*255,/);
+  assert.match(declsFor(".card-name-cell:hover"), /background:\s*var\(--surface-hover\)/);
+  const notice = declsFor(".modal-alt-notice");
+  assert.match(notice, /background:\s*rgba\(255,\s*255,\s*255,/);
+  assert.match(notice, /border:\s*1px solid var\(--border\)/);
+  // The focused tile keeps the accent frame: it is the focus indicator.
+  assert.match(declsFor(".card-tile:focus-visible .card-tile-image"), /248,\s*208,\s*48/);
 });
 
 test("the progress fill is one flat accent, and the rarity bars are neutral", () => {
