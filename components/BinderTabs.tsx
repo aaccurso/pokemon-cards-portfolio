@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Binder } from "@/lib/binders";
-import { activeTabScrollLeft } from "@/lib/tabStrip";
+import { activeTabScrollLeft, tabStripFade, type TabStripFade } from "@/lib/tabStrip";
 
 export type BinderCounts = Record<string, { owned: number; total: number }>;
 
@@ -15,6 +15,11 @@ type Props = {
 
 export function BinderTabs({ binders, activeId, counts, onSelect }: Props) {
   const activeRef = useRef<HTMLButtonElement>(null);
+  const navRef = useRef<HTMLElement>(null);
+  // Which edges of the phone strip hide more tabs; null until measured, so
+  // the server markup carries no attribute and the CSS default (fade the far
+  // edge, which is where the overflow is at scrollLeft 0) applies first.
+  const [fade, setFade] = useState<TabStripFade | null>(null);
 
   // On phones the strip scrolls horizontally; keep the active tab visible.
   // Only the nav's own x axis moves. Scrolling the tab "into view" via the
@@ -33,10 +38,25 @@ export function BinderTabs({ binders, activeId, counts, onSelect }: Props) {
       elWidth: el.offsetWidth,
     });
     if (left !== null) nav.scrollTo({ left });
+    setFade(tabStripFade(nav));
   }, [activeId]);
 
+  // The fade mask follows the scroll position so the tab that is fully in
+  // view is never dimmed; a resize can change whether the strip overflows.
+  useEffect(() => {
+    const nav = navRef.current;
+    if (!nav) return;
+    const update = () => setFade(tabStripFade(nav));
+    nav.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      nav.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
+
   return (
-    <nav className="binder-tabs" aria-label="Binders">
+    <nav className="binder-tabs" aria-label="Binders" ref={navRef} data-fade={fade ?? undefined}>
       {binders.map((b) => {
         const c = counts[b.id] ?? { owned: 0, total: 0 };
         const active = b.id === activeId;

@@ -66,6 +66,8 @@ lib/
   sort.ts        — SortKey/SortDir, SORT_KEYS + isSortKey (validates ?sort=), getSortValue, compareBySort nulls-last comparator (pure)
   tableColumns.ts — tableColumns(binderCards, binder): the table's column list per binder (Set only across several sets, Rarity only when present; no Language or Variant) (pure)
   format.ts      — fmtEur, the one place prices are formatted for display (pure)
+  filters.ts     — activeFilterCount for the phone "Filters" disclosure badge (pure)
+  tabStrip.ts    — activeTabScrollLeft / tabStripFade geometry for the phone tab strip (pure)
   meta.ts        — Meta type, latestCardmarketDate, fmtRefreshed ("29 Oct 2026"), metaProblems (pure)
 data/
   binders.json    — binder registry
@@ -79,7 +81,7 @@ scripts/
 tests/            — node --test suites (*.test.ts), run with npm test
 ```
 
-`lib/cards.ts`, `lib/purchases.ts`, `lib/binders.ts`, `lib/sort.ts`, `lib/tableColumns.ts`, `lib/format.ts`, `lib/needed.ts`, `lib/print.ts`, `lib/shortlist.ts`, `lib/meta.ts` must not import JSON or use the `@/` alias, so Node can run the tests directly. Imports between them use a relative path with an explicit `.ts` extension (`import { rarityOrder } from "./cards.ts"`), which both Node and the Next bundler resolve; keep the graph acyclic (`cards.ts` imports nothing from the others).
+`lib/cards.ts`, `lib/purchases.ts`, `lib/binders.ts`, `lib/sort.ts`, `lib/tableColumns.ts`, `lib/format.ts`, `lib/needed.ts`, `lib/print.ts`, `lib/shortlist.ts`, `lib/filters.ts`, `lib/tabStrip.ts`, `lib/meta.ts` must not import JSON or use the `@/` alias, so Node can run the tests directly. Imports between them use a relative path with an explicit `.ts` extension (`import { rarityOrder } from "./cards.ts"`), which both Node and the Next bundler resolve; keep the graph acyclic (`cards.ts` imports nothing from the others).
 
 ## Source of truth rule
 **The five `data/*.json` files are the only places collection data lives.** `lib/data.ts` is a thin loader — do not hand-edit card objects anywhere else. Never set `owned` or `pricePaid` on a card — those are derived.
@@ -143,6 +145,7 @@ Whenever a card is added or updated without a bundled image (e.g. a new set not 
 - CSV download of the active binder
 - Finish-as-singles shortlist: "Buy as singles" on the master-set "to go" line of the stats strip (wanted, table, buyPrice desc), "Copy as text" when the Wanted filter is on (`Need (N): 003 007 ...`, Pokedex number + name for wants binders), Cardmarket search in the card modal
 - Card modal as a buying surface: on a wanted card with a chosen print (`buyPrice != null`) the one filled button is "Open on Cardmarket · <trend price>" (`cardmarketButtonLabel` in `lib/shortlist.ts`), the details list leads with Status, Trend price and Paid, owned cards and wants-binder cards with no print chosen yet keep the quiet Cardmarket link in the Code row instead of the button (their code is a default regular print, not a buying target), and on phones the card image is capped at 45dvh so the facts sit on the first screen. Price history from `data/prices.json` is still not shown (the UI does not load it)
+- Phone first screen (max-width 768px): 22px left-aligned title with the description hidden, a compact stats strip, rarity completion as wrapping chips (no bars), and one row of controls (search, a "Filters" disclosure that reveals the selects and shows how many are set, the view toggle) so the first card tile starts above 500px on a 390px phone. The tab strip fades only the edge that still hides tabs (`data-fade` from `tabStripFade`). Desktop markup and layout are unchanged: the disclosure button is hidden and its panel is `display: contents`. `tests/phone-first-screen.test.ts` pins the rules.
 - Print page (`/print?binder=<id>`) for blank placeholder cards, sorted by the binder's sort key; `&ink=1` is the ink saver (no card photo, outlined badges and watermark, same geometry)
 - Needed list (`/needed?binder=<id>`): one-screen or one-A4 view of the missing numbers (master sets as a 001 to 165 grid with secrets in their own block, wants binders as `#025 Pikachu` rows), owned cells dimmed, plus a "Copy as text" button that emits `Need (62): 003 007 ...` for seller chats
 
