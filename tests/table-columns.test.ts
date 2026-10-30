@@ -150,3 +150,24 @@ test("phone rows are two lines: own, number, name and price first, metadata seco
   assert.match(declarations(phone, ".card-table thead th:not(.sortable)"), /display:\s*none/);
   assert.match(declarations(phone, ".card-table thead tr::before"), /content:\s*"Sort by"/);
 });
+
+test("phone Paid cell keeps its 'paid' label: the dot separator is a DOM-sibling rule and Paid always follows the Buy price cell", () => {
+  // `td.row-meta + td.row-meta::before` (0,3,3) outranks `td.paid::before` (0,2,2),
+  // so the label survives only because the `+` combinator follows DOM order, not the
+  // flex order: the Paid cell's DOM predecessor is the Buy price cell, which is not
+  // row-meta. Pin all three facts so a column reorder cannot drop the label silently.
+  assert.match(declarations(phone, ".card-table td.paid::before"), /content:\s*"· paid"/);
+  assert.match(declarations(phone, ".card-table td.row-meta + td.row-meta::before"), /content:\s*"\\00b7"/);
+  assert.match(cardTable, /case "buyPrice":\s*return <td key=\{col\.key\} className="price">/);
+  assert.match(cardTable, /className=\{paid == null \? "price row-meta paid is-empty" : "price row-meta paid"\}/);
+  const configs = [
+    tableColumns([card({ id: "a" })], wants),
+    tableColumns([card({ id: "a", set: "A" }), card({ id: "b", set: "B", rarity: "None" })], master),
+    tableColumns([], wants),
+  ];
+  for (const cols of configs) {
+    const keys = cols.map((c) => c.key);
+    assert.equal(keys.indexOf("pricePaid"), keys.indexOf("buyPrice") + 1);
+    assert.equal(keys.indexOf("pricePaid"), keys.length - 1);
+  }
+});

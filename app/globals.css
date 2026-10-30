@@ -2224,7 +2224,10 @@ header .binder-description {
     margin-right: 0.5rem;
   }
 
-  /* Literal middle dot: after a hex escape the next space is eaten as the terminator. */
+  /* Literal middle dot: after a hex escape the next space is eaten as the terminator.
+     The sibling rule above is more specific but never matches Paid: `+` follows DOM
+     order, and Paid always comes right after the Buy price cell, which is not row-meta
+     (pinned in tests/table-columns.test.ts). */
   .card-table td.paid::before {
     content: "· paid";
     margin-right: 0.3rem;
