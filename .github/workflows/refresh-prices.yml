@@ -33,6 +33,15 @@ jobs:
 
       - run: npm ci
 
+      # api.tcgdex.net is GeoDNS: North American clients (GitHub runners) get
+      # a node in Canada (142.44.242.175) that lacks the newest sets (every
+      # M6a card and the set itself were 404 on 2026-10-30), while European
+      # clients get 51.255.35.48 which has everything. Pin the EU node. If it
+      # ever moves, the skip guardrail turns this run red rather than
+      # committing a partial refresh.
+      - name: Pin api.tcgdex.net to the EU node
+        run: echo "51.255.35.48 api.tcgdex.net" | sudo tee -a /etc/hosts
+
       - name: Refresh prices from tcgdex
         run: node scripts/refresh_prices.mjs --summary .refresh-summary.md
 
