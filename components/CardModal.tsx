@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { BinderDisplay, Card, languageFlags, conditionNames, numberLabel, rarityLabel, typeBadges } from "@/lib/cards";
 import type { CardOwnership } from "@/lib/purchases";
 import { fmtEur } from "@/lib/format";
-import { cardmarketSearchUrl } from "@/lib/shortlist";
+import { cardmarketSearchUrl, cardmarketButtonLabel } from "@/lib/shortlist";
 
 type Props = {
   card: Card;
@@ -135,7 +135,54 @@ export function CardModal({ card, ownership, onClose, onPrev, onNext, binder }: 
               <span className="variant-badge">{card.variant}</span>
             )}
           </div>
+          {/* Wanted card with a chosen print: the modal is a buying surface,
+              so the one filled button is the Cardmarket search with the trend
+              price on it. A wants-binder card with no print chosen yet
+              (buyPrice == null) is not a buying target: its code is a default
+              regular print, so it keeps the quiet Code-row link instead. */}
+          {!owned && card.buyPrice != null && (
+            <a
+              className="modal-buy"
+              href={cardmarketSearchUrl(card.code)}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {cardmarketButtonLabel(card.buyPrice)}
+            </a>
+          )}
           <dl className="modal-details">
+            {/* Price facts first so they land on a phone's first screen. */}
+            <div>
+              <dt>Status</dt>
+              <dd>
+                <span className={owned ? "status-owned" : "status-wanted"}>
+                  {owned ? "Owned" : "Wanted"}
+                </span>
+              </dd>
+            </div>
+            {card.buyPrice != null && (
+              <div>
+                <dt>Trend price</dt>
+                <dd>{fmtEur(card.buyPrice)}</dd>
+              </div>
+            )}
+            {ownership && (
+              <div>
+                <dt>Paid</dt>
+                <dd>
+                  {ownership.pricePaid != null
+                    ? fmtEur(ownership.pricePaid)
+                    : "Pulled from pack"}
+                  {ownership.duplicateCount > 0 && (
+                    <span className="dupe-note">
+                      {" "}
+                      · {ownership.duplicateCount} duplicate
+                      {ownership.duplicateCount === 1 ? "" : "s"}
+                    </span>
+                  )}
+                </dd>
+              </div>
+            )}
             <div>
               <dt>
                 {binder.kind === "wants" && card.pokedexNumber != null
@@ -165,15 +212,20 @@ export function CardModal({ card, ownership, onClose, onPrev, onNext, binder }: 
               <dt>Code</dt>
               <dd>
                 {card.code}
-                <a
-                  className="cardmarket-link"
-                  href={cardmarketSearchUrl(card.code)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  title="Search this code on Cardmarket"
-                >
-                  Cardmarket &#8599;
-                </a>
+                {/* The complement of the button gate: owned cards (price
+                    checks) and wants-binder cards with no print chosen keep
+                    the quiet link; a wanted priced card has the button above. */}
+                {(owned || card.buyPrice == null) && (
+                  <a
+                    className="cardmarket-link"
+                    href={cardmarketSearchUrl(card.code)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="Search this code on Cardmarket"
+                  >
+                    Cardmarket &#8599;
+                  </a>
+                )}
               </dd>
             </div>
             <div>
@@ -195,37 +247,6 @@ export function CardModal({ card, ownership, onClose, onPrev, onNext, binder }: 
                   title={conditionNames[card.condition] ?? card.condition}
                 >
                   {card.condition}
-                </span>
-              </dd>
-            </div>
-            {card.buyPrice != null && (
-              <div>
-                <dt>Buy Price</dt>
-                <dd>{fmtEur(card.buyPrice)}</dd>
-              </div>
-            )}
-            {ownership && (
-              <div>
-                <dt>Paid</dt>
-                <dd>
-                  {ownership.pricePaid != null
-                    ? fmtEur(ownership.pricePaid)
-                    : "Pulled from pack"}
-                  {ownership.duplicateCount > 0 && (
-                    <span className="dupe-note">
-                      {" "}
-                      · {ownership.duplicateCount} duplicate
-                      {ownership.duplicateCount === 1 ? "" : "s"}
-                    </span>
-                  )}
-                </dd>
-              </div>
-            )}
-            <div>
-              <dt>Status</dt>
-              <dd>
-                <span className={owned ? "status-owned" : "status-wanted"}>
-                  {owned ? "Owned" : "Wanted"}
                 </span>
               </dd>
             </div>

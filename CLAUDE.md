@@ -12,7 +12,7 @@ Next.js 15 (App Router, TypeScript) web app to track several Japanese Pokemon TC
 - TypeScript (`resolveJsonModule` for JSON imports, `allowImportingTsExtensions` for the tests)
 - React 19
 - No external UI libraries — plain CSS with dark theme and Pokemon type colors
-- Theme: a neutral dark ground (`--bg #141416`, `--surface #1d1d21`, tokens in `:root` of `app/globals.css`) so the card art is the colour on the page. The accent (`--accent #f8d030`) is spent on three things only: the active binder tab, the one primary action on a screen (`.action-button.primary`, "Buy as singles") and the progress fill; keyboard focus rings also use it. Everything else, including the h1, stat values and hover states, is ink (`--text`), and text on an accent fill uses `--accent-ink`. `tests/accent.test.ts` fails if a new rule uses the accent (the token, the hex or a literal `rgba(248, 208, 48, ...)` tint) outside that allowlist; tile hover, table name-cell hover and the modal alt-image notice are neutral. `app/opengraph-image.tsx` hard-codes the same ground and surface; change both together.
+- Theme: a neutral dark ground (`--bg #141416`, `--surface #1d1d21`, tokens in `:root` of `app/globals.css`) so the card art is the colour on the page. The accent (`--accent #f8d030`) is spent on three things only: the active binder tab, the one primary action on a screen (`.action-button.primary`, "Buy as singles", the modal's `.modal-buy` "Open on Cardmarket" button) and the progress fill; keyboard focus rings also use it. Everything else, including the h1, stat values and hover states, is ink (`--text`), and text on an accent fill uses `--accent-ink`. `tests/accent.test.ts` fails if a new rule uses the accent (the token, the hex or a literal `rgba(248, 208, 48, ...)` tint) outside that allowlist; tile hover, table name-cell hover and the modal alt-image notice are neutral. `app/opengraph-image.tsx` hard-codes the same ground and surface; change both together.
 - Tests: Node 24 built-in runner (`node --test`), no test dependencies
 
 ## Data model
@@ -61,7 +61,7 @@ lib/
   cards.ts       — Card type, typeColors, numberLabel/typeBadges/rarityLabel/tileRarity display helpers
   purchases.ts   — ownership/stats derivation + CSV export (pure)
   needed.ts      — needed-list blocks, labels and text export (pure)
-  shortlist.ts   - Cardmarket search URL for the card modal (pure)
+  shortlist.ts   - Cardmarket search URL and the "Open on Cardmarket · <price>" button label for the card modal (pure)
   binders.ts     — Binder type, resolveBinderId/getBinder/cardsForBinder, validateData (pure)
   sort.ts        — SortKey/SortDir, SORT_KEYS + isSortKey (validates ?sort=), getSortValue, compareBySort nulls-last comparator (pure)
   tableColumns.ts — tableColumns(binderCards, binder): the table's column list per binder (Set only across several sets, Rarity only when present; no Language or Variant) (pure)
@@ -141,7 +141,8 @@ Whenever a card is added or updated without a bundled image (e.g. a new set not 
 - Pokemon type badges with canonical game colors; neutral badge for Trainers. `typeBadges` in `lib/cards.ts` also returns the text `ink`, decided by the fill's relative luminance (`badgeInk`, threshold `BADGE_INK_LUMINANCE` 0.35): dark on the light fills (Electric, Ice, Ground, Steel, Grass, Fairy, Bug, Normal, Rock), white elsewhere, no text-shadow. The print placeholder badge keeps its own rules. The Grid/Table view toggle's selected button is inverted (`--text` fill, `--bg` text) so it cannot be confused with the neutral hover lift on its neighbour
 - Variant badges (ex, GX, V, VMAX, VSTAR, BREAK, LEGEND, Alolan/Galarian/Hisuian/Mega forms)
 - CSV download of the active binder
-- Finish-as-singles shortlist: "Buy as singles" on the master-set "to go" line of the stats strip (wanted, table, buyPrice desc), "Copy as text" when the Wanted filter is on (`Need (N): 003 007 ...`, Pokedex number + name for wants binders), Cardmarket search link in the card modal
+- Finish-as-singles shortlist: "Buy as singles" on the master-set "to go" line of the stats strip (wanted, table, buyPrice desc), "Copy as text" when the Wanted filter is on (`Need (N): 003 007 ...`, Pokedex number + name for wants binders), Cardmarket search in the card modal
+- Card modal as a buying surface: on a wanted card with a chosen print (`buyPrice != null`) the one filled button is "Open on Cardmarket · <trend price>" (`cardmarketButtonLabel` in `lib/shortlist.ts`), the details list leads with Status, Trend price and Paid, owned cards and wants-binder cards with no print chosen yet keep the quiet Cardmarket link in the Code row instead of the button (their code is a default regular print, not a buying target), and on phones the card image is capped at 45dvh so the facts sit on the first screen. Price history from `data/prices.json` is still not shown (the UI does not load it)
 - Print page (`/print?binder=<id>`) for blank placeholder cards, sorted by the binder's sort key; `&ink=1` is the ink saver (no card photo, outlined badges and watermark, same geometry)
 - Needed list (`/needed?binder=<id>`): one-screen or one-A4 view of the missing numbers (master sets as a 001 to 165 grid with secrets in their own block, wants binders as `#025 Pikachu` rows), owned cells dimmed, plus a "Copy as text" button that emits `Need (62): 003 007 ...` for seller chats
 

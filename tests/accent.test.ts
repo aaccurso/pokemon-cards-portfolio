@@ -53,6 +53,8 @@ test("the accent appears only on the active tab, primary actions and the progres
     ".importer-actions button.primary",
     // "Buy as singles" is the one primary action on the master-set dashboard.
     ".stat-link",
+    // "Open on Cardmarket · <price>" is the one primary action in the card modal.
+    ".modal-buy",
     // Semantic status colour, not decoration.
     ".tag-warn",
   ]);
@@ -86,11 +88,12 @@ test("the progress fill is one flat accent, and the rarity bars are neutral", ()
 });
 
 test("accent fills use the ink token for their text", () => {
-  for (const sel of [".binder-tab.active", ".action-button.primary", ".view-toggle button.active", ".pill-toggle.active"]) {
+  for (const sel of [".binder-tab.active", ".action-button.primary", ".view-toggle button.active", ".pill-toggle.active", ".modal-buy"]) {
     assert.doesNotMatch(declsFor(sel), /color:\s*#222/, `${sel} still uses the old #222`);
   }
   assert.match(declsFor(".binder-tab.active"), /color:\s*var\(--accent-ink\)/);
   assert.match(declsFor(".action-button.primary"), /color:\s*var\(--accent-ink\)/);
+  assert.match(declsFor(".modal-buy"), /color:\s*var\(--accent-ink\)/);
 });
 
 test("the selected view toggle button survives a hover on its neighbour", () => {
