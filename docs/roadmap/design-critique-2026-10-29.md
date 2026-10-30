@@ -29,37 +29,46 @@ Ranked by impact for this collector. Effort: S under half a day, M a day, L seve
    Lead with `31 to go · 374,74 EUR as singles`, split into price bands (11 cards over 10 EUR = 315,52 EUR;
    20 cards under 10 EUR = 59,22 EUR), with "Buy as singles" as the one filled button. Demote the tiles.
    M. `critique-shots/m6a-grid-desktop.png`
+   Status: shipped 2026-10-29 in 053142e.
 2. **Stop lying on the wants binder.**
    "To complete (est.) 109,04 EUR" covers 3 of 69 missing cards. Show
    `69 to go · 66 still to choose a print · 3 chosen, 109,04 EUR` and make "to choose" the wants-binder lead.
    S. `critique-shots/kanto-grid-desktop.png`
+   Status: shipped 2026-10-29 in 053142e.
 3. **Replace the six-tile grid with one divided strip**
    of two lead figures (30px) and three or four secondary ones (20px), label above value, values in ink not
    yellow, zero tiles hidden, red reserved for actual bad news (not "value = 31%" on a binder built from booster
    boxes). M. `critique-shots/m6a-grid-desktop.png`
+   Status: shipped 2026-10-29 in 053142e.
 4. **Phone first screen.**
    Title 22px, tabs not clipped by the fade mask, stats as a six-line label/value list, one row of controls
    (search plus a Filters sheet) so the first card appears above 500px. M. `critique-shots/m6a-phone-fold.jpg`
+   Status: shipped 2026-10-29 in 526a214.
 5. **Table columns that earn their place.**
    Drop Language (every row says Japanese), drop Set on master-set binders (165 rows of "30th CELEBRATION"),
    add Rarity, sentence-case 12px headers, a visible sort affordance on every sortable header, and two-line rows
    on the phone instead of wrapping "7,94 EUR" and "m1L 064" onto two lines.
    M. `critique-shots/kanto-table-phone.jpg`, `critique-shots/m6a-singles-desktop.png`
+   Status: shipped 2026-10-29 in 9ac9184.
 6. **Rarity on tiles and in the modal.**
    AR / SAR / RR / Classic is what prices an M6a card and it appears nowhere on a tile. A small neutral chip
    beside `130/103`. S. `critique-shots/m6a-grid-desktop.png`
+   Status: shipped 2026-10-29 in 1c64748.
 7. **Link the tools and date the prices.**
    `/print` has no link from the dashboard at all; `/needed` hides behind a "☐ Needed" button among the exports.
    One quiet "Tools" row (Needed list, Placeholder sheets, CSV, Trade list) plus a `Prices refreshed 29 Oct`
    stamp beside the progress bar. S. `critique-shots/kanto-grid-desktop.png`
+   Status: shipped 2026-10-29 in c615289 (accent follow-up f975046).
 8. **Modal as a buying surface.**
    On a wanted card, "Open on Cardmarket · 78,72 EUR" is the primary button, not a link tucked into the Code
    row; show the two price snapshots you already have; on the phone cap the image at 45dvh so the facts are on
    the first screen. M. `critique-shots/m6a-modal-desktop.png`, `critique-shots/modal-phone.jpg`
+   Status: shipped 2026-10-29 in feaafbb.
 9. **Accent discipline and a neutral dark.**
    Yellow only on the active tab, the one primary action and the progress fill; stat values in `#f2f2f2`;
    ground `#141416` and surface `#1d1d21` instead of navy; dark text on the Electric, Ground, Ice, Steel, Normal
    and Fairy badges; no text-shadow. S. `critique-shots/m6a-grid-desktop.png`
+   Status: shipped 2026-10-29 in cb7519b (bulk of the item in 677b336).
 10. **Print sheet finishing.**
     Corner crop ticks outside each card, calibration folded onto sheet 1 beside the first six cards, the budget
     line in black, and the red PLACEHOLDER stamp lighter in normal mode. S. `critique-shots/print-m6a-sheet.png`

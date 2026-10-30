@@ -1,11 +1,16 @@
 :root {
-  --bg: #1a1a2e;
-  --surface: #16213e;
-  --surface-hover: #1a2745;
-  --border: #2a3a5c;
-  --text: #e0e0e0;
-  --text-muted: #8892a4;
+  /* Neutral dark ground so the card art is the only colour on the page.
+     The accent is spent on three things: the active binder tab, the one
+     primary action on a screen, and the progress fill. Everything else is ink. */
+  --bg: #141416;
+  --surface: #1d1d21;
+  --surface-hover: #242429;
+  --border: #2a2a30;
+  --text: #f2f2f2;
+  --text-muted: #9a9aa3;
   --accent: #f8d030;
+  /* Text on an accent fill (active tab, primary button). */
+  --accent-ink: #1a1a1a;
   --owned-bg: #1a3a2e;
   --owned-border: #2a5a3e;
   /* Keyboard focus: double ring (bg gap + accent) reads on dark surfaces and on the yellow active pill.
@@ -40,7 +45,7 @@ header {
 
 header h1 {
   font-size: 2rem;
-  color: var(--accent);
+  color: var(--text);
   margin-bottom: 0.25rem;
 }
 
@@ -60,15 +65,16 @@ header .binder-description {
 .header-link {
   display: inline-block;
   margin-top: 0.5rem;
-  color: var(--accent);
+  color: var(--text-muted);
   text-decoration: none;
   font-size: 0.85rem;
   border-bottom: 1px dashed transparent;
-  transition: border-color 0.15s;
+  transition: border-color 0.15s, color 0.15s;
 }
 
 .header-link:hover {
-  border-bottom-color: var(--accent);
+  color: var(--text);
+  border-bottom-color: var(--text-muted);
 }
 
 /* Collection summary strip: two lead figures, then two quiet lines.
@@ -158,9 +164,20 @@ header .binder-description {
 
 .progress-bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, #f8d030, #78c850);
+  background: var(--accent);
   border-radius: 999px;
   transition: width 0.5s ease;
+}
+
+/* Freshness of every trend price on the page, from data/meta.json */
+.prices-stamp {
+  flex: 0 0 auto;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  padding-left: 0.75rem;
+  border-left: 1px solid var(--border);
 }
 
 /* Completion by rarity (master-set binders): one clickable row per rarity */
@@ -196,7 +213,7 @@ header .binder-description {
 
 .rarity-row.active {
   color: var(--text);
-  border-color: var(--accent);
+  border-color: var(--text-muted);
   background: var(--surface);
 }
 
@@ -217,7 +234,8 @@ header .binder-description {
 .rarity-bar-fill {
   display: block;
   height: 100%;
-  background: linear-gradient(90deg, #f8d030, #78c850);
+  /* Neutral: the one yellow bar on the page is the binder progress above. */
+  background: var(--text-muted);
   border-radius: 999px;
   transition: width 0.5s ease;
 }
@@ -233,14 +251,7 @@ header .binder-description {
   text-align: right;
 }
 
-@media (max-width: 640px) {
-  .rarity-row {
-    grid-template-columns: 7rem 1fr 4rem;
-  }
-  .rarity-togo {
-    display: none;
-  }
-}
+/* Phones: the rows become wrapping chips, see the (max-width: 768px) block. */
 
 /* Filters on the left, Share/CSV on the right. On phones the row dissolves
    (display: contents) and .controls-secondary is reordered below the results. */
@@ -263,6 +274,58 @@ header .binder-description {
 .controls-secondary {
   display: flex;
   gap: 0.75rem;
+}
+
+/* Tools row under the controls: the two pages and the two exports as quiet
+   text links, dot-separated, so the filter row stays the only strip of buttons. */
+.tools-row {
+  flex-basis: 100%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.75rem;
+  margin-top: -0.25rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.tools-label {
+  margin-right: 0.25rem;
+}
+
+.tools-row > :not(.tools-label) + :not(.tools-label)::before {
+  content: "·";
+  margin-right: 0.75rem;
+  color: var(--text-muted);
+}
+
+.tool-link {
+  display: inline-block;
+  background: none;
+  border: none;
+  padding: 0.15rem 0;
+  margin: 0;
+  font: inherit;
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.tool-link:hover {
+  color: var(--text);
+  border-bottom-color: var(--text);
+}
+
+.tool-link:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+  border-radius: 2px;
+}
+
+.trade-menu[open] > summary.tool-link {
+  border-bottom-color: var(--text);
 }
 
 .controls input,
@@ -290,6 +353,31 @@ header .binder-description {
   border-color: var(--accent);
 }
 
+/* Desktop: the Filters disclosure does not exist. The panel dissolves so the
+   selects sit in the controls row exactly as before; the button is hidden. */
+.filters-toggle {
+  display: none;
+}
+
+.filters-panel {
+  display: contents;
+}
+
+.filters-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.25rem;
+  height: 1.25rem;
+  padding: 0 0.35rem;
+  border-radius: 999px;
+  background: var(--border);
+  color: var(--text);
+  font-size: 0.7rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
 .card-table {
   width: 100%;
   border-collapse: separate;
@@ -297,25 +385,44 @@ header .binder-description {
   font-size: 0.85rem;
 }
 
+/* Headers: 12px sentence case. Only the sort buttons take the pointer; Type and Rarity do not sort. */
 .card-table thead th {
   background: var(--surface);
   padding: 0.75rem 0.5rem;
   text-align: left;
   color: var(--text-muted);
   font-weight: 600;
-  text-transform: uppercase;
-  font-size: 0.7rem;
-  letter-spacing: 0.05em;
+  font-size: 0.75rem;
   border-bottom: 2px solid var(--border);
   position: sticky;
   top: 0;
   z-index: 1;
-  cursor: pointer;
+  cursor: default;
   user-select: none;
 }
 
-.card-table thead th:hover {
-  color: var(--accent);
+.th-sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+/* Ink lift on hover, same as the tools row and the name cell; the accent stays off the table. */
+.th-sort:hover {
+  color: var(--text);
+}
+
+.th-sort:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
 }
 
 .card-table tbody tr {
@@ -341,6 +448,9 @@ header .binder-description {
   vertical-align: middle;
 }
 
+/* Fill and text colour come from typeBadges() as inline styles: white text on
+   the saturated fills, dark ink on the light ones (Electric, Ground, Ice,
+   Steel, Normal, Fairy). No text-shadow: contrast comes from the ink choice. */
 .type-badge {
   display: inline-block;
   padding: 2px 8px;
@@ -348,7 +458,6 @@ header .binder-description {
   font-size: 0.7rem;
   font-weight: 600;
   color: #fff;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
   margin-right: 4px;
 }
 
@@ -356,7 +465,6 @@ header .binder-description {
   width: 18px;
   height: 18px;
   cursor: pointer;
-  accent-color: var(--accent);
 }
 
 .price {
@@ -375,14 +483,18 @@ header .binder-description {
   border-radius: 4px;
   font-size: 0.65rem;
   font-weight: 600;
-  background: rgba(248, 208, 48, 0.15);
-  color: var(--accent);
-  border: 1px solid rgba(248, 208, 48, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .sort-indicator {
-  margin-left: 4px;
   font-size: 0.7rem;
+}
+
+/* Inactive sortable headers still say they sort: the two-way arrow at 40%. */
+.sort-indicator.idle {
+  opacity: 0.4;
 }
 
 /* View toggle buttons */
@@ -404,14 +516,16 @@ header .binder-description {
   transition: background 0.15s, color 0.15s;
 }
 
-.view-toggle button:hover {
+.view-toggle button:not(.active):hover {
   color: var(--text);
   background: var(--surface-hover);
 }
 
+/* Inverted, so a hover on the other button (a neutral surface lift) can never
+   be mistaken for the selected one. */
 .view-toggle button.active {
-  background: var(--accent);
-  color: #222;
+  background: var(--text);
+  color: var(--bg);
   font-weight: 600;
 }
 
@@ -433,9 +547,9 @@ header .binder-description {
 }
 
 .pill-toggle.active {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #222;
+  background: var(--border);
+  border-color: var(--text-muted);
+  color: var(--text);
   font-weight: 600;
 }
 
@@ -510,8 +624,8 @@ header .binder-description {
 .card-tile:hover .card-tile-image {
   box-shadow:
     0 18px 40px rgba(0, 0, 0, 0.55),
-    0 0 24px rgba(248, 208, 48, 0.25);
-  border-color: rgba(248, 208, 48, 0.5);
+    0 0 24px rgba(255, 255, 255, 0.1);
+  border-color: var(--text-muted);
 }
 
 .card-tile-image img {
@@ -602,6 +716,23 @@ header .binder-description {
   font-size: 0.7rem;
   color: var(--text-muted);
   font-variant-numeric: tabular-nums;
+}
+
+/* Rarity beside the number label (tile and modal): a quiet outlined chip,
+   neutral on purpose so the type badges keep the colour. */
+.rarity-chip {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 0 5px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+  vertical-align: middle;
+  white-space: nowrap;
 }
 
 .card-tile-name {
@@ -750,9 +881,9 @@ header .binder-description {
   display: inline-block;
   margin-left: 4px;
   padding: 0 5px;
-  border: 1px solid var(--accent);
+  border: 1px solid var(--text-muted);
   border-radius: 999px;
-  color: var(--accent);
+  color: var(--text);
   font-size: 0.7rem;
   font-weight: 600;
   line-height: 1.5;
@@ -776,8 +907,8 @@ header .binder-description {
 }
 
 .trade-menu[open] > summary {
-  border-color: var(--accent);
-  color: var(--accent);
+  border-color: var(--text-muted);
+  color: var(--text);
 }
 
 .trade-menu-items {
@@ -839,7 +970,7 @@ header .binder-description {
 
 .card-name-cell:hover,
 .card-name-cell:focus-visible {
-  background: rgba(248, 208, 48, 0.08);
+  background: var(--surface-hover);
   outline: none;
 }
 
@@ -961,8 +1092,8 @@ header .binder-description {
 .modal-close:hover,
 .modal-close:focus-visible {
   background: var(--surface);
-  color: var(--accent);
-  border-color: var(--accent);
+  color: var(--text);
+  border-color: var(--text-muted);
   transform: scale(1.05);
   outline: none;
 }
@@ -996,7 +1127,7 @@ header .binder-description {
 
 .modal-nav:hover {
   background: var(--surface-hover);
-  color: var(--accent);
+  color: var(--text);
   transform: translateY(-50%) scale(1.08);
 }
 
@@ -1056,8 +1187,8 @@ header .binder-description {
   max-width: 340px;
   line-height: 1.45;
   padding: 0.5rem 0.75rem;
-  background: rgba(248, 208, 48, 0.08);
-  border: 1px solid rgba(248, 208, 48, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
   border-radius: 6px;
 }
 
@@ -1099,7 +1230,7 @@ header .binder-description {
 
 .placeholder-pokeball {
   font-size: 3rem;
-  color: var(--accent);
+  color: var(--text-muted);
   opacity: 0.4;
 }
 
@@ -1124,7 +1255,7 @@ header .binder-description {
 
 .modal-info h2 {
   font-size: 1.6rem;
-  color: var(--accent);
+  color: var(--text);
   margin-bottom: 0.75rem;
 }
 
@@ -1250,7 +1381,7 @@ header .binder-description {
   line-height: 1.5;
 }
 
-/* Binder tabs re-skinned for the light print page (the app's pills are navy) */
+/* Binder tabs re-skinned for the light print page (the app's pills are dark) */
 .print-page .binder-tabs {
   margin: 0.75rem 0 0;
 }
@@ -1734,19 +1865,19 @@ header .binder-description {
 
 .action-button:hover {
   background: var(--surface-hover);
-  border-color: var(--accent);
-  color: var(--accent);
+  border-color: var(--text-muted);
+  color: var(--text);
 }
 
 .action-button.primary {
   background: var(--accent);
   border-color: var(--accent);
-  color: #222;
+  color: var(--accent-ink);
   font-weight: 600;
 }
 
 .action-button.primary:hover {
-  color: #222;
+  color: var(--accent-ink);
   filter: brightness(1.05);
 }
 
@@ -1762,7 +1893,7 @@ header .binder-description {
 }
 
 .error-page h1 {
-  color: var(--accent);
+  color: var(--text);
   margin-bottom: 0.75rem;
 }
 
@@ -1821,18 +1952,45 @@ header .binder-description {
   font-weight: 400;
 }
 
-/* Cardmarket search link beside the set code in the modal */
+/* Wanted-card modal: the one filled button, "Open on Cardmarket · 78,72 €"
+   (design critique item 8). Sits between the badges and the details list. */
+.modal-buy {
+  display: inline-block;
+  margin-bottom: 1.25rem;
+  padding: 0.6rem 1rem;
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  color: var(--accent-ink);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  font-variant-numeric: tabular-nums;
+}
+
+.modal-buy:hover {
+  filter: brightness(1.05);
+}
+
+.modal-buy:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+}
+
+/* Cardmarket search link beside the set code in the modal (owned cards) */
 .cardmarket-link {
   margin-left: 0.6rem;
-  color: var(--accent);
+  color: var(--text);
   font-size: 0.8rem;
   font-weight: 500;
-  text-decoration: none;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: var(--text-muted);
   white-space: nowrap;
 }
 
 .cardmarket-link:hover {
-  text-decoration: underline;
+  text-decoration-color: var(--text);
 }
 
 /* Text-style link inside a stat tile ("Buy as singles") */
@@ -1866,7 +2024,7 @@ header .binder-description {
 }
 
 .importer-modal h2 {
-  color: var(--accent);
+  color: var(--text);
   font-size: 1.4rem;
   margin-bottom: 0.5rem;
 }
@@ -1915,13 +2073,13 @@ header .binder-description {
 
 .importer-actions button:hover:not(:disabled) {
   background: var(--surface-hover);
-  border-color: var(--accent);
+  border-color: var(--text-muted);
 }
 
 .importer-actions button.primary {
   background: var(--accent);
   border-color: var(--accent);
-  color: #222;
+  color: var(--accent-ink);
   font-weight: 600;
 }
 
@@ -2068,26 +2226,98 @@ header .binder-description {
     padding: 1rem 0.5rem;
   }
 
+  /* First screen on a 390px phone: the first card tile must start above 500px
+     (design critique item 4). Title 22px left, description gone, tighter
+     rhythm above the grid; the tab row is the title row's context. */
+  header {
+    text-align: left;
+    margin-bottom: 0.75rem;
+  }
+
+  header h1 {
+    font-size: 22px;
+    text-align: left;
+    line-height: 1.2;
+  }
+
+  header .binder-description {
+    display: none;
+  }
+
+  .binder-summary {
+    margin: -0.25rem 0 0.75rem;
+  }
+
+  .progress {
+    margin-bottom: 1rem;
+  }
+
   .stats-strip {
-    --stat-lead: 1.5rem;
-    padding: 0.9rem 1rem 0.85rem;
-    margin-bottom: 1.25rem;
+    --stat-lead: 1.35rem;
+    padding: 0.7rem 0.85rem 0.65rem;
+    margin-bottom: 1rem;
   }
 
   .stat-leads {
-    gap: 0.75rem 1rem;
+    gap: 0.5rem 0.75rem;
+    padding-bottom: 0.55rem;
+  }
+
+  .stat-lead .label {
+    font-size: 0.75rem;
+    margin-top: 0.15rem;
   }
 
   .stat-lines {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
+    gap: 0.25rem;
+    margin-top: 0.55rem;
+  }
+
+  .stat-lines .stat-link {
+    margin-top: 0.15rem;
+  }
+
+  /* Rarity completion as wrapping chips: label and owned / total, no bar.
+     Click still filters; the bar and the "to go" column need the desktop width. */
+  .rarity-breakdown {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin: -0.25rem 0 1rem;
+  }
+
+  .rarity-row {
+    display: inline-flex;
+    width: auto;
+    gap: 0.4rem;
+    padding: 0.25rem 0.6rem;
+    border-color: var(--border);
+    border-radius: 999px;
+    font-size: 0.75rem;
+  }
+
+  .rarity-row.active {
+    border-color: var(--text-muted);
+  }
+
+  .rarity-label {
+    overflow: visible;
+  }
+
+  .rarity-bar,
+  .rarity-togo {
+    display: none;
   }
 
   .controls-row {
     display: contents;
   }
 
+  /* One row: search, Filters, view toggle. The selects open below it. */
   .controls {
-    margin-bottom: 1.25rem;
+    margin-bottom: 1rem;
+    align-items: center;
   }
 
   /* 16px keeps iOS Safari from zooming the page when a field is focused. */
@@ -2097,7 +2327,7 @@ header .binder-description {
   }
 
   .controls input {
-    flex-basis: 100%;
+    flex: 1 1 0;
     min-width: 0;
   }
 
@@ -2106,10 +2336,66 @@ header .binder-description {
     min-width: 0;
   }
 
+  .filters-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    font: inherit;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
+  .filters-toggle[aria-expanded="true"] {
+    border-color: var(--text-muted);
+  }
+
+  .filters-panel {
+    display: none;
+  }
+
+  .filters-panel.open {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    flex-basis: 100%;
+    order: 1;
+  }
+
+  .view-toggle button {
+    padding: 0.5rem 0.6rem;
+  }
+
   .controls-secondary {
     order: 1;
     justify-content: center;
     margin-top: 0.75rem;
+  }
+
+  /* Below the results with the other secondary controls, so the first card
+     stays as high as it was. */
+  .tools-row {
+    order: 1;
+    justify-content: center;
+    margin-top: 0.75rem;
+  }
+
+  /* The stamp wraps under the bar instead of squeezing it. */
+  .progress {
+    flex-wrap: wrap;
+    gap: 0.5rem 0.75rem;
+  }
+
+  .prices-stamp {
+    flex-basis: 100%;
+    padding-left: 0;
+    border-left: none;
+    text-align: right;
   }
 
   .table-wrap {
@@ -2117,7 +2403,102 @@ header .binder-description {
   }
 
   .card-table {
+    font-size: 0.85rem;
+  }
+
+  /* Two-line rows (design critique item 5). Line one: Own, #, Name, Buy price.
+     Line two: Type, Rarity, Code, Set, Paid as one muted metadata line. The
+     tr::after pseudo-element is the line break, so no price or code ever wraps
+     mid-value. The header turns into a "Sort by" row of the sortable labels. */
+  .card-table thead tr,
+  .card-table tbody tr {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    column-gap: 0.5rem;
+  }
+
+  .card-table thead tr {
+    padding: 0.5rem;
+    row-gap: 0.35rem;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .card-table thead tr::before {
+    content: "Sort by";
+    color: var(--text-muted);
     font-size: 0.75rem;
+  }
+
+  .card-table thead th {
+    position: static;
+    border: 0;
+    padding: 0;
+  }
+
+  .card-table thead th:not(.sortable) {
+    display: none;
+  }
+
+  .th-sort {
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 2px 8px;
+  }
+
+  .card-table tbody tr {
+    padding: 0.55rem 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .card-table tbody tr::after {
+    content: "";
+    flex-basis: 100%;
+    height: 0;
+    order: 1;
+  }
+
+  .card-table td {
+    display: block;
+    padding: 0;
+    border: 0;
+    white-space: nowrap;
+  }
+
+  .card-table td.name-cell {
+    flex: 1 1 0;
+    min-width: 0;
+    white-space: normal;
+  }
+
+  .card-table td.row-meta {
+    order: 2;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-weight: 400;
+  }
+
+  .card-table td.row-meta:empty,
+  .card-table td.paid.is-empty {
+    display: none;
+  }
+
+  .card-table td.row-meta + td.row-meta::before {
+    content: "\00b7";
+    margin-right: 0.5rem;
+  }
+
+  /* Literal middle dot: after a hex escape the next space is eaten as the terminator.
+     The sibling rule above is more specific but never matches Paid: `+` follows DOM
+     order, and Paid always comes right after the Buy price cell, which is not row-meta
+     (pinned in tests/table-columns.test.ts). */
+  .card-table td.paid::before {
+    content: "· paid";
+    margin-right: 0.3rem;
+  }
+
+  .card-table td.row-meta .type-badge {
+    margin-right: 0;
   }
 
   .preview-icon {
@@ -2139,6 +2520,25 @@ header .binder-description {
     /* dvh tracks the iOS URL bar; vh first so older browsers keep a value */
     max-height: 90vh;
     max-height: 90dvh;
+  }
+
+  /* Cap the card photo at under half the screen so the name, the Cardmarket
+     button and the price rows are on the first screen (critique item 8). */
+  .modal-image-clip {
+    width: auto;
+    max-width: 100%;
+  }
+
+  .modal-image {
+    width: auto;
+    max-width: 100%;
+    max-height: 45vh;
+    max-height: 45dvh;
+  }
+
+  .modal-placeholder {
+    max-height: 45vh;
+    max-height: 45dvh;
   }
 
   /* Nav buttons leave the absolute left/right slots (which land over the
@@ -2220,7 +2620,7 @@ header .binder-description {
 .binder-tab.active {
   background: var(--accent);
   border-color: var(--accent);
-  color: #222;
+  color: var(--accent-ink);
   font-weight: 600;
 }
 .binder-tab-count {
@@ -2239,8 +2639,27 @@ header .binder-description {
     scrollbar-width: none;
     margin-inline: -0.5rem;
     padding-inline: 0.5rem;
+    /* Default (server markup, scrollLeft 0): only the far edge hides tabs. */
     -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
     mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
+  }
+
+  /* BinderTabs writes data-fade from the scroll position (lib/tabStrip.ts) so
+     the fade sits only on the edge that still hides tabs; a tab that is fully
+     in view, the active one included, is never dimmed. */
+  .binder-tabs[data-fade="none"] {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .binder-tabs[data-fade="start"] {
+    -webkit-mask-image: linear-gradient(to left, #000 calc(100% - 28px), transparent);
+    mask-image: linear-gradient(to left, #000 calc(100% - 28px), transparent);
+  }
+
+  .binder-tabs[data-fade="both"] {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 28px, #000 calc(100% - 28px), transparent);
+    mask-image: linear-gradient(to right, transparent, #000 28px, #000 calc(100% - 28px), transparent);
   }
 
   .binder-tabs::-webkit-scrollbar {
@@ -2288,6 +2707,7 @@ header .binder-description {
    active pill in Chrome and clipped by border-radius: 999px in Safari. */
 .binder-tab:focus-visible,
 .pill-toggle:focus-visible,
+.filters-toggle:focus-visible,
 .action-button:focus-visible,
 .modal-nav:focus-visible,
 .print-btn:focus-visible,
@@ -2301,7 +2721,8 @@ header .binder-description {
   outline: none;
   box-shadow: var(--ring-inset);
 }
-/* Focused tile also lights the image frame, reusing the hover glow */
+/* Focused tile lights the image frame in the accent: a focus indicator, like the rings above.
+   The mouse hover is a neutral lift (see .card-tile:hover .card-tile-image). */
 .card-tile:focus-visible .card-tile-image {
   box-shadow:
     0 18px 40px rgba(0, 0, 0, 0.55),

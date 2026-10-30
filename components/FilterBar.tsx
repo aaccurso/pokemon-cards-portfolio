@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 
 import type { RarityRow } from "@/lib/purchases";
+import { activeFilterCount } from "@/lib/filters";
 
 /** `dupes` is owned with at least one extra copy; in the URL as `own=dupes`. */
 export type OwnFilter = "all" | "owned" | "wanted" | "dupes";
@@ -37,6 +39,8 @@ type Props = {
   onCsv: () => void;
   /** Href of the /needed one-sheet for the active binder. */
   neededHref: string;
+  /** Href of the /print placeholder sheets for the active binder. */
+  printHref: string;
   copied: boolean;
   /** Cards with extra copies; 0 hides the trade-list disclosure. */
   tradeCount: number;
@@ -61,6 +65,7 @@ export function FilterBar({
   onShare,
   onCsv,
   neededHref,
+  printHref,
   copied,
   tradeCount,
   tradeCopied,
@@ -70,6 +75,12 @@ export function FilterBar({
   copiedNeeded,
   showIllustration,
 }: Props) {
+  // Phones only: the selects sit behind a "Filters" button so the first row
+  // is search, Filters and the view toggle. On desktop the panel is
+  // display: contents and the button is hidden, so the row is unchanged.
+  const [filtersOpen, setFiltersOpen] = useState(false);
+  const activeCount = activeFilterCount(filters);
+
   return (
     <div className="controls-row">
       <div className="controls">
@@ -79,55 +90,68 @@ export function FilterBar({
           value={filters.q}
           onChange={(e) => onChange({ q: e.target.value })}
         />
-        <select value={filters.type} onChange={(e) => onChange({ type: e.target.value })}>
-          <option value="all">All Types</option>
-          {types.map((t) => (
-            <option key={t} value={t}>
-              {t}
-            </option>
-          ))}
-        </select>
-        <select value={filters.set} onChange={(e) => onChange({ set: e.target.value })}>
-          <option value="all">All Sets</option>
-          {sets.map((s) => (
-            <option key={s} value={s}>
-              {s}
-            </option>
-          ))}
-        </select>
-        <select
-          value={filters.own}
-          onChange={(e) => onChange({ own: e.target.value as OwnFilter })}
+        <button
+          type="button"
+          className="filters-toggle"
+          aria-expanded={filtersOpen}
+          aria-controls="filters-panel"
+          onClick={() => setFiltersOpen((o) => !o)}
+          title={filtersOpen ? "Hide the filter controls" : "Show the filter controls"}
         >
-          <option value="all">All Cards</option>
-          <option value="owned">Owned Only</option>
-          <option value="wanted">Wanted Only</option>
-          <option value="dupes">Duplicates Only</option>
-        </select>
-        {rarities.length > 0 && (
-          <select
-            value={filters.rarity}
-            onChange={(e) => onChange({ rarity: e.target.value })}
-            aria-label="Rarity"
-          >
-            <option value="all">All Rarities</option>
-            {rarities.map((r) => (
-              <option key={r.rarity} value={r.rarity}>
-                {r.label}
+          Filters
+          {activeCount > 0 && <span className="filters-count">{activeCount}</span>}
+        </button>
+        <div id="filters-panel" className={`filters-panel${filtersOpen ? " open" : ""}`}>
+          <select value={filters.type} onChange={(e) => onChange({ type: e.target.value })}>
+            <option value="all">All Types</option>
+            {types.map((t) => (
+              <option key={t} value={t}>
+                {t}
               </option>
             ))}
           </select>
-        )}
-        {showIllustration && (
-          <button
-            className={`pill-toggle${filters.illus ? " active" : ""}`}
-            onClick={() => onChange({ illus: !filters.illus })}
-            aria-pressed={filters.illus}
-            title="Show only cards with a priced illustration target"
+          <select value={filters.set} onChange={(e) => onChange({ set: e.target.value })}>
+            <option value="all">All Sets</option>
+            {sets.map((s) => (
+              <option key={s} value={s}>
+                {s}
+              </option>
+            ))}
+          </select>
+          <select
+            value={filters.own}
+            onChange={(e) => onChange({ own: e.target.value as OwnFilter })}
           >
-            Illustration only
-          </button>
-        )}
+            <option value="all">All Cards</option>
+            <option value="owned">Owned Only</option>
+            <option value="wanted">Wanted Only</option>
+            <option value="dupes">Duplicates Only</option>
+          </select>
+          {rarities.length > 0 && (
+            <select
+              value={filters.rarity}
+              onChange={(e) => onChange({ rarity: e.target.value })}
+              aria-label="Rarity"
+            >
+              <option value="all">All Rarities</option>
+              {rarities.map((r) => (
+                <option key={r.rarity} value={r.rarity}>
+                  {r.label}
+                </option>
+              ))}
+            </select>
+          )}
+          {showIllustration && (
+            <button
+              className={`pill-toggle${filters.illus ? " active" : ""}`}
+              onClick={() => onChange({ illus: !filters.illus })}
+              aria-pressed={filters.illus}
+              title="Show only cards with a priced illustration target"
+            >
+              Illustration only
+            </button>
+          )}
+        </div>
         <div className="view-toggle" role="group" aria-label="View mode">
           <button
             className={viewMode === "table" ? "active" : ""}
@@ -164,27 +188,41 @@ export function FilterBar({
             {copiedNeeded ? "✓ Copied" : "⎘ Copy as text"}
           </button>
         )}
+      </div>
+      {/* The quiet row of tools the binder offers: the two pages and the two
+          exports. Text links, not buttons, so the filter row above stays the
+          only loud control strip. */}
+      <nav className="tools-row" aria-label="Tools">
+        <span className="tools-label">Tools</span>
+        <Link
+          href={neededHref}
+          className="tool-link"
+          title="One-sheet list of the numbers still missing, for shops and seller chats"
+        >
+          Needed list
+        </Link>
+        <Link
+          href={printHref}
+          className="tool-link"
+          title="Printable placeholder cards for the pockets still empty"
+        >
+          Placeholder sheets
+        </Link>
         <button
-          className="action-button"
+          type="button"
+          className="tool-link"
           onClick={onCsv}
           title="Download the current portfolio as CSV"
         >
-          ↓ CSV
+          CSV
         </button>
-        <Link
-          href={neededHref}
-          className="action-button"
-          title="One-sheet list of the numbers still missing, for shops and seller chats"
-        >
-          ☐ Needed
-        </Link>
         {tradeCount > 0 && (
           <details className="trade-menu">
             <summary
-              className="action-button"
+              className="tool-link"
               title="Export the extra copies for a trade partner or buylist"
             >
-              ⇄ Trade list ({tradeCount})
+              Trade list ({tradeCount})
             </summary>
             <div className="trade-menu-items">
               <button className="action-button" onClick={onTradeText}>
@@ -196,7 +234,7 @@ export function FilterBar({
             </div>
           </details>
         )}
-      </div>
+      </nav>
     </div>
   );
 }

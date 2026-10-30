@@ -98,6 +98,22 @@ export const rarityOrder: RarityLabel[] = [
   { rarity: "Classic Collection", label: "Classic" },
 ];
 
+/** Short display label for a tcgdex rarity ("Special illustration rare" -> "SAR"); unknown rarities stay raw. */
+export function rarityLabel(rarity: string): string {
+  return rarityOrder.find((r) => r.rarity === rarity)?.label ?? rarity;
+}
+
+/**
+ * The rarity chip a tile shows beside its number: the short label, or null
+ * when the card has no rarity or is a plain Common / Uncommon print ("None"),
+ * which is most of a master set and would put the same chip on most tiles.
+ * The modal shows every rarity through rarityLabel.
+ */
+export function tileRarity(c: Card): string | null {
+  if (!c.rarity || c.rarity === rarityOrder[0].rarity) return null;
+  return rarityLabel(c.rarity);
+}
+
 /**
  * Master-set binders show the slot index as printed on the card ("126/103",
  * or "126" without an official count). Wants binders show the Pokedex number
@@ -114,18 +130,45 @@ export function numberLabel(c: Card, binder: BinderDisplay): string {
   return `No. ${c.setNumber}`;
 }
 
-export type TypeBadge = { label: string; color: string };
+/** `ink` is the text colour that reads on `color`: dark on the light fills, white elsewhere. */
+export type TypeBadge = { label: string; color: string; ink: string };
+
+/** WCAG relative luminance (0 black to 1 white) of a `#rgb` or `#rrggbb` colour. */
+export function relativeLuminance(hex: string): number {
+  let h = hex.replace("#", "");
+  if (h.length === 3) h = h.replace(/./g, (c) => c + c);
+  const n = parseInt(h, 16);
+  const channel = (v: number) => {
+    const s = v / 255;
+    return s <= 0.03928 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4;
+  };
+  return 0.2126 * channel(n >> 16) + 0.7152 * channel((n >> 8) & 255) + 0.0722 * channel(n & 255);
+}
+
+/**
+ * Fills lighter than this get dark ink. White text on a fill at this luminance is
+ * about 2.6:1; the badges have no text-shadow to help it. It lands between Rock
+ * (0.36) and Flying (0.35), so Electric, Ice, Ground, Steel, Grass, Fairy, Bug,
+ * Normal and Rock are dark-ink and the saturated types keep white.
+ */
+export const BADGE_INK_LUMINANCE = 0.35;
+
+export function badgeInk(fill: string): string {
+  return relativeLuminance(fill) > BADGE_INK_LUMINANCE ? "#1a1a1a" : "#fff";
+}
 
 /** Type badges for Pokemon; one neutral category badge otherwise. */
 export function typeBadges(c: Card): TypeBadge[] {
   const category = cardCategory(c);
   if (category !== "Pokemon" || c.type1 == null) {
-    return [{ label: category === "Pokemon" ? "Unknown" : category, color: "#777" }];
+    return [{ label: category === "Pokemon" ? "Unknown" : category, color: "#777", ink: "#fff" }];
   }
-  const badges: TypeBadge[] = [
-    { label: c.type1, color: typeColors[c.type1] ?? "#888" },
-  ];
-  if (c.type2) badges.push({ label: c.type2, color: typeColors[c.type2] ?? "#888" });
+  const badge = (type: string): TypeBadge => {
+    const color = typeColors[type] ?? "#888";
+    return { label: type, color, ink: badgeInk(color) };
+  };
+  const badges: TypeBadge[] = [badge(c.type1)];
+  if (c.type2) badges.push(badge(c.type2));
   return badges;
 }
 

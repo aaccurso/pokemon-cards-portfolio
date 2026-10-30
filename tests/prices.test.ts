@@ -1,6 +1,10 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { seedManual, upsertCardmarket, nextBuyPrice, topMovers, formatPrices } from "../scripts/lib/prices.mjs";
+import { seedManual, upsertCardmarket, nextBuyPrice, topMovers, formatPrices, formatMeta } from "../scripts/lib/prices.mjs";
+
+test("formatMeta is the two-space JSON the hand-written data/meta.json uses, with a trailing newline", () => {
+  assert.equal(formatMeta({ pricesRefreshed: "2026-10-29" }), '{\n  "pricesRefreshed": "2026-10-29"\n}\n');
+});
 
 test("seedManual only once and only for priced cards", () => {
   assert.deepEqual(seedManual(undefined, 32, "2026-10-23"), [{ date: "2026-10-23", source: "manual", price: 32 }]);

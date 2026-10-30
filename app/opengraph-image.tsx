@@ -22,9 +22,9 @@ export default async function Image() {
         style={{
           width: "100%",
           height: "100%",
-          background:
-            "linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #1a3a2e 100%)",
-          color: "#e0e0e0",
+          // Same ground and surface as --bg / --surface in app/globals.css.
+          background: "linear-gradient(135deg, #141416 0%, #1d1d21 100%)",
+          color: "#f2f2f2",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -112,10 +112,10 @@ export default async function Image() {
               style={{
                 display: "flex",
                 fontSize: 25,
-                color: "#8892a4",
+                color: "#9a9aa3",
                 padding: "8px 20px",
                 borderRadius: 999,
-                border: "2px solid #2a3450",
+                border: "2px solid #2a2a30",
                 background: "rgba(255,255,255,0.04)",
               }}
             >

@@ -62,7 +62,7 @@ test("PortfolioTracker builds the shortlist from the shared filter state and sor
 });
 
 test("CardModal links the set code to a Cardmarket search", () => {
-  assert.match(modal, /import \{ cardmarketSearchUrl \} from "@\/lib\/shortlist"/);
+  assert.match(modal, /import \{ cardmarketSearchUrl, cardmarketButtonLabel \} from "@\/lib\/shortlist"/);
   assert.match(modal, /href=\{cardmarketSearchUrl\(card\.code\)\}/);
   assert.match(modal, /rel="noopener noreferrer"/);
 });

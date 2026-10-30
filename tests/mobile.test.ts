@@ -61,7 +61,8 @@ test("the stats strip keeps two lead figures side by side and scales them throug
 test("form fields are at least 16px on phones so iOS Safari does not zoom on focus", () => {
   assert.match(declarations(phone, ".controls input"), /font-size:\s*16px/);
   assert.match(declarations(phone, ".controls select"), /font-size:\s*16px/);
-  assert.match(declarations(phone, ".controls input"), /flex-basis:\s*100%/);
+  // The search box shares its row with the Filters button and the view toggle (critique item 4).
+  assert.match(declarations(phone, ".controls input"), /flex:\s*1 1 0/);
   assert.match(declarations(phone, ".controls select"), /min-width:\s*0/);
 });
 
@@ -79,9 +80,11 @@ test("binder tabs become a horizontal scroll strip on phones", () => {
   assert.match(declarations(phone, ".binder-tab"), /flex:\s*0 0 auto/);
 });
 
-test("Share and CSV live in a secondary group that moves below the results on phones", () => {
-  assert.match(filterBar, /<div className="controls-secondary">[\s\S]*Share[\s\S]*CSV[\s\S]*<\/div>/);
+test("Share lives in a secondary group, and CSV in the tools row, that both move below the results on phones", () => {
+  assert.match(filterBar, /<div className="controls-secondary">[\s\S]*Share[\s\S]*<\/div>\s*\{\/\*/);
+  assert.match(filterBar, /<nav className="tools-row"[\s\S]*CSV[\s\S]*<\/nav>/);
   assert.match(declarations(phone, ".controls-secondary"), /order:\s*\d+/);
+  assert.match(declarations(phone, ".tools-row"), /order:\s*\d+/);
 });
 
 // Keeping the active tab visible must only move the strip's own horizontal
