@@ -23,8 +23,15 @@
  * view derives what it needs at build time. Shard to data/prices/<year>.json
  * only if the file passes a few MB.
  *
- *   node scripts/refresh_prices.mjs            # refresh and write
- *   node scripts/refresh_prices.mjs --dry-run  # print changes only
+ * Guardrails (for the unattended weekly Action, .github/workflows/
+ * refresh-prices.yml): exits 2 without writing when any card priced at
+ * 1 EUR or more moves over 5x either way, or when more than 60% of the
+ * refreshed cards change. --force writes anyway after a human has looked.
+ *
+ *   node scripts/refresh_prices.mjs                       # refresh and write
+ *   node scripts/refresh_prices.mjs --dry-run             # print changes only
+ *   node scripts/refresh_prices.mjs --summary FILE        # also write the commit message to FILE
+ *   node scripts/refresh_prices.mjs --force               # ignore the guardrails
  */
 import fs from "node:fs";
 import { fetchCard } from "./lib/tcgdex.mjs";
@@ -37,13 +44,23 @@ import {
   topMovers,
   formatPrices,
   formatMeta,
+  guardrailViolations,
+  summaryMessage,
 } from "./lib/prices.mjs";
 
 const CARDS_FILE = "data/cards.json";
 const BINDERS_FILE = "data/binders.json";
 const PRICES_FILE = "data/prices.json";
 const META_FILE = "data/meta.json";
-const DRY_RUN = process.argv.includes("--dry-run");
+const argv = process.argv.slice(2);
+const DRY_RUN = argv.includes("--dry-run");
+const FORCE = argv.includes("--force");
+const summaryAt = argv.indexOf("--summary");
+const SUMMARY_FILE = summaryAt !== -1 ? argv[summaryAt + 1] : null;
+if (summaryAt !== -1 && !SUMMARY_FILE) {
+  console.error("--summary needs a file path");
+  process.exit(1);
+}
 
 const cards = JSON.parse(fs.readFileSync(CARDS_FILE, "utf8"));
 const binders = JSON.parse(fs.readFileSync(BINDERS_FILE, "utf8"));
@@ -102,6 +119,17 @@ if (DRY_RUN) {
   process.exit(0);
 }
 
+const violations = guardrailViolations(changes, refreshed);
+if (violations.length > 0 && !FORCE) {
+  console.error("guardrail tripped, nothing written (rerun with --force after checking):");
+  for (const v of violations) console.error(`  ${v}`);
+  process.exit(2);
+}
+if (violations.length > 0) {
+  console.warn("guardrail tripped but --force given:");
+  for (const v of violations) console.warn(`  ${v}`);
+}
+
 writeAllAtomic([
   [PRICES_FILE, formatPrices(prices)],
   [CARDS_FILE, JSON.stringify(cards, null, 2) + "\n"],
@@ -110,4 +138,10 @@ writeAllAtomic([
 console.log("top movers:");
 for (const c of topMovers(changes.filter((c) => c.from != null), 10)) {
   console.log(`  ${c.id}: ${fmt(c.from)} -> ${fmt(c.to)}`);
+}
+
+if (SUMMARY_FILE) {
+  const skipped = skippedNoId.length + skippedNoPrice.length;
+  fs.writeFileSync(SUMMARY_FILE, summaryMessage({ date: today, changes, skipped }));
+  console.log(`commit message written to ${SUMMARY_FILE}`);
 }
