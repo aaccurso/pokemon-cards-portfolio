@@ -412,14 +412,16 @@ header .binder-description {
   transition: background 0.15s, color 0.15s;
 }
 
-.view-toggle button:hover {
+.view-toggle button:not(.active):hover {
   color: var(--text);
   background: var(--surface-hover);
 }
 
+/* Inverted, so a hover on the other button (a neutral surface lift) can never
+   be mistaken for the selected one. */
 .view-toggle button.active {
-  background: var(--border);
-  color: var(--text);
+  background: var(--text);
+  color: var(--bg);
   font-weight: 600;
 }
 
