@@ -108,7 +108,9 @@ test(".modal-buy is the one filled button in the modal and reuses the shared foc
   const buy = rule(desktop, ".modal-buy");
   assert.ok(buy, ".modal-buy should have a rule");
   assert.match(buy, /background:\s*var\(--accent\)/);
-  assert.match(buy, /color:\s*#222/);
+  // Text on an accent fill goes through the shared token (tests/accent.test.ts).
+  assert.match(buy, /color:\s*var\(--accent-ink\)/);
+  assert.doesNotMatch(buy, /color:\s*#222/);
   assert.match(buy, /text-decoration:\s*none/);
   const focus = rule(desktop, ".modal-buy:focus-visible");
   assert.ok(focus, ".modal-buy:focus-visible should have a rule");

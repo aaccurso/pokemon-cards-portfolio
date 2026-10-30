@@ -1941,7 +1941,7 @@ header .binder-description {
   background: var(--accent);
   border: 1px solid var(--accent);
   border-radius: 8px;
-  color: #222;
+  color: var(--accent-ink);
   font-size: 0.9rem;
   font-weight: 600;
   text-decoration: none;
