@@ -8,6 +8,8 @@ import type { Card } from "../lib/cards.ts";
 import type { PurchaseData } from "../lib/purchases.ts";
 import type { Binder } from "../lib/binders.ts";
 import { formatPrices } from "../scripts/lib/prices.mjs";
+import { latestCardmarketDate, metaProblems } from "../lib/meta.ts";
+import type { Meta } from "../lib/meta.ts";
 
 const read = (p: string) => JSON.parse(fs.readFileSync(new URL(`../${p}`, import.meta.url), "utf8"));
 const cards: Card[] = read("data/cards.json");
@@ -28,6 +30,12 @@ test("every price-history key is a current card id", () => {
 test("data/prices.json is stored one snapshot per line (formatPrices output)", () => {
   const raw = fs.readFileSync(new URL("../data/prices.json", import.meta.url), "utf8");
   assert.equal(raw, formatPrices(JSON.parse(raw)));
+});
+
+test("data/meta.json dates the prices with the newest cardmarket snapshot in prices.json", () => {
+  const meta: Meta = read("data/meta.json");
+  assert.deepEqual(metaProblems(meta), []);
+  assert.equal(meta.pricesRefreshed, latestCardmarketDate(read("data/prices.json")));
 });
 
 test("the M6a binder holds exactly cards 001 to 165", () => {

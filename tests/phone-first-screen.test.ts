@@ -130,3 +130,16 @@ test("the Filters button shows how many filters are set while the panel is close
   const withSearch = { q: "pika", type: "all", set: "all", own: "all", illus: false, rarity: "all" };
   assert.equal(activeFilterCount(withSearch), 0);
 });
+
+test("the Filters badge and the open/active outlines are neutral, like .pill-toggle.active (accent discipline, item 9)", () => {
+  // The count badge is a neutral chip: border fill with ink text, no accent and no stray hex.
+  const badge = declarations(base, ".filters-count");
+  assert.match(badge, /background:\s*var\(--border\)/);
+  assert.match(badge, /color:\s*var\(--text\)/);
+  assert.doesNotMatch(badge, /var\(--accent\)|#222|#f8d030/i);
+  // An open Filters disclosure and an active rarity chip outline in muted ink, the same as .pill-toggle.active.
+  assert.match(declarations(phone, '.filters-toggle[aria-expanded="true"]'), /border-color:\s*var\(--text-muted\)/);
+  assert.match(declarations(phone, ".rarity-row.active"), /border-color:\s*var\(--text-muted\)/);
+  assert.doesNotMatch(declarations(phone, '.filters-toggle[aria-expanded="true"]'), /var\(--accent\)/);
+  assert.doesNotMatch(declarations(phone, ".rarity-row.active"), /var\(--accent\)/);
+});

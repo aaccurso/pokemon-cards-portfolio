@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { BinderDisplay, Card, languageFlags, conditionNames, numberLabel, typeBadges } from "@/lib/cards";
+import { BinderDisplay, Card, languageFlags, conditionNames, numberLabel, rarityLabel, typeBadges } from "@/lib/cards";
 import type { CardOwnership } from "@/lib/purchases";
 import { fmtEur } from "@/lib/format";
 import { cardmarketSearchUrl } from "@/lib/shortlist";
@@ -126,7 +126,7 @@ export function CardModal({ card, ownership, onClose, onPrev, onNext, binder }: 
               <span
                 key={b.label}
                 className={`type-badge${b.label === "Trainer" || b.label === "Energy" ? " trainer" : ""}`}
-                style={{ background: b.color }}
+                style={{ background: b.color, color: b.ink }}
               >
                 {b.label}
               </span>
@@ -142,7 +142,14 @@ export function CardModal({ card, ownership, onClose, onPrev, onNext, binder }: 
                   ? "Pokedex #"
                   : "Number"}
               </dt>
-              <dd>{numberLabel(card, binder)}</dd>
+              <dd>
+                {numberLabel(card, binder)}
+                {card.rarity && (
+                  <span className="rarity-chip" title={card.rarity}>
+                    {rarityLabel(card.rarity)}
+                  </span>
+                )}
+              </dd>
             </div>
             {binder.kind === "master-set" && card.pokedexNumber != null && (
               <div>

@@ -39,6 +39,8 @@ type Props = {
   onCsv: () => void;
   /** Href of the /needed one-sheet for the active binder. */
   neededHref: string;
+  /** Href of the /print placeholder sheets for the active binder. */
+  printHref: string;
   copied: boolean;
   /** Cards with extra copies; 0 hides the trade-list disclosure. */
   tradeCount: number;
@@ -63,6 +65,7 @@ export function FilterBar({
   onShare,
   onCsv,
   neededHref,
+  printHref,
   copied,
   tradeCount,
   tradeCopied,
@@ -185,27 +188,41 @@ export function FilterBar({
             {copiedNeeded ? "✓ Copied" : "⎘ Copy as text"}
           </button>
         )}
+      </div>
+      {/* The quiet row of tools the binder offers: the two pages and the two
+          exports. Text links, not buttons, so the filter row above stays the
+          only loud control strip. */}
+      <nav className="tools-row" aria-label="Tools">
+        <span className="tools-label">Tools</span>
+        <Link
+          href={neededHref}
+          className="tool-link"
+          title="One-sheet list of the numbers still missing, for shops and seller chats"
+        >
+          Needed list
+        </Link>
+        <Link
+          href={printHref}
+          className="tool-link"
+          title="Printable placeholder cards for the pockets still empty"
+        >
+          Placeholder sheets
+        </Link>
         <button
-          className="action-button"
+          type="button"
+          className="tool-link"
           onClick={onCsv}
           title="Download the current portfolio as CSV"
         >
-          ↓ CSV
+          CSV
         </button>
-        <Link
-          href={neededHref}
-          className="action-button"
-          title="One-sheet list of the numbers still missing, for shops and seller chats"
-        >
-          ☐ Needed
-        </Link>
         {tradeCount > 0 && (
           <details className="trade-menu">
             <summary
-              className="action-button"
+              className="tool-link"
               title="Export the extra copies for a trade partner or buylist"
             >
-              ⇄ Trade list ({tradeCount})
+              Trade list ({tradeCount})
             </summary>
             <div className="trade-menu-items">
               <button className="action-button" onClick={onTradeText}>
@@ -217,7 +234,7 @@ export function FilterBar({
             </div>
           </details>
         )}
-      </div>
+      </nav>
     </div>
   );
 }
