@@ -38,6 +38,48 @@ export function nextBuyPrice(card, binderKind, trend) {
   return Math.round(trend * 100) / 100;
 }
 
+/**
+ * Guardrails for an unattended refresh. Returns human-readable reasons to
+ * abort, empty when the refresh looks like a market and not an API accident:
+ * - any card with a previous price of at least 1 EUR moving more than
+ *   maxRatio times up or down (sub-euro commons swing wildly and harmlessly);
+ * - more than maxChangedShare of the refreshed cards changing price at once.
+ */
+export function guardrailViolations(
+  changes,
+  refreshedCount,
+  { maxRatio = 5, maxChangedShare = 0.6 } = {}
+) {
+  const reasons = [];
+  for (const c of changes) {
+    if (c.from == null || c.to == null) continue;
+    const base = Math.min(c.from, c.to);
+    if (base < 1) continue;
+    const ratio = Math.max(c.from, c.to) / base;
+    if (ratio > maxRatio) {
+      reasons.push(`${c.id} moved ${ratio.toFixed(1)}x: ${c.from.toFixed(2)} -> ${c.to.toFixed(2)}`);
+    }
+  }
+  if (refreshedCount > 0 && changes.length / refreshedCount > maxChangedShare) {
+    reasons.push(
+      `${changes.length} of ${refreshedCount} refreshed cards changed price (limit ${Math.round(maxChangedShare * 100)}%)`
+    );
+  }
+  return reasons;
+}
+
+/**
+ * The commit message for a refresh: a one-line title, a blank line, then the
+ * top movers (the same list CLAUDE.md asks to paste by hand).
+ */
+export function summaryMessage({ date, changes, skipped, top = 10 }) {
+  const title = `Refresh Cardmarket prices ${date}: ${changes.length} change${changes.length === 1 ? "" : "s"}, ${skipped} skipped`;
+  const movers = topMovers(changes.filter((c) => c.from != null), top);
+  if (movers.length === 0) return `${title}\n\nNo price changes.\n`;
+  const lines = movers.map((c) => `  ${c.id}: ${c.from.toFixed(2)} -> ${c.to.toFixed(2)}`);
+  return `${title}\n\nTop movers:\n${lines.join("\n")}\n`;
+}
+
 /** The n changes with the largest absolute move, largest first. */
 export function topMovers(changes, n) {
   return changes

@@ -2,6 +2,8 @@
  * Helpers for mapping this project's card codes to tcgdex (api.tcgdex.net)
  * Japanese card ids, plus thin fetchers.
  */
+import { withRetry } from "./retry.mjs";
+
 const API = "https://api.tcgdex.net/v2/ja";
 const UA = "pokemon-cards-portfolio";
 const PAUSE_MS = 150;
@@ -32,12 +34,15 @@ export function toTcgdexId(code, setIds) {
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
+/** GET JSON with a polite pause; 404 is null, 429 and 5xx are retried with backoff. */
 async function getJson(url) {
-  const res = await fetch(url, { headers: { "User-Agent": UA } });
-  await sleep(PAUSE_MS);
-  if (res.status === 404) return null;
-  if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
-  return res.json();
+  return withRetry(async () => {
+    const res = await fetch(url, { headers: { "User-Agent": UA } });
+    await sleep(PAUSE_MS);
+    if (res.status === 404) return null;
+    if (!res.ok) throw Object.assign(new Error(`HTTP ${res.status} for ${url}`), { status: res.status });
+    return res.json();
+  });
 }
 
 /** All Japanese set ids known to tcgdex. */
