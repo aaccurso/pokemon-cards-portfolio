@@ -126,6 +126,17 @@ function declarations(block: string, selector: string): string {
 const base = css.replace(/@media[^{]+\{(?:[^{}]|\{[^{}]*\})*\}/g, "");
 const phone = mediaBlocks(css, "(max-width: 768px)");
 
+test("the sort button hover and the type badge follow the accent discipline of item 9", () => {
+  // Hover on a sortable header is an ink lift, like the tools row and the name cell,
+  // not the accent (tests/accent.test.ts keeps the allowlist; this pins the intent here).
+  const hover = declarations(base, ".th-sort:hover");
+  assert.match(hover, /color:\s*var\(--text\)/);
+  assert.doesNotMatch(hover, /accent|248,\s*208,\s*48|#f8d030/i);
+  // The table badge paints its text with the badge ink so Electric, Ground, Ice,
+  // Steel, Normal and Fairy keep dark text on their light fills.
+  assert.match(cardTable, /style=\{\{\s*background:\s*b\.color,\s*color:\s*b\.ink\s*\}\}/);
+});
+
 test("table headers are 12px sentence case, and only the sort buttons take the pointer", () => {
   const th = declarations(base, ".card-table thead th");
   assert.doesNotMatch(th, /text-transform:\s*uppercase/);

@@ -63,6 +63,15 @@ export function topMovers(changes, n) {
  * object with plain JSON.parse; tests/data.test.ts asserts the file on disk
  * is byte-identical to this output.
  */
+/**
+ * Serialise data/meta.json ({ pricesRefreshed: "YYYY-MM-DD" }), the one
+ * freshness file lib/data.ts imports; tests/data.test.ts checks its date
+ * against the newest cardmarket snapshot in prices.json.
+ */
+export function formatMeta(meta) {
+  return JSON.stringify(meta, null, 2) + "\n";
+}
+
 export function formatPrices(prices) {
   const ids = Object.keys(prices);
   if (ids.length === 0) return "{}\n";

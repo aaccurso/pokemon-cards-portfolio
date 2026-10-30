@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { BinderDisplay, Card, numberLabel, typeBadges } from "@/lib/cards";
+import { BinderDisplay, Card, numberLabel, tileRarity, typeBadges } from "@/lib/cards";
 
 type Props = {
   card: Card;
@@ -117,7 +117,14 @@ export function CardTile({ card, owned, onClick, binder, copies = 1 }: Props) {
           )}
         </div>
         <div className="card-tile-info">
-          <span className="card-tile-num">{numberLabel(card, binder)}</span>
+          <span className="card-tile-num">
+            {numberLabel(card, binder)}
+            {tileRarity(card) && (
+              <span className="rarity-chip" title={card.rarity}>
+                {tileRarity(card)}
+              </span>
+            )}
+          </span>
           <span className="card-tile-name">
             {card.name}
             {card.nameJa && <span className="name-ja" lang="ja">{card.nameJa}</span>}
@@ -127,7 +134,7 @@ export function CardTile({ card, owned, onClick, binder, copies = 1 }: Props) {
               <span
                 key={b.label}
                 className={`type-badge${b.label === "Trainer" || b.label === "Energy" ? " trainer" : ""}`}
-                style={{ background: b.color }}
+                style={{ background: b.color, color: b.ink }}
               >
                 {b.label}
               </span>
