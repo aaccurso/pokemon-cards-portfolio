@@ -51,6 +51,7 @@ test("every pill, tab, toggle, nav button and tile owns a visible :focus-visible
     ".card-tile",
     ".card-name-cell",
     ".print-btn",
+    ".th-sort",
   ];
   const missing = controls.filter((c) => !rulesFor(`${c}:focus-visible`).some((r) => visibleIndicator(r.decls)));
   assert.deepEqual(missing, [], `no visible :focus-visible indicator for: ${missing.join(", ")}`);

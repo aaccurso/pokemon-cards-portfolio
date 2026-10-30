@@ -25,6 +25,7 @@ import {
 } from "@/lib/purchases";
 import { fmtEur } from "@/lib/format";
 import { compareBySort, isSortKey, SortDir, SortKey } from "@/lib/sort";
+import { tableColumns } from "@/lib/tableColumns";
 import { fmt0 } from "@/lib/format";
 import { neededText } from "@/lib/needed";
 import { printHref } from "@/lib/print";
@@ -85,6 +86,8 @@ export default function PortfolioTracker() {
 
   const binder = getBinder(binderId, binders);
   const binderCards = useMemo(() => cardsForBinder(binderId, allCards), [binderId]);
+  // Table columns follow the whole binder (Set only across several sets, Rarity only when present).
+  const columns = useMemo(() => tableColumns(binderCards, binder), [binderCards, binder]);
   const cardBinder = useMemo(() => buildCardBinderMap(allCards), []);
 
   useEffect(() => {
@@ -418,6 +421,7 @@ export default function PortfolioTracker() {
       ) : (
         <CardTable
           cards={filtered}
+          columns={columns}
           ownership={ownership}
           binder={binder}
           sortKey={sortKey}
