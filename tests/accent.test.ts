@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { typeBadges, typeColors } from "../lib/cards.ts";
+import { BADGE_INK_LUMINANCE, badgeInk, relativeLuminance, typeBadges, typeColors } from "../lib/cards.ts";
 import { card } from "./helpers.ts";
 
 // Contract tests for design critique item 9: accent discipline and a neutral dark.
@@ -93,6 +93,19 @@ test("accent fills use the ink token for their text", () => {
   assert.match(declsFor(".action-button.primary"), /color:\s*var\(--accent-ink\)/);
 });
 
+test("the selected view toggle button survives a hover on its neighbour", () => {
+  // Inverted: ink fill, ground text. A hover is a neutral surface lift, so the
+  // two can never look alike, and the hover rule does not reach the active button.
+  const active = declsFor(".view-toggle button.active");
+  assert.match(active, /background:\s*var\(--text\)/);
+  assert.match(active, /color:\s*var\(--bg\)/);
+  const hover = declsFor(".view-toggle button:not(.active):hover");
+  assert.match(hover, /background:\s*var\(--surface-hover\)/);
+  assert.equal(declsFor(".view-toggle button:hover"), "", "the hover rule must exclude .active");
+  const bg = (d: string) => d.match(/background:\s*([^;]+);/)?.[1];
+  assert.notEqual(bg(active), bg(hover), "active and hover fills must differ");
+});
+
 test("type badges drop the text-shadow and the variant badge is neutral", () => {
   assert.doesNotMatch(declsFor(".type-badge"), /text-shadow/);
   assert.doesNotMatch(declsFor(".variant-badge"), /248,\s*208,\s*48|accent/);
@@ -101,7 +114,10 @@ test("type badges drop the text-shadow and the variant badge is neutral", () => 
 });
 
 test("typeBadges carries dark ink for the light type fills and white for the rest", () => {
-  const light = ["Electric", "Ground", "Ice", "Steel", "Normal", "Fairy"];
+  // Decided by the fill's relative luminance, not by name: Grass (0.46) and Bug
+  // (0.43) are lighter than Normal (0.38), so they get dark ink too. Fire and
+  // Flying (0.34, 0.35) sit just under the line and keep white.
+  const light = ["Electric", "Ground", "Ice", "Steel", "Grass", "Fairy", "Bug", "Normal", "Rock"];
   for (const t of light) {
     assert.equal(typeBadges(card({ type1: t }))[0].ink, "#1a1a1a", `${t} should get dark text`);
   }
@@ -111,6 +127,18 @@ test("typeBadges carries dark ink for the light type fills and white for the res
   assert.equal(typeBadges(card({ type1: "Water", type2: "Ice" }))[1].ink, "#1a1a1a");
   assert.equal(typeBadges(card({ pokedexNumber: null, type1: null, category: "Trainer" }))[0].ink, "#fff");
   assert.equal(typeBadges(card({ type1: "Mystery" }))[0].ink, "#fff");
+});
+
+test("badgeInk is a luminance threshold on the fill colour", () => {
+  assert.equal(badgeInk("#ffffff"), "#1a1a1a");
+  assert.equal(badgeInk("#000000"), "#fff");
+  // The unknown-type fallback fill (#888, luminance 0.25) stays white.
+  assert.equal(badgeInk("#888"), "#fff");
+  assert.equal(relativeLuminance("#ffffff"), 1);
+  assert.equal(relativeLuminance("#000000"), 0);
+  assert.ok(Math.abs(relativeLuminance(typeColors.Grass) - 0.459) < 0.005);
+  assert.ok(relativeLuminance(typeColors.Grass) > BADGE_INK_LUMINANCE);
+  assert.ok(relativeLuminance(typeColors.Fire) < BADGE_INK_LUMINANCE);
 });
 
 test("every on-screen type badge paints its text with the badge ink", () => {

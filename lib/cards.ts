@@ -133,11 +133,28 @@ export function numberLabel(c: Card, binder: BinderDisplay): string {
 /** `ink` is the text colour that reads on `color`: dark on the light fills, white elsewhere. */
 export type TypeBadge = { label: string; color: string; ink: string };
 
-/** Type fills too light for white text; these badges get dark ink and no text-shadow. */
-const lightTypes = new Set(["Electric", "Ground", "Ice", "Steel", "Normal", "Fairy"]);
+/** WCAG relative luminance (0 black to 1 white) of a `#rgb` or `#rrggbb` colour. */
+export function relativeLuminance(hex: string): number {
+  let h = hex.replace("#", "");
+  if (h.length === 3) h = h.replace(/./g, (c) => c + c);
+  const n = parseInt(h, 16);
+  const channel = (v: number) => {
+    const s = v / 255;
+    return s <= 0.03928 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4;
+  };
+  return 0.2126 * channel(n >> 16) + 0.7152 * channel((n >> 8) & 255) + 0.0722 * channel(n & 255);
+}
 
-export function badgeInk(type: string): string {
-  return lightTypes.has(type) ? "#1a1a1a" : "#fff";
+/**
+ * Fills lighter than this get dark ink. White text on a fill at this luminance is
+ * about 2.6:1; the badges have no text-shadow to help it. It lands between Rock
+ * (0.36) and Flying (0.35), so Electric, Ice, Ground, Steel, Grass, Fairy, Bug,
+ * Normal and Rock are dark-ink and the saturated types keep white.
+ */
+export const BADGE_INK_LUMINANCE = 0.35;
+
+export function badgeInk(fill: string): string {
+  return relativeLuminance(fill) > BADGE_INK_LUMINANCE ? "#1a1a1a" : "#fff";
 }
 
 /** Type badges for Pokemon; one neutral category badge otherwise. */
@@ -146,11 +163,10 @@ export function typeBadges(c: Card): TypeBadge[] {
   if (category !== "Pokemon" || c.type1 == null) {
     return [{ label: category === "Pokemon" ? "Unknown" : category, color: "#777", ink: "#fff" }];
   }
-  const badge = (type: string): TypeBadge => ({
-    label: type,
-    color: typeColors[type] ?? "#888",
-    ink: badgeInk(type),
-  });
+  const badge = (type: string): TypeBadge => {
+    const color = typeColors[type] ?? "#888";
+    return { label: type, color, ink: badgeInk(color) };
+  };
   const badges: TypeBadge[] = [badge(c.type1)];
   if (c.type2) badges.push(badge(c.type2));
   return badges;
